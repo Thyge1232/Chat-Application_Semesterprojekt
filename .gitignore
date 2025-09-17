@@ -1,0 +1,31 @@
+# --- Global ---
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+
+# --- Node / Vite frontend ---
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# --- ASP.NET Core backend ---
+backend/bin/
+backend/obj/
+backend/*.user
+backend/*.suo
+backend/*.userosscache
+backend/*.sln.docstates
+backend/.vs/
+backend/wwwroot/dist/
+backend/appsettings.*.json
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.swp
