@@ -1,4 +1,4 @@
-import { it, describe, expect } from "vitest";
+import { it, expect } from "vitest";
 
 it("can check that true is true", () => {
   expect(true).toBe(true);

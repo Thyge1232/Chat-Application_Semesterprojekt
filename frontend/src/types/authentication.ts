@@ -1,9 +1,9 @@
-type LoginRequest = {
+export type LoginRequest = {
   email: string;
   password: string;
 };
 
-type SignupRequest = {
+export type SignupRequest = {
   email: string;
   // todo
 };
