@@ -1,0 +1,37 @@
+stages:
+  - test
+  - build
+  - deploy
+
+# Frontend test
+test-frontend:
+  stage: test
+  script:
+    - cd frontend
+    - npm ci
+    - npm run lint
+    - npm test
+
+# Backend build
+build-backend:
+  stage: build
+  script:
+    - echo "todo - build backend"
+    #- cd backend
+    #- dotnet restore
+    #- dotnet build --configuration Release
+
+# Backend tests
+test-backend:
+  stage: test
+  script:
+    - echo "todo - test backend"
+    #- cd backend
+    #- dotnet test --no-build
+
+# Backend deploy TODO
+deploy-backend:
+  stage: deploy
+  environment: production
+  script:
+    - echo "Deploying backend API..."
