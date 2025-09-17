@@ -3,7 +3,7 @@
 ### Tech setup for React development
 node npm version 22.x - https://nodejs.org/en/download 
 
-- clone repoet
+Først: Clone repoet
 herefter kør:
 ```cd frontend```
 ```npm install```
