@@ -1,7 +1,5 @@
-interface TitleProps {
-  title: string;
-}
+import type { PropsWithChildren } from "react";
 
-export const Title = ({ title }: TitleProps) => {
-  return <h1 className="m-5 text-center font-sans text-5xl">{title}</h1>;
+export const Title = ({ children }: PropsWithChildren) => {
+  return <h1 className="m-5 text-center font-sans text-5xl">{children}</h1>;
 };
