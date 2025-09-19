@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
+// A simple health check controller to verify that the API is running.
 namespace BackendAPI.Controllers;
 
 [ApiController]
