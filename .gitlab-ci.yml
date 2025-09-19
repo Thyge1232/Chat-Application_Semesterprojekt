@@ -13,26 +13,44 @@ test-frontend:
     - npm run lint
     - npm test
 
-# Backend build
-build-backend:
-  stage: build
-  script:
-    - echo "todo - build backend"
-    #- cd backend
-    #- dotnet restore
-    #- dotnet build --configuration Release
 
-# Backend tests
+
+# --- Backend tests ---
 test-backend:
   stage: test
+  image: mcr.microsoft.com/dotnet/sdk:8.0
   script:
-    - echo "todo - test backend"
-    #- cd backend
-    #- dotnet test --no-build
+    - cd BackendAPI
+    - dotnet restore
+    - dotnet build --configuration Release
+    - dotnet test --no-build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - BackendAPI/**
 
-# Backend deploy TODO
-deploy-backend:
-  stage: deploy
-  environment: production
+# --- Backend build & push to GitLab Container Registry ---
+build-backend:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  variables:
+    DOCKERFILE: BackendAPI/Dockerfile
+    CONTEXT: BackendAPI
+    IMAGE: "$CI_REGISTRY_IMAGE/backendapi"
   script:
-    - echo "Deploying backend API..."
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - >
+      /kaniko/executor
+      --context "$CONTEXT"
+      --dockerfile "$DOCKERFILE"
+      --destination "$IMAGE:latest"
+      --destination "$IMAGE:$CI_COMMIT_SHORT_SHA"
+      --cache=true
+      --cache-repo "$IMAGE/cache"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      changes:
+        - BackendAPI/**

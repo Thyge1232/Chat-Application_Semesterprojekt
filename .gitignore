@@ -15,17 +15,18 @@ frontend/.env.test.local
 frontend/.env.production.local
 
 # --- ASP.NET Core backend ---
-backend/bin/
-backend/obj/
-backend/*.user
-backend/*.suo
-backend/*.userosscache
-backend/*.sln.docstates
-backend/.vs/
-backend/wwwroot/dist/
-backend/appsettings.*.json
+backendAPI/bin/
+backendAPI/obj/
+backendAPI/*.user
+backendAPI/*.suo
+backendAPI/*.userosscache
+backendAPI/*.sln.docstates
+backendAPI/.vs/
+backendAPI/wwwroot/dist/
+backendAPI/appsettings.*.json
 
 # --- IDEs ---
+.vs/
 .vscode/
 .idea/
 *.swp
