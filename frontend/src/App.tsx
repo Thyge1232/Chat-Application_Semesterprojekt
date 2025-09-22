@@ -1,8 +1,8 @@
 import "./App.css";
-import { DemoComponent } from "./pages/Demo";
+import { Demo } from "./pages/Demo";
 
-function App() {
-  return <DemoComponent />;
-}
+const App = () => {
+  return <Demo />;
+};
 
 export default App;

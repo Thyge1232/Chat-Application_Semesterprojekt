@@ -1,7 +1,7 @@
 import { Button } from "../ui/Button";
 import { Title } from "../ui/Title";
 
-export const DemoComponent = () => {
+export const Demo = () => {
   return (
     <>
       <Title>WhoseApp</Title>
