@@ -5,7 +5,7 @@ namespace BackendAPI.Controllers;
 
 [ApiController]
 [Route("health2")]
-public class HealthController : ControllerBase
+public class HealthController2 : ControllerBase
 {
     [HttpGet] public IActionResult Get() => Ok(new { status = "ok" });
 }
