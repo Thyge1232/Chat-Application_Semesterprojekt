@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connString = Environment.GetEnvironmentVariable("ConnectionSTrings__Default") ??
 builder.Configuration.GetConnectionString("Default");
+Console.WriteLine($"Using DB: {connString}");
 
 
 builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));

@@ -29,7 +29,7 @@ public class TestController : ControllerBase
 
     [Route("testGet")]
     [HttpGet]
-    public async Task<ActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<DbTest>>> GetAll()
     {
         try
         {
@@ -37,9 +37,9 @@ public class TestController : ControllerBase
         }
         catch (Exception Ex)
         {
-            return StatusCode(500, new { error = Ex.Message });
+            return StatusCode(405, new { error = Ex.Message });
         }
 
-        return Ok(new { status = "Get gotten" });
+        return null;
     }
 }
