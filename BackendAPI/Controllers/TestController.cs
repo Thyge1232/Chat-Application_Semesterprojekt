@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Test;
+
 // A simple health check controller to verify that the API is running.
 namespace BackendAPI.Controllers;
 
@@ -9,15 +10,25 @@ namespace BackendAPI.Controllers;
 public class TestController : ControllerBase
 {
     private readonly MyDBContext _db;
-    TestController(MyDBContext db) => _db = db;
-    [HttpPost] async public Task<ActionResult> Post()
+
+    public TestController(MyDBContext db) => _db = db;
+
+    [HttpPost]
+    public async Task<ActionResult> Post()
     {
-        await _db.Database.MigrateAsync();
-        return Ok(new { status = "migrated" });
+        try
+        {
+            await _db.Database.MigrateAsync();
+            return Ok(new { status = "migrated" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
     }
 
     [Route("testGet")]
-    [HttpGet] async public Task<ActionResult<IEnumerable<DbTest>>> GetAll() =>
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<DbTest>>> GetAll() =>
         await _db.Tests.AsNoTracking().OrderByDescending(t => t.TestId).ToListAsync();
-
 }
