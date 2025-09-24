@@ -5,7 +5,7 @@ using Test;
 namespace BackendAPI.Controllers;
 
 [ApiController]
-[Route("testPut")]
+[Route("testPost")]
 public class TestController : ControllerBase
 {
     private readonly MyDBContext _db;
