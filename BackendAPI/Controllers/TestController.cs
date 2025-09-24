@@ -10,8 +10,15 @@ public class TestController : ControllerBase
 {
     private readonly MyDBContext _db;
 
-    public TestController(MyDBContext db) => _db = db;
-    
+    public TestController(MyDBContext db)
+    {
+        _db = db;
+        _db.Database.EnsureCreated();
+    }
+
+
+
+
     [Route("testPost")]
     [HttpPost]
     public async Task<ActionResult> Post()
