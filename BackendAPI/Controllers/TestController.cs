@@ -6,13 +6,13 @@ using Test;
 namespace BackendAPI.Controllers;
 
 [ApiController]
-[Route("testPost")]
 public class TestController : ControllerBase
 {
     private readonly MyDBContext _db;
 
     public TestController(MyDBContext db) => _db = db;
-
+    
+    [Route("testPost")]
     [HttpPost]
     public async Task<ActionResult> Post()
     {
@@ -29,6 +29,17 @@ public class TestController : ControllerBase
 
     [Route("testGet")]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<DbTest>>> GetAll() =>
-        await _db.Tests.AsNoTracking().OrderByDescending(t => t.DbTestId).ToListAsync();
+    public async Task<ActionResult> GetAll()
+    {
+        try
+        {
+            await _db.Tests.AsNoTracking().OrderByDescending(t => t.DbTestId).ToListAsync();
+        }
+        catch (Exception Ex)
+        {
+            return StatusCode(500, new { error = Ex.Message });
+        }
+
+        return Ok(new { status = "Get gotten" });
+    }
 }
