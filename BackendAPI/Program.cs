@@ -3,7 +3,8 @@ using Test;
 using BackendAPI.Controllers;
 var builder = WebApplication.CreateBuilder(args);
 
-var connString = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS__DEFAULT");
+var connString = Environment.GetEnvironmentVariable("ConnectionSTrings__Default") ??
+builder.Configuration.GetConnectionString("Default");
 
 
 builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));
