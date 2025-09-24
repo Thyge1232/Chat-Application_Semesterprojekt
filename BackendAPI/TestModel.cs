@@ -4,7 +4,7 @@ namespace Test
 
     public class DbTest
     {
-        public int TestId { get; set; }
+        public int DbTestId { get; set; }
         public string testString { get; set; }
     }
 

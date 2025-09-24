@@ -30,5 +30,5 @@ public class TestController : ControllerBase
     [Route("testGet")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<DbTest>>> GetAll() =>
-        await _db.Tests.AsNoTracking().OrderByDescending(t => t.TestId).ToListAsync();
+        await _db.Tests.AsNoTracking().OrderByDescending(t => t.DbTestId).ToListAsync();
 }

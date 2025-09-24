@@ -15,7 +15,7 @@ public class MyDBContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<DbTest>().HasData(
-            new DbTest { TestId = 1, testString = "Test!!!" }
+            new DbTest { DbTestId = 1, testString = "Test!!!" }
         );
     }
 
