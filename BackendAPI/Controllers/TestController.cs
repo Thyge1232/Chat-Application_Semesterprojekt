@@ -36,17 +36,7 @@ public class TestController : ControllerBase
 
     [Route("testGet")]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<DbTest>>> GetAll()
-    {
-        try
-        {
+    public async Task<ActionResult<IEnumerable<DbTest>>> GetAll() =>
+    
             await _db.Tests.AsNoTracking().OrderByDescending(t => t.DbTestId).ToListAsync();
-        }
-        catch (Exception Ex)
-        {
-            return StatusCode(405, new { error = Ex.Message });
-        }
-
-        return null;
-    }
 }
