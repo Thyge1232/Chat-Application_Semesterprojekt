@@ -15,6 +15,8 @@ public class TestController : ControllerBase
         await _db.Database.MigrateAsync();
         return Ok(new { status = "migrated" });
     }
+
+    [Route("testGet")]
     [HttpGet] async public Task<ActionResult<IEnumerable<DbTest>>> GetAll() =>
         await _db.Tests.AsNoTracking().OrderByDescending(t => t.TestId).ToListAsync();
 
