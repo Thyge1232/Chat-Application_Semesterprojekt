@@ -65,9 +65,7 @@ namespace BackendAPI.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("JoinedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("UserId", "ChatroomId");
 

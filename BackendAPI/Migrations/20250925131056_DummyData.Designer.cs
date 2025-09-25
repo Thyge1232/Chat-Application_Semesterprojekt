@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackendAPI.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20250925125728_StringToDatetime")]
-    partial class StringToDatetime
+    [Migration("20250925131056_DummyData")]
+    partial class DummyData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,9 +68,7 @@ namespace BackendAPI.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("JoinedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("UserId", "ChatroomId");
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -20,7 +21,7 @@ namespace BackendAPI.Migrations
                     ChatroomId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<string>(type: "text", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,7 +49,7 @@ namespace BackendAPI.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Username = table.Column<string>(type: "text", nullable: false),
                     PassWord = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ProfilePicture = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false)
                 },
@@ -63,7 +64,7 @@ namespace BackendAPI.Migrations
                 {
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     ChatroomId = table.Column<int>(type: "integer", nullable: false),
-                    JoinedAt = table.Column<string>(type: "text", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                    JoinedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,7 +91,7 @@ namespace BackendAPI.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     MessageContent = table.Column<string>(type: "text", nullable: false),
                     ChatroomId = table.Column<int>(type: "integer", nullable: false),
-                    TimeStamp = table.Column<string>(type: "text", nullable: false),
+                    TimeStamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -115,8 +116,8 @@ namespace BackendAPI.Migrations
                 columns: new[] { "ChatroomId", "CreatedAt", "Name" },
                 values: new object[,]
                 {
-                    { 1, "2025-09-25", "General" },
-                    { 2, "2025-09-25", "Tech Talk" }
+                    { 1, new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc), "General" },
+                    { 2, new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc), "Tech Talk" }
                 });
 
             migrationBuilder.InsertData(
@@ -129,8 +130,8 @@ namespace BackendAPI.Migrations
                 columns: new[] { "UserId", "CreatedAt", "Email", "PassWord", "ProfilePicture", "Username" },
                 values: new object[,]
                 {
-                    { 1, "2025-09-25", "alice@example.com", "hashed_pw_1", "alice.png", "alice" },
-                    { 2, "2025-09-25", "bob@example.com", "hashed_pw_2", "bob.png", "bob" }
+                    { 1, new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc), "alice@example.com", "hashed_pw_1", "alice.png", "alice" },
+                    { 2, new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc), "bob@example.com", "hashed_pw_2", "bob.png", "bob" }
                 });
 
             migrationBuilder.InsertData(
@@ -138,9 +139,9 @@ namespace BackendAPI.Migrations
                 columns: new[] { "ChatroomId", "UserId", "JoinedAt" },
                 values: new object[,]
                 {
-                    { 1, 1, "2025-09-25" },
-                    { 1, 2, "2025-09-25" },
-                    { 2, 2, "2025-09-25" }
+                    { 1, 1, new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 1, 2, new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 2, 2, new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(
@@ -148,9 +149,9 @@ namespace BackendAPI.Migrations
                 columns: new[] { "MessageId", "ChatroomId", "MessageContent", "TimeStamp", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, "Hello everyone!", "2025-09-25", 1 },
-                    { 2, 1, "Hi Alice!", "2025-09-25", 2 },
-                    { 3, 2, "Anyone tried .NET MAUI?", "2025-09-25", 2 }
+                    { 1, 1, "Hello everyone!", new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc), 1 },
+                    { 2, 1, "Hi Alice!", new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc), 2 },
+                    { 3, 2, "Anyone tried .NET MAUI?", new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc), 2 }
                 });
 
             migrationBuilder.CreateIndex(

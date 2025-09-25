@@ -38,8 +38,7 @@ public class MyDBContext : DbContext
 
         modelBuilder
             .Entity<ChatroomMember>()
-            .Property(cm => cm.JoinedAt)
-            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            .Property(cm => cm.JoinedAt);
 
         modelBuilder
             .Entity<User>()
