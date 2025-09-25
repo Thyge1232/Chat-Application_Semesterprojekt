@@ -26,8 +26,16 @@ public class MessageController : ControllerBase
         public async Task<ActionResult<IEnumerable<Message>>> GetMessagesFromChatroom(
             int chatroomId, CancellationToken ct)
         {
-            var result = await _messages.GetMessagesFromChatroom(chatroomId, ct);
-            return Ok(result); // [] if room has no messages or doesn't exist (by design)
+            try
+            {
+                var result = await _messages.GetMessagesFromChatroom(chatroomId, ct);
+                return Ok(result); // [] if room has no messages or doesn't exist (by design)
+            }
+            catch (Exception Ex)
+            {
+                Console.WriteLine($"Something happened: {Ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
     
 }
