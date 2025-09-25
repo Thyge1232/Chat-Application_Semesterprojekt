@@ -9,7 +9,7 @@ public class Message
 
     [ForeignKey("ChatroomId")]
     public Chatroom Chatroom { get; set; }
-    public string TimeStamp { get; set; }
+    public DateTime TimeStamp { get; set; }
 
     public int UserId { get; set; }
     [ForeignKey("UserId")] public User User { get; set; }
