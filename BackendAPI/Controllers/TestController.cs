@@ -13,10 +13,7 @@ public class TestController : ControllerBase
     public TestController(MyDBContext db)
     {
         _db = db;
-        _db.Database.EnsureCreated();
     }
-
-
 
 
     [Route("testPost")]

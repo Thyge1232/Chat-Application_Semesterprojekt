@@ -9,13 +9,21 @@ Console.WriteLine($"Using DB: {connString}");
 
 
 builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));
+builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<TestController>();
+
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 // Configure the HTTP request pipeline.
 
