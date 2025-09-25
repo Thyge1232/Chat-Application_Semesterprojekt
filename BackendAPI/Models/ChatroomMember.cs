@@ -8,6 +8,6 @@ public class ChatroomMember
     public int ChatroomId { get; set; }
     [ForeignKey("ChatroomId")]
     public Chatroom Chatroom { get; set; }
-    public DateTime JoinedAt { get; set; }
+    public string JoinedAt { get; set; }
 
 }
