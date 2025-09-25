@@ -8,7 +8,7 @@ public class MyDBContext : DbContext
     {
     }
 
-    public DbSet<DbTest> Tests { get; set; }
+    public DbSet<DbTest> Tests { get; set; } 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
