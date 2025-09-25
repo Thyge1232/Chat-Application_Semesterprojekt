@@ -3,8 +3,6 @@
 # ----- Build -----
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-RUN dotnet tool install --global dotnet-ef
-ENV PATH="$PATH:/root/.dotnet/tools"
 
 
 
@@ -19,9 +17,11 @@ RUN dotnet publish -c Release -o /app /p:UseAppHost=false
 # ----- Runtime -----
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
 COPY --from=build /app ./
 ENV ASPNETCORE_URLS=http://0.0.0.0:8080
 EXPOSE 8080
 COPY entrypoint.sh ./entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]
 
