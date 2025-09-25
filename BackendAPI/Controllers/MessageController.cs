@@ -1,11 +1,8 @@
 ﻿using BackendAPI.Context;
+using BackendAPI.Models;
 using MessageService;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Test;
-using BackendAPI.Models;
 
-// A simple health check controller to verify that the API is running.
 namespace BackendAPI.Controllers;
 
 [ApiController]
@@ -13,28 +10,43 @@ public class MessageController : ControllerBase
 {
     private readonly MyDBContext _db;
     private readonly IMessageService _messages;
+
     public MessageController(MyDBContext db, IMessageService messages)
     {
         _db = db;
         _messages = messages;
     }
 
-
-    //GetMessagesFromChatroom()
-        // GET /messages/{chatroomId}
-        [HttpGet("messages/{chatroomId:int}")]
-        public async Task<ActionResult<IEnumerable<Message>>> GetMessagesFromChatroom(
-            int chatroomId, CancellationToken ct)
+    // GET /messages/{chatroomId}
+    [HttpGet("messages/{chatroomId:int}")]
+    public async Task<ActionResult<IEnumerable<Message>>> GetMessagesFromChatroom(
+        int chatroomId, CancellationToken ct)
+    {
+        try
         {
-            try
-            {
-                var result = await _messages.GetMessagesFromChatroom(chatroomId, ct);
-                return Ok(result); // [] if room has no messages or doesn't exist (by design)
-            }
-            catch (Exception Ex)
-            {
-                return StatusCode(500, $"Internal server error: {Ex.Message}");
-            }
+            var result = await _messages.GetMessagesFromChatroom(chatroomId, ct);
+            return Ok(result);
         }
-    
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    // POST /messages  (body is the Message model)
+    [HttpPost("messages")]
+    [ProducesResponseType(typeof(Message), StatusCodes.Status201Created)]
+    public async Task<ActionResult<Message>> SendMessage([FromBody] Message message, CancellationToken ct)
+    {
+        try
+        {
+            var created = await _messages.CreateMessage(message, ct);
+            return CreatedAtAction(nameof(GetMessagesFromChatroom),
+                new { chatroomId = created.ChatroomId }, created);
+        }
+        catch (Exception ex) // includes FK violations, etc.
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
 }

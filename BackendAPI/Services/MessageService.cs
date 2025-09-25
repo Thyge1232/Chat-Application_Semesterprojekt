@@ -8,6 +8,7 @@ namespace MessageService;
 public interface IMessageService
 {
     Task<IReadOnlyList<Message>> GetMessagesFromChatroom(int chatroomId, CancellationToken ct = default);
+    Task<Message> CreateMessage(Message message, CancellationToken ct = default);
 }
 
 public sealed class MessageService(MyDBContext db) : IMessageService
@@ -33,4 +34,15 @@ public sealed class MessageService(MyDBContext db) : IMessageService
             })
             .ToListAsync(ct);
     }
+
+    public async Task<Message> CreateMessage(Message message, CancellationToken ct = default)
+    {
+        // No checks; just set server timestamp and insert
+        message.TimeStamp = DateTime.UtcNow;
+
+        db.Messages.Add(message);
+        await db.SaveChangesAsync(ct);
+        return message; // now has MessageId
+    }
+
 }
