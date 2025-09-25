@@ -33,8 +33,7 @@ public class MessageController : ControllerBase
             }
             catch (Exception Ex)
             {
-                Console.WriteLine($"Something happened: {Ex.Message}");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, $"Internal server error: {Ex.Message}");
             }
         }
     
