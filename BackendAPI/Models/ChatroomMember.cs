@@ -6,6 +6,7 @@ public class ChatroomMember
     [ForeignKey("UserId")]
     public User User { get; set; }
     public int ChatroomId { get; set; }
+    [ForeignKey("ChatroomId")]
     public Chatroom Chatroom { get; set; }
     public DateTime JoinedAt { get; set; }
 

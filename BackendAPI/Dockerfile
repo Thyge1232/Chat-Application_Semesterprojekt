@@ -8,7 +8,7 @@ WORKDIR /src
 COPY BackendAPI.csproj ./
 RUN dotnet restore ./BackendAPI.csproj
 
-# Copy rest and publish
+# Copy rest and publishtest
 COPY . .
 RUN dotnet publish -c Release -o /app /p:UseAppHost=false
 
