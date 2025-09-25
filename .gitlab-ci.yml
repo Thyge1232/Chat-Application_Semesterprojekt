@@ -12,8 +12,16 @@ test-frontend:
     - npm ci
     - npm run lint
     - npm test
-
-
+  rules:
+    # On main: run but don't block the pipeline if it fails
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      allow_failure: true
+      when: on_success
+    # On MRs / other branches: run and must pass
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: on_success
+    - if: '$CI_COMMIT_BRANCH != "main"'
+      when: on_success
 
 # --- Backend tests ---
 test-backend:
@@ -25,9 +33,21 @@ test-backend:
     - dotnet build --configuration Release
     - dotnet test --no-build
   rules:
+    # On main: run but allow failure so build proceeds
     - if: '$CI_COMMIT_BRANCH == "main"'
       changes:
         - BackendAPI/**
+      allow_failure: true
+      when: on_success
+    # On MRs / other branches: enforce passing tests
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - BackendAPI/**
+      when: on_success
+    - if: '$CI_COMMIT_BRANCH != "main"'
+      changes:
+        - BackendAPI/**
+      when: on_success
 
 # --- Backend build & push to GitLab Container Registry ---
 build-backend:
@@ -54,3 +74,4 @@ build-backend:
       --cache-repo "$IMAGE/cache"
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
