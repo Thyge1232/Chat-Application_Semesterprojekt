@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore; 
 using Npgsql.EntityFrameworkCore.PostgreSQL;
-namespace Test;
+using Test;
+namespace BackendAPI.Context;
 
 public class MyDBContext : DbContext
 {
@@ -19,4 +20,10 @@ public class MyDBContext : DbContext
         );
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<User>()
+    }
 }
