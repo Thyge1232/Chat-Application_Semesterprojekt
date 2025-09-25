@@ -12,7 +12,7 @@ Console.WriteLine($"Using DB: {connString}");
 builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<TestController>();
+builder.Services.AddScoped<MessageService.IMessageService, MessageService.MessageService>();
 
 
 // Add services to the container.
