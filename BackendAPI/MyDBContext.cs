@@ -49,7 +49,7 @@ public class MyDBContext : DbContext
                     UserId = 1,
                     Username = "alice",
                     PassWord = "hashed_pw_1",
-                    CreatedAt = DateTime.UtcNow.AddDays(-10),
+                    CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
                     ProfilePicture = "alice.png",
                     Email = "alice@example.com",
                 },
@@ -58,7 +58,7 @@ public class MyDBContext : DbContext
                     UserId = 2,
                     Username = "bob",
                     PassWord = "hashed_pw_2",
-                    CreatedAt = DateTime.UtcNow.AddDays(-5),
+                    CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
                     ProfilePicture = "bob.png",
                     Email = "bob@example.com",
                 }
@@ -71,13 +71,13 @@ public class MyDBContext : DbContext
                 {
                     ChatroomId = 1,
                     Name = "General",
-                    CreatedAt = DateTime.UtcNow.AddDays(-7),
+                    CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
                 },
                 new Chatroom
                 {
                     ChatroomId = 2,
                     Name = "Tech Talk",
-                    CreatedAt = DateTime.UtcNow.AddDays(-3),
+                    CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
                 }
             );
 
@@ -88,19 +88,19 @@ public class MyDBContext : DbContext
                 {
                     UserId = 1,
                     ChatroomId = 1,
-                    JoinedAt = DateTime.UtcNow.AddDays(-6),
+                    JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0),
                 },
                 new ChatroomMember
                 {
                     UserId = 2,
                     ChatroomId = 1,
-                    JoinedAt = DateTime.UtcNow.AddDays(-5),
+                    JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0),
                 },
                 new ChatroomMember
                 {
                     UserId = 2,
                     ChatroomId = 2,
-                    JoinedAt = DateTime.UtcNow.AddDays(-2),
+                    JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0),
                 }
             );
 
@@ -113,7 +113,7 @@ public class MyDBContext : DbContext
                     MessageContent = "Hello everyone!",
                     ChatroomId = 1,
                     UserId = 1,
-                    TimeStamp = DateTime.UtcNow.AddDays(-6).AddHours(1),
+                    TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0),
                 },
                 new Message
                 {
@@ -121,7 +121,7 @@ public class MyDBContext : DbContext
                     MessageContent = "Hi Alice!",
                     ChatroomId = 1,
                     UserId = 2,
-                    TimeStamp = DateTime.UtcNow.AddDays(-5).AddHours(2),
+                    TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0),
                 },
                 new Message
                 {
@@ -129,7 +129,7 @@ public class MyDBContext : DbContext
                     MessageContent = "Anyone tried .NET MAUI?",
                     ChatroomId = 2,
                     UserId = 2,
-                    TimeStamp = DateTime.UtcNow.AddDays(-2).AddHours(3),
+                    TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0),
                 }
             );
     }
