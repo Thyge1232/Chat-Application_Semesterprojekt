@@ -9,6 +9,7 @@ Console.WriteLine($"Using DB: {connString}");
 
 
 builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<TestController>();
 
