@@ -21,6 +21,11 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+await using (scope = app.Services.CreateAsyncScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<MyDBContext>();
+    await db.Database.MigrateAsync();
+}
 
 app.UseSwagger();
 app.UseSwaggerUI();
