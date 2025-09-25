@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Test;
+using BackendAPI.Context;
 
 // A simple health check controller to verify that the API is running.
 namespace BackendAPI.Controllers;
