@@ -3,6 +3,10 @@
 # ----- Build -----
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+
 
 # Copy csproj and restore (relative to context root = BackendAPI/)
 COPY BackendAPI.csproj ./
@@ -18,4 +22,6 @@ WORKDIR /app
 COPY --from=build /app ./
 ENV ASPNETCORE_URLS=http://0.0.0.0:8080
 EXPOSE 8080
-ENTRYPOINT ["dotnet", "BackendAPI.dll"]
+COPY entrypoint.sh ./entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
+
