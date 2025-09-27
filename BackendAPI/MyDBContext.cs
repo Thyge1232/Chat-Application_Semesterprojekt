@@ -45,7 +45,7 @@ public class MyDBContext : DbContext
                 {
                     UserId = 1,
                     Username = "alice",
-                    PassWord = "hashed_pw_1",
+                    Password = "hashed_pw_1",
                     CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
                     ProfilePicture = "alice.png",
                     Email = "alice@example.com",
@@ -54,7 +54,7 @@ public class MyDBContext : DbContext
                 {
                     UserId = 2,
                     Username = "bob",
-                    PassWord = "hashed_pw_2",
+                    Password = "hashed_pw_2",
                     CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
                     ProfilePicture = "bob.png",
                     Email = "bob@example.com",

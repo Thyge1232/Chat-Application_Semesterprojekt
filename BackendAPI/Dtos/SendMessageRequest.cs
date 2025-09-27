@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BackendAPI.Contracts;
+namespace BackendAPI.Dtos;
 
 public sealed class SendMessageRequest
 {

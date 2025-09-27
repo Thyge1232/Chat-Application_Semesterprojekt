@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Test;
 using BackendAPI.Context;
 using BackendAPI.Controllers;
+using BackendAPI.Services.Mocks;
+using BackendAPI.Services.Interfaces;
+using BackendAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 var connString = Environment.GetEnvironmentVariable("ConnectionSTrings__Default") ??
@@ -15,18 +18,38 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MessageService.IMessageService, MessageService.MessageService>();
 
 
+// BETINGET REGISTRERING AF IUserService
+if (builder.Environment.IsDevelopment())
+{
+    //Development-mode, med hardcoded data
+    Console.WriteLine("--> Using Mock User Service");
+    builder.Services.AddSingleton<IUserService, MockUserService>();
+}
+else
+{
+    
+    Console.WriteLine("--> Using Real User Service");
+    builder.Services.AddScoped<IUserService, UserService>();
+}
+
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-await using (var scope = app.Services.CreateAsyncScope())
+// Kør KUN migrations, hvis IKKE er i development-mode 
+if (!app.Environment.IsDevelopment())
 {
-    var db = scope.ServiceProvider.GetRequiredService<MyDBContext>();
-    await db.Database.MigrateAsync();
-}
 
+    await using (var scope = app.Services.CreateAsyncScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<MyDBContext>();
+        await db.Database.MigrateAsync();
+    }
+}
 app.UseSwagger();
 app.UseSwaggerUI();
 

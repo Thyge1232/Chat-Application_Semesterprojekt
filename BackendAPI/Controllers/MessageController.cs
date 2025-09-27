@@ -1,5 +1,5 @@
 ﻿using BackendAPI.Context;
-using BackendAPI.Contracts;
+using BackendAPI.Dtos;
 using BackendAPI.Models;
 using MessageService;
 using Microsoft.AspNetCore.Mvc;
