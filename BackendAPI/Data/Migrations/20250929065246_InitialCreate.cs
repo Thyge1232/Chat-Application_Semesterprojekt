@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -27,7 +27,7 @@ namespace BackendAPI.Data.Migrations
             
 
             migrationBuilder.AlterColumn<string>(
-                name: "PassWord",
+                name: "Password",
                 table: "Users",
                 type: "text",
                 nullable: false,
