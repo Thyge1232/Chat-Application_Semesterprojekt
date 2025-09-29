@@ -48,7 +48,7 @@ namespace BackendAPI.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Username = table.Column<string>(type: "text", nullable: false),
-                    PassWord = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ProfilePicture = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false)
@@ -127,7 +127,7 @@ namespace BackendAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "CreatedAt", "Email", "PassWord", "ProfilePicture", "Username" },
+                columns: new[] { "UserId", "CreatedAt", "Email", "Password", "ProfilePicture", "Username" },
                 values: new object[,]
                 {
                     { 1, new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc), "alice@example.com", "hashed_pw_1", "alice.png", "alice" },
