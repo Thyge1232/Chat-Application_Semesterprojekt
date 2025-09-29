@@ -5,6 +5,10 @@ using BackendAPI.Controllers;
 using BackendAPI.Services.Mocks;
 using BackendAPI.Services.Interfaces;
 using BackendAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,22 +22,33 @@ builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MessageService.IMessageService, MessageService.MessageService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
+builder.Services.AddScoped<IUserService, UserService>();
 
-// BETINGET REGISTRERING AF IUserService
-if (builder.Environment.IsDevelopment())
+// JWT Authentication
+var jwtKey = builder.Configuration["Jwt:Secret"] 
+             ?? throw new InvalidOperationException("JWT secret mangler i konfigurationen");
+var keyBytes = Encoding.ASCII.GetBytes(jwtKey);
+
+builder.Services.AddAuthentication(options =>
 {
-    //Development-mode, med hardcoded data
-    Console.WriteLine("--> Using Mock User Service");
-    builder.Services.AddSingleton<IUserService, MockUserService>();
-}
-else
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
 {
-    
-    Console.WriteLine("--> Using Real User Service");
-    builder.Services.AddScoped<IUserService, UserService>();
-}
-
+    options.RequireHttpsMetadata = false; // kun til udvikling
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
+    };
+});
 
 
 // Add services to the container.
@@ -59,6 +74,8 @@ app.UseSwaggerUI();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
