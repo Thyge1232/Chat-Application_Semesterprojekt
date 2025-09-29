@@ -57,6 +57,11 @@ namespace BackendAPI.Services
 
         public async Task<UserDto> RegisterUserAsync(CreateUserDto createUserDto) // POST
         {
+            if (string.IsNullOrWhiteSpace(createUserDto.Username))
+            {
+                throw new ArgumentException("Username cannot be empty.", nameof(createUserDto.Username));
+            }
+            
             if (await _dbContext.Users.AnyAsync(u => u.Username == createUserDto.Username))
             {
 

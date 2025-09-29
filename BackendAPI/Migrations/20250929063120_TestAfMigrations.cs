@@ -11,7 +11,7 @@ namespace BackendAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "PassWord",
+                name: "Password",
                 table: "Users",
                 newName: "Password");
 

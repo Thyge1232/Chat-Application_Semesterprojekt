@@ -20,19 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MessageService.IMessageService, MessageService.MessageService>();
 
 
-// BETINGET REGISTRERING AF IUserService
-if (builder.Environment.IsDevelopment())
-{
-    //Development-mode, med hardcoded data
-    Console.WriteLine("--> Using Mock User Service");
-    builder.Services.AddSingleton<IUserService, MockUserService>();
-}
-else
-{
-    
-    Console.WriteLine("--> Using Real User Service");
-    builder.Services.AddScoped<IUserService, UserService>();
-}
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 
