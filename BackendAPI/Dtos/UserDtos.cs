@@ -11,6 +11,10 @@ namespace BackendAPI.Dtos
         [Required]
         [EmailAddress]
         public string Email { get; set; } = string.Empty; 
+
+        [Required]
+        [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long.")]
+        public string Password { get; set; } = string.Empty;
     }
 
     public class UserDto
@@ -20,6 +24,4 @@ namespace BackendAPI.Dtos
         public string Email { get; set; } = string.Empty;    
         public DateTime CreatedAt { get; set; }              
     }
-    
-
 }

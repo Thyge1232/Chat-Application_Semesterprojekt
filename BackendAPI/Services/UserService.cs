@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BackendAPI.Services.Interfaces;
+using BCrypt.Net;
 
 namespace BackendAPI.Services
 {
@@ -61,12 +62,15 @@ namespace BackendAPI.Services
 
                 throw new ArgumentException($"Username '{createUserDto.Username}' is already taken.");
             }
+            // Oprettelse af Hash af password
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(createUserDto.Password); 
+
 
             var user = new User
             {
                 Username = createUserDto.Username,
                 Email = createUserDto.Email,
-                Password = null,
+                Password = passwordHash, // Gemmer det hashed password. 
                 CreatedAt = DateTime.UtcNow,
                 ProfilePicture = "default-avatar.png"
             };

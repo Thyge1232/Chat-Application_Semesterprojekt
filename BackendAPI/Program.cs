@@ -5,6 +5,8 @@ using BackendAPI.Controllers;
 using BackendAPI.Services.Mocks;
 using BackendAPI.Services.Interfaces;
 using BackendAPI.Services;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 var connString = Environment.GetEnvironmentVariable("ConnectionSTrings__Default") ??
@@ -63,3 +65,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

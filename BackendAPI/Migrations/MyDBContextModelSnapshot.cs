@@ -165,8 +165,7 @@ namespace BackendAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("PassWord")
-                        .IsRequired()
+                    b.Property<string>("Password")
                         .HasColumnType("text");
 
                     b.Property<string>("ProfilePicture")
@@ -187,7 +186,7 @@ namespace BackendAPI.Migrations
                             UserId = 1,
                             CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "alice@example.com",
-                            PassWord = "hashed_pw_1",
+                            Password = "hashed_pw_1",
                             ProfilePicture = "alice.png",
                             Username = "alice"
                         },
@@ -196,7 +195,7 @@ namespace BackendAPI.Migrations
                             UserId = 2,
                             CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "bob@example.com",
-                            PassWord = "hashed_pw_2",
+                            Password = "hashed_pw_2",
                             ProfilePicture = "bob.png",
                             Username = "bob"
                         });
