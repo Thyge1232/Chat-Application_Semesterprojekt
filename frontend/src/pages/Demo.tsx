@@ -11,12 +11,12 @@ export const Demo = () => {
     <>
       <Title>WhoseApp</Title>
       <div className="flex flex-col items-center space-y-4">
-        <h1 className="text-xl">bigger text AGAIN again</h1>
+        <h1 className="text-xl">biggertext AGAIN again</h1>
         <p className="font-mono text-red-600">
           velkommen til vores CHAT APP hehehe 😝
           {newList}
         </p>
-        <Button className="w-40">en SEJ KNAP</Button>
+        <Button className="w-4">en SEJ KNAP</Button>
       </div>
     </>
   );
