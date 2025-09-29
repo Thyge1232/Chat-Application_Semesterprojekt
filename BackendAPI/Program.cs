@@ -5,6 +5,10 @@ using BackendAPI.Controllers;
 using BackendAPI.Services.Mocks;
 using BackendAPI.Services.Interfaces;
 using BackendAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +22,7 @@ builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MessageService.IMessageService, MessageService.MessageService>();
-
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // BETINGET REGISTRERING AF IUserService
 if (builder.Environment.IsDevelopment())
@@ -34,6 +38,29 @@ else
     builder.Services.AddScoped<IUserService, UserService>();
 }
 
+// JWT Authentication
+var jwtKey = builder.Configuration["Jwt:Secret"] 
+             ?? throw new InvalidOperationException("JWT secret mangler i konfigurationen");
+var keyBytes = Encoding.ASCII.GetBytes(jwtKey);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false; // kun til udvikling
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
+    };
+});
 
 
 // Add services to the container.
@@ -59,6 +86,8 @@ app.UseSwaggerUI();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
