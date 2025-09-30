@@ -10,10 +10,7 @@ namespace BackendAPI.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Password",
-                table: "Users",
-                newName: "Password");
+           
 
             migrationBuilder.AlterColumn<string>(
                 name: "Password",
@@ -27,10 +24,7 @@ namespace BackendAPI.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Password",
-                table: "Users",
-                newName: "PassWord");
+            
 
             migrationBuilder.AlterColumn<string>(
                 name: "PassWord",

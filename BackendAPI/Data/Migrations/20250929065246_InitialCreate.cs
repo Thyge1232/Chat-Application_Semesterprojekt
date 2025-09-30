@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -10,10 +10,7 @@ namespace BackendAPI.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "PassWord",
-                table: "Users",
-                newName: "Password");
+            
 
             migrationBuilder.AlterColumn<string>(
                 name: "Password",
@@ -27,13 +24,10 @@ namespace BackendAPI.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Password",
-                table: "Users",
-                newName: "PassWord");
+            
 
             migrationBuilder.AlterColumn<string>(
-                name: "PassWord",
+                name: "Password",
                 table: "Users",
                 type: "text",
                 nullable: false,
