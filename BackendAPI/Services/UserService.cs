@@ -1,7 +1,7 @@
-using BackendAPI.Context; 
+using BackendAPI.Context;
 using BackendAPI.Dtos;
 using BackendAPI.Models;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,25 +57,30 @@ namespace BackendAPI.Services
 
         public async Task<UserDto> RegisterUserAsync(CreateUserDto createUserDto) // POST
         {
+            if (await _dbContext.Users.AnyAsync(u => u.Username == createUserDto.Username || u.Email == createUserDto.Email))
+            {
+                throw new ArgumentException("Username or Email is already taken.");
+            }
+
             if (string.IsNullOrWhiteSpace(createUserDto.Username))
             {
                 throw new ArgumentException("Username cannot be empty.", nameof(createUserDto.Username));
             }
-            
+
             if (await _dbContext.Users.AnyAsync(u => u.Username == createUserDto.Username))
             {
 
                 throw new ArgumentException($"Username '{createUserDto.Username}' is already taken.");
             }
             // Oprettelse af Hash af password
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(createUserDto.Password); 
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(createUserDto.Password);
 
 
             var user = new User
             {
                 Username = createUserDto.Username,
                 Email = createUserDto.Email,
-                Password = passwordHash, // Gemmer det hashed password. 
+                Password = passwordHash, // Gemmer det hashed password.
                 CreatedAt = DateTime.UtcNow,
                 ProfilePicture = "default-avatar.png"
             };

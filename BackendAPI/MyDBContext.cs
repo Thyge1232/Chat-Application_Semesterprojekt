@@ -24,6 +24,14 @@ public class MyDBContext : DbContext
 
         modelBuilder.Entity<ChatroomMember>().HasKey(cm => new { cm.UserId, cm.ChatroomId });
 
+        modelBuilder.Entity<User>() // Unik Username
+            .HasIndex(u => u.Username)
+            .IsUnique();
+
+        modelBuilder.Entity<User>() // Unik Email
+            .HasIndex(u => u.Email)
+            .IsUnique();
+
         modelBuilder
             .Entity<ChatroomMember>()
             .HasOne(cm => cm.User)

@@ -42,6 +42,11 @@ namespace BackendAPI.Services.Mocks
             {
                 throw new ArgumentException($"Username '{createUserDto.Username}' is already taken.");
             }
+            
+            if (_users.Any(u => u.Email == createUserDto.Email))
+            {
+                throw new ArgumentException($"Email '{createUserDto.Email}' is already in use.");
+            }            
 
             // Simuler oprettelse af en ny bruger
             var newUser = new UserDto

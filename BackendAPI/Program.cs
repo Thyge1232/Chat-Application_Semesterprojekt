@@ -20,7 +20,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<MessageService.IMessageService, MessageService.MessageService>();
 
 
-builder.Services.AddScoped<IUserService, UserService>();
+if (builder.Environment.IsDevelopment())
+{
+    // Når vi er i Development, VIL VI KUN have mock-servicen.
+    Console.WriteLine("--> Using Mock User Service");
+    builder.Services.AddSingleton<IUserService, MockUserService>(); // Singleton for mock
+}
+else
+{
+    // I alle andre tilfælde (produktion osv.), brug den rigtige service.
+    Console.WriteLine("--> Using Real User Service");
+    builder.Services.AddScoped<IUserService, UserService>();
+}
 
 
 
