@@ -170,7 +170,6 @@ namespace BackendAPI.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Username")
