@@ -24,7 +24,7 @@ backendAPI/*.sln.docstates
 backendAPI/.vs/
 backendAPI/wwwroot/dist/
 backendAPI/appsettings.*.json
-backendAPI/appsettings.json
+
 
 # --- IDEs ---
 .vs/
