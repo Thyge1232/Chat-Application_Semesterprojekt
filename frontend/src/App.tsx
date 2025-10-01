@@ -1,35 +1,24 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Demo } from "./pages/Demo";
 import { Login } from "./pages/Login";
 import { Registration } from "./pages/Registration";
 import { Conversations } from "./pages/Conversations";
-import { Layout } from "./ui/Layout";
+import { Settings } from "./pages/Settings";
 import { Users } from "./pages/Users";
+import { Home } from "./pages/Home";
+import { Layout } from "./ui/Layout";
 
 const App = () => (
   <Router>
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/registration" element={<Registration />} />
-
-      <Route
-        path="/conversations"
-        element={
-          <Layout>
-            <Conversations />
-          </Layout>
-        }
-      />
-
-      <Route
-        path="/users"
-        element={
-          <Layout>
-            <Users />
-          </Layout>
-        }
-      />
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/conversations" element={<Conversations />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </Layout>
   </Router>
 );
 

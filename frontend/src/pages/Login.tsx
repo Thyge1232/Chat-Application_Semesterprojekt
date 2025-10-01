@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useLogin } from "../hooks/useLogin";
 
 type Inputs = {
   loginCredentials: string;
@@ -13,13 +14,19 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    // TODO: validate against database
-    navigate("/conversations");
+  const { mutate, data, error, isPending } = useLogin();
+
+  const onSubmit: SubmitHandler<Inputs> = ({ loginCredentials, password }) => {
+    mutate(
+      { username: loginCredentials, password }, // match your backend DTO
+      {
+        onSuccess: () => {
+          navigate("/conversations"); // shared page for all users
+        },
+      }
+    );
   };
 
   return (
