@@ -25,6 +25,7 @@ backendAPI/.vs/
 backendAPI/wwwroot/dist/
 backendAPI/appsettings.*.json
 
+
 # --- IDEs ---
 .vs/
 .vscode/

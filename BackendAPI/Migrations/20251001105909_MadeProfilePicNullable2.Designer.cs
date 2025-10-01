@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackendAPI.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20250929063120_TestAfMigrations")]
-    partial class TestAfMigrations
+    [Migration("20251001105909_MadeProfilePicNullable2")]
+    partial class MadeProfilePicNullable2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,75 +25,74 @@ namespace BackendAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("BackendAPI.Models.Chatroom", b =>
+            modelBuilder.Entity("BackendAPI.Models.Conversation", b =>
                 {
-                    b.Property<int>("ChatroomId")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ChatroomId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ConversationId"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("ChatroomId");
+                    b.HasKey("ConversationId");
 
-                    b.ToTable("Chatrooms");
+                    b.ToTable("Conversations");
 
                     b.HasData(
                         new
                         {
-                            ChatroomId = 1,
-                            CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConversationId = 1,
+                            CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc),
                             Name = "General"
                         },
                         new
                         {
-                            ChatroomId = 2,
-                            CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConversationId = 2,
+                            CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Tech Talk"
                         });
                 });
 
-            modelBuilder.Entity("BackendAPI.Models.ChatroomMember", b =>
+            modelBuilder.Entity("BackendAPI.Models.ConversationMember", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ChatroomId")
+                    b.Property<int>("ConversationId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("JoinedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("UserId", "ChatroomId");
+                    b.HasKey("UserId", "ConversationId");
 
-                    b.HasIndex("ChatroomId");
+                    b.HasIndex("ConversationId");
 
-                    b.ToTable("ChatroomMembers");
+                    b.ToTable("ConversationMembers");
 
                     b.HasData(
                         new
                         {
                             UserId = 1,
-                            ChatroomId = 1,
-                            JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified)
+                            ConversationId = 1,
+                            JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             UserId = 2,
-                            ChatroomId = 1,
-                            JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified)
+                            ConversationId = 1,
+                            JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             UserId = 2,
-                            ChatroomId = 2,
-                            JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified)
+                            ConversationId = 2,
+                            JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -105,11 +104,10 @@ namespace BackendAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MessageId"));
 
-                    b.Property<int>("ChatroomId")
+                    b.Property<int>("ConversationId")
                         .HasColumnType("integer");
 
                     b.Property<string>("MessageContent")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("TimeStamp")
@@ -120,7 +118,7 @@ namespace BackendAPI.Migrations
 
                     b.HasKey("MessageId");
 
-                    b.HasIndex("ChatroomId");
+                    b.HasIndex("ConversationId");
 
                     b.HasIndex("UserId");
 
@@ -130,25 +128,25 @@ namespace BackendAPI.Migrations
                         new
                         {
                             MessageId = 1,
-                            ChatroomId = 1,
+                            ConversationId = 1,
                             MessageContent = "Hello everyone!",
-                            TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 1
                         },
                         new
                         {
                             MessageId = 2,
-                            ChatroomId = 1,
+                            ConversationId = 1,
                             MessageContent = "Hi Alice!",
-                            TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 2
                         },
                         new
                         {
                             MessageId = 3,
-                            ChatroomId = 2,
+                            ConversationId = 2,
                             MessageContent = "Anyone tried .NET MAUI?",
-                            TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc),
                             UserId = 2
                         });
                 });
@@ -165,21 +163,24 @@ namespace BackendAPI.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
                     b.Property<string>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Username")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Users");
 
@@ -187,7 +188,7 @@ namespace BackendAPI.Migrations
                         new
                         {
                             UserId = 1,
-                            CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc),
                             Email = "alice@example.com",
                             Password = "hashed_pw_1",
                             ProfilePicture = "alice.png",
@@ -196,7 +197,7 @@ namespace BackendAPI.Migrations
                         new
                         {
                             UserId = 2,
-                            CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc),
                             Email = "bob@example.com",
                             Password = "hashed_pw_2",
                             ProfilePicture = "bob.png",
@@ -213,7 +214,6 @@ namespace BackendAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DbTestId"));
 
                     b.Property<string>("testString")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("DbTestId");
@@ -228,11 +228,11 @@ namespace BackendAPI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BackendAPI.Models.ChatroomMember", b =>
+            modelBuilder.Entity("BackendAPI.Models.ConversationMember", b =>
                 {
-                    b.HasOne("BackendAPI.Models.Chatroom", "Chatroom")
+                    b.HasOne("BackendAPI.Models.Conversation", "Conversation")
                         .WithMany("UserList")
-                        .HasForeignKey("ChatroomId")
+                        .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -242,16 +242,16 @@ namespace BackendAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Chatroom");
+                    b.Navigation("Conversation");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("BackendAPI.Models.Message", b =>
                 {
-                    b.HasOne("BackendAPI.Models.Chatroom", "Chatroom")
+                    b.HasOne("BackendAPI.Models.Conversation", "Conversation")
                         .WithMany()
-                        .HasForeignKey("ChatroomId")
+                        .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -261,12 +261,12 @@ namespace BackendAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Chatroom");
+                    b.Navigation("Conversation");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BackendAPI.Models.Chatroom", b =>
+            modelBuilder.Entity("BackendAPI.Models.Conversation", b =>
                 {
                     b.Navigation("UserList");
                 });

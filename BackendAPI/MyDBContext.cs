@@ -13,8 +13,8 @@ public class MyDBContext : DbContext
     public DbSet<DbTest> Tests { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Message> Messages { get; set; }
-    public DbSet<Chatroom> Chatrooms { get; set; }
-    public DbSet<ChatroomMember> ChatroomMembers { get; set; }
+    public DbSet<Conversation> Conversations { get; set; }
+    public DbSet<ConversationMember> ConversationMembers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -22,7 +22,7 @@ public class MyDBContext : DbContext
 
         modelBuilder.Entity<DbTest>().HasData(new DbTest { DbTestId = 1, testString = "Test!!!" });
 
-        modelBuilder.Entity<ChatroomMember>().HasKey(cm => new { cm.UserId, cm.ChatroomId });
+        modelBuilder.Entity<ConversationMember>().HasKey(cm => new { cm.UserId, cm.ConversationId });
 
         modelBuilder.Entity<User>() // Unik Username
             .HasIndex(u => u.Username)
@@ -33,18 +33,18 @@ public class MyDBContext : DbContext
             .IsUnique();
 
         modelBuilder
-            .Entity<ChatroomMember>()
+            .Entity<ConversationMember>()
             .HasOne(cm => cm.User)
             .WithMany(u => u.MemberIn)
             .HasForeignKey(cm => cm.UserId);
 
         modelBuilder
-            .Entity<ChatroomMember>()
-            .HasOne(cm => cm.Chatroom)
+            .Entity<ConversationMember>()
+            .HasOne(cm => cm.Conversation)
             .WithMany(c => c.UserList)
-            .HasForeignKey(cm => cm.ChatroomId);
+            .HasForeignKey(cm => cm.ConversationId);
 
-        modelBuilder.Entity<ChatroomMember>().Property(cm => cm.JoinedAt);
+        modelBuilder.Entity<ConversationMember>().Property(cm => cm.JoinedAt);
 
         modelBuilder
             .Entity<User>()
@@ -54,7 +54,7 @@ public class MyDBContext : DbContext
                     UserId = 1,
                     Username = "alice",
                     Password = "hashed_pw_1",
-                    CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
+                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0),DateTimeKind.Utc),
                     ProfilePicture = "alice.png",
                     Email = "alice@example.com",
                 },
@@ -63,49 +63,49 @@ public class MyDBContext : DbContext
                     UserId = 2,
                     Username = "bob",
                     Password = "hashed_pw_2",
-                    CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
+                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                     ProfilePicture = "bob.png",
                     Email = "bob@example.com",
                 }
             );
 
         modelBuilder
-            .Entity<Chatroom>()
+            .Entity<Conversation>()
             .HasData(
-                new Chatroom
+                new Conversation
                 {
-                    ChatroomId = 1,
+                    ConversationId = 1,
                     Name = "General",
-                    CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
+                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                 },
-                new Chatroom
+                new Conversation
                 {
-                    ChatroomId = 2,
+                    ConversationId = 2,
                     Name = "Tech Talk",
-                    CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0),
+                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                 }
             );
 
         modelBuilder
-            .Entity<ChatroomMember>()
+            .Entity<ConversationMember>()
             .HasData(
-                new ChatroomMember
+                new ConversationMember
                 {
                     UserId = 1,
-                    ChatroomId = 1,
-                    JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0),
+                    ConversationId = 1,
+                    JoinedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                 },
-                new ChatroomMember
+                new ConversationMember
                 {
                     UserId = 2,
-                    ChatroomId = 1,
-                    JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0),
+                    ConversationId = 1,
+                    JoinedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                 },
-                new ChatroomMember
+                new ConversationMember
                 {
                     UserId = 2,
-                    ChatroomId = 2,
-                    JoinedAt = new DateTime(2025, 9, 25, 14, 0, 0),
+                    ConversationId = 2,
+                    JoinedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                 }
             );
 
@@ -116,25 +116,25 @@ public class MyDBContext : DbContext
                 {
                     MessageId = 1,
                     MessageContent = "Hello everyone!",
-                    ChatroomId = 1,
+                    ConversationId = 1,
                     UserId = 1,
-                    TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0),
+                    TimeStamp = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                 },
                 new Message
                 {
                     MessageId = 2,
                     MessageContent = "Hi Alice!",
-                    ChatroomId = 1,
+                    ConversationId = 1,
                     UserId = 2,
-                    TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0),
+                    TimeStamp = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                 },
                 new Message
                 {
                     MessageId = 3,
                     MessageContent = "Anyone tried .NET MAUI?",
-                    ChatroomId = 2,
+                    ConversationId = 2,
                     UserId = 2,
-                    TimeStamp = new DateTime(2025, 9, 25, 14, 0, 0),
+                    TimeStamp = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                 }
             );
         modelBuilder
@@ -143,12 +143,12 @@ public class MyDBContext : DbContext
             .HasColumnType("timestamp with time zone");
 
         modelBuilder
-            .Entity<Chatroom>()
+            .Entity<Conversation>()
             .Property(c => c.CreatedAt)
             .HasColumnType("timestamp with time zone");
 
         modelBuilder
-            .Entity<ChatroomMember>()
+            .Entity<ConversationMember>()
             .Property(cm => cm.JoinedAt)
             .HasColumnType("timestamp with time zone");
 

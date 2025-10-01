@@ -1,19 +1,17 @@
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BackendAPI.Data.Migrations
+namespace BackendAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class MadeProfilePicNullable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            
-
             migrationBuilder.AlterColumn<string>(
-                name: "Password",
+                name: "ProfilePicture",
                 table: "Users",
                 type: "text",
                 nullable: true,
@@ -24,10 +22,8 @@ namespace BackendAPI.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
-
             migrationBuilder.AlterColumn<string>(
-                name: "Password",
+                name: "ProfilePicture",
                 table: "Users",
                 type: "text",
                 nullable: false,
