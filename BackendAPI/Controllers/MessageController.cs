@@ -18,14 +18,14 @@ public class MessageController : ControllerBase
         _messages = messages;
     }
 
-    // GET /messages/{chatroomId}
-    [HttpGet("messages/{chatroomId:int}")]
-    public async Task<ActionResult<IEnumerable<Message>>> GetMessagesFromChatroom(
-        int chatroomId, CancellationToken ct)
+    // GET /messages/{conversationId}
+    [HttpGet("messages/{conversationId:int}")]
+    public async Task<ActionResult<IEnumerable<Message>>> GetMessagesFromConversation(
+        int conversationId, CancellationToken ct)
     {
         try
         {
-            var result = await _messages.GetMessagesFromChatroom(chatroomId, ct);
+            var result = await _messages.GetMessagesFromConversation(conversationId, ct);
             return Ok(result);
         }
         catch (Exception ex)
@@ -46,12 +46,12 @@ public class MessageController : ControllerBase
 
         try
         {
-            var created = await _messages.CreateMessage(req.ChatroomId, req.UserId, req.Content, ct);
+            var created = await _messages.CreateMessage(req.ConversationId, req.UserId, req.Content, ct);
 
             // 201 with a Location that lists the room's messages
             return CreatedAtAction(
-                nameof(GetMessagesFromChatroom),
-                new { chatroomId = req.ChatroomId },
+                nameof(GetMessagesFromConversation),
+                new { conversationId = req.ConversationId },
                 created);
         }
         catch (UnauthorizedAccessException ex)

@@ -9,6 +9,6 @@ public class User
     public DateTime CreatedAt { get; set; }
     public string ProfilePicture { get; set; }= null!;
     public string Email { get; set; }= null!;
-    public ICollection<ChatroomMember> MemberIn { get; set;} = new List<ChatroomMember>();
+    public ICollection<ConversationMember> MemberIn { get; set;} = new List<ConversationMember>();
 
 }
