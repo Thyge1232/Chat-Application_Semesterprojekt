@@ -7,19 +7,23 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using BackendAPI.Services.Implementations;
+
 
 namespace BackendAPI.Services.Implementations
 {
     public class AuthService : IAuthService
     {
         private readonly MyDBContext _dbContext;
+        private readonly IPasswordHasher _passwordHasher;
 
         private readonly IConfiguration _config;
 
-        public AuthService(MyDBContext dbContext, IConfiguration config)
+        public AuthService(MyDBContext dbContext, IConfiguration config, IPasswordHasher passwordHasher)
         {
             _dbContext = dbContext;
             _config = config;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<string> LoginAsync(LoginDto loginDto)
@@ -30,7 +34,7 @@ namespace BackendAPI.Services.Implementations
     if (user == null)
         throw new InvalidOperationException("User not found");
 
-    if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
+    if (!_passwordHasher.VerifyPassword(loginDto.Password, user.Password))
         throw new UnauthorizedAccessException("Invalid password");
 
     var key = Encoding.ASCII.GetBytes(_config["Jwt:Secret"]);

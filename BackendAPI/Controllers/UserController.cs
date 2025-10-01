@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using BackendAPI.Services.Interfaces;
 
 
-namespace BackendAPI.Controller;
+namespace BackendAPI.Controllers;
 
 [ApiController]
-    [Route("api/[controller]")] // Dette vil give ruten "/api/users"
+    [Route("api/users")] // api/users
     public class UsersController : ControllerBase
     {
 
@@ -45,7 +45,7 @@ namespace BackendAPI.Controller;
             }
         }
 
-        // GET /api/users/{id} // ved succes: 200 OK
+        // GET /api/users/{id} 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUserById(int id)
         {
