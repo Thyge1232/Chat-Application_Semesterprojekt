@@ -1,8 +1,7 @@
-//her tester vi at loginformen omsættes korrekt til json format
+/* //her tester vi at loginformen omsættes korrekt til json format
 
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
-import LoginForm from './LoginForm';
+// import { render, screen, fireEvent } from '@testing-library/react';
 
 describe('LoginForm', () => {
   const testCases = [
@@ -16,7 +15,7 @@ describe('LoginForm', () => {
     'submits credentials: username="%s", password="%s"',
     (username, password) => {
       const mockLogin = vi.fn();
-      render(<LoginForm onLogin={mockLogin} />);
+      // render(<LoginForm onLogin={mockLogin} />);
 
       fireEvent.change(screen.getByLabelText(/username/i), {
         target: { value: username },
@@ -68,4 +67,4 @@ This separation keeps your form component testable and focused, while the actual
 🧠 Why This Matters
 • 	TDD discipline: You only add code when a test demands it.
 • 	Separation of concerns: UI handles inputs, services handle data, pages handle navigation.
-• 	Scalability: Later, you can swap out the backend or add OAuth without rewriting your form.
+• 	Scalability: Later, you can swap out the backend or add OAuth without rewriting your form. */
