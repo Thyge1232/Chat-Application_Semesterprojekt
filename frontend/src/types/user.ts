@@ -1,8 +1,8 @@
-export type UserId = string;
+export type UserId = number;
 
 export interface User {
   id: UserId;
-  firstName: string;
-  lastName: string;
-  isOnline?: boolean;
+  userName: string;
+  email: string;
+  creation: string;
 }
