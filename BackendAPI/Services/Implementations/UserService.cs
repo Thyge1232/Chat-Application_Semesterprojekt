@@ -9,10 +9,11 @@ namespace BackendAPI.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-
-        public UserService(IUserRepository userRepository)
+        private readonly IPasswordHasher _passwordHasher;
+        public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher)
         {
             _userRepository = userRepository;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<UserDto?> GetUserByIdAsync(int userId)
@@ -51,8 +52,7 @@ namespace BackendAPI.Services.Implementations
                 throw new ArgumentException("Username or Email is already taken.");
             }
 
-            // FEJL: Brug createUserDto.Password i stedet for password
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(createUserDto.Password);
+            var passwordHash = _passwordHasher.HashPassword(createUserDto.Password);
             var user = new User
             {
                 Username = createUserDto.Username,

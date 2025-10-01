@@ -2,6 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Test;
 using BackendAPI.Context;
+using BackendAPI.Services.Interfaces;
+using BackendAPI.Services.Implementations;
+using BackendAPI.Dtos;
+using BackendAPI.Models;
+
 
 // A simple health check controller to verify that the API is running.
 namespace BackendAPI.Controllers;
@@ -10,6 +15,8 @@ namespace BackendAPI.Controllers;
 public class TestController : ControllerBase
 {
     private readonly MyDBContext _db;
+    private readonly IPasswordHasher _passwordHasher;
+    private readonly MyDBContext _context;
 
     public TestController(MyDBContext db)
     {
@@ -31,6 +38,45 @@ public class TestController : ControllerBase
             return StatusCode(500, new { error = ex.Message });
         }
     }
+    [HttpGet("test-hash")]
+    public IActionResult TestHash()
+    {
+        var testPassword = "test123";
+        var hashedPassword = _passwordHasher.HashPassword(testPassword);
+        var isValid = _passwordHasher.VerifyPassword(testPassword, hashedPassword);
+
+        return Ok(new
+        {
+            OriginalPassword = testPassword,
+            HashedPassword = hashedPassword,
+            VerificationResult = isValid
+        });
+    }
+    [HttpPost("login")]
+public async Task<ActionResult<string>> Login([FromBody] LoginDto loginDto)
+{
+    try
+    {
+        // Find bruger i databasen
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Username == loginDto.Username);
+
+        if (user == null)
+            return Unauthorized("User not found");
+
+        // Verificér adgangskode
+        if (!_passwordHasher.VerifyPassword(loginDto.Password, user.Password))
+            return Unauthorized("Invalid password");
+
+        // Generér JWT-token (hvis du har AuthService)
+        // Eller brug en simpel test-token
+        return Ok(new { token = "test-jwt-token" });
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new { message = ex.Message });
+    }
+}
 
     [Route("testGet")]
     [HttpGet]
