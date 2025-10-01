@@ -1,36 +1,28 @@
-using BackendAPI.Context;
 using BackendAPI.Dtos;
 using BackendAPI.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using BackendAPI.Repositories.Interfaces;
 using BackendAPI.Services.Interfaces;
 using BCrypt.Net;
 
-namespace BackendAPI.Services
+namespace BackendAPI.Services.Implementations
 {
     public class UserService : IUserService
     {
-        private readonly MyDBContext _dbContext;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(MyDBContext dbContext)
+        public UserService(IUserRepository userRepository)
         {
-            _dbContext = dbContext;
+            _userRepository = userRepository;
         }
 
         public async Task<UserDto?> GetUserByIdAsync(int userId)
         {
-            var user = await _dbContext.Users
-                .FirstOrDefaultAsync(u => u.UserId == userId);
-
+            var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
             {
                 return null;
             }
 
-            // Hvis brugeren findes, map den til en UserDto og returner
             return new UserDto
             {
                 Id = user.UserId,
@@ -42,51 +34,36 @@ namespace BackendAPI.Services
 
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
-            var users = await _dbContext.Users
-                .Select(u => new UserDto
-                {
-                    Id = u.UserId,
-                    Username = u.Username,
-                    Email = u.Email,
-                    CreatedAt = u.CreatedAt
-                })
-                .ToListAsync();
-
-            return users;
+            var users = await _userRepository.GetAllAsync();
+            return users.Select(user => new UserDto
+            {
+                Id = user.UserId,
+                Username = user.Username,
+                Email = user.Email,
+                CreatedAt = user.CreatedAt
+            });
         }
 
-        public async Task<UserDto> RegisterUserAsync(CreateUserDto createUserDto) // POST
+        public async Task<UserDto> RegisterUserAsync(CreateUserDto createUserDto)
         {
-            if (await _dbContext.Users.AnyAsync(u => u.Username == createUserDto.Username || u.Email == createUserDto.Email))
+            if (await _userRepository.ExistsByUsernameOrEmailAsync(createUserDto.Username, createUserDto.Email))
             {
                 throw new ArgumentException("Username or Email is already taken.");
             }
 
-            if (string.IsNullOrWhiteSpace(createUserDto.Username))
-            {
-                throw new ArgumentException("Username cannot be empty.", nameof(createUserDto.Username));
-            }
-
-            if (await _dbContext.Users.AnyAsync(u => u.Username == createUserDto.Username))
-            {
-
-                throw new ArgumentException($"Username '{createUserDto.Username}' is already taken.");
-            }
-            // Oprettelse af Hash af password
+            // FEJL: Brug createUserDto.Password i stedet for password
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(createUserDto.Password);
-
-
             var user = new User
             {
                 Username = createUserDto.Username,
                 Email = createUserDto.Email,
-                Password = passwordHash, // Gemmer det hashed password.
+                Password = passwordHash,
                 CreatedAt = DateTime.UtcNow,
                 ProfilePicture = "default-avatar.png"
             };
 
-            _dbContext.Users.Add(user);
-            await _dbContext.SaveChangesAsync();
+            await _userRepository.AddAsync(user);
+            await _userRepository.SaveChangesAsync();
 
             return new UserDto
             {

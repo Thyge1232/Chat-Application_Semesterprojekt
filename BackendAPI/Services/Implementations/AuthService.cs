@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace BackendAPI.Services
+namespace BackendAPI.Services.Implementations
 {
     public class AuthService : IAuthService
     {

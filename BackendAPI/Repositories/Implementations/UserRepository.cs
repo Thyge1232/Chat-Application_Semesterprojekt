@@ -1,8 +1,8 @@
-
-using BackendAPI.Context; 
+// TRIN 1: RETTEDE USING-STATEMENTS
+using BackendAPI.Context;
 using BackendAPI.Models;
 using BackendAPI.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendAPI.Repositories.Implementations
 {
@@ -20,25 +20,34 @@ namespace BackendAPI.Repositories.Implementations
             return await _dbContext.Users.FindAsync(userId);
         }
 
+        public async Task<IEnumerable<User>> GetAllAsync()
+        {
+            return await _dbContext.Users.AsNoTracking().ToListAsync();
+        }
+
+        // TRIN 2: IMPLEMENTERET DEN MANGLENDE METODE
+        public async Task<bool> ExistsByUsernameOrEmailAsync(string username, string email)
+        {
+            return await _dbContext.Users
+                .AnyAsync(u => u.Username == username || u.Email == email);
+        }
+
+        // TRIN 3: KORREKT IMPLEMENTERET FindByUsernameAsync (KUN EN GANG!)
+        public async Task<User?> FindByUsernameAsync(string username)
+        {
+            return await _dbContext.Users
+                .FirstOrDefaultAsync(u => u.Username == username);
+        }
+
         public async Task<User> AddAsync(User user)
         {
             await _dbContext.Users.AddAsync(user);
             return user;
         }
 
-        public async Task<bool> ExistsByUsernameOrEmailAsync(string username, string email)
-        {
-            return await _dbContext.Users.AnyAsync(u => u.Username == username || u.Email == email);
-        }
-
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<User>> GetAllAsync()
-        {
-            return await _dbContext.Users.AsNoTracking().ToListAsync();
         }
     }
 }

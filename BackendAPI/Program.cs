@@ -1,15 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using Test;
 using BackendAPI.Context;
-using BackendAPI.Controllers;
-using BackendAPI.Services.Mocks;
+using BackendAPI.Repositories.Interfaces;
+using BackendAPI.Repositories.Implementations;
 using BackendAPI.Services.Interfaces;
-using BackendAPI.Services;
+using BackendAPI.Services.Implementations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,25 +14,15 @@ var connString = Environment.GetEnvironmentVariable("ConnectionStrings__Default"
 builder.Configuration.GetConnectionString("Default");
 Console.WriteLine($"Using DB: {connString}");
 
-
 builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Registrer dine services
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<MessageService.IMessageService, MessageService.MessageService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-
-if (builder.Environment.IsDevelopment())
-{
-    // Når vi er i Development, VIL VI KUN have mock-servicen.
-    Console.WriteLine("--> Using Mock User Service");
-    builder.Services.AddSingleton<IUserService, MockUserService>(); // Singleton for mock
-}
-else
-{
-    // I alle andre tilfælde (produktion osv.), brug den rigtige service.
-    Console.WriteLine("--> Using Real User Service");
-    builder.Services.AddScoped<IUserService, UserService>();
-}
 
 // JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Secret"]
@@ -61,25 +48,19 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 var app = builder.Build();
-
-
 
 await using (var scope = app.Services.CreateAsyncScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<MyDBContext>();
     await db.Database.MigrateAsync();
 }
+
 app.UseSwagger();
 app.UseSwaggerUI();
-
-
-// Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
 
