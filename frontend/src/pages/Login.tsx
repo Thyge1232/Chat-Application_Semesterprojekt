@@ -20,10 +20,10 @@ export const Login = () => {
 
   const onSubmit: SubmitHandler<Inputs> = ({ loginCredentials, password }) => {
     mutate(
-      { username: loginCredentials, password }, // match your backend DTO
+      { username: loginCredentials, password },
       {
         onSuccess: () => {
-          navigate("/conversations"); // shared page for all users
+          navigate("/conversations");
         },
       }
     );

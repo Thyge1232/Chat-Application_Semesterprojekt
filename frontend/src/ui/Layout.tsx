@@ -56,8 +56,15 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
       <main className="flex-1 flex flex-col">{children}</main>
 
-      <footer className="p-1 text-right bg-gray-100 text-sm text-gray-600">
-        chatApp gruppe 5 (det her er vorefooter)
+      <footer className="flex items-center justify-between p-1 bg-gray-100 text-sm text-gray-600">
+        {!hideButtons && (
+          <Link to="/">
+            <Button className="text-2xl bg-purple-500 text-white rounded-lg shadow-md">
+              Log ud
+            </Button>
+          </Link>
+        )}
+        <span>chatApp gruppe 5 (det her er vorefooter)</span>
       </footer>
     </div>
   );
