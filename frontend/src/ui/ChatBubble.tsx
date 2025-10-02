@@ -23,6 +23,10 @@ export const ChatBubble = ({
       <div className="text-xl text-gray-600 mb-1">
         {sender} {timestamp}
       </div>
+      <div className="flex gap-0.3 flex-row h-10">
+        <img src="/Images/delete_icon.png"></img>
+        <img src="/Images/edit_icon.png"></img>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,13 @@
-import { T } from "vitest/dist/chunks/reporters.d.BFLkQcL6.js";
 import { ChatBubble } from "../ui/ChatBubble";
 import { Title } from "../ui/Title";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useSendMessage } from "../hooks/useSendMessage";
+import type { Message as AppMessage } from "../types/message";
+import type { Conversation } from "../types/conversation";
+import { useGetConversation } from "../hooks/useGetConversation";
 
 // Mock data before I establish the backend connection for this part
-const mockMessages = [
+const mockMessages: AppMessage[] = [
   {
     id: "1",
     senderId: "Bobby",
@@ -104,11 +107,7 @@ const mockMessages = [
     timestamp: "10:13:00",
   },
 ];
-
-function handleSendMessage() {
-  // Logic to send message
-  mockMessages.push(e.target.value);
-}
+const getConversation:Conversation[]=useGetConversation(id:number)
 
 export const Conversations = () => {
   return (
@@ -143,7 +142,10 @@ export const Conversations = () => {
             className="border border-gray-300 rounded-md p-2 resize-none h-20 w-full"
             placeholder="Type your message..."
           />
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-md"
+            type="submit"
+          >
             Send
           </button>
         </div>
