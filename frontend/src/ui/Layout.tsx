@@ -17,7 +17,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         />
 
         <div className="flex flex-1 justify-center relative">
-          <span className="text-4xl font-bold text-indigo-400 absolute left-1/2 -translate-x-1/2">
+          <span className="text-4xl font-bold text-indigo-400 absolute left-1/2 -translate-x-1/2 -top-20">
             Connecting people
           </span>
 
