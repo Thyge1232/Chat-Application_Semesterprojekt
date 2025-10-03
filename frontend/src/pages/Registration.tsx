@@ -17,6 +17,7 @@ export const Registration = () => {
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     const {confirmPassword, ...userData } = data;
 
+
     createUserMutation.mutate(userData, {
       onSuccess: (res) => {
         console.log("Response fra backend: ", res);
@@ -28,6 +29,7 @@ export const Registration = () => {
       },
      });
    console.log("Form data:", data);
+   console.log("Json-String:", userData);
   };
 
  
@@ -41,18 +43,18 @@ export const Registration = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
         <div>
-          <label htmlFor="userName" className="block text-sm font-medium text-gray-900">
+          <label htmlFor="username" className="block text-sm font-medium text-gray-900">
             Brugernavn:
           </label>
           <div className="mt-2">
             <input
-              id="userName"
+              id="username"
               type="text"
               placeholder="Skriv dit ønskede brugernavn"
               className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-              {...register("userName", { required: "Oprettelse kræver et brugernavn" })}
+              {...register("username", { required: "Oprettelse kræver et brugernavn" })}
             />
-            {errors.userName && <p className="text-red-500">{errors.userName.message}</p>}
+            {errors.username && <p className="text-red-500">{errors.username.message}</p>}
           </div>
         </div>
 
