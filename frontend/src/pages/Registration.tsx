@@ -2,15 +2,15 @@ import type { UserSignup } from "../types/usersignup";
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { usePostData } from "../hooks/usePostData";
+import { useNavigate } from "react-router-dom";
 
 interface FormInputs extends UserSignup {
     confirmPassword: string;
   }
 
 export const Registration = () => {
-  
-
   const { register, handleSubmit, watch, formState: { errors } } = useForm<FormInputs>();
+  const navigate = useNavigate();
 
   const createUserMutation = usePostData<UserSignup, unknown>("/api/users"); //tjek denne
 
