@@ -5,6 +5,11 @@ import { useSendMessage } from "../hooks/useSendMessage";
 import type { Message as AppMessage } from "../types/message";
 import type { Conversation } from "../types/conversation";
 import { useGetConversation } from "../hooks/useGetConversation";
+import { MessageInput } from "../ui/MessageInput";
+
+//todo some implementation of aquiring userid at login and use it here
+const userId = 6;
+const senderId = "Mantequilla";
 
 // Mock data before I establish the backend connection for this part
 const mockMessages: AppMessage[] = [
@@ -107,11 +112,17 @@ const mockMessages: AppMessage[] = [
     timestamp: "10:13:00",
   },
 ];
-const getConversation:Conversation[]=useGetConversation(id:number)
+// const getConversation:Conversation[]=useGetConversation(id:number)
 
 export const Conversations = () => {
+  const { mutate: sendMessage } = useSendMessage();
+  const [content, setContent] = useState<string>("");
+  const [messages, setMessages] = useState<AppMessage[]>(mockMessages);
+
+  console.log(content);
+
   return (
-    <div className="grid grid-cols-[20%_80%]" style={{ height: "70vh" }}>
+    <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
       {/* Left Sidebar */}
       <div className="bg-blue-100 p-4 overflow-y-auto">
         <p>Here u see list over many people</p>
@@ -124,31 +135,40 @@ export const Conversations = () => {
           <Title>Messages</Title>
           {/* Map through mock messages and put sender + timestamp at the corner of the message in small font */}
 
-          {mockMessages.map((msg) => (
+          {messages.map((msg) => (
             <ChatBubble
               key={msg.id}
               isSender={msg.isSender}
               sender={msg.senderId}
               timestamp={msg.timestamp}
+              messageId={msg.id}
             >
               {msg.content}
             </ChatBubble>
           ))}
         </div>
-
-        {/* Input Area Anchored to Bottom */}
-        <div className="border-t p-4 flex gap-2">
-          <textarea
-            className="border border-gray-300 rounded-md p-2 resize-none h-20 w-full"
-            placeholder="Type your message..."
-          />
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md"
-            type="submit"
-          >
-            Send
-          </button>
-        </div>
+        <MessageInput
+          content={content}
+          setContent={setContent}
+          onSubmit={() => {
+            sendMessage({
+              conversationId: 1,
+              userId: userId,
+              content: content,
+            });
+            const newMessage: AppMessage = {
+              id: String(messages.length + 1),
+              senderId: senderId,
+              content: content,
+              isSender: true,
+              timestamp: new Date().toLocaleTimeString(),
+            };
+            console.log("Before:", messages.length);
+            setMessages((messages) => [...messages, newMessage]);
+            console.log("After:", messages.length);
+            setContent("");
+          }}
+        />
       </div>
     </div>
   );

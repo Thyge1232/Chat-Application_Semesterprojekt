@@ -1,6 +1,7 @@
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import "./LayoutStyle.css";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -8,38 +9,34 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     location.pathname === "/" || location.pathname === "/registration";
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="flex items-center justify-between p-0 bg-gray-100 z-0">
+    <div className="layout">
+      <header className="header">
         <img
           src="/Images/header.jpg"
           alt="connecting people img"
-          className="h-40 w-40 object-contain"
+          className="header__image"
         />
 
-        <div className="flex flex-1 justify-center relative">
-          <span className="text-4xl font-bold text-indigo-400 absolute left-1/2 -translate-x-1/2 -top-20">
-            Connecting people
-          </span>
+        <div className="header__center">
+          <span className="header__title">Connecting people</span>
 
           {!hideButtons && (
-            <div className="flex gap-2 absolute left-0 ml-44">
+            <div className="header__nav">
               <Link to="/conversations">
-                <Button className="text-2xl bg-red-200 text-white rounded-lg shadow-md">
-                  Samtaler
-                </Button>
+                <Button className="nav-button nav-button--red">Samtaler</Button>
               </Link>
               <Link to="/home">
-                <Button className="text-2xl bg-blue-300 text-black rounded-lg shadow-md">
+                <Button className="nav-button nav-button--blue">
                   Personlig side
                 </Button>
               </Link>
               <Link to="/users">
-                <Button className="text-2xl bg-amber-500 text-white rounded-lg shadow-md">
+                <Button className="nav-button nav-button--amber">
                   Brugere
                 </Button>
               </Link>
               <Link to="/settings">
-                <Button className="text-2xl bg-amber-200 text-black rounded-lg shadow-md">
+                <Button className="nav-button nav-button--amber-light">
                   Indstillinger
                 </Button>
               </Link>
@@ -50,18 +47,16 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <img
           src="/Images/LogoChatApp.png"
           alt="Logo"
-          className="h-40 w-40 object-contain"
+          className="header__image"
         />
       </header>
 
-      <main className="flex-1 flex flex-col">{children}</main>
+      <main className="main">{children}</main>
 
-      <footer className="flex items-center justify-between p-1 bg-gray-100 text-sm text-gray-600">
+      <footer className="footer">
         {!hideButtons && (
           <Link to="/">
-            <Button className="text-2xl bg-purple-500 text-white rounded-lg shadow-md">
-              Log ud
-            </Button>
+            <Button className="nav-button nav-button--purple">Log ud</Button>
           </Link>
         )}
         <span>chatApp gruppe 5 (det her er vorefooter)</span>

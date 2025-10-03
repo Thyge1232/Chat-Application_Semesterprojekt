@@ -1,0 +1,38 @@
+.button {
+  font-size: 15px;
+  background-color: greenyellow;
+  color: rgb(0, 0, 0);
+}
+
+.nav-button {
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+}
+
+.nav-button--red {
+  background-color: #fecaca; /* red-200 */
+  color: white;
+}
+
+.nav-button--blue {
+  background-color: #93c5fd; /* blue-300 */
+  color: black;
+}
+
+.nav-button--amber {
+  background-color: #f59e0b; /* amber-500 */
+  color: white;
+}
+
+.nav-button--amber-light {
+  background-color: #fde68a; /* amber-200 */
+  color: black;
+}
+
+.nav-button--purple {
+  background-color: #a78bfa; /* purple-500 */
+  color: white;
+}
