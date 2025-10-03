@@ -145,7 +145,8 @@ export const Conversations = () => {
             >
               {msg.content}
             </ChatBubble>
-          ))}
+          ))} */}
+          ))} */}
         </div>
         <MessageInput
           content={content}
