@@ -1,8 +1,8 @@
 export type UserId = number;
 
-export interface User {
+export type User = {
   id: UserId;
   userName: string;
   email: string;
-  creation: string;
-}
+  createdAt: string;
+};

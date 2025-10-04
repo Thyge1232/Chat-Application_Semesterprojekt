@@ -1,14 +1,23 @@
-import type { ConversationId } from "./conversation";
-import type { User, UserId } from "./user";
+export type MessageId = number;
 
-export type MessageId = string;
+export type ApiMessage = {
+  messageId?: number;
+  conversationId: number;
+  userId: number;
+  messageContent: string;
+  timeStamp: string;
+};
 
 export interface Message {
-  id: MessageId;
-  conversationId: ConversationId;
-  sender: User;
+  id?: number;
+  conversationId: number;
+  senderId: number;
   content: string;
-  // attachments?!
   sentAt: Date;
-  readBy: UserId[];
 }
+
+export type SendMessage = {
+  conversationId: number;
+  userId: number;
+  content: string;
+};

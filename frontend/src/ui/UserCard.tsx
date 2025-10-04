@@ -6,31 +6,49 @@ interface UserCardProps {
   email: string;
   createdAt: string;
   className?: string;
+  userId?: number;
+  img?: string;
 }
+
+//placeholder til brugerens billede for now:
+const placeholder = "../public/Images/user.png";
 
 export const UserCard = ({
   username,
   email,
   createdAt,
   className,
+  userId,
+  img,
 }: UserCardProps) => {
   return (
     <li className={twMerge("user-card", className)}>
-      <p className="user-card__info">
-        <text>Brugernavn: </text>
-        <br />
-        <strong>{username}</strong>
-        <br />
-        <text className="text-xs">Email: </text>
-        <br />
-        <span className="user-card__email">{email}</span>
-        <br />
-        <text className="text-xs">Oprettet: </text>
-        <br />
-        <span className="user-card__created">
-          {new Date(createdAt).toLocaleString()}
-        </span>
-      </p>
+      <div className="user-card__layout">
+        <div className="user-card__info">
+          <span>Brugernavn:</span>
+          <br />
+          <strong>{username}</strong>
+          <br />
+          <span className="text-xs">Email:</span>
+          <br />
+          <span className="user-card__email">{email}</span>
+          <br />
+          <span className="text-xs">Oprettet:</span>
+          <br />
+          <span className="user-card__created">
+            {new Date(createdAt).toLocaleString()}
+          </span>
+          <br />
+          <span className="text-xs">
+            UserId: <div className="user-card__userId">{userId}</div>
+          </span>
+        </div>
+        <img
+          src={placeholder}
+          alt={`${username}'s avatar`}
+          className="user-card__avatar"
+        />
+      </div>
     </li>
   );
 };

@@ -15,9 +15,10 @@ export const Users = () => {
         {data?.map((user) => (
           <UserCard
             key={user.id}
-            username={user.username}
+            username={user.userName}
             email={user.email}
             createdAt={user.createdAt}
+            userId={user.id}
           />
         ))}
       </ul>

@@ -26,7 +26,8 @@ export const Signup = () => {
     createUserMutation.mutate(userData, {
       onSuccess: (res) => {
         console.log("Response fra backend: ", res);
-        //navigate("/personalpage")
+        //navigate("/personalpage") på sigt, for nu tager vi til users page
+        navigate("/users");
       },
       onError: (err: Error) => {
         alert("Noget gik galt: " + err.message);

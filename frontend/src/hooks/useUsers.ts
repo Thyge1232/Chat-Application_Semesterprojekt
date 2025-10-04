@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { User } from "../types/user";
-const apiUsersEndpoint = "/api/users";
+import type { User } from "../types/user";
+const apiUsersEndpoint = "https://api.venner.nu/api/users";
 
 export const useUsers = () => {
   return useQuery<User[]>({
