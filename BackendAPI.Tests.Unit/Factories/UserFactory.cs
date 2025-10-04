@@ -17,6 +17,7 @@ public static class UserFactory
 
 }
 
+
 public static class CreateUserDtoFactory
 {
     public static CreateUserDto Create(string username = "testname", string email = "test@example.com", string password)
