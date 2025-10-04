@@ -1,5 +1,11 @@
+import { Spinner } from "../ui/Spinner";
+
 export const Settings = () => {
   return (
-    <div className="w-200 h-200 bg-red-500 text-9xl"> HER ER SETTINGS</div>
+    <>
+      <div> HER ER SETTINGS</div>
+      <Spinner />
+      <img src="/public/Images/Error.png" alt="error" className="h-160 w-160" />
+    </>
   );
 };

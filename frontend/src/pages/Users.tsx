@@ -1,10 +1,11 @@
 import { useUsers } from "../hooks/useUsers";
+import { SpinnerWithText } from "../ui/SpinnerWithText";
 import { UserCard } from "../ui/UserCard";
 
 export const Users = () => {
   const { data, isPending, error } = useUsers();
 
-  if (isPending) return <p className="text-center text-gray-500">Loading...</p>;
+  if (isPending) return <SpinnerWithText />;
   if (error)
     return <p className="text-center text-red-500">Error loading users</p>;
 

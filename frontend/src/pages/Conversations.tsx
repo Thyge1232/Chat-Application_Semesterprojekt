@@ -1,28 +1,35 @@
 import { ChatBubble } from "../ui/ChatBubble";
 import { Title } from "../ui/Title";
-import React, { use, useState } from "react";
+import { useState } from "react";
 import { useSendMessage } from "../hooks/useSendMessage";
-import type { ApiMessage, Message as AppMessage } from "../types/message";
 import { useGetConversation } from "../hooks/useGetConversation";
 import { MessageInput } from "../ui/MessageInput";
 import { getCurrentUserFromToken } from "../utils/validation";
+import { SpinnerWithText } from "../ui/SpinnerWithText";
+import { Button } from "../ui/Button";
+import { useQueryClient } from "@tanstack/react-query";
 
-//todo some implementation of aquiring userid at login and use it here
 const userId = 6;
-const senderId = "Mantequilla";
-const conversationId = 1;
 
-const currentUser = getCurrentUserFromToken();
+//todo remove dummy current user, when backend team has implemented login feature
+let currentUser = getCurrentUserFromToken();
+if (!currentUser) currentUser = { userId: 1, userName: "Alice" };
+
 export const Conversations = () => {
+  const [conversationId, setConversationId] = useState<number>(1);
   const { mutate: sendMessage } = useSendMessage();
   const [content, setContent] = useState<string>("");
+  const queryClient = useQueryClient();
 
-  const { data, isLoading, error } = useGetConversation();
-  if (isLoading) return <p className="text-center text-gray-500">Loading...</p>;
-  if (error)
+  const { data, isLoading, error } = useGetConversation(conversationId);
+
+  if (isLoading)
     return (
-      <p className="text-center text-red-500">Error loading conversations</p>
+      <p>
+        <SpinnerWithText />
+      </p>
     );
+  if (error) return <img src="/public/Images/Error.png" alt="error" />;
 
   console.log(content);
 
@@ -30,7 +37,43 @@ export const Conversations = () => {
     <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
       {/* Left Sidebar */}
       <div className="bg-blue-100 p-4 overflow-y-auto">
-        <p>Here u see list over many people</p>
+        <Title>Conversations</Title>
+        <Button
+          onClick={() => {
+            setConversationId(1);
+            queryClient.invalidateQueries({
+              queryKey: ["conversation", 1],
+            });
+          }}
+        >
+          Conversation 1
+        </Button>
+
+        <br />
+        <br />
+        <Button
+          onClick={() => {
+            setConversationId(2);
+            queryClient.invalidateQueries({
+              queryKey: ["conversation", 2],
+            });
+          }}
+        >
+          Conversation 2
+        </Button>
+
+        <br />
+        <br />
+        <Button
+          onClick={() => {
+            setConversationId(3);
+            queryClient.invalidateQueries({
+              queryKey: ["conversation", 3],
+            });
+          }}
+        >
+          Conversation 3
+        </Button>
       </div>
 
       {/* Right Chat Area */}
@@ -59,10 +102,11 @@ export const Conversations = () => {
           setContent={setContent}
           onSubmit={() => {
             sendMessage({
-              conversationId: 1,
-              userId: userId,
-              content: content,
+              conversationId,
+              userId,
+              content,
             });
+
             setContent("");
           }}
         />
