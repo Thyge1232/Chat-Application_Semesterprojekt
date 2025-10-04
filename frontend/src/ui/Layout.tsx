@@ -2,11 +2,12 @@ import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "./LayoutStyle.css";
+import "./ButtonStyle.css";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const hideButtons =
-    location.pathname === "/" || location.pathname === "/registration";
+    location.pathname === "/" || location.pathname === "/signup";
 
   return (
     <div className="layout">
@@ -23,20 +24,22 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           {!hideButtons && (
             <div className="header__nav">
               <Link to="/conversations">
-                <Button className="nav-button nav-button--red">Samtaler</Button>
+                <Button className="custom-nav-button custom-nav-button--red">
+                  Samtaler
+                </Button>
               </Link>
               <Link to="/home">
-                <Button className="nav-button nav-button--blue">
+                <Button className="custom-nav-button custom-nav-button--blue">
                   Personlig side
                 </Button>
               </Link>
               <Link to="/users">
-                <Button className="nav-button nav-button--amber">
+                <Button className="custom-nav-button custom-nav-button--amber">
                   Brugere
                 </Button>
               </Link>
               <Link to="/settings">
-                <Button className="nav-button nav-button--amber-light">
+                <Button className="custom-nav-button custom-nav-button--amber-light">
                   Indstillinger
                 </Button>
               </Link>
@@ -56,7 +59,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       <footer className="footer">
         {!hideButtons && (
           <Link to="/">
-            <Button className="nav-button nav-button--purple">Log ud</Button>
+            <Button className="custom-nav-button custom-nav-button--purple">
+              Log ud
+            </Button>
           </Link>
         )}
         <span>chatApp gruppe 5 (det her er vorefooter)</span>

@@ -5,18 +5,22 @@ import { usePostData } from "../hooks/usePostData";
 import { useNavigate } from "react-router-dom";
 
 interface FormInputs extends UserSignup {
-    confirmPassword: string;
-  }
+  confirmPassword: string;
+}
 
-export const Registration = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormInputs>();
+export const Signup = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormInputs>();
   const navigate = useNavigate();
 
   const createUserMutation = usePostData<UserSignup, unknown>("/api/users"); //tjek denne
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    const {confirmPassword, ...userData } = data;
-
+    const { confirmPassword, ...userData } = data;
 
     createUserMutation.mutate(userData, {
       onSuccess: (res) => {
@@ -27,12 +31,11 @@ export const Registration = () => {
         alert("Noget gik galt: " + err.message);
         console.log(err);
       },
-     });
-   console.log("Form data:", data);
-   console.log("Json-String:", userData);
+    });
+    console.log("Form data:", data);
+    console.log("Json-String:", userData);
   };
 
- 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -41,9 +44,15 @@ export const Registration = () => {
         </h2>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6"
+      >
         <div>
-          <label htmlFor="username" className="block text-sm font-medium text-gray-900">
+          <label
+            htmlFor="username"
+            className="block text-sm font-medium text-gray-900"
+          >
             Brugernavn:
           </label>
           <div className="mt-2">
@@ -52,14 +61,21 @@ export const Registration = () => {
               type="text"
               placeholder="Skriv dit ønskede brugernavn"
               className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-              {...register("username", { required: "Oprettelse kræver et brugernavn" })}
+              {...register("username", {
+                required: "Oprettelse kræver et brugernavn",
+              })}
             />
-            {errors.username && <p className="text-red-500">{errors.username.message}</p>}
+            {errors.username && (
+              <p className="text-red-500">{errors.username.message}</p>
+            )}
           </div>
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-900"
+          >
             Email:
           </label>
           <div className="mt-2">
@@ -70,15 +86,21 @@ export const Registration = () => {
               className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               {...register("email", {
                 required: "Email er påkrævet for oprettelse",
-                validate: (value) => value.includes("@") || "Email skal indeholde @"
+                validate: (value) =>
+                  value.includes("@") || "Email skal indeholde @",
               })}
             />
-            {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
           </div>
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-900">
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-900"
+          >
             Kodeord:
           </label>
           <div className="mt-2">
@@ -89,15 +111,21 @@ export const Registration = () => {
               className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               {...register("password", {
                 required: "Kodeord er påkrævet for oprettelse",
-                validate: (value) => value.length >= 6 || "Kodeordet skal være mindst 6 tegn"
+                validate: (value) =>
+                  value.length >= 6 || "Kodeordet skal være mindst 6 tegn",
               })}
             />
-            {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
           </div>
         </div>
 
         <div>
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-900">
+          <label
+            htmlFor="confirmPassword"
+            className="block text-sm font-medium text-gray-900"
+          >
             Gentag kodeord:
           </label>
           <div className="mt-2">
@@ -108,10 +136,14 @@ export const Registration = () => {
               className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               {...register("confirmPassword", {
                 required: "Kodeord er påkrævet for oprettelse",
-                validate: (value) => value === watch("password", "") || "Kodeord matcher ikke hinanden."
+                validate: (value) =>
+                  value === watch("password", "") ||
+                  "Kodeord matcher ikke hinanden.",
               })}
             />
-            {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword.message}</p>}
+            {errors.confirmPassword && (
+              <p className="text-red-500">{errors.confirmPassword.message}</p>
+            )}
           </div>
         </div>
 

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import "../ui/PagesStyle.css";
 
 type Inputs = {
   loginCredentials: string;
@@ -94,8 +95,8 @@ export const Login = () => {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
-            <Link to="/registration">Er du ny her?</Link>
+          <p className="custom-link-button">
+            <Link to="/signup">Er du ny her?</Link>
           </p>
         </div>
       </div>

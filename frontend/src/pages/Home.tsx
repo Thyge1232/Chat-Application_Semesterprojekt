@@ -6,7 +6,6 @@ export const Home = () => {
     <>
       {" "}
       <Title>her er der info om dig!!!</Title>
-      <MessageInput />
     </>
   );
 };

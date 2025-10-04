@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./pages/Login";
-import { Registration } from "./pages/Registration";
+import { Signup } from "./pages/Signup";
 import { Conversations } from "./pages/Conversations";
 import { Settings } from "./pages/Settings";
 import { Users } from "./pages/Users";
@@ -12,8 +12,8 @@ const App = () => (
     <Layout>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/registration" element={<Registration />} />
-        {/* <Route path="/conversations" element={<Conversations />} /> */}
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/conversations" element={<Conversations />} />
         <Route path="/users" element={<Users />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/home" element={<Home />} />

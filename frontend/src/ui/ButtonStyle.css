@@ -4,7 +4,7 @@
   color: rgb(0, 0, 0);
 }
 
-.nav-button {
+.custom-nav-button {
   font-size: 1.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -12,27 +12,27 @@
   padding: 0.5rem 1rem;
 }
 
-.nav-button--red {
-  background-color: #fecaca; /* red-200 */
+.custom-nav-button--red {
+  background-color: #fecaca;
   color: white;
 }
 
-.nav-button--blue {
-  background-color: #93c5fd; /* blue-300 */
+.custom-nav-button--blue {
+  background-color: #93c5fd;
   color: black;
 }
 
-.nav-button--amber {
-  background-color: #f59e0b; /* amber-500 */
+.custom-nav-button--amber {
+  background-color: #f59e0b;
   color: white;
 }
 
-.nav-button--amber-light {
-  background-color: #fde68a; /* amber-200 */
+.custom-nav-button--amber-light {
+  background-color: #fde68a;
   color: black;
 }
 
-.nav-button--purple {
-  background-color: #a78bfa; /* purple-500 */
+.custom-nav-button--purple {
+  background-color: #a78bfa;
   color: white;
 }
