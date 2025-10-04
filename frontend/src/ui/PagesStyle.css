@@ -1,8 +1,11 @@
+/*for our nav links on signup and login pages */
 .custom-link-button {
   margin-top: 10px;
   text-align: center;
-  color: #5f7cb8;
+  color: #5170aa;
+  background-color: white;
   border: 1px solid black;
   border-radius: 0.5rem;
-  box-shadow: #070707;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
 }

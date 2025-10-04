@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { usePostData } from "../hooks/usePostData";
 import { useNavigate } from "react-router-dom";
+import "../ui/PagesStyle.css";
 
 interface FormInputs extends UserSignup {
   confirmPassword: string;
@@ -154,10 +155,9 @@ export const Signup = () => {
           Opret bruger
         </button>
       </form>
-
-      <p className="mt-10 text-center text-sm text-gray-500">
-        <Link to="/">Tilbage til log ind</Link>
-      </p>
+      <Link className="custom-link-button" to="/">
+        Tilbage til log ind
+      </Link>
     </div>
   );
 };
