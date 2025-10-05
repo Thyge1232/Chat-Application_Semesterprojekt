@@ -2,31 +2,36 @@ namespace BackendAPI.Tests.Unit.Factories;
 
 public static class UserFactory
 {
-    public static User CreateUser(int id, string username, string email, string passwordHash)
+    public static User CreateUser(
+        int id = 1, 
+        string username = "testuser", 
+        string email = "test@example.com", 
+        string passwordHash = "a_valid_hash")
     {
         return new User
         {
             UserId = id,
             Username = username,
-            Email = $"{email}@example.com",
-            Password = hashed_password,
+            Email = email, 
+            Password = passwordHash,
             CreatedAt = DateTime.UtcNow,
             ProfilePicture = "default.png"
         };
     }
-
 }
-
 
 public static class CreateUserDtoFactory
 {
-    public static CreateUserDto Create(string username = "testname", string email = "test@example.com", string password)
+    public static CreateUserDto Create(
+        string username = "testname", 
+        string email = "test@example.com", 
+        string password = "password123")
     {
         return new CreateUserDto
         {
             Username = username,
             Email = email,
-            Password = "password123"
+            Password = password 
         };
     }
 }

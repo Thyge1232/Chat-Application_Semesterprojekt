@@ -8,3 +8,4 @@ global using BackendAPI.Services.Interfaces;
 global using BackendAPI.Services.Implementations;
 global using BackendAPI.Repositories.Interfaces;
 global using BackendAPI.Models;
+global using BackendAPI.Tests.Unit.Factories;
