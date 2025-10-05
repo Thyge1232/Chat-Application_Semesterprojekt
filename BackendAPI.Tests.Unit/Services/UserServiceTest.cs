@@ -5,7 +5,7 @@ public class UserServiceTest
     private readonly Mock<IUserRepository> _mockUserRepository;
     private readonly Mock<IPasswordHasher> _mockPasswordHasher;
     private readonly UserService _userService;
-    
+
     public UserServiceTest()
     {
         _mockUserRepository = new Mock<IUserRepository>();
@@ -65,5 +65,26 @@ public class UserServiceTest
         Assert.NotNull(result);
         Assert.Equal(fakeUser.Username, result.Username);
         Assert.Equal(fakeUser.UserId, result.Id);
+    }
+    [Fact]
+    public async Task GetUserByIdAsyc_WithNoneExistingId_ShoudReturnNull()
+    {
+        //Arrange
+        var nonExistingId = 99;
+
+        _mockUserRepository
+            .Setup(repo => repo.GetByIdAsync(nonExistingId))
+            .ReturnsAsync(null);
+
+        //Act
+        var result = await _userService.GetUserByIdAsync(nonExistingId);
+
+        //Assert
+        Assert.Null(result);
+
+
+
+
+
     }
 }
