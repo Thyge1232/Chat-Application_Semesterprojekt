@@ -1,4 +1,3 @@
-// TRIN 1: RETTEDE USING-STATEMENTS
 using BackendAPI.Context;
 using BackendAPI.Models;
 using BackendAPI.Repositories.Interfaces;
@@ -25,14 +24,13 @@ namespace BackendAPI.Repositories.Implementations
             return await _dbContext.Users.AsNoTracking().ToListAsync();
         }
 
-        // TRIN 2: IMPLEMENTERET DEN MANGLENDE METODE
         public async Task<bool> ExistsByUsernameOrEmailAsync(string username, string email)
         {
             return await _dbContext.Users
                 .AnyAsync(u => u.Username == username || u.Email == email);
         }
 
-        // TRIN 3: KORREKT IMPLEMENTERET FindByUsernameAsync (KUN EN GANG!)
+   
         public async Task<User?> FindByUsernameAsync(string username)
         {
             return await _dbContext.Users
