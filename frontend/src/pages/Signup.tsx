@@ -1,6 +1,6 @@
 import type { UserSignup } from "../types/usersignup";
 import { Link } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { usePostData } from "../hooks/usePostData";
 import { useNavigate } from "react-router-dom";
 import "../ui/PagesStyle.css";
@@ -18,7 +18,9 @@ export const Signup = () => {
   } = useForm<FormInputs>();
   const navigate = useNavigate();
 
-  const createUserMutation = usePostData<UserSignup, unknown>("/api/users"); //tjek denne
+  const createUserMutation = usePostData<UserSignup, unknown>(
+    "https://api.venner.nu/api/users"
+  ); //tjek denne
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     const { confirmPassword, ...userData } = data;

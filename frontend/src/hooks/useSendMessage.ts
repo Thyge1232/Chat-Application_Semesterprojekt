@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { ApiMessage, SendMessage } from "../types/message";
-
-const apiSendMsgEndpoint = "/api/messages";
+import type { ApiMessage, SendMessage, Message } from "../types/message";
+import { ENDPOINTS } from "../config/api";
+import { transformMessageFromApi } from "../utils/transformMessageFromApi";
 
 export const useSendMessage = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<ApiMessage, Error, SendMessage>({
+  return useMutation<Message, Error, SendMessage>({
     mutationFn: async (message) => {
       const token = localStorage.getItem("authToken");
-      const res = await fetch(apiSendMsgEndpoint, {
+      const res = await fetch(ENDPOINTS.messages, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -21,10 +21,13 @@ export const useSendMessage = () => {
       });
       if (!res.ok)
         throw new Error("Fejl ved afsendelse af besked til databasen");
-      return res.json();
+      const apiMsg: ApiMessage = await res.json();
+      return transformMessageFromApi(apiMsg);
     },
-    onSuccess: () => {
-      // Refresh conversation after sending
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["conversation", variables.conversationId],
+      });
       queryClient.invalidateQueries({ queryKey: ["conversations"] });
     },
   });

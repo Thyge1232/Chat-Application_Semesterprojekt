@@ -1,17 +1,29 @@
 import "./ChatBubbleStyle.css";
-import type { ChatBubbleProps } from "../types/chatBubble";
+
+export type ChatBubbleProps = {
+  isSender?: boolean;
+  children: React.ReactNode;
+  timestamp?: Date;
+  sender?: string;
+  messageId?: number;
+  conversationId?: number;
+  handleDelete?: (messageId: number) => void;
+  handleEdit?: (messageId: number) => void;
+};
 
 export const ChatBubble = ({
   isSender,
   children,
   timestamp,
   sender,
+  messageId,
   handleDelete,
   handleEdit,
 }: ChatBubbleProps) => {
   const bubbleClass = isSender
     ? "chat-bubble chat-bubble--sender"
     : "chat-bubble chat-bubble--receiver";
+
   const formattedTime = timestamp
     ? timestamp.toLocaleString("en-GB", {
         year: "numeric",
@@ -30,10 +42,11 @@ export const ChatBubble = ({
         {sender} {formattedTime}
       </div>
       <div className="chat-bubble__actions">
-        <button onClick={() => handleDelete(this)}>
+        <button onClick={() => handleDelete(messageId)}>
           <img src="/Images/delete_icon.png" alt="delete" />
         </button>
-        <button onClick={() => handleEdit(this)}>
+
+        <button onClick={() => handleEdit(messageId)}>
           <img src="/Images/edit_icon.png" alt="edit" />
         </button>
       </div>

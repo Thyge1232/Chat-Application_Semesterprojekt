@@ -1,28 +1,31 @@
 import { ChatBubble } from "../ui/ChatBubble";
 import { Title } from "../ui/Title";
-import { useState } from "react";
-import { useSendMessage } from "../hooks/useSendMessage";
-import { useGetConversation } from "../hooks/useGetConversation";
 import { MessageInput } from "../ui/MessageInput";
-import { getCurrentUserFromToken } from "../utils/validation";
 import { SpinnerWithText } from "../ui/SpinnerWithText";
 import { Button } from "../ui/Button";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState, useEffect, useRef } from "react";
+import { useSendMessage } from "../hooks/useSendMessage";
+import { useGetConversation } from "../hooks/useGetConversation";
+import { useUsers } from "../hooks/useUsers";
+import { getCurrentUserFromToken } from "../utils/validation";
 
-const userId = 6;
-
-//todo remove dummy current user, when backend team has implemented login feature
+//todo remove dummy current user and dummy userId, when backend team has implemented login feature
 let currentUser = getCurrentUserFromToken();
 if (!currentUser) currentUser = { userId: 1, userName: "Alice" };
 
 export const Conversations = () => {
   const [conversationId, setConversationId] = useState<number>(1);
-  const { mutate: sendMessage } = useSendMessage();
   const [content, setContent] = useState<string>("");
   const queryClient = useQueryClient();
-
+  const { mutate: sendMessage } = useSendMessage();
+  const { data: users } = useUsers();
+  const userMap = new Map(users?.map((u) => [u.id, u.username]));
+  const endRef = useRef<HTMLDivElement>(null);
   const { data, isLoading, error } = useGetConversation(conversationId);
-
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [data]);
   if (isLoading)
     return (
       <p>
@@ -35,15 +38,12 @@ export const Conversations = () => {
 
   return (
     <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
-      {/* Left Sidebar */}
+      {/* Left column with buttons to switch between conversations*/}
       <div className="bg-blue-100 p-4 overflow-y-auto">
         <Title>Conversations</Title>
         <Button
           onClick={() => {
             setConversationId(1);
-            queryClient.invalidateQueries({
-              queryKey: ["conversation", 1],
-            });
           }}
         >
           Conversation 1
@@ -76,19 +76,18 @@ export const Conversations = () => {
         </Button>
       </div>
 
-      {/* Right Chat Area */}
+      {/*Right column with the chatbubbles and inputfield*/}
       <div className="grid grid-rows-[1fr_auto] bg-white">
-        {/* Scrollable Messages */}
-        <div className="overflow-y-auto p-4" style={{ height: "60vh" }}>
-          <Title>Messages</Title>
+        {/*Message area - limited screen area with scrollable functionality*/}
+        <div className="overflow-y-auto p-4" style={{ height: "75vh" }}>
           {data?.map((msg) => (
             <ChatBubble
               key={msg.id}
               isSender={msg.senderId == currentUser.userId}
               sender={
-                currentUser.userId == msg.senderId
+                currentUser.userId === msg.senderId
                   ? currentUser.userName
-                  : "Mantequilla"
+                  : userMap.get(msg.senderId) ?? "Ukendt afsender"
               }
               timestamp={msg.sentAt}
               messageId={msg.id}
@@ -96,6 +95,7 @@ export const Conversations = () => {
               {msg.content}
             </ChatBubble>
           ))}
+          <div ref={endRef} />
         </div>
         <MessageInput
           content={content}
@@ -103,10 +103,9 @@ export const Conversations = () => {
           onSubmit={() => {
             sendMessage({
               conversationId,
-              userId,
+              userId: currentUser.userId,
               content,
             });
-
             setContent("");
           }}
         />

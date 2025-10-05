@@ -1,17 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-
-const apiLoginEndpoint = "/api/Auth/login";
+import { ENDPOINTS } from "../config/api";
+import type { LoginCredentials } from "../types/loginCredentials";
 
 export const useLogin = () => {
-  return useMutation({
-    mutationFn: async ({
-      username,
-      password,
-    }: {
-      username: string;
-      password: string;
-    }) => {
-      const res = await fetch(apiLoginEndpoint, {
+  return useMutation<string, Error, LoginCredentials>({
+    mutationFn: async ({ username, password }: LoginCredentials) => {
+      const res = await fetch(ENDPOINTS.login, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),

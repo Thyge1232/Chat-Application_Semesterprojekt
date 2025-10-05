@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0;
+  padding: 0.2rem;
   background-color: rgba(191, 222, 231, 0.699);
 }
 
@@ -54,7 +54,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.25rem;
+  padding: 0.1rem;
   background-color: #f3f4f6;
   font-size: 0.875rem;
   color: #647997;

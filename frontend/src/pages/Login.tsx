@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
 import "../ui/PagesStyle.css";

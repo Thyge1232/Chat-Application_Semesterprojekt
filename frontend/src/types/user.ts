@@ -2,7 +2,7 @@ export type UserId = number;
 
 export type User = {
   id: UserId;
-  userName: string;
+  username: string;
   email: string;
   createdAt: string;
 };

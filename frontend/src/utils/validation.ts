@@ -1,4 +1,4 @@
-//Her validerer vi inputs i.e. login- og registreringsform.
+//Her hentes brugerens login token
 export const getCurrentUserFromToken = () => {
   const token = localStorage.getItem("authToken");
   if (!token) return null;

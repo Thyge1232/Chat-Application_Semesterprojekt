@@ -1,5 +1,6 @@
 import { useUsers } from "../hooks/useUsers";
 import { SpinnerWithText } from "../ui/SpinnerWithText";
+import { Title } from "../ui/Title";
 import { UserCard } from "../ui/UserCard";
 
 export const Users = () => {
@@ -11,12 +12,12 @@ export const Users = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Brugere</h1>
+      <Title>Brugere</Title>
       <ul className="user-grid">
         {data?.map((user) => (
           <UserCard
             key={user.id}
-            username={user.userName}
+            username={user.username}
             email={user.email}
             createdAt={user.createdAt}
             userId={user.id}
