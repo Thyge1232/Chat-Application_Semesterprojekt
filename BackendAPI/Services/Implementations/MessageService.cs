@@ -47,8 +47,8 @@ public sealed class MessageService(MyDBContext db) : IMessageService
         // Optional: enforce membership
         var isMember = await db.ConversationMembers
             .AnyAsync(cm => cm.ConversationId == conversationId && cm.UserId == userId, ct);
-        if (!isMember)
-            throw new UnauthorizedAccessException("User is not a member of this conversation.");
+        //if (!isMember)
+            //throw new UnauthorizedAccessException("User is not a member of this conversation.");
 
         var entity = new Message
         {
