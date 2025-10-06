@@ -47,6 +47,7 @@ export const Signup = () => {
           Opret en bruger
         </h2>
       </div>
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -158,9 +159,13 @@ export const Signup = () => {
           Opret bruger
         </button>
       </form>
-      <Link className="custom-link-button" to="/">
+      
+      <p className="custom-link-button">
+      <Link  to="/">
         Tilbage til log ind
       </Link>
+      </p>
     </div>
+  </div>
   );
 };
