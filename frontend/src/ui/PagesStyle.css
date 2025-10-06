@@ -9,3 +9,15 @@
   display: inline-block;
   padding: 0.25rem 0.5rem;
 }
+
+/*for update information button on home*/
+.custom-info-button {
+  margin-top: 10px;
+  text-align: center;
+  color: white;
+  background-color: #4f46e5;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+}

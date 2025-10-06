@@ -6,13 +6,7 @@ import { Banner } from "../ui/Banner";
 // definer default værdier
 // Get user, (kig på conversation page)
 // definer typerne  ()
-// implementeret specifik hook : useUserById  (inpiration useUsers)
-// refactor
-//User probs -- edit, reset,
-// definer default værdier
-// Get user, (kig på conversation page)
-// definer typerne  ()
-// implementeret specifik hook : useUserById  (inpiration useUsers)
+// implementeret specifik hook : useUserById  (inpiration useUsers), usePostUserInformation (profilbillede + fun fact)
 // refactor
 import type { User } from "../types/user";
 import { useUserById } from "../hooks/useUserById";
@@ -30,6 +24,7 @@ export const Home = () => {
         userId={current.id}
         userName={current.username}
         email={current.email}
+        createdAt={current.createdAt}
         profilePhoto={"../public/Images/user.png"}
         totalMessages={2}
         level={0}
