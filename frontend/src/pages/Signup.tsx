@@ -150,13 +150,11 @@ export const Signup = () => {
               )}
             </div>
           </div>
-
-          <button
-            type="submit"
-            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-600"
-          >
-            Opret bruger
-          </button>
+          <div>
+            <button type="submit" className="custom-info-button w-full">
+              Opret bruger
+            </button>
+          </div>
         </form>
 
         <p className="custom-link-button">

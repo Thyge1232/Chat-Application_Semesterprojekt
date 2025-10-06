@@ -24,18 +24,12 @@ export const Banner = ({
       <div className="w-full md:w-5/12 flex flex-col items-center md:items-end h-full">
         <img
           src={profilePhoto}
-          alt="About Me"
+          alt="Profile Photo"
           className="w-72 h-96 md:w-80 lg:w-96 object-cover rounded-lg shadow-lg"
         />
       </div>
-
-      {/* Højre: Tekst */}
       <div className="w-full md:w-7/12 text-center md:text-left relative">
-        <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 pl-10">
-          A Passionate Software Developer
-        </h2>
-
-        <p className="text-amber-400 mb-6 text-sm md:text-base leading-relaxed max-w-2xl mx-auto md:mx-0 whitespace-pre-line">
+        <p className="text-indigo-600 mb-6 text-sm md:text-base leading-relaxed max-w-2xl mx-auto md:mx-0 whitespace-pre-line">
           {`Brugernavn: ${userName}
             Email: ${email}
             Oprettet: ${createdAt}
@@ -45,7 +39,7 @@ export const Banner = ({
         </p>
       </div>
 
-      <div className="absolute bottom-8 right-8 flex gap-4">
+      <div className="absolute bottom-8 right-8 gap-4 grid grid-rows-[1fr_auto]">
         <button type="submit" className="custom-info-button">
           Opdater profilbillede
         </button>
