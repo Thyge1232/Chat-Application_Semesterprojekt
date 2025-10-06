@@ -13,7 +13,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="layout">
       <header className="header">
         <img
-          src="/Images/header.jpg"
+          src="/Images/frog-message-me.gif"
           alt="connecting people img"
           className="header__image"
         />
