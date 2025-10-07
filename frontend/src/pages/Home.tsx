@@ -27,9 +27,8 @@ export const Home = () => {
         createdAt={current.createdAt}
         profilePhoto={"../public/Images/user.png"}
         totalMessages={2}
-        level={0}
         aboutMe={"Jeg elsker pølser, og er DannyBoy"}
-      ></Banner>
+      />
     </>
   );
 };
