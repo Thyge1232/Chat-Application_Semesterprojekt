@@ -49,6 +49,11 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Generate password 
+var hasher = new PasswordHasher();
+var hash = hasher.HashPassword("alice123");
+Console.WriteLine("Hash for alice123: " + hash);
+
 // Add services to the container.
 builder.Services.AddControllers();
 

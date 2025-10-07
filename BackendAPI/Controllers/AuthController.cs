@@ -24,8 +24,9 @@ namespace BackendAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            if (!ModelState.IsValid) return ValidationProblem(ModelState);
-
+            if (!ModelState.IsValid)
+            return ValidationProblem(ModelState);
+        
             try
             {
                 var token = await _auth.LoginAsync(loginDto);
