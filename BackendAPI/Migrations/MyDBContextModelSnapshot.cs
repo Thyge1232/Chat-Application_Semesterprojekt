@@ -193,7 +193,7 @@ namespace BackendAPI.Migrations
                             UserId = 1,
                             CreatedAt = new DateTime(2025, 9, 25, 14, 0, 0, 0, DateTimeKind.Utc),
                             Email = "alice@example.com",
-                            Password = "hashed_pw_1",
+                            Password = "$2a$11$DHb2SBahkIIXSIv1hf.GX.fP1BjCtOwTJJ9Boyqi3PrjEqCZRQs66",
                             ProfilePicture = "alice.png",
                             Username = "alice"
                         },
