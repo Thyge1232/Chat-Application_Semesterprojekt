@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { ApiMessage, SendMessage, Message } from "../types/message";
 import { ENDPOINTS } from "../config/api";
-import { transformMessageFromApi } from "../utils/transformMessageFromApi";
+import { transformMessageFromApi } from "../services/transformMessageFromApi";
 
 export const useSendMessage = () => {
   const queryClient = useQueryClient();

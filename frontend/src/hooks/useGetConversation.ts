@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ApiMessage, Message } from "../types/message";
-import { transformMessageFromApi } from "../utils/transformMessageFromApi";
+import { transformMessageFromApi } from "../services/transformMessageFromApi";
 import { ENDPOINTS } from "../config/api";
 
 export const useGetConversation = (conversationId: number) => {

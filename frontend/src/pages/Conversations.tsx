@@ -8,7 +8,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSendMessage } from "../hooks/useSendMessage";
 import { useGetConversation } from "../hooks/useGetConversation";
 import { useUsers } from "../hooks/useUsers";
-import { getCurrentUserFromToken } from "../utils/validation";
+import { getCurrentUserFromToken } from "../services/validation";
 
 //todo remove dummy current user and dummy userId, when backend team has implemented login feature
 let currentUser = getCurrentUserFromToken();
