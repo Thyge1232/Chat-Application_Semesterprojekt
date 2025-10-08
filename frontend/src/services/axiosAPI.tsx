@@ -20,3 +20,5 @@
 //   }, []);
 //   if (loading) return <div> </div>;
 // };
+
+// todo Det skal bare være en .ts fil og funktion skal bare være en standard js/ts funktion og ikke en komponent :)) aka ingen useEffect eller useState
