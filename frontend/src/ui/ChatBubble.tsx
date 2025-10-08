@@ -16,10 +16,10 @@ export const ChatBubble = ({
   children,
   timestamp,
   sender,
-  messageId,
-  handleDelete,
-  handleEdit,
-}: ChatBubbleProps) => {
+}: // messageId,
+// handleDelete,
+// handleEdit,
+ChatBubbleProps) => {
   const bubbleClass = isSender
     ? "chat-bubble chat-bubble--sender"
     : "chat-bubble chat-bubble--receiver";
@@ -42,11 +42,15 @@ export const ChatBubble = ({
         {sender} {formattedTime}
       </div>
       <div className="chat-bubble__actions">
-        <button onClick={() => handleDelete(messageId)}>
+        <button
+        // onClick={() => handleDelete(messageId)}
+        >
           <img src="/Images/delete_icon.png" alt="delete" />
         </button>
 
-        <button onClick={() => handleEdit(messageId)}>
+        <button
+        // onClick={() => handleEdit(messageId)}
+        >
           <img src="/Images/edit_icon.png" alt="edit" />
         </button>
       </div>

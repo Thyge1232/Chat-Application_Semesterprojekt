@@ -19,8 +19,8 @@ export const UserCard = ({
   createdAt,
   className,
   userId,
-  img,
-}: UserCardProps) => {
+}: // img,
+UserCardProps) => {
   return (
     <li className={twMerge("user-card", className)}>
       <div className="user-card__layout">

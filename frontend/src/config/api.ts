@@ -2,5 +2,5 @@
 export const ENDPOINTS = {
   messages: "/api/messages",
   users: "/api/api/users",
-  login: "/api/Auth/login",
+  login: "https://api.venner.nu/api/Auth/login",
 };

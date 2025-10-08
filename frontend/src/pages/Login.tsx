@@ -17,7 +17,7 @@ export const Login = () => {
   } = useForm<Inputs>();
   const navigate = useNavigate();
 
-  const { mutate, data, error, isPending } = useLogin();
+  const { mutate } = useLogin();
 
   const onSubmit: SubmitHandler<Inputs> = ({ loginCredentials, password }) => {
     mutate(
