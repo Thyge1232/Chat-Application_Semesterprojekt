@@ -25,6 +25,18 @@ backendAPI/.vs/
 backendAPI/wwwroot/dist/
 backendAPI/appsettings.*.json
 
+# --- ASP.NET Core backend test ---
+backendAPI.Test.unit/bin/
+backendAPI.Test.unit/obj/
+backendAPI.Test.unit/*.user
+backendAPI.Test.unit/*.suo
+backendAPI.Test.unit/*.userosscache
+backendAPI.Test.unit/*.sln.docstates
+backendAPI.Test.unit/.vs/
+backendAPI.Test.unit/wwwroot/dist/
+backendAPI.Test.unit/appsettings.*.json
+
+
 
 # --- IDEs ---
 .vs/
