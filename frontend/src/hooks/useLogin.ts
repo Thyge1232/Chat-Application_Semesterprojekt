@@ -1,21 +1,24 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, type UseMutationResult } from "@tanstack/react-query";
+import { axiosInstance } from "../api/axios";
 import { ENDPOINTS } from "../config/api";
 import type { LoginCredentials } from "../types/loginCredentials";
+import { setToken } from "../services/tokenService";
+import { getCurrentUser, type CurrentUser } from "../services/authService";
 
-export const useLogin = () => {
-  return useMutation<string, Error, LoginCredentials>({
+export const useLogin = (): UseMutationResult<
+  CurrentUser | null,
+  Error,
+  LoginCredentials
+> => {
+  return useMutation<CurrentUser | null, Error, LoginCredentials>({
     mutationFn: async ({ username, password }: LoginCredentials) => {
-      const res = await fetch(ENDPOINTS.login, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+      const res = await axiosInstance.post<string>(ENDPOINTS.login, {
+        username,
+        password,
       });
-
-      if (!res.ok) throw new Error("Login oplysningerne er ugyldige");
-
-      const token = await res.text();
-      localStorage.setItem("authToken", token);
-      return token;
+      const token = res.data;
+      setToken(token);
+      return getCurrentUser();
     },
   });
 };

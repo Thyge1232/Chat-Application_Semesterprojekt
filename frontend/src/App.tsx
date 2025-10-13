@@ -6,6 +6,7 @@ import { Settings } from "./pages/Settings";
 import { Users } from "./pages/Users";
 import { Home } from "./pages/Home";
 import { Layout } from "./ui/Layout";
+import { RequireAuth } from "./components/RequireAuth";
 
 const App = () => (
   <Router>
@@ -13,10 +14,38 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/conversations" element={<Conversations />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/conversations"
+          element={
+            <RequireAuth>
+              <Conversations />{" "}
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <RequireAuth>
+              <Users />{" "}
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <RequireAuth>
+              <Settings />{" "}
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <RequireAuth>
+              <Home />{" "}
+            </RequireAuth>
+          }
+        />
       </Routes>
     </Layout>
   </Router>

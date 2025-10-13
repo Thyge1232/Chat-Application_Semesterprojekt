@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { ApiMessage, SendMessage, Message } from "../types/message";
-import { ENDPOINTS } from "../config/api";
+import { axiosInstance } from "../api/axios";
 import { transformMessageFromApi } from "../services/transformMessageFromApi";
 
 export const useSendMessage = () => {
@@ -8,26 +8,15 @@ export const useSendMessage = () => {
 
   return useMutation<Message, Error, SendMessage>({
     mutationFn: async (message) => {
-      const token = localStorage.getItem("authToken");
-      const res = await fetch(ENDPOINTS.messages, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(message),
-      });
-      if (!res.ok)
-        throw new Error("Fejl ved afsendelse af besked til databasen");
-      const apiMsg: ApiMessage = await res.json();
-      return transformMessageFromApi(apiMsg);
+      const res = await axiosInstance.post<ApiMessage>("/messages", message);
+      return transformMessageFromApi(res.data);
     },
     onSuccess: (_data, variables) => {
+      //we invalidate the conversation to rebuild the messages on the page
       queryClient.invalidateQueries({
         queryKey: ["conversation", variables.conversationId],
       });
+      //and also update the conversationslist to the left on our page
       queryClient.invalidateQueries({ queryKey: ["conversations"] });
     },
   });

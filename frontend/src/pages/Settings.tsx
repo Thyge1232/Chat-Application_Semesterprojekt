@@ -1,6 +1,10 @@
 import { Spinner } from "../ui/Spinner";
+import { useAuth } from "../hooks/useAuth";
 
 export const Settings = () => {
+  const { currentUser } = useAuth();
+  if (!currentUser) return <Spinner />;
+
   return (
     <>
       <div> HER ER SETTINGS</div>

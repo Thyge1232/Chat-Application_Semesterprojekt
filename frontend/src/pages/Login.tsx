@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { useLogin } from "../hooks/useLogin";
 import "../ui/PagesStyle.css";
 
@@ -17,14 +16,19 @@ export const Login = () => {
   } = useForm<Inputs>();
   const navigate = useNavigate();
 
-  const { mutate } = useLogin();
+  const { mutate: login, isPending, error } = useLogin();
 
-  const onSubmit: SubmitHandler<Inputs> = ({ loginCredentials, password }) => {
-    mutate(
+  const onSubmit = ({ loginCredentials, password }: Inputs) => {
+    login(
       { username: loginCredentials, password },
       {
-        onSuccess: () => {
-          navigate("/conversations");
+        onSuccess: (user) => {
+          console.log("Logged in as", user?.userName);
+          navigate("/home");
+        },
+        onError: (err: Error) => {
+          alert("Noget gik galt: " + err.message);
+          console.log(err);
         },
       }
     );
@@ -43,14 +47,14 @@ export const Login = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
               <label
-                htmlFor="email"
+                htmlFor="loginCredentials"
                 className="block text-sm/6 font-medium text-gray-900"
               >
-                Hvad er det lige du hedder??
+                Skriv brugernavnet her!
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
+                  id="loginCredentials"
                   type="text"
                   {...register("loginCredentials", { required: true })}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -68,14 +72,14 @@ export const Login = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-900"
               >
-                Hvad hedder din mis?
+                Skriv koden til dit brugernavn!
               </label>
               <div className="mt-2">
                 <input
                   id="password"
                   type="password"
                   {...register("password", { required: true })}
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
                 />
                 {errors.password && (
                   <span className="text-red-500 text-sm">
@@ -87,11 +91,14 @@ export const Login = () => {
 
             <div>
               <button
+                disabled={isPending}
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow hover:bg-indigo-500 disabled:opacity-50"
               >
-                Kom videre
+                {isPending ? "Logger ind…" : "Kom videre"}
               </button>
+
+              {error && <p className="text-red-500 mt-2">{error.message}</p>}
             </div>
           </form>
 

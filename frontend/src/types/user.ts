@@ -1,7 +1,5 @@
-export type UserId = number;
-
 export type User = {
-  id: UserId;
+  id: number;
   username: string;
   email: string;
   createdAt: string;

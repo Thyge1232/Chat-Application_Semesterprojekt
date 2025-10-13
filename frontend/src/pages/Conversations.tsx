@@ -8,86 +8,67 @@ import { useState, useEffect, useRef } from "react";
 import { useSendMessage } from "../hooks/useSendMessage";
 import { useGetConversation } from "../hooks/useGetConversation";
 import { useUsers } from "../hooks/useUsers";
-import { getCurrentUserFromToken } from "../services/validation";
-
-//todo remove dummy current user and dummy userId, when backend team has implemented login feature
-let currentUser = getCurrentUserFromToken();
-if (!currentUser) currentUser = { userId: 1, userName: "Alice" };
+import { useSocket } from "../hooks/useSocket";
+import { useAuth } from "../hooks/useAuth";
+import { type SocketEvent } from "../types/socketEvent";
 
 export const Conversations = () => {
+  const { currentUser } = useAuth();
   const [conversationId, setConversationId] = useState<number>(1);
   const [content, setContent] = useState<string>("");
+
   const queryClient = useQueryClient();
+
   const { mutate: sendMessage } = useSendMessage();
   const { data: users } = useUsers();
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
+
   const endRef = useRef<HTMLDivElement>(null);
-  const { data, isLoading, error } = useGetConversation(conversationId);
+  const {
+    data: messages,
+    isPending,
+    error,
+  } = useGetConversation(conversationId);
+
+  useSocket<SocketEvent>((event) => {
+    if (event.type === "NEW_MESSAGE") {
+      queryClient.invalidateQueries({
+        queryKey: ["conversation", event.payload.conversationId],
+      });
+    }
+  });
+
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [data]);
-  if (isLoading)
-    return (
-      <p>
-        <SpinnerWithText />
-      </p>
-    );
-  if (error) return <img src="/public/Images/Error.png" alt="error" />;
+  }, [messages]);
 
-  console.log(content);
+  if (isPending) return <SpinnerWithText />;
+  if (error) return <p>Something went wrong loading messages.</p>;
 
   return (
     <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
-      {/* Left column with buttons to switch between conversations*/}
+      {/* Left column: conversation list */}
       <div className="bg-blue-100 p-4 overflow-y-auto">
         <Title>Conversations</Title>
-        <Button
-          onClick={() => {
-            setConversationId(1);
-          }}
-        >
-          Conversation 1
-        </Button>
-
-        <br />
-        <br />
-        <Button
-          onClick={() => {
-            setConversationId(2);
-            queryClient.invalidateQueries({
-              queryKey: ["conversation", 2],
-            });
-          }}
-        >
-          Conversation 2
-        </Button>
-
-        <br />
-        <br />
-        <Button
-          onClick={() => {
-            setConversationId(3);
-            queryClient.invalidateQueries({
-              queryKey: ["conversation", 3],
-            });
-          }}
-        >
-          Conversation 3
-        </Button>
+        {/* TODO: Replace with useConversations() query */}
+        {[1, 2, 3].map((id) => (
+          <Button key={id} onClick={() => setConversationId(id)}>
+            Conversation {id}
+          </Button>
+        ))}
       </div>
 
-      {/*Right column with the chatbubbles and inputfield*/}
+      {/* Right column: messages + input */}
       <div className="grid grid-rows-[1fr_auto] bg-white">
-        {/*Message area - limited screen area with scrollable functionality*/}
         <div className="overflow-y-auto p-4" style={{ height: "75vh" }}>
-          {data?.map((msg) => (
+          {messages?.map((msg) => (
             <ChatBubble
               key={msg.id}
-              isSender={msg.senderId == currentUser.userId}
+              isSender={msg.senderId === currentUser?.userId}
               sender={
-                currentUser.userId === msg.senderId
-                  ? currentUser.userName
-                  : userMap.get(msg.senderId) ?? "Ukendt afsender"
+                currentUser?.userId === msg.senderId
+                  ? currentUser?.userName
+                  : userMap.get(msg.senderId) ?? "Unknown sender"
               }
               timestamp={msg.sentAt}
               messageId={msg.id}
@@ -97,10 +78,12 @@ export const Conversations = () => {
           ))}
           <div ref={endRef} />
         </div>
+
         <MessageInput
           content={content}
           setContent={setContent}
           onSubmit={() => {
+            if (!currentUser) return;
             sendMessage({
               conversationId,
               userId: currentUser.userId,
