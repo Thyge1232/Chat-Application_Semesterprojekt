@@ -1,6 +1,6 @@
 //To use in conversation colortheme
 export interface IColorThemeConversation {
-  //chatbubble
+  //chatbubble  --tjek
   bubbleSenderBg: string;
   bubbleSenderText: string;
   bubbleReceiverBg: string;
@@ -15,7 +15,7 @@ export interface IColorThemeConversation {
   conversationsBg: string; //Bg for conversations field
 
   //Left column
-  titleColor: string; //<Title>
+  titleColor: string; //<Title>  - OBS bruges endnu ikke i Conversations.tsx / Title component
   conversationBottomBg: string;
   conversationsBottomText: string;
   leftBg: string;

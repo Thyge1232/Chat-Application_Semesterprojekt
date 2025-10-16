@@ -1,4 +1,5 @@
 import "./ChatBubbleStyle.css";
+import type { IColorThemeConversation } from "../types/iColorThemes";
 
 export type ChatBubbleProps = {
   isSender?: boolean;
@@ -9,6 +10,7 @@ export type ChatBubbleProps = {
   conversationId?: number;
   handleDelete?: (messageId: number) => void;
   handleEdit?: (messageId: number) => void;
+  colorTheme: IColorThemeConversation;
 };
 
 export const ChatBubble = ({
@@ -16,13 +18,14 @@ export const ChatBubble = ({
   children,
   timestamp,
   sender,
+  colorTheme,
 }: // messageId,
 // handleDelete,
 // handleEdit,
 ChatBubbleProps) => {
   const bubbleClass = isSender
-    ? "chat-bubble chat-bubble--sender"
-    : "chat-bubble chat-bubble--receiver";
+    ? `${colorTheme.bubbleSenderBg} ${colorTheme.bubbleSenderText} ml-auto max-w-[40%] p-2 rounded-xl shadow`
+    : `${colorTheme.bubbleReceiverBg} ${colorTheme.bubbleReceiverText} mr-auto max-w-[40%] p-2 rounded-xl shadow`;
 
   const formattedTime = timestamp
     ? timestamp.toLocaleString("en-GB", {

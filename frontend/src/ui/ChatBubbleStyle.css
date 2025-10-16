@@ -1,25 +1,25 @@
-.chat-bubble {
-  max-width: 40%;
-  width: fit-content;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem 0;
-  border-radius: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 1.5rem;
+/* .chat-bubble { */
+/* max-width: 40%;
+  width: fit-content; */
+/* padding: 0.5rem 1rem; */
+/* margin: 0.5rem 0; */
+/* border-radius: 1rem; */
+/* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+/* font-size: 1.5rem;
   font-weight: 600;
-}
+} */
 
-.chat-bubble--sender {
+/* .chat-bubble--sender {
   background-color: #bfdbfe; /* Tailwind's blue-200 */
-  color: black;
+/* color: black;
   margin-left: auto;
 }
 
 .chat-bubble--receiver {
   background-color: #e5e7eb; /* Tailwind's gray-200 */
-  color: black;
-  margin-right: auto;
-}
+/* color: black; */
+/* margin-right: auto;
+} */
 
 .chat-bubble__meta {
   font-size: 1rem;

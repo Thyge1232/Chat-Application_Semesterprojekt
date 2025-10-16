@@ -22,7 +22,7 @@
   box-shadow: 0 0 10px 1000px rgba(0, 0, 0, 0.3);
 }
 
-.input__submit {
+/* .input__submit {
   position: absolute;
   right: 0;
   top: 0;
@@ -40,4 +40,4 @@
 
 .input__submit:hover {
   background-color: #05376d;
-}
+} */

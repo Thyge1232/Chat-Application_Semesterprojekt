@@ -11,6 +11,7 @@ import { useUsers } from "../hooks/useUsers";
 import { useSocket } from "../hooks/useSocket";
 import { useAuth } from "../hooks/useAuth";
 import { type SocketEvent } from "../types/socketEvent";
+import { ConversationColorThemeFactory } from "../ui/ColorThemes/ConversationColorThemeFactory";
 
 export const Conversations = () => {
   const { currentUser } = useAuth();
@@ -22,6 +23,9 @@ export const Conversations = () => {
   const { mutate: sendMessage } = useSendMessage();
   const { data: users } = useUsers();
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
+
+  // const userThemeId = currentUser?.themeId ?? 1; // First hardcoded null → default = 1
+  const theme = ConversationColorThemeFactory.createTheme(2); //OBS fra User.ColorTheme
 
   const endRef = useRef<HTMLDivElement>(null);
   const {
@@ -48,18 +52,22 @@ export const Conversations = () => {
   return (
     <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
       {/* Left column: conversation list */}
-      <div className="bg-blue-100 p-4 overflow-y-auto">
+      <div className={`${theme.leftBg} p-4 overflow-y-auto flex flex-col`}>
         <Title>Conversations</Title>
         {/* TODO: Replace with useConversations() query */}
         {[1, 2, 3].map((id) => (
-          <Button key={id} onClick={() => setConversationId(id)}>
+          <Button
+            key={id}
+            onClick={() => setConversationId(id)}
+            className={`${theme.conversationsBottomText} ${theme.conversationBottomBg}`}
+          >
             Conversation {id}
           </Button>
         ))}
       </div>
 
       {/* Right column: messages + input */}
-      <div className="grid grid-rows-[1fr_auto] bg-white">
+      <div className={`grid grid-rows-[1fr_auto] ${theme.conversationsBg}`}>
         <div className="overflow-y-auto p-4" style={{ height: "75vh" }}>
           {messages?.map((msg) => (
             <ChatBubble
@@ -72,6 +80,7 @@ export const Conversations = () => {
               }
               timestamp={msg.sentAt}
               messageId={msg.id}
+              colorTheme={theme}
             >
               {msg.content}
             </ChatBubble>
@@ -80,6 +89,7 @@ export const Conversations = () => {
         </div>
 
         <MessageInput
+          colorTheme={theme}
           content={content}
           setContent={setContent}
           onSubmit={() => {
