@@ -4,6 +4,7 @@ using BackendAPI.Context;
 using MessageService;
 using Microsoft.AspNetCore.Mvc;
 using BackendAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace BackendAPI.Controllers;
@@ -45,7 +46,7 @@ namespace BackendAPI.Controllers;
             }
         }
 
-        // GET /api/users/{id} 
+        [Authorize]            // GET /api/users/{id} 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUserById(int id)
         {
@@ -60,7 +61,7 @@ namespace BackendAPI.Controllers;
             return Ok(user);
         }
 
-        // GET /api/users //404 Not Found ved fail
+        [Authorize]  // GET /api/users //404 Not Found ved fail
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsers()
         {
