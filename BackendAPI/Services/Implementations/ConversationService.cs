@@ -16,7 +16,7 @@ namespace BackendAPI.Services.Implementations
             _convoRepo = convoRepo;
         }
 
-        public async Task<ConversationDto> CreateConversationAsync(CreateConversationDto createDto)
+        public async Task<ConversationDto> CreateConversationAsync(CreateConversationDto createDto, int creatorId)
         {
 
             var conversation = new Conversation
@@ -24,6 +24,16 @@ namespace BackendAPI.Services.Implementations
                 Name = createDto.Name,
                 CreatedAt = DateTime.UtcNow
             };
+
+            //Skaberen tilføjes til conversation
+             var firstMember = new ConversationMember
+            {
+                UserId = creatorId, 
+                Conversation = conversation, 
+                JoinedAt = DateTime.UtcNow
+            };
+            conversation.UserList.Add(firstMember); 
+
 
             await _convoRepo.AddAsync(conversation);
             await _convoRepo.SaveChangesAsync();

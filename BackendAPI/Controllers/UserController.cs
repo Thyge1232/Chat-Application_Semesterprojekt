@@ -46,7 +46,6 @@ namespace BackendAPI.Controllers;
             }
         }
 
-        [Authorize]            // GET /api/users/{id} 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUserById(int id)
         {
@@ -61,7 +60,6 @@ namespace BackendAPI.Controllers;
             return Ok(user);
         }
 
-        [Authorize]  // GET /api/users //404 Not Found ved fail
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsers()
         {

@@ -8,15 +8,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);///123
+var builder = WebApplication.CreateBuilder(args);
 
 var connString = Environment.GetEnvironmentVariable("ConnectionStrings__Default") ??
 builder.Configuration.GetConnectionString("Default");
 Console.WriteLine($"Using DB: {connString}");
 
 builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 // Registrer dine services
 builder.Services.AddScoped<IConversationService, ConversationService>();
@@ -51,6 +49,38 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Swagger configuration med JWT support
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    // Definer sikkerhedsskemaet (Bearer token)
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
+    });
+
+    // Gør det muligt at tilføje token til alle requests
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
+
 // Generate password 
 var hasher = new PasswordHasher();
 var hash = hasher.HashPassword("alice123");
@@ -59,8 +89,7 @@ Console.WriteLine("Hash for alice123: " + hash);
 // Add services to the container.
 builder.Services.AddControllers();
 
-
-// NYT: Definer CORS-politik
+// Definer CORS-politik
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
@@ -86,7 +115,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-// NYT: Aktiver CORS-middleware
+// Aktiver CORS-middleware
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
