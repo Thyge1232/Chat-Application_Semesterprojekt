@@ -7,5 +7,6 @@ namespace BackendAPI.Services.Interfaces
     {
         Task<ConversationDto> CreateConversationAsync(CreateConversationDto createDto, int creatorId);
         Task<ConversationWithMembersDto?> GetConversationByIdAsync(int conversationId);
+        Task<IEnumerable<ConversationSummaryDto>> GetConversationByUserIdAsync(int userId);
     }
 }

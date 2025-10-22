@@ -58,18 +58,16 @@ public class ConversationController : ControllerBase
     {
         var userIdString = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
 
-        // Vi kan ikke fortsætte uden et gyldigt ID
         if (!int.TryParse(userIdString, out var currentUserId))
         {
-            // Dette burde teoretisk set aldrig ske, da [Authorize] beskytter metoden,
-            // men det er god praksis at have et sikkerhedsnet.
+
             return Unauthorized("Invalid user token.");
         }
         var conversation = await _conversationservice.GetConversationByIdAsync(id);
 
         if (conversation == null)
         {
-            return NotFound(); 
+            return NotFound();
         }
 
         var isUserMember = conversation.Members.Any(member => member.Id == currentUserId);
@@ -79,8 +77,13 @@ public class ConversationController : ControllerBase
             return Forbid();
         }
 
-        return Ok(conversation); 
+        return Ok(conversation);
     }
+
+    
+
+    
+
 }
 
 

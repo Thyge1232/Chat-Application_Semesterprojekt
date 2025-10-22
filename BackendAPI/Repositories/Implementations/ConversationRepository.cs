@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using BackendAPI.Context;
 using BackendAPI.Models;
 using BackendAPI.Repositories.Interfaces;
@@ -23,7 +24,7 @@ namespace BackendAPI.Repositories.Implementations
         {
             await _dbContext.SaveChangesAsync();
         }
-        
+
         public async Task<Conversation?> GetByIdWithMembersAsync(int conversationId)
         {
             return await _dbContext.Conversations
@@ -31,6 +32,15 @@ namespace BackendAPI.Repositories.Implementations
                 .ThenInclude(cu => cu.User)
                 .FirstOrDefaultAsync(c => c.ConversationId == conversationId);
         }
+        
+        public async Task<IEnumerable<Conversation>> GetByUserIdAsync(int userId)
+        {
+            return await _dbContext.Conversations
+                .Where(c => c.UserList.Any(cm => cm.UserId == userId))
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
 
     }
 }

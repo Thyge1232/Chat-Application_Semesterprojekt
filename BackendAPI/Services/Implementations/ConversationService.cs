@@ -66,6 +66,18 @@ namespace BackendAPI.Services.Implementations
 
             };
         }
+        public async Task<IEnumerable<ConversationSummaryDto>> GetConversationByUserIdAsync(int userId)
+        {
+            var conversations = await _convoRepo.GetByUserIdAsync(userId);
+
+            return conversations.Select(c => new ConversationSummaryDto
+            {
+                Id = c.ConversationId,
+                Name = c.Name
+            });
+        }
+
+
     
     }
         

@@ -5,6 +5,8 @@ using MessageService;
 using Microsoft.AspNetCore.Mvc;
 using BackendAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims; 
+
 
 
 namespace BackendAPI.Controllers;
@@ -14,12 +16,14 @@ namespace BackendAPI.Controllers;
     public class UsersController : ControllerBase
     {
 
-        private readonly IUserService _userService;
+    private readonly IUserService _userService;
+    private readonly IConversationService _conversationService;
 
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IConversationService conversationService)
         {
-            _userService = userService;
+        _userService = userService;
+        _conversationService = conversationService;
         }
 
         // POST /api/users
@@ -65,5 +69,21 @@ namespace BackendAPI.Controllers;
         {
             var users = await _userService.GetAllUsersAsync();
             return Ok(users);
+        }
+        
+        [Authorize]
+        [HttpGet("me/conversations")]
+        public async Task<ActionResult<IEnumerable<ConversationSummaryDto>>> GetMyConversations()
+        {
+            var loggedInUserIdString = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+
+            if (!int.TryParse(loggedInUserIdString, out var currentUserId))
+            {
+
+                return Unauthorized("Invalid user token.");
+            }
+
+            var conversations = await _conversationService.GetConversationByUserIdAsync(currentUserId);
+            return Ok(conversations);
         }
     }

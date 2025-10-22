@@ -9,5 +9,6 @@ namespace BackendAPI.Repositories.Interfaces
         Task AddAsync(Conversation conversation);
         Task SaveChangesAsync();
         Task<Conversation?> GetByIdWithMembersAsync(int conversationId);
+        Task<IEnumerable<Conversation>> GetByUserIdAsync(int userId);
     }
 }
