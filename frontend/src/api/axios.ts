@@ -2,7 +2,22 @@ import axios, { AxiosError } from "axios";
 import { getToken, clearToken } from "../services/tokenService";
 import { API_BASE_URL } from "../config/api";
 
-//our axios instance used for the http transport
+/**
+ * Axios instance for all our http requests
+ *
+ * @remarks
+ * - Setsup our base URL (`API_BASE_URL`)
+ * - applies header and token
+ * - clears token if `401 Unauthorized` responses.
+ *
+ * @example
+ * ```ts
+ * import { axiosInstance } from "../api/axios";
+ *
+ * const res = await axiosInstance.get("/users");
+ * console.log(res.data);
+ * ```
+ */
 export const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 5000,
@@ -11,7 +26,11 @@ export const axiosInstance = axios.create({
   },
 });
 
-//request interceptor
+/**
+ * request interceptor
+ * - adds `Authorization` header with bearer token
+ */
+
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = getToken();
@@ -26,7 +45,10 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-//response interceptor
+/**
+ * response interceptor
+ * - passes successful responses unless `401 Unauthorized`
+ */
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {

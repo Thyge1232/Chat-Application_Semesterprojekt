@@ -4,3 +4,11 @@ export type User = {
   email: string;
   createdAt: string;
 };
+
+export interface CreateUserDto {
+  name: string;
+}
+
+export interface UpdateUserDto {
+  name?: string;
+}

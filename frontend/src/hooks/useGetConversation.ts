@@ -1,5 +1,5 @@
 import { useApiQuery } from "./useApiQuery";
-import { messagesApi } from "../api/ConversationApi";
+import { messagesApi } from "../api/messageApi";
 import type { Message } from "../types/message";
 
 export function useGetConversation(conversationId?: number) {

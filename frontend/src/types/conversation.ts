@@ -8,3 +8,11 @@ export interface Conversation {
   createdAt: Date;
   participants: User[];
 }
+
+export interface CreateConversationDto {
+  name: string;
+}
+
+export interface UpdateConversationDto {
+  name?: string;
+}

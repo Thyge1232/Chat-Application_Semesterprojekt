@@ -1,6 +1,37 @@
 import { axiosInstance } from "./axios";
 
-//har sat disse metoder op... skal vi bruge flerE? listet i crud orden
+/**
+ * Our base crud operations
+ *
+ * @remarks
+ * - uses our shared `axiosInstance` for all requests
+ * - atm we have list, get, update, create and remove, can expand
+ *
+ * @examples
+ * ```ts
+ * import { createResourceApi } from "../api/resourceApi";
+ * import { User, CreateUserDto, UpdateUserDto } from "../types/user";
+ *
+ * //setup resource api for users
+ * const userApi = createResourceApi<User, CreateUserDto, UpdateUserDto>("/users");
+ *
+ * //list all users
+ * const users = await userApi.list();
+ *
+ * //get a single user
+ * const user = await userApi.get("123");
+ *
+ * //create a new user
+ * const newUser = await userApi.create({ name: "Alice" });
+ *
+ * //update a user
+ * const updatedUser = await userApi.update("123", { name: "Bob" });
+ *
+ * //remove a user
+ * await userApi.remove("123");
+ * ```
+ */
+
 export interface IResourceApi<T, CreateDto, UpdateDto> {
   //create request:
   create(dto: CreateDto): Promise<T>; //til at oprette //Read requests:

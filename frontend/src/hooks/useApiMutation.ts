@@ -4,6 +4,29 @@ import {
   type UseMutationOptions,
   type UseMutationResult,
 } from "@tanstack/react-query";
+/**
+ * A typed wrapper around React Query's {@link useMutation} hook.
+ *
+ * @typeParam TData - The type of data returned by the mutation function.
+ * @typeParam TVariables - The type of variables accepted by the mutation function.
+ *
+ * @param mutationFn - An async function that performs the mutation (e.g. create, update, delete).
+ * @param options - Optional React Query mutation options (onSuccess, onError, etc.).
+ *
+ * @returns A {@link UseMutationResult} object containing:
+ * - `mutate` / `mutateAsync` to trigger the mutation
+ * - `isPending`, `isError`, `error`, etc. for status handling
+ *
+ * @example
+ * ```tsx
+ * const { mutate: createUser } = useApiMutation<User, CreateUserDto>(
+ *   (dto) => userApi.create(dto),
+ *   { onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }) }
+ * );
+ *
+ * createUser({ name: "Alice" });
+ * ```
+ */
 
 export function useApiMutation<TData, TVariables>(
   mutationFn: (variables: TVariables) => Promise<TData>,
@@ -14,29 +37,3 @@ export function useApiMutation<TData, TVariables>(
     ...options,
   });
 }
-
-/*eksempler på anvendelse: 
-Lav en burger:
-const createUser = useApiMutation<User, CreateUserDto>(
-  (dto) => usersApi.create(dto),
-  {
-    onSuccess: () => queryClient.invalidateQueries(["users"]),
-  }
-);
-
-opdater brugeren
-const updateUser = useApiMutation<User, { id: string; dto: UpdateUserDto }>(
-  ({ id, dto }) => usersApi.update(id, dto),
-  {
-    onSuccess: () => queryClient.invalidateQueries(["users"]),
-  }
-);
-
-slet brugeren
-const deleteUser = useApiMutation<void, string>(
-  (id) => usersApi.remove(id),
-  {
-    onSuccess: () => queryClient.invalidateQueries(["users"]),
-  }
-);
-*/

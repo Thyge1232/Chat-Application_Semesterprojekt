@@ -1,14 +1,40 @@
-import { axiosInstance } from "./axios";
 import { createResourceApi } from "./baseCRUDApi";
-import type { ApiMessage, Message, SendMessage } from "../types/message";
-import { transformMessageFromApi } from "../services/transformMessageFromApi";
+import type {
+  Conversation,
+  CreateConversationDto,
+} from "../types/conversation";
 
-export const messagesApi = {
-  ...createResourceApi<Message, SendMessage, Partial<SendMessage>>("/messages"),
+/**
+ * Our conversation api
+ *
+ * @examples
+ * ```ts
+ * import { conversationApi } from "../api/conversationApi";
+ *
+ * //list all conversations
+ * const conversations = await conversationApi.list();
+ *
+ * //get a single conversation
+ * const convo = await conversationApi.get("123");
+ *
+ * //create a new conversation
+ * const newConvo = await conversationApi.create({
+ *   title: "Project kickoff",
+ *   participants: ["u1", "u2"],
+ * });
+ *
+ * //update a conversation
+ * const updatedConvo = await conversationApi.update("123", {
+ *   title: "Renamed project kickoff",
+ * });
+ *
+ * //remove a conversation
+ * await conversationApi.remove("123");
+ * ```
+ */
 
-  async getByConversation(conversationId: number): Promise<Message[]> {
-    const res = await axiosInstance.get(`/messages/${conversationId}`);
-    const raw = res.data as ApiMessage[];
-    return raw.map(transformMessageFromApi);
-  },
-};
+export const conversationApi = createResourceApi<
+  Conversation,
+  CreateConversationDto,
+  Partial<CreateConversationDto>
+>("/conversations");
