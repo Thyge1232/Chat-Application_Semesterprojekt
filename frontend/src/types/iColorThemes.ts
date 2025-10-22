@@ -13,10 +13,4 @@ export interface IColorThemeConversation {
   inputSubmitText: string;
 
   conversationsBg: string; //Bg for conversations field
-
-  //Left column
-  titleColor: string; //<Title>  - OBS bruges endnu ikke i Conversations.tsx / Title component
-  conversationBottomBg: string;
-  conversationsBottomText: string;
-  leftBg: string;
 }
