@@ -1,12 +1,10 @@
-import type { Message } from "./message";
 import type { User } from "./user";
 
-export type ConversationId = string;
+export type conversationId = number;
 
 export interface Conversation {
-  id: ConversationId;
-  participants: User[];
-  lastMessage?: Message;
+  conversationId: number;
+  name: string;
   createdAt: Date;
-  updatedAt: Date;
+  participants: User[];
 }

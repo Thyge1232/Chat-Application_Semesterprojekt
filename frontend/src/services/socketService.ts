@@ -7,7 +7,7 @@ class SocketService {
   private socket: WebSocket | null = null;
 
   connect(onMessage: MessageHandler) {
-    if (this.socket) return; // already connected
+    if (this.socket) return;
 
     this.socket = new WebSocket(`${ENDPOINTS.socket}?token=${getToken()}`);
 
