@@ -1,7 +1,7 @@
 //here we register endpoints to have a centralised place to update/add if nescesary
 const isDev = import.meta.env.DEV;
 
-export const API_BASE_URL = isDev ? "/api" : "https://api.venner.nu/";
+export const API_BASE_URL = isDev ? "/api" : "https://api.venner.nu";
 
 export const ENDPOINTS = {
   users: `${API_BASE_URL}/api/users`,
