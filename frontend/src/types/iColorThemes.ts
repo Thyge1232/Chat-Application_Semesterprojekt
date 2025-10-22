@@ -13,4 +13,6 @@ export interface IColorThemeConversation {
   inputSubmitText: string;
 
   conversationsBg: string; //Bg for conversations field
+
+  //TO DO: tilføj farver til dropdown
 }

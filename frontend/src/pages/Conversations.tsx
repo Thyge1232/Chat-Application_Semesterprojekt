@@ -12,6 +12,7 @@ import { useSocket } from "../hooks/useSocket";
 import { useAuth } from "../hooks/useAuth";
 import { type SocketEvent } from "../types/socketEvent";
 import { ConversationColorThemeFactory } from "../ui/ColorThemes/ConversationColorThemeFactory";
+import { Dropdown } from "../ui/DropDown";
 
 export const Conversations = () => {
   const { currentUser } = useAuth();
@@ -25,7 +26,43 @@ export const Conversations = () => {
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
 
   // const conversationThemeId = currentConversation?.themeId ?? 1; // First hardcoded null → default = 1
-  const theme = ConversationColorThemeFactory.createTheme(2); //OBS fra User.ColorTheme
+  const [conversationThemes, setConversationThemes] = useState<
+    Record<number, number>
+  >({});
+  const currentThemeNumber = conversationThemes[conversationId] ?? 1;
+  const theme = ConversationColorThemeFactory.createTheme(currentThemeNumber);
+  const updateThemeForConversation = (themeNumber: number) => {
+    setConversationThemes((prev) => ({
+      ...prev,
+      [conversationId]: themeNumber,
+    }));
+
+    // TODO: send til backend via Axios senere
+    console.log(
+      `Conversation ${conversationId} theme updated to ${themeNumber}`
+    );
+  };
+
+  //DROPDOWN!!!
+  const themeOptions = ConversationColorThemeFactory.getAvailableThemes();
+
+  const dropdownItems = [
+    {
+      itemlabel: "Tilføj bruger",
+      onSubmit: () => console.log("Tilføj bruger Conversation clicked"), //another
+    },
+    {
+      itemlabel: "Fjern bruger",
+      onSubmit: () => console.log("Fjernbruger clicked"), //another
+    },
+    {
+      itemlabel: "Vælgfarvetema",
+      children: themeOptions.map((t) => ({
+        itemlabel: t.label,
+        onSubmit: () => updateThemeForConversation(t.id),
+      })),
+    },
+  ];
 
   const endRef = useRef<HTMLDivElement>(null);
   const {
@@ -54,6 +91,7 @@ export const Conversations = () => {
       {/* Left column: conversation list */}
       <div className={"bg-blue-100 p-4 overflow-y-auto flex flex-col"}>
         <Title>Conversations</Title>
+
         {/* TODO: Replace with useConversations() query */}
         {[1, 2, 3].map((id) => (
           <Button
@@ -67,7 +105,15 @@ export const Conversations = () => {
       </div>
 
       {/* Right column: messages + input */}
-      <div className={`grid grid-rows-[1fr_auto] ${theme.conversationsBg}`}>
+      <div
+        className={`relative grid grid-rows-[1fr_auto] ${theme.conversationsBg}`}
+      >
+        {/* Dropdown above the conversation buttons */}
+        <Dropdown
+          label="Indstillinger"
+          items={dropdownItems}
+          className="absolute top-2 right-2"
+        />
         <div className="overflow-y-auto p-4" style={{ height: "75vh" }}>
           {messages?.map((msg) => (
             <ChatBubble

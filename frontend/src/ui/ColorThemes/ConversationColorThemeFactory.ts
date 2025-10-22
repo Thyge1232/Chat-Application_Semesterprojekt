@@ -20,4 +20,12 @@ export class ConversationColorThemeFactory {
         return new ThemeBlue();
     }
   }
+
+  // Dynamisk liste af tilgængelige temaer
+  static getAvailableThemes(): { id: number; label: string }[] {
+    return [
+      { id: 1, label: "Blå" },
+      { id: 2, label: "Dark Mode" },
+    ];
+  }
 }
