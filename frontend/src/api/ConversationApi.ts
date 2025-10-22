@@ -3,6 +3,7 @@ import type {
   Conversation,
   CreateConversationDto,
 } from "../types/conversation";
+import { ENDPOINTS } from "../config/api";
 
 /**
  * Our conversation api
@@ -37,4 +38,4 @@ export const conversationApi = createResourceApi<
   Conversation,
   CreateConversationDto,
   Partial<CreateConversationDto>
->("/conversations");
+>(ENDPOINTS.createConversations);

@@ -16,3 +16,8 @@ export interface CreateConversationDto {
 export interface UpdateConversationDto {
   name?: string;
 }
+
+export interface ConversationSummary {
+  id: number;
+  name: string | null;
+}

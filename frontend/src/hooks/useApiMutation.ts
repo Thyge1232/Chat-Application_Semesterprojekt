@@ -1,30 +1,31 @@
-//hook til vores mutation requests (create, update, delete)
 import {
   useMutation,
   type UseMutationOptions,
   type UseMutationResult,
 } from "@tanstack/react-query";
 /**
- * A typed wrapper around React Query's {@link useMutation} hook.
+ * Our base mutation hook
  *
- * @typeParam TData - The type of data returned by the mutation function.
- * @typeParam TVariables - The type of variables accepted by the mutation function.
+ * @remarks
+ * - wraps `useMutation` from react-query
+ * - takes a `mutationFn` (async function) and optional options
+ * - returns a typed mutation result with status, data, error etc.
+ * - can be reused for any POST/PUT/DELETE style request
  *
- * @param mutationFn - An async function that performs the mutation (e.g. create, update, delete).
- * @param options - Optional React Query mutation options (onSuccess, onError, etc.).
+ * @examples
+ * ```ts
+ * import { useApiMutation } from "../hooks/useApiMutation";
+ * import { conversationApi } from "../api/conversationApi";
+ * import { messagesApi } from "../api/messagesApi";
  *
- * @returns A {@link UseMutationResult} object containing:
- * - `mutate` / `mutateAsync` to trigger the mutation
- * - `isPending`, `isError`, `error`, etc. for status handling
- *
- * @example
- * ```tsx
- * const { mutate: createUser } = useApiMutation<User, CreateUserDto>(
- *   (dto) => userApi.create(dto),
- *   { onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }) }
+ * //create a conversation
+ * const createConversation = useApiMutation(
+ *   (dto: CreateConversationDto) => conversationApi.create(dto)
  * );
  *
- * createUser({ name: "Alice" });
+ * //usage
+ * createConversation.mutate({ name: "New Project Chat" });
+ *
  * ```
  */
 

@@ -18,7 +18,7 @@ const App = () => (
           path="/conversations"
           element={
             <RequireAuth>
-              <Conversations />{" "}
+              <Conversations />
             </RequireAuth>
           }
         />
@@ -26,7 +26,7 @@ const App = () => (
           path="/users"
           element={
             <RequireAuth>
-              <Users />{" "}
+              <Users />
             </RequireAuth>
           }
         />
@@ -34,7 +34,7 @@ const App = () => (
           path="/settings"
           element={
             <RequireAuth>
-              <Settings />{" "}
+              <Settings />
             </RequireAuth>
           }
         />
@@ -42,7 +42,7 @@ const App = () => (
           path="/home"
           element={
             <RequireAuth>
-              <Home />{" "}
+              <Home />
             </RequireAuth>
           }
         />

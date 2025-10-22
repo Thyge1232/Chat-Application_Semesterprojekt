@@ -11,23 +11,30 @@ import { useUsers } from "../hooks/useUsers";
 import { useAuth } from "../hooks/useAuth";
 import { type SocketEvent } from "../types/socketEvent";
 import { ConversationColorThemeFactory } from "../ui/ColorThemes/ConversationColorThemeFactory";
-import { Dropdown } from "../ui/DropDown";
+import { Dropdown } from "../ui/Dropdown";
 import { useGetUserConversations } from "../hooks/useGetUserConversations";
+import { useCreateConversation } from "../hooks/useCreateConversation";
+import { AxiosError } from "axios";
 
 export const Conversations = () => {
   const { currentUser } = useAuth();
-  const { data: userconversations } = useGetUserConversations();
+  const {
+    data: userconversations,
+    isLoading: isLoadingConversations,
+    error: conversationsError,
+  } = useGetUserConversations();
+
   const [conversationId, setConversationId] = useState<number | undefined>(
     undefined
   );
   const [content, setContent] = useState<string>("");
-
+  const { mutate: createConversation } = useCreateConversation();
   const queryClient = useQueryClient();
   const { mutate: sendMessage } = useSendMessage();
   const { data: users } = useUsers();
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
 
-  // const conversationThemeId = currentConversation?.themeId ?? 1; // First hardcoded null → default = 1
+  const conversationThemeId = conversationId ?? 1; // First hardcoded null → default = 1
   const [conversationThemes, setConversationThemes] = useState<
     Record<number, number>
   >({});
@@ -70,6 +77,8 @@ export const Conversations = () => {
     isPending,
     error,
   } = useGetConversation(conversationId);
+  if (error?.response?.status === 401)
+    console.error("Adgang til samtale nægtet");
 
   // useSocket<SocketEvent>((event) => {
   //   if (event.type === "NEW_MESSAGE") {
@@ -95,7 +104,10 @@ export const Conversations = () => {
 
   if (conversationId != null && isPending) return <SpinnerWithText />;
   if (error) return <p>Something went wrong loading messages.</p>;
-
+  console.log(
+    "Conversation IDs:",
+    userconversations?.map((c) => c.id)
+  );
   return (
     <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
       {/* Left column: conversation list */}
@@ -103,19 +115,47 @@ export const Conversations = () => {
         <div className="bg-blue-100 p-4 flex flex-col overflow-y-auto relative">
           <Title>Mine samtaler</Title>
 
+          {isLoadingConversations && <SpinnerWithText />}
+
+          {conversationsError && (
+            <p className="text-red-500">
+              {conversationsError instanceof AxiosError &&
+              conversationsError.response?.status === 401
+                ? "Du har ikke adgang til dette..."
+                : "Noget gik galt, da vi prøvede at indhente samtalerne"}
+            </p>
+          )}
+
+          {userconversations?.length === 0 && (
+            <p className="text-gray-500">
+              You don’t have any conversations yet. Create one below!
+            </p>
+          )}
+
           {userconversations?.map((conversation) => (
             <Button
-              key={conversation.conversationId}
-              onClick={() => setConversationId(conversation.conversationId)}
+              key={conversation.id}
+              onClick={() => setConversationId(conversation.id)}
               className="bg-blue-300 text-white mb-2"
             >
-              {conversation.name ??
-                `Conversation ${conversation.conversationId}`}
+              {`Conversation ${conversation.id}`}
             </Button>
           ))}
         </div>
 
-        <Button className="bg-blue-300 text-white mb-2">
+        <Button
+          className="bg-blue-300 text-white mb-2"
+          onClick={() =>
+            createConversation(
+              { name: `Conversation ${Date.now()}` },
+              {
+                onSuccess: (newConversation) => {
+                  setConversationId(newConversation.conversationId);
+                },
+              }
+            )
+          }
+        >
           Opret en samtale
         </Button>
 
@@ -141,7 +181,7 @@ export const Conversations = () => {
                 sender={
                   currentUser?.userId === msg.senderId
                     ? currentUser?.userName
-                    : userMap.get(msg.senderId) ?? "Unknown sender"
+                    : userMap.get(msg.senderId) ?? "Ukendt afsender"
                 }
                 timestamp={msg.sentAt}
                 messageId={msg.id}
