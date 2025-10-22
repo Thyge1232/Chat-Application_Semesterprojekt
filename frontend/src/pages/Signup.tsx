@@ -26,14 +26,14 @@ export const Signup = () => {
     const { confirmPassword, ...userData } = data;
 
     createUserMutation.mutate(userData, {
-      onSuccess: (res) => {
-        console.log("Response fra backend: ", res);
+      onSuccess: (response) => {
+        console.log("Response fra backend: ", response);
         //navigate("/personalpage") på sigt, for nu tager vi til users page
         navigate("/users");
       },
-      onError: (err: Error) => {
-        alert("Noget gik galt: " + err.message);
-        console.log(err);
+      onError: (error: Error) => {
+        alert("Noget gik galt: " + error.message);
+        console.log(error);
       },
     });
     console.log("Form data:", data);

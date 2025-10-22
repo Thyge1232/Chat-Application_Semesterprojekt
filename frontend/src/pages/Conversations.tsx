@@ -24,7 +24,7 @@ export const Conversations = () => {
   const { data: users } = useUsers();
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
 
-  // const userThemeId = currentUser?.themeId ?? 1; // First hardcoded null → default = 1
+  // const conversationThemeId = currentConversation?.themeId ?? 1; // First hardcoded null → default = 1
   const theme = ConversationColorThemeFactory.createTheme(2); //OBS fra User.ColorTheme
 
   const endRef = useRef<HTMLDivElement>(null);
@@ -52,14 +52,14 @@ export const Conversations = () => {
   return (
     <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
       {/* Left column: conversation list */}
-      <div className={`${theme.leftBg} p-4 overflow-y-auto flex flex-col`}>
+      <div className={"bg-blue-100 p-4 overflow-y-auto flex flex-col"}>
         <Title>Conversations</Title>
         {/* TODO: Replace with useConversations() query */}
         {[1, 2, 3].map((id) => (
           <Button
             key={id}
             onClick={() => setConversationId(id)}
-            className={`${theme.conversationsBottomText} ${theme.conversationBottomBg}`}
+            className={"bg-blue-300 text-white"}
           >
             Conversation {id}
           </Button>
