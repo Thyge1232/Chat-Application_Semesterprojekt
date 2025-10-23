@@ -6,12 +6,11 @@ import type {
   CreateConversationDto,
 } from "../types/conversation";
 /**
- * React Query mutation hook for creating a new conversation.
+ * hook to create new conversation.
  *
  * @remarks
- * - Wraps the `conversationApi.create` call in a mutation.
  * - On success, invalidates the `["userConversations"]` query so the
- *   conversation list is refreshed automatically.
+ *   conversation list is refreshed.
  *
  * @returns A mutation object from React Query, including:
  * - `mutate` / `mutateAsync` to trigger the creation
