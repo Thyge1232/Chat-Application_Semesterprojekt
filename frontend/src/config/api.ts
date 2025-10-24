@@ -22,7 +22,7 @@ export function useGetUserConversations() {
  */
 export const ENDPOINTS = {
   users: `${API_BASE_URL}/api/users`,
-  messages: `${API_BASE_URL}/messages`,
+  messages: `${API_BASE_URL}/api/messages`,
   login: `${API_BASE_URL}/api/auth/login`,
   createConversations: `${API_BASE_URL}/api/conversations`,
   userConversations: `${API_BASE_URL}/api/users/me/conversations`,

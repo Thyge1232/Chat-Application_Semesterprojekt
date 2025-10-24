@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BackendAPI.Controllers;
 
 [ApiController]
-[Route("messages")]
+[Route("api/messages")]
 public class MessageController : ControllerBase
 {
     private readonly MyDBContext _db;
@@ -49,7 +49,7 @@ public class MessageController : ControllerBase
         try
         {
             //Security: Ensure the user is part of the conversation
-            bool isMember = await _db.ConversationMembers
+            var isMember = await _db.ConversationMembers
                 .AnyAsync(cm => cm.ConversationId == req.ConversationId && cm.UserId == req.UserId, ct);
 
             if (!isMember)
