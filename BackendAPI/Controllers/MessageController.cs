@@ -3,6 +3,7 @@ using BackendAPI.Dtos;
 using BackendAPI.Models;
 using MessageService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendAPI.Controllers;
 
@@ -46,9 +47,15 @@ public class MessageController : ControllerBase
 
         try
         {
+            //Security: Ensure the user is part of the conversation
+            bool isMember = await _db.ConversationMembers
+                .AnyAsync(cm => cm.ConversationId == req.ConversationId && cm.UserId == req.UserId, ct);
+
+            if (!isMember)
+                return Unauthorized("User is not a member of this conversation.");
+
             var created = await _messages.CreateMessage(req.ConversationId, req.UserId, req.Content, ct);
 
-            // 201 with a Location that lists the room's messages
             return CreatedAtAction(
                 nameof(GetMessagesFromConversation),
                 new { conversationId = req.ConversationId },
@@ -58,7 +65,7 @@ public class MessageController : ControllerBase
         {
             return StatusCode(StatusCodes.Status401Unauthorized, ex.Message);
         }
-        catch (InvalidOperationException ex) // user/room missing
+        catch (InvalidOperationException ex)
         {
             return NotFound(ex.Message);
         }
@@ -70,5 +77,42 @@ public class MessageController : ControllerBase
         {
             return StatusCode(500, $"Internal server error: {ex.Message}");
         }
+    }
+
+    // DELETE /messages/{messageId}?userId=5
+    [HttpDelete("messages/{messageId:int}")]
+    public async Task<IActionResult> DeleteMessage(int messageId, [FromQuery] int userId, CancellationToken ct)
+    {
+        var message = await _db.Messages.FindAsync(new object[] { messageId }, ct);
+        if (message == null)
+            return NotFound("Message not found.");
+
+        //Security: Only the author can delete their message
+        if (message.UserId != userId)
+            return Unauthorized("You can only delete your own messages.");
+
+        _db.Messages.Remove(message);
+        await _db.SaveChangesAsync(ct);
+        return NoContent();
+    }
+
+    // PUT /messages/{messageId}?userId=5
+    [HttpPut("messages/{messageId:int}")]
+    public async Task<IActionResult> UpdateMessage(int messageId, [FromQuery] int userId, [FromBody] string newContent, CancellationToken ct)
+    {
+        var message = await _db.Messages.FindAsync(new object[] { messageId }, ct);
+        if (message == null)
+            return NotFound("Message not found.");
+
+        //Security: Only the author can edit their message
+        if (message.UserId != userId)
+            return Unauthorized("You can only edit your own messages.");
+
+        if (string.IsNullOrWhiteSpace(newContent))
+            return BadRequest("Message content cannot be empty.");
+
+        message.MessageContent = newContent.Trim();
+        await _db.SaveChangesAsync(ct);
+        return NoContent();
     }
 }
