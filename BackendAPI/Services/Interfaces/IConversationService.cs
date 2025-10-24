@@ -1,12 +1,10 @@
 using BackendAPI.Dtos;
-using System.Threading.Tasks;
 
-namespace BackendAPI.Services.Interfaces
+namespace BackendAPI.Services.Interfaces;
+
+public interface IConversationService
 {
-    public interface IConversationService
-    {
-        Task<ConversationDto> CreateConversationAsync(CreateConversationDto createDto, int creatorId);
-        Task<ConversationWithMembersDto?> GetConversationByIdAsync(int conversationId);
-        Task<IEnumerable<ConversationSummaryDto>> GetConversationByUserIdAsync(int userId);
-    }
+    Task<ConversationDto> CreateConversationAsync(CreateConversationDto createDto, int creatorId);
+    Task<ConversationWithMembersDto?> GetConversationByIdAsync(int conversationId);
+    Task<IEnumerable<ConversationSummaryDto>> GetConversationByUserIdAsync(int userId);
 }

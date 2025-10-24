@@ -1,11 +1,7 @@
-namespace Test
+namespace BackendAPI.Models;
+
+public class DbTest
 {
-    using System.ComponentModel.DataAnnotations.Schema;
-
-    public class DbTest
-    {
-        public int DbTestId { get; set; }
-        public string testString { get; set; }
-    }
-
+    public int DbTestId { get; set; }
+    public string testString { get; set; }
 }

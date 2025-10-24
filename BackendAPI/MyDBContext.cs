@@ -1,14 +1,14 @@
 using BackendAPI.Models;
 using Microsoft.EntityFrameworkCore;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
-using Test;
 
 namespace BackendAPI.Context;
 
 public class MyDBContext : DbContext
 {
     public MyDBContext(DbContextOptions<MyDBContext> options)
-        : base(options) { }
+        : base(options)
+    {
+    }
 
     public DbSet<DbTest> Tests { get; set; }
     public DbSet<User> Users { get; set; }
@@ -54,9 +54,9 @@ public class MyDBContext : DbContext
                     UserId = 1,
                     Username = "alice",
                     Password = "$2a$11$DHb2SBahkIIXSIv1hf.GX.fP1BjCtOwTJJ9Boyqi3PrjEqCZRQs66", // hashed version of "alice123"
-                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0),DateTimeKind.Utc),
+                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                     ProfilePicture = "alice.png",
-                    Email = "alice@example.com",
+                    Email = "alice@example.com"
                 },
                 new User
                 {
@@ -65,7 +65,7 @@ public class MyDBContext : DbContext
                     Password = "hashed_pw_2",
                     CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
                     ProfilePicture = "bob.png",
-                    Email = "bob@example.com",
+                    Email = "bob@example.com"
                 }
             );
 
@@ -76,13 +76,13 @@ public class MyDBContext : DbContext
                 {
                     ConversationId = 1,
                     Name = "General",
-                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
+                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc)
                 },
                 new Conversation
                 {
                     ConversationId = 2,
                     Name = "Tech Talk",
-                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
+                    CreatedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc)
                 }
             );
 
@@ -93,19 +93,19 @@ public class MyDBContext : DbContext
                 {
                     UserId = 1,
                     ConversationId = 1,
-                    JoinedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
+                    JoinedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc)
                 },
                 new ConversationMember
                 {
                     UserId = 2,
                     ConversationId = 1,
-                    JoinedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
+                    JoinedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc)
                 },
                 new ConversationMember
                 {
                     UserId = 2,
                     ConversationId = 2,
-                    JoinedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
+                    JoinedAt = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc)
                 }
             );
 
@@ -118,7 +118,7 @@ public class MyDBContext : DbContext
                     MessageContent = "Hello everyone!",
                     ConversationId = 1,
                     UserId = 1,
-                    TimeStamp = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
+                    TimeStamp = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc)
                 },
                 new Message
                 {
@@ -126,7 +126,7 @@ public class MyDBContext : DbContext
                     MessageContent = "Hi Alice!",
                     ConversationId = 1,
                     UserId = 2,
-                    TimeStamp = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
+                    TimeStamp = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc)
                 },
                 new Message
                 {
@@ -134,7 +134,7 @@ public class MyDBContext : DbContext
                     MessageContent = "Anyone tried .NET MAUI?",
                     ConversationId = 2,
                     UserId = 2,
-                    TimeStamp = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc),
+                    TimeStamp = DateTime.SpecifyKind(new DateTime(2025, 9, 25, 14, 0, 0), DateTimeKind.Utc)
                 }
             );
         modelBuilder

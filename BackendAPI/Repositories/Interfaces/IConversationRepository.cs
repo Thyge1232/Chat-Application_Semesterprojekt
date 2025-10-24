@@ -1,14 +1,11 @@
 using BackendAPI.Models;
-using System.Threading.Tasks;
-using BackendAPI.Dtos;
 
-namespace BackendAPI.Repositories.Interfaces
+namespace BackendAPI.Repositories.Interfaces;
+
+public interface IConversationRepository
 {
-    public interface IConversationRepository
-    {
-        Task AddAsync(Conversation conversation);
-        Task SaveChangesAsync();
-        Task<Conversation?> GetByIdWithMembersAsync(int conversationId);
-        Task<IEnumerable<Conversation>> GetByUserIdAsync(int userId);
-    }
+    Task AddAsync(Conversation conversation);
+    Task SaveChangesAsync();
+    Task<Conversation?> GetByIdWithMembersAsync(int conversationId);
+    Task<IEnumerable<Conversation>> GetByUserIdAsync(int userId);
 }
