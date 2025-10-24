@@ -1,8 +1,7 @@
-namespace BackendAPI.Dtos
+namespace BackendAPI.Dtos;
+
+public class ConversationDto
 {
-    public class ConversationDto
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-    }
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
 }

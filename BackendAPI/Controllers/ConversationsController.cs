@@ -1,45 +1,35 @@
+using System.Security.Claims;
 using BackendAPI.Dtos;
-using BackendAPI.Models;
-using BackendAPI.Context;
-using Microsoft.AspNetCore.Mvc;
 using BackendAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 
-
+namespace BackendAPI.Controllers;
 
 [Authorize]
 [ApiController]
 [Route("api/conversations")]
-
 public class ConversationController : ControllerBase
 {
-    private readonly IConversationService _conversationservice;
+    private readonly IConversationService _conversationService;
 
     public ConversationController(IConversationService conversationService)
     {
-        _conversationservice = conversationService;
+        _conversationService = conversationService;
     }
 
     [Authorize]
     [HttpPost]
     public async Task<IActionResult> CreateConversation([FromBody] CreateConversationDto createConversationsDto)
     {
-        
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
+        if (!ModelState.IsValid) return BadRequest(ModelState);
 
         try
         {
-            var userIdString = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (!int.TryParse(userIdString, out var currentUserId))
-            {
-                return Unauthorized("Invalid user token.");
-            }
-            var newConversation = await _conversationservice.CreateConversationAsync(createConversationsDto, currentUserId);
+            if (!int.TryParse(userIdString, out var currentUserId)) return Unauthorized("Invalid user token.");
+            var newConversation = await _conversationService.CreateConversationAsync(createConversationsDto, currentUserId);
 
             return CreatedAtAction(nameof(GetConversationById), new { id = newConversation.Id }, newConversation);
         }
@@ -48,45 +38,23 @@ public class ConversationController : ControllerBase
         {
             return Conflict(new { message = ex.Message });
         }
-
-
-
     }
+
     [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetConversationById(int id)
     {
-        var userIdString = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (!int.TryParse(userIdString, out var currentUserId))
-        {
+        if (!int.TryParse(userIdString, out var currentUserId)) return Unauthorized("Invalid user token.");
+        var conversation = await _conversationService.GetConversationByIdAsync(id);
 
-            return Unauthorized("Invalid user token.");
-        }
-        var conversation = await _conversationservice.GetConversationByIdAsync(id);
-
-        if (conversation == null)
-        {
-            return NotFound();
-        }
+        if (conversation == null) return NotFound();
 
         var isUserMember = conversation.Members.Any(member => member.Id == currentUserId);
 
-        if (!isUserMember)
-        {
-            return Forbid();
-        }
+        if (!isUserMember) return Forbid();
 
         return Ok(conversation);
     }
-
-    
-
-    
-
 }
-
-
-
-
-

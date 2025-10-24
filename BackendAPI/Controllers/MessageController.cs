@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BackendAPI.Controllers;
 
 [ApiController]
+[Route("messages")]
 public class MessageController : ControllerBase
 {
     private readonly MyDBContext _db;
@@ -20,7 +21,7 @@ public class MessageController : ControllerBase
     }
 
     // GET /messages/{conversationId}
-    [HttpGet("messages/{conversationId:int}")]
+    [HttpGet("{conversationId:int}")]
     public async Task<ActionResult<IEnumerable<Message>>> GetMessagesFromConversation(
         int conversationId, CancellationToken ct)
     {
@@ -36,7 +37,7 @@ public class MessageController : ControllerBase
     }
 
     // POST /messages
-    [HttpPost("messages")]
+    [HttpPost("")]
     [ProducesResponseType(typeof(Message), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -80,7 +81,7 @@ public class MessageController : ControllerBase
     }
 
     // DELETE /messages/{messageId}?userId=5
-    [HttpDelete("messages/{messageId:int}")]
+    [HttpDelete("{messageId:int}")]
     public async Task<IActionResult> DeleteMessage(int messageId, [FromQuery] int userId, CancellationToken ct)
     {
         var message = await _db.Messages.FindAsync(new object[] { messageId }, ct);
@@ -97,7 +98,7 @@ public class MessageController : ControllerBase
     }
 
     // PUT /messages/{messageId}?userId=5
-    [HttpPut("messages/{messageId:int}")]
+    [HttpPut("{messageId:int}")]
     public async Task<IActionResult> UpdateMessage(int messageId, [FromQuery] int userId, [FromBody] string newContent, CancellationToken ct)
     {
         var message = await _db.Messages.FindAsync(new object[] { messageId }, ct);

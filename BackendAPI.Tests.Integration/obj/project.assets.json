@@ -5643,40 +5643,33 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\thyge\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/nis/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI.Tests.Integration\\BackendAPI.Tests.Integration.csproj",
+      "projectUniqueName": "/Users/nis/Documents/Git/chat-app/BackendAPI.Tests.Integration/BackendAPI.Tests.Integration.csproj",
       "projectName": "BackendAPI.Tests.Integration",
-      "projectPath": "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI.Tests.Integration\\BackendAPI.Tests.Integration.csproj",
-      "packagesPath": "C:\\Users\\thyge\\.nuget\\packages\\",
-      "outputPath": "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI.Tests.Integration\\obj\\",
+      "projectPath": "/Users/nis/Documents/Git/chat-app/BackendAPI.Tests.Integration/BackendAPI.Tests.Integration.csproj",
+      "packagesPath": "/Users/nis/.nuget/packages/",
+      "outputPath": "/Users/nis/Documents/Git/chat-app/BackendAPI.Tests.Integration/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\thyge\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/nis/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI\\BackendAPI.csproj": {
-              "projectPath": "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI\\BackendAPI.csproj"
+            "/Users/nis/Documents/Git/chat-app/BackendAPI/BackendAPI.csproj": {
+              "projectPath": "/Users/nis/Documents/Git/chat-app/BackendAPI/BackendAPI.csproj"
             }
           }
         }
@@ -5691,7 +5684,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -5746,7 +5739,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
