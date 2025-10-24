@@ -34,7 +34,7 @@ export const Conversations = () => {
   const { data: users } = useUsers();
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
 
-  const conversationThemeId = conversationId ?? 1; // First hardcoded null → default = 1
+  const conversationThemeId = conversationId ?? 1;
   const [conversationThemes, setConversationThemes] = useState<
     Record<number, number>
   >({});

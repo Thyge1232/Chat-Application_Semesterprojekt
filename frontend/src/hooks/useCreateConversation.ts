@@ -4,7 +4,7 @@ import type {
   Conversation,
   CreateConversationDto,
 } from "../types/conversation";
-import { conversationApi } from "../api/ConversationApi";
+import { conversationApi } from "../api/conversationApi";
 /**
  * hook to create new conversation.
  *
