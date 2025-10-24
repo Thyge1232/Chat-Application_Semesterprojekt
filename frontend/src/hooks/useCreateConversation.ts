@@ -1,10 +1,10 @@
 import { useApiMutation } from "./useApiMutation";
 import { useQueryClient } from "@tanstack/react-query";
-import { conversationApi } from "../api/conversationApi";
 import type {
   Conversation,
   CreateConversationDto,
 } from "../types/conversation";
+import { conversationApi } from "../api/ConversationApi";
 /**
  * hook to create new conversation.
  *
