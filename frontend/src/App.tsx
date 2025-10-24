@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Login } from "./pages/Login";
-import { Signup } from "./pages/Signup";
+import { Login } from "./features/authentication/pages/Login";
+import { Signup } from "./features/authentication/pages/Signup";
 import { Conversations } from "./pages/Conversations";
 import { Settings } from "./pages/Settings";
 import { Users } from "./pages/Users";
 import { Home } from "./pages/Home";
 import { Layout } from "./ui/Layout";
-import { RequireAuth } from "./components/RequireAuth";
+import { RequireAuth } from "./features/authentication/RequireAuth";
 
 const App = () => (
   <Router>

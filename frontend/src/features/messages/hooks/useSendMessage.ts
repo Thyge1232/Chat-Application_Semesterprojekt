@@ -1,18 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { ApiMessage, SendMessage, Message } from "../types/message";
-import { axiosInstance } from "../api/axios";
-import { transformMessageFromApi } from "../services/transformMessageFromApi";
-import { ENDPOINTS } from "../config/api";
+import type { ApiMessage, Message, SendMessage } from "../../../types/message";
+import { transformMessageFromApi } from "../../../services/transformMessageFromApi";
+import { apiClient } from "../../../api/apiClient";
+import { ENDPOINTS } from "../../../config/api";
 
 export const useSendMessage = () => {
   const queryClient = useQueryClient();
 
   return useMutation<Message, Error, SendMessage>({
     mutationFn: async (message) => {
-      const res = await axiosInstance.post<ApiMessage>(
-        ENDPOINTS.messages,
-        message
-      );
+      const res = await apiClient.post<ApiMessage>(ENDPOINTS.messages, message);
       return transformMessageFromApi(res.data);
     },
     onSuccess: (_data, variables) => {

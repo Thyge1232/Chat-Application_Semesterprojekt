@@ -1,5 +1,5 @@
 import { useMutation, type UseMutationResult } from "@tanstack/react-query";
-import { axiosInstance } from "../api/axios";
+import { apiClient } from "../api/apiClient";
 import { ENDPOINTS } from "../config/api";
 import type { LoginCredentials } from "../types/loginCredentials";
 import { setToken } from "../services/tokenService";
@@ -12,7 +12,7 @@ export const useLogin = (): UseMutationResult<
 > => {
   return useMutation<CurrentUser | null, Error, LoginCredentials>({
     mutationFn: async ({ username, password }: LoginCredentials) => {
-      const res = await axiosInstance.post<string>(ENDPOINTS.login, {
+      const res = await apiClient.post<string>(ENDPOINTS.login, {
         username,
         password,
       });

@@ -1,7 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useLogin } from "../hooks/useLogin";
 import "../ui/PagesStyle.css";
+import { useLogin } from "../hooks/useLogin";
 
 type Inputs = {
   loginCredentials: string;

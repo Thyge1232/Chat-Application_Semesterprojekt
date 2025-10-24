@@ -5,16 +5,16 @@ import { SpinnerWithText } from "../ui/SpinnerWithText";
 import { Button } from "../ui/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect, useRef } from "react";
-import { useSendMessage } from "../hooks/useSendMessage";
-import { useGetConversation } from "../hooks/useGetConversation";
-import { useUsers } from "../hooks/useUsers";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../features/authentication/hooks/useAuth";
 import { type SocketEvent } from "../types/socketEvent";
 import { ConversationColorThemeFactory } from "../ui/ColorThemes/ConversationColorThemeFactory";
 import { Dropdown, type DropdownItem } from "../ui/Dropdown";
-import { useGetUserConversations } from "../hooks/useGetUserConversations";
-import { useCreateConversation } from "../hooks/useCreateConversation";
+import { useCreateConversation } from "../features/conversations/hooks/useCreateConversation";
 import { AxiosError } from "axios";
+import { useUsers } from "../features/authentication/hooks/useUsers";
+import { useSendMessage } from "../features/messages/hooks/useSendMessage";
+import { useGetConversation } from "../features/conversations/hooks/useGetConversation";
+import { useGetUserConversations } from "../features/conversations/hooks/useGetUserConversations";
 
 export const Conversations = () => {
   //LOGIC PART OF THE COMPONENT

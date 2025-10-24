@@ -4,12 +4,9 @@ using BackendAPI.Models;
 using MessageService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 
 namespace BackendAPI.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("api/messages")]
 public class MessageController : ControllerBase
@@ -23,25 +20,12 @@ public class MessageController : ControllerBase
         _messages = messages;
     }
 
-    // GET /api/messages/{conversationId}
     [HttpGet("{conversationId:int}")]
     public async Task<ActionResult<IEnumerable<Message>>> GetMessagesFromConversation(
         int conversationId, CancellationToken ct)
     {
         try
         {
-            // 🔒 Get current user ID from JWT
-            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdString, out var currentUserId))
-                return Unauthorized("Invalid user token.");
-
-            // Ensure user is a member of this conversation
-            bool isMember = await _db.ConversationMembers
-                .AnyAsync(cm => cm.ConversationId == conversationId && cm.UserId == currentUserId, ct);
-
-            if (!isMember)
-                return Forbid();
-
             var result = await _messages.GetMessagesFromConversation(conversationId, ct);
             return Ok(result);
         }
@@ -51,7 +35,6 @@ public class MessageController : ControllerBase
         }
     }
 
-    // POST /api/messages
     [HttpPost("")]
     [ProducesResponseType(typeof(Message), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -63,18 +46,14 @@ public class MessageController : ControllerBase
 
         try
         {
-            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdString, out var currentUserId))
-                return Unauthorized("Invalid user token.");
-
-            // Security: Ensure the user is part of the conversation
+            //Security: Ensure the user is part of the conversation
             var isMember = await _db.ConversationMembers
-                .AnyAsync(cm => cm.ConversationId == req.ConversationId && cm.UserId == currentUserId, ct);
+                .AnyAsync(cm => cm.ConversationId == req.ConversationId && cm.UserId == req.UserId, ct);
 
             if (!isMember)
                 return Unauthorized("User is not a member of this conversation.");
 
-            var created = await _messages.CreateMessage(req.ConversationId, currentUserId, req.Content, ct);
+            var created = await _messages.CreateMessage(req.ConversationId, req.UserId, req.Content, ct);
 
             return CreatedAtAction(
                 nameof(GetMessagesFromConversation),
@@ -99,20 +78,16 @@ public class MessageController : ControllerBase
         }
     }
 
-    // DELETE /api/messages/{messageId}
+    // DELETE /messages/{messageId}?userId=5
     [HttpDelete("{messageId:int}")]
-    public async Task<IActionResult> DeleteMessage(int messageId, CancellationToken ct)
+    public async Task<IActionResult> DeleteMessage(int messageId, [FromQuery] int userId, CancellationToken ct)
     {
-        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!int.TryParse(userIdString, out var currentUserId))
-            return Unauthorized("Invalid user token.");
-
         var message = await _db.Messages.FindAsync(new object[] { messageId }, ct);
         if (message == null)
             return NotFound("Message not found.");
 
-        // Security: Only the author can delete their message
-        if (message.UserId != currentUserId)
+        //Security: Only the author can delete their message
+        if (message.UserId != userId)
             return Unauthorized("You can only delete your own messages.");
 
         _db.Messages.Remove(message);
@@ -120,20 +95,16 @@ public class MessageController : ControllerBase
         return NoContent();
     }
 
-    // PUT /api/messages/{messageId}
+    // PUT /messages/{messageId}?userId=5
     [HttpPut("{messageId:int}")]
-    public async Task<IActionResult> UpdateMessage(int messageId, [FromBody] string newContent, CancellationToken ct)
+    public async Task<IActionResult> UpdateMessage(int messageId, [FromQuery] int userId, [FromBody] string newContent, CancellationToken ct)
     {
-        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!int.TryParse(userIdString, out var currentUserId))
-            return Unauthorized("Invalid user token.");
-
         var message = await _db.Messages.FindAsync(new object[] { messageId }, ct);
         if (message == null)
             return NotFound("Message not found.");
 
-        // Security: Only the author can edit their message
-        if (message.UserId != currentUserId)
+        //Security: Only the author can edit their message
+        if (message.UserId != userId)
             return Unauthorized("You can only edit your own messages.");
 
         if (string.IsNullOrWhiteSpace(newContent))

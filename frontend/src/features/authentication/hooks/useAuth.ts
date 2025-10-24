@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { clearToken } from "../services/tokenService";
-import { getCurrentUser } from "../services/authService";
+import { clearToken } from "../../../services/tokenService";
+import { getCurrentUser } from "../../../services/authService";
 
 export function useAuth() {
   const [currentUser, setCurrentUser] =

@@ -1,8 +1,8 @@
-import { axiosInstance } from "./axios";
-import { createResourceApi } from "./baseCRUDApi";
+import { apiClient } from "./apiClient";
 import type { ApiMessage, Message, SendMessage } from "../types/message";
 import { transformMessageFromApi } from "../services/transformMessageFromApi";
 import { ENDPOINTS } from "../config/api";
+import { createResourceApi } from "./baseCRUDApi";
 
 /**
  * Our messages api
@@ -42,10 +42,10 @@ export const messagesApi = {
   ),
 
   async getByConversation(conversationId: number): Promise<Message[]> {
-    const res = await axiosInstance.get(
+    const response = await apiClient.get(
       `${ENDPOINTS.messages}/${conversationId}`
     );
-    const raw = res.data as ApiMessage[];
+    const raw = response.data as ApiMessage[];
     return raw.map(transformMessageFromApi);
   },
 };

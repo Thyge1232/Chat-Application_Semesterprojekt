@@ -1,4 +1,4 @@
-import { axiosInstance } from "./axios";
+import { apiClient } from "./apiClient";
 
 /**
  * Our base crud operations
@@ -52,23 +52,23 @@ export function createResourceApi<T, CreateDto, UpdateDto>(
 ): IResourceApi<T, CreateDto, UpdateDto> {
   return {
     async list() {
-      const res = await axiosInstance.get<T[]>(endpoint);
-      return res.data;
+      const response = await apiClient.get<T[]>(endpoint);
+      return response.data;
     },
     async get(id: string) {
-      const res = await axiosInstance.get<T>(`${endpoint}/${id}`);
-      return res.data;
+      const response = await apiClient.get<T>(`${endpoint}/${id}`);
+      return response.data;
     },
     async create(dto: CreateDto) {
-      const res = await axiosInstance.post<T>(endpoint, dto);
-      return res.data;
+      const response = await apiClient.post<T>(endpoint, dto);
+      return response.data;
     },
     async update(id: string, dto: UpdateDto) {
-      const res = await axiosInstance.put<T>(`${endpoint}/${id}`, dto);
-      return res.data;
+      const response = await apiClient.put<T>(`${endpoint}/${id}`, dto);
+      return response.data;
     },
     async remove(id: string) {
-      await axiosInstance.delete(`${endpoint}/${id}`);
+      await apiClient.delete(`${endpoint}/${id}`);
     },
   };
 }

@@ -18,7 +18,7 @@ import { API_BASE_URL } from "../config/api";
  * console.log(res.data);
  * ```
  */
-export const axiosInstance = axios.create({
+export const apiClient = axios.create({
   baseURL: API_BASE_URL,
   timeout: 5000,
   headers: {
@@ -31,7 +31,7 @@ export const axiosInstance = axios.create({
  * - adds `Authorization` header with bearer token
  */
 
-axiosInstance.interceptors.request.use(
+apiClient.interceptors.request.use(
   (config) => {
     const token = getToken();
     if (token && config.headers) {
@@ -49,7 +49,7 @@ axiosInstance.interceptors.request.use(
  * response interceptor
  * - passes successful responses unless `401 Unauthorized`
  */
-axiosInstance.interceptors.response.use(
+apiClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     if (error.response?.status === 401) {
