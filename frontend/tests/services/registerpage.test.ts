@@ -2,6 +2,12 @@
 // import { describe, it, expect, vi } from 'vitest'
 // import { Signup } from '../src/pages/Signup'
 
+import { expect, it } from "vitest";
+
+it("can check that true is true", () => {
+  expect(true).toBe(true);
+});
+
 // //Test createbutton + JSON string
 // describe('Signup', () => {
 //   it('collects username, email, and password and sends them as a JSON string', () => {
