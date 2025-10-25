@@ -61,16 +61,15 @@ export const Conversations = () => {
     },
     {
       itemlabel: "Forlad samtalen",
-      onSubmit: () => console.log("Forlad samtalen clicked"),
+      onClick: () => console.log("Forlad samtalen clicked"),
     },
     {
       itemlabel: "Vælg farvetema",
-      children: themeOptions.map((t) => ({
+      subItems: themeOptions.map((t) => ({
         itemlabel: t.label,
-        onSubmit: () => (
-          updateThemeForConversation(t.id),
-          console.log("vælg farvetema clicked")
-        ),
+        onClick: () => {
+          updateThemeForConversation(t.id);
+        },
       })),
     },
   ];
@@ -185,7 +184,8 @@ export const Conversations = () => {
             <Dropdown
               label="Indstillinger"
               items={dropdownItems}
-              className="z-2"
+              className={`absolute top-2 right-2 ${theme.dropdownBg} ${theme.dropdownText}`}
+              colorTheme={theme}
             />
             <div className="mb-4 mt-14" />
             {messages?.map((msg) => (
