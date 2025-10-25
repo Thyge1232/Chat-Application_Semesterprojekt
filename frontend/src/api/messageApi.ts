@@ -33,7 +33,7 @@ export async function updateMessage(
   content: string
 ): Promise<Message> {
   const apiMessage = await updateItemInBackend<string, ApiMessage>(
-    `${ENDPOINTS.messages}/${messageId}`,
+    ENDPOINTS.messages,
     messageId,
     content
   );

@@ -1,5 +1,6 @@
 import "./ChatBubbleStyle.css";
 import type { IColorThemeConversation } from "../types/iColorThemes";
+import { useState, useEffect } from "react";
 
 export type ChatBubbleProps = {
   isSender?: boolean;
@@ -9,7 +10,7 @@ export type ChatBubbleProps = {
   messageId?: number;
   conversationId?: number;
   handleDelete?: (messageId: number) => void;
-  handleEdit?: (messageId: number) => void;
+  handleEdit?: (messageId: number, newContent: string) => void;
   colorTheme: IColorThemeConversation;
 };
 
@@ -23,6 +24,15 @@ export const ChatBubble = ({
   handleDelete,
   handleEdit,
 }: ChatBubbleProps) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedContent, setEditedContent] = useState(
+    children?.toString() ?? ""
+  );
+
+  useEffect(() => {
+    setEditedContent(children?.toString() ?? "");
+  }, [children]);
+
   const bubbleClass = isSender
     ? `${colorTheme.bubbleSenderBg} ${colorTheme.bubbleSenderText} ml-auto max-w-[40%] p-2 rounded-xl shadow`
     : `${colorTheme.bubbleReceiverBg} ${colorTheme.bubbleReceiverText} mr-auto max-w-[40%] p-2 rounded-xl shadow`;
@@ -37,6 +47,7 @@ export const ChatBubble = ({
         second: "2-digit",
       })
     : "";
+
   const onDelete = () => {
     if (handleDelete && messageId !== undefined) {
       handleDelete(messageId);
@@ -45,26 +56,49 @@ export const ChatBubble = ({
 
   const onEdit = () => {
     if (handleEdit && messageId !== undefined) {
-      handleEdit(messageId);
+      handleEdit(messageId, editedContent);
     }
+    setIsEditing(false);
   };
 
   return (
     <div className={bubbleClass}>
-      <div className="chat-bubble__content">{children}</div>
+      <div className="chat-bubble__content">
+        {isEditing ? (
+          <div className="flex gap-2">
+            <input
+              className="flex-1 border rounded px-2"
+              value={editedContent}
+              onChange={(e) => setEditedContent(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") onEdit();
+                if (e.key === "Escape") setIsEditing(false);
+              }}
+              autoFocus
+            />
+            <button type="button" onClick={onEdit}>
+              ✔
+            </button>
+            <button type="button" onClick={() => setIsEditing(false)}>
+              ✖
+            </button>
+          </div>
+        ) : (
+          children
+        )}
+      </div>
       <div className="chat-bubble__meta">
         {sender} {formattedTime}
-        <div className="chat-bubble__actions">
-          <button onClick={onDelete}>
-            <img src="/Images/delete_icon.png" alt="delete" />
-          </button>
-
-          <button
-          // onClick={() => handleEdit(messageId)}
-          >
-            <img src="/Images/edit_icon.png" alt="edit" />
-          </button>
-        </div>
+        {isSender && (
+          <div className="chat-bubble__actions">
+            <button type="button" onClick={onDelete}>
+              <img src="/Images/delete_icon.png" alt="delete" />
+            </button>
+            <button type="button" onClick={() => setIsEditing(true)}>
+              <img src="/Images/edit_icon.png" alt="edit" />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

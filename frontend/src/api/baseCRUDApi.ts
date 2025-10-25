@@ -35,8 +35,8 @@ export async function updateItemInBackend<RequestDto, ResultDto>(
 ): Promise<ResultDto> {
   const response = await apiClient.put<ResultDto>(
     `${endpoint}/${id}`,
-    dto,
-    config
+    typeof dto === "string" ? JSON.stringify(dto) : dto,
+    { headers: { "Content-Type": "application/json" }, ...config }
   );
   return response.data;
 }
