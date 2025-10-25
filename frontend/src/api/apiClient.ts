@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosHeaders } from "axios";
 import { getToken, clearToken } from "../services/tokenService";
 import { API_BASE_URL } from "../config/api";
 
@@ -7,19 +7,19 @@ export const apiClient = axios.create({
   timeout: 1000,
 });
 
-apiClient.interceptors.request.use(
-  (config) => {
-    const token = getToken();
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
+apiClient.interceptors.request.use((config) => {
+  const token = getToken();
+  console.log("Interceptor attaching token:", token);
+  if (token) {
+    if (config.headers instanceof AxiosHeaders) {
+      config.headers.set("Authorization", `Bearer ${token}`);
+    } else {
+      config.headers = new AxiosHeaders(config.headers);
+      config.headers.set("Authorization", `Bearer ${token}`);
     }
-
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
   }
-);
+  return config;
+});
 
 apiClient.interceptors.response.use(
   (response) => response,

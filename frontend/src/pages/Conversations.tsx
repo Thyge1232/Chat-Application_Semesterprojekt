@@ -13,6 +13,7 @@ import { useCreateConversation } from "../features/conversations/hooks/useCreate
 import { AxiosError } from "axios";
 import { useUsers } from "../features/authentication/hooks/useUsers";
 import { useSendMessage } from "../features/messages/hooks/useSendMessage";
+import { useDeleteMessage } from "../features/messages/hooks/useDeleteMessage";
 import { useGetConversation } from "../features/conversations/hooks/useGetConversation";
 import { useGetUserConversations } from "../features/conversations/hooks/useGetUserConversations";
 
@@ -32,6 +33,7 @@ export const Conversations = () => {
   const { mutate: createConversation } = useCreateConversation();
   const queryClient = useQueryClient();
   const { mutate: sendMessage } = useSendMessage();
+  const { mutate: deleteMessage } = useDeleteMessage();
   const { data: users } = useUsers();
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
 
@@ -199,6 +201,10 @@ export const Conversations = () => {
                 }
                 timestamp={msg.sentAt}
                 messageId={msg.id}
+                conversationId={conversationId}
+                handleDelete={(messageId: number) => {
+                  deleteMessage({ messageId, conversationId });
+                }}
                 colorTheme={theme}
               >
                 {msg.content}

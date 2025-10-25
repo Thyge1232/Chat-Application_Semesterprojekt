@@ -55,9 +55,7 @@ export const ChatBubble = ({
       <div className="chat-bubble__meta">
         {sender} {formattedTime}
         <div className="chat-bubble__actions">
-          <button
-          // onClick={() => handleDelete(messageId)}
-          >
+          <button onClick={onDelete}>
             <img src="/Images/delete_icon.png" alt="delete" />
           </button>
 

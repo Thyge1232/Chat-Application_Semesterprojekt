@@ -1,9 +1,4 @@
-import type {
-  ApiMessage,
-  Message,
-  SendMessage,
-  UpdateMessage,
-} from "../types/message";
+import type { ApiMessage, Message, SendMessage } from "../types/message";
 import { transformMessageFromApi } from "../services/transformMessageFromApi";
 import { ENDPOINTS } from "../config/api";
 import {
@@ -35,18 +30,18 @@ export async function sendMessage(
 
 export async function updateMessage(
   messageId: number,
-  updateMessageDto: UpdateMessage
+  content: string
 ): Promise<Message> {
-  const apiMessage = await updateItemInBackend<UpdateMessage, ApiMessage>(
+  const apiMessage = await updateItemInBackend<string, ApiMessage>(
     `${ENDPOINTS.messages}/${messageId}`,
     messageId,
-    updateMessageDto
+    content
   );
   return transformMessageFromApi(apiMessage);
 }
 
 export async function deleteMessage(messageId: number): Promise<void> {
-  await deleteItemFromBackend(`${ENDPOINTS.messages}/${messageId}`, messageId);
+  await deleteItemFromBackend(ENDPOINTS.messages, messageId);
 }
 
 export async function getMessageById(messageId: number): Promise<Message> {

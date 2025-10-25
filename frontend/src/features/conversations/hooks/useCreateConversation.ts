@@ -5,7 +5,6 @@ import type {
 } from "../../../types/conversation";
 import { createConversation } from "../../../api/conversationApi";
 import { ENDPOINTS } from "../../../config/api";
-// import { useApiMutation } from "../../../hooks/useApiMutation";
 
 export function useCreateConversation() {
   const queryClient = useQueryClient();
