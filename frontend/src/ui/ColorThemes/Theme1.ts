@@ -13,6 +13,8 @@ export class ThemeBlue implements IColorThemeConversation {
   inputSubmitText = "text-white";
 
   conversationsBg = "bg-blue-50";
+  dropdownBg = "bg-white";
+  dropdownText = "text-black";
 }
 
 //DarkMode -- RET
@@ -28,4 +30,6 @@ export class ThemeDarkMode implements IColorThemeConversation {
   inputSubmitText = "text-white";
 
   conversationsBg = "bg-gray-900";
+  dropdownBg = "bg-gray-800";
+  dropdownText = "text-white";
 }

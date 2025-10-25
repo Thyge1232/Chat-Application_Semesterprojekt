@@ -1,66 +1,106 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import type { IColorThemeConversation } from "../types/iColorThemes";
 
 export interface DropdownItem {
+  id?: string;
   itemlabel: string;
-  onSubmit?: () => void;
-  children?: DropdownItem[];
+  onClick?: () => void;
+  subItems?: DropdownItem[];
 }
 
-export type DropdownProps = {
+interface DropdownProps {
   label: string;
   items: DropdownItem[];
   className?: string;
-};
+  colorTheme: IColorThemeConversation;
+}
 
-export const Dropdown = ({ label, items, className }: DropdownProps) => {
+const DropdownButton = ({
+  label,
+  colorTheme,
+}: {
+  label: string;
+  colorTheme: IColorThemeConversation;
+}) => (
+  <MenuButton
+    className={`inline-flex justify-center gap-x-1.5 rounded-md ${colorTheme.dropdownBg} ${colorTheme.dropdownText} px-3 py-2 text-sm font-semibold shadow-xs ring-1 ring-gray-300 hover:opacity-90 w-full`}
+  >
+    {label}
+    <ChevronDownIcon
+      className={`-mr-1 h-5 w-5 ${colorTheme.dropdownText}`}
+      aria-hidden="true"
+    />
+  </MenuButton>
+);
+
+const DropdownItemButton = ({
+  item,
+  hasSubItems = false,
+  closeMenu,
+  colorTheme,
+}: {
+  item: DropdownItem;
+  hasSubItems?: boolean;
+  closeMenu: () => void;
+  colorTheme: IColorThemeConversation;
+}) => (
+  <button
+    onClick={() => {
+      item.onClick?.();
+      closeMenu();
+    }}
+    className={`flex justify-between w-full px-4 py-2 text-sm text-left ${colorTheme.dropdownText} ${colorTheme.dropdownBg} hover:opacity-80`}
+  >
+    {item.itemlabel}
+    {hasSubItems && <ChevronRightIcon className="h-4 w-4 text-gray-400" />}
+  </button>
+);
+
+export const Dropdown = ({
+  label,
+  items,
+  className,
+  colorTheme,
+}: DropdownProps) => {
   return (
     <Menu
       as="div"
       className={`absolute right-0 inline-block ${className ?? ""}`}
     >
-      {/* Label */}
-      <MenuButton className="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 hover:bg-gray-50 w-full">
-        {label}
-        <ChevronDownIcon
-          className="-mr-1 h-5 w-5 text-gray-400"
-          aria-hidden="true"
-        />
-      </MenuButton>
+      {/* Dropdown label */}
+      <DropdownButton label={label} colorTheme={colorTheme} />
 
-      {/* Parent MenuItems */}
-      <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg outline-none">
-        {items.map((item, idx) => (
-          <div key={idx} className="relative group">
+      {/* Menu items */}
+      <MenuItems
+        className={`absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md ${colorTheme.dropdownBg} ${colorTheme.dropdownText} shadow-lg outline-none ring-1 ring-black ring-opacity-5`}
+      >
+        {items.map((item) => (
+          <div key={item.id ?? item.itemlabel} className="relative group">
             <MenuItem>
               {({ close }) => (
-                <button
-                  onClick={() => item.onSubmit?.()}
-                  className="flex justify-between w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none"
-                >
-                  {item.itemlabel}
-                  {item.children && (
-                    <ChevronRightIcon className="h-4 w-4 text-gray-400" />
-                  )}
-                </button>
+                <DropdownItemButton
+                  item={item}
+                  hasSubItems={!!item.subItems?.length}
+                  closeMenu={close}
+                  colorTheme={colorTheme}
+                />
               )}
             </MenuItem>
 
-            {/* Children under parent, skjult indtil klik */}
-            {item.children && (
-              <div className="absolute top-0 right-full mt-0 ml-0 w-48 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition-opacity">
-                {item.children.map((child, cidx) => (
-                  <MenuItem key={cidx}>
+            {/* Submenu */}
+            {item.subItems && (
+              <div
+                className={`absolute top-0 right-full mt-0 ml-0 w-48 origin-top-left rounded-md ${colorTheme.dropdownBg} ${colorTheme.dropdownText} shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition-opacity`}
+              >
+                {item.subItems.map((subItem) => (
+                  <MenuItem key={subItem.id ?? subItem.itemlabel}>
                     {({ close }) => (
-                      <button
-                        onClick={() => {
-                          child.onSubmit?.();
-                          close();
-                        }}
-                        className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none"
-                      >
-                        {child.itemlabel}
-                      </button>
+                      <DropdownItemButton
+                        item={subItem}
+                        closeMenu={close}
+                        colorTheme={colorTheme}
+                      />
                     )}
                   </MenuItem>
                 ))}
