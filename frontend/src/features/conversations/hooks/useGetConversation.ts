@@ -1,14 +1,17 @@
 import { AxiosError } from "axios";
-import { useApiQuery } from "../../../hooks/useApiQuery";
-import { messagesApi } from "../../../api/messageApi";
+import { useQuery } from "@tanstack/react-query";
+import { getMessagesByConversationId } from "../../../api/messageApi";
 import type { Message } from "../../../types/message";
+import { ENDPOINTS } from "../../../config/api";
 
 export function useGetConversation(conversationId?: number) {
-  return useApiQuery<Message[], AxiosError>(
-    ["conversation", conversationId ?? "none"],
-    () => messagesApi.getByConversation(conversationId!),
-    {
-      enabled: conversationId != null,
-    }
-  );
+  return useQuery<Message[], AxiosError>({
+    queryKey: [ENDPOINTS.messages, conversationId],
+    queryFn: async () => {
+      if (conversationId == null) throw new Error("Fejl i conversationId");
+      return getMessagesByConversationId(conversationId);
+    },
+    enabled: conversationId != null,
+  });
 }
+

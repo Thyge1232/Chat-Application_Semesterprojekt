@@ -1,51 +1,58 @@
-import { apiClient } from "./apiClient";
-import type { ApiMessage, Message, SendMessage } from "../types/message";
+import type {
+  ApiMessage,
+  Message,
+  SendMessage,
+  UpdateMessage,
+} from "../types/message";
 import { transformMessageFromApi } from "../services/transformMessageFromApi";
 import { ENDPOINTS } from "../config/api";
-import { createResourceApi } from "./baseCRUDApi";
+import {
+  getItemFromBackend,
+  createItemInBackend,
+  updateItemInBackend,
+  deleteItemFromBackend,
+  getListFromBackend,
+} from "./baseCRUDApi";
 
-/**
- * Our messages api
- *
- * @examples
- * ```ts
- * import { messagesApi } from "../api/messagesApi";
- *
- * //list all messages
- * const messages = await messagesApi.list();
- *
- * //get a single message
- * const msg = await messagesApi.get("123");
- *
- * //create a new message
- * const newMsg = await messagesApi.create({
- *   conversationId: 1,
- *   text: "Hello world",
- * });
- *
- * //update a message
- * const updatedMsg = await messagesApi.update("123", {
- *   text: "Edited message",
- * });
- *
- * //remove a message
- * await messagesApi.remove("123");
- *
- * //get all messages for a conversation
- * const convoMessages = await messagesApi.getByConversation(1);
- * ```
- */
+export async function getMessagesByConversationId(
+  conversationId: number
+): Promise<Message[]> {
+  const apiMessages = await getListFromBackend<ApiMessage>(
+    `${ENDPOINTS.messages}/${conversationId}`
+  );
+  return apiMessages.map(transformMessageFromApi);
+}
 
-export const messagesApi = {
-  ...createResourceApi<Message, SendMessage, Partial<SendMessage>>(
-    ENDPOINTS.messages
-  ),
+export async function sendMessage(
+  sendMessageDto: SendMessage
+): Promise<Message> {
+  const apiMessage = await createItemInBackend<SendMessage, ApiMessage>(
+    ENDPOINTS.messages,
+    sendMessageDto
+  );
+  return transformMessageFromApi(apiMessage);
+}
 
-  async getByConversation(conversationId: number): Promise<Message[]> {
-    const response = await apiClient.get(
-      `${ENDPOINTS.messages}/${conversationId}`
-    );
-    const raw = response.data as ApiMessage[];
-    return raw.map(transformMessageFromApi);
-  },
-};
+export async function updateMessage(
+  messageId: number,
+  updateMessageDto: UpdateMessage
+): Promise<Message> {
+  const apiMessage = await updateItemInBackend<UpdateMessage, ApiMessage>(
+    `${ENDPOINTS.messages}/${messageId}`,
+    messageId,
+    updateMessageDto
+  );
+  return transformMessageFromApi(apiMessage);
+}
+
+export async function deleteMessage(messageId: number): Promise<void> {
+  await deleteItemFromBackend(`${ENDPOINTS.messages}/${messageId}`, messageId);
+}
+
+export async function getMessageById(messageId: number): Promise<Message> {
+  const apiMessage = await getItemFromBackend<ApiMessage>(
+    `${ENDPOINTS.messages}/${messageId}`,
+    messageId
+  );
+  return transformMessageFromApi(apiMessage);
+}

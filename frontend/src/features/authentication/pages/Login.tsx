@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import "../ui/PagesStyle.css";
+import "../../../ui/PagesStyle.css";
 import { useLogin } from "../hooks/useLogin";
 
 type Inputs = {
@@ -16,22 +16,19 @@ export const Login = () => {
   } = useForm<Inputs>();
   const navigate = useNavigate();
 
-  const { mutate: login, isPending, error } = useLogin();
+  const { mutateAsync: login, isPending, error } = useLogin();
 
-  const onSubmit = ({ loginCredentials, password }: Inputs) => {
-    login(
-      { username: loginCredentials, password },
-      {
-        onSuccess: (user) => {
-          console.log("Logged in as", user?.userName);
-          navigate("/home");
-        },
-        onError: (err: Error) => {
-          alert("Noget gik galt: " + err.message);
-          console.log(err);
-        },
-      }
-    );
+  const onSubmit = async (data: Inputs) => {
+    try {
+      const user = await login({
+        username: data.loginCredentials,
+        password: data.password,
+      });
+      console.log("Logged in as", user?.userName);
+      navigate("/home");
+    } catch (err) {
+      alert("Noget gik galt: " + (err as Error).message);
+    }
   };
 
   return (

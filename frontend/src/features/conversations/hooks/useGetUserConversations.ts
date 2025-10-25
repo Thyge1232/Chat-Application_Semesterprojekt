@@ -1,17 +1,14 @@
-import { AxiosError } from "axios";
-import { useApiQuery } from "../../../hooks/useApiQuery";
+import { useQuery } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+import { getListOfUserConversations } from "../../../api/conversationApi";
 import type { ConversationSummary } from "../../../types/conversation";
 import { ENDPOINTS } from "../../../config/api";
-import { apiClient } from "../../../api/apiClient";
 
 export function useGetUserConversations() {
-  return useApiQuery<ConversationSummary[], AxiosError>(
-    ["userconversations"],
-    async () => {
-      const res = await apiClient.get<ConversationSummary[]>(
-        ENDPOINTS.userConversations
-      );
-      return res.data;
-    }
-  );
+  return useQuery<ConversationSummary[], AxiosError>({
+    queryKey: [ENDPOINTS.userConversations],
+    queryFn: () => getListOfUserConversations(),
+    staleTime: 1000 * 30,
+    retry: 1,
+  });
 }

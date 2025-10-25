@@ -21,3 +21,8 @@ export type SendMessage = {
   userId: number;
   content: string;
 };
+
+export type UpdateMessage = {
+  messageId: number;
+  content: string;
+};

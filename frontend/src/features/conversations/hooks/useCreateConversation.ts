@@ -1,36 +1,24 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { useApiMutation } from "../../../hooks/useApiMutation";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import type {
   Conversation,
   CreateConversationDto,
 } from "../../../types/conversation";
-import { conversationApi } from "../../../api/ConversationApi";
-/**
- * hook to create new conversation.
- *
- * @remarks
- * - On success, invalidates the `["userConversations"]` query so the
- *   conversation list is refreshed.
- *
- * @returns A mutation object from React Query, including:
- * - `mutate` / `mutateAsync` to trigger the creation
- * - `isPending`, `isError`, `error`, etc. for status handling
- *
- * @example
- * ```tsx
- * const { mutate: createConversation, isPending } = useCreateConversation();
- *
- * createConversation({ name: "My new conversation" });
- * ```
- */
+import { createConversation } from "../../../api/conversationApi";
+import { ENDPOINTS } from "../../../config/api";
+// import { useApiMutation } from "../../../hooks/useApiMutation";
 
 export function useCreateConversation() {
   const queryClient = useQueryClient();
-  return useApiMutation<Conversation, CreateConversationDto>(
-    (dto) => conversationApi.create(dto),
-    {
-      onSuccess: () =>
-        queryClient.invalidateQueries({ queryKey: ["userConversations"] }),
-    }
-  );
+  return useMutation<Conversation, unknown, CreateConversationDto>({
+    mutationFn: (dto: CreateConversationDto) => createConversation(dto),
+
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: [ENDPOINTS.userConversations],
+      }),
+    onError: (error: unknown) => {
+      console.error("Error creating conversation:", error);
+    },
+    retry: 1,
+  });
 }

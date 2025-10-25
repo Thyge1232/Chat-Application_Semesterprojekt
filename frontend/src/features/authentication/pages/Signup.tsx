@@ -2,8 +2,8 @@ import type { UserSignup } from "../../../types/usersignup";
 import { Link } from "react-router-dom";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import "../ui/PagesStyle.css";
-import { usePostData } from "../../../hooks/usePostData";
+import "../../../ui/PagesStyle.css";
+import { useSignup } from "../hooks/useSignup";
 
 interface FormInputs extends UserSignup {
   confirmPassword: string;
@@ -18,26 +18,20 @@ export const Signup = () => {
   } = useForm<FormInputs>();
   const navigate = useNavigate();
 
-  const createUserMutation = usePostData<UserSignup, unknown>(
-    "https://api.venner.nu/api/users"
-  ); //tjek denne
+  const createUserMutation = useSignup();
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     const { confirmPassword, ...userData } = data;
-
-    createUserMutation.mutate(userData, {
-      onSuccess: (response) => {
-        console.log("Response fra backend: ", response);
-        //navigate("/personalpage") på sigt, for nu tager vi til users page
-        navigate("/users");
-      },
-      onError: (error: Error) => {
-        alert("Noget gik galt: " + error.message);
-        console.log(error);
-      },
-    });
-    console.log("Form data:", data);
-    console.log("Json-String:", userData);
+    try {
+      await createUserMutation.mutateAsync(userData);
+      navigate("/home");
+      console.log("Form data:", data);
+      console.log("Json-String:", userData);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      alert("Noget gik galt: " + message);
+      console.error("Fejlmeldning: ", message);
+    }
   };
 
   return (
