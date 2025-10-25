@@ -1,5 +1,5 @@
 import type { IColorThemeConversation } from "../../types/iColorThemes";
-import { ThemeBlue, ThemeDarkMode } from "./Theme1";
+import { ThemeBlue, ThemeDarkMode, ThemeEdgeLord } from "./Theme1";
 
 //Factoryclass: return a colortheme for conversationpage based on a number from User.ThemeNumber (db)
 //Husk: se ui komponenter igennem for hardcoded styling /
@@ -14,7 +14,8 @@ export class ConversationColorThemeFactory {
       case 2:
         return new ThemeDarkMode();
 
-      //case + 3
+      case 3:
+        return new ThemeEdgeLord();
 
       default:
         return new ThemeBlue();
@@ -26,6 +27,7 @@ export class ConversationColorThemeFactory {
     return [
       { id: 1, label: "Blå" },
       { id: 2, label: "Dark Mode" },
+      { id: 3, label: "Edgelord Theme" },
     ];
   }
 }

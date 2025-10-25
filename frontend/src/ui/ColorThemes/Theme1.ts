@@ -33,3 +33,20 @@ export class ThemeDarkMode implements IColorThemeConversation {
   dropdownBg = "bg-gray-800";
   dropdownText = "text-white";
 }
+
+//Edgelord Theme
+export class ThemeEdgeLord implements IColorThemeConversation {
+  bubbleSenderBg = "bg-gray-800";
+  bubbleSenderText = "text-red-600";
+  bubbleReceiverBg = "bg-black";
+  bubbleReceiverText = "text-green-300";
+
+  messageInputBg = "bg-gray-200 hover:bg-gray-800";
+  messageInputText = "text-red-800 hover:text-yellow-400";
+  inputSubmitBg = "bg-red-800 hover:bg-red-700";
+  inputSubmitText = "text-white";
+
+  conversationsBg = "bg-pink-900/90";
+  dropdownBg = "bg-gray-900/80";
+  dropdownText = "text-orange-400";
+}

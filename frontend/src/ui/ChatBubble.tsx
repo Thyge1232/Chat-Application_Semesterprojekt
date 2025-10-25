@@ -37,6 +37,17 @@ export const ChatBubble = ({
         second: "2-digit",
       })
     : "";
+  const onDelete = () => {
+    if (handleDelete && messageId !== undefined) {
+      handleDelete(messageId);
+    }
+  };
+
+  const onEdit = () => {
+    if (handleEdit && messageId !== undefined) {
+      handleEdit(messageId);
+    }
+  };
 
   return (
     <div className={bubbleClass}>
