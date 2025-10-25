@@ -20,20 +20,30 @@ public class ConversationController : ControllerBase
 
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> CreateConversation([FromBody] CreateConversationDto createConversationsDto)
+    public async Task<IActionResult> CreateConversation(
+        [FromBody] CreateConversationDto createConversationsDto
+    )
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
         try
         {
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (!int.TryParse(userIdString, out var currentUserId)) return Unauthorized("Invalid user token.");
-            var newConversation = await _conversationService.CreateConversationAsync(createConversationsDto, currentUserId);
+            if (!int.TryParse(userIdString, out var currentUserId))
+                return Unauthorized("Invalid user token.");
+            var newConversation = await _conversationService.CreateConversationAsync(
+                createConversationsDto,
+                currentUserId
+            );
 
-            return CreatedAtAction(nameof(GetConversationById), new { id = newConversation.Id }, newConversation);
+            return CreatedAtAction(
+                nameof(GetConversationById),
+                new { id = newConversation.Id },
+                newConversation
+            );
         }
-
         catch (ArgumentException ex)
         {
             return Conflict(new { message = ex.Message });
@@ -46,15 +56,34 @@ public class ConversationController : ControllerBase
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (!int.TryParse(userIdString, out var currentUserId)) return Unauthorized("Invalid user token.");
+        if (!int.TryParse(userIdString, out var currentUserId))
+            return Unauthorized("Invalid user token.");
         var conversation = await _conversationService.GetConversationByIdAsync(id);
 
-        if (conversation == null) return NotFound();
+        if (conversation == null)
+            return NotFound();
 
         var isUserMember = conversation.Members.Any(member => member.Id == currentUserId);
 
-        if (!isUserMember) return Forbid();
+        if (!isUserMember)
+            return Forbid();
 
         return Ok(conversation);
+    }
+
+    [HttpPost("{conversationId}/users/{userId}")]
+    public async Task<IActionResult> AddUserByIdToConversationById(int conversationId, int userId)
+    {
+        var result = await _conversationService.AddUserByIdToConversationByIdAsync(
+            conversationId,
+            userId
+        );
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        return Ok($"Added user with id {result.Members[0].Id} to conversation with id {result.Id}");
     }
 }

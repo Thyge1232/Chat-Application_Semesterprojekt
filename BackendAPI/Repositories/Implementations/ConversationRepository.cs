@@ -27,8 +27,8 @@ namespace BackendAPI.Repositories.Implementations
 
         public async Task<Conversation?> GetByIdWithMembersAsync(int conversationId)
         {
-            return await _dbContext.Conversations
-                .Include(c => c.UserList)
+            return await _dbContext
+                .Conversations.Include(c => c.UserList)
                 .ThenInclude(cu => cu.User)
                 .FirstOrDefaultAsync(c => c.ConversationId == conversationId);
         }
@@ -42,5 +42,32 @@ namespace BackendAPI.Repositories.Implementations
         }
 
 
+        public async Task<User?> AddUsertoConversationAsync(Conversation conversation, int userId)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var alreadyAdded = await _dbContext.ConversationMembers.AnyAsync(cm =>
+                cm.ConversationId == conversation.ConversationId && cm.UserId == userId
+            );
+
+            if (alreadyAdded)
+                return user;
+
+            var conversationMember = new ConversationMember
+            {
+                ConversationId = conversation.ConversationId,
+                UserId = userId,
+                JoinedAt = DateTime.UtcNow
+            };
+            _dbContext.ConversationMembers.Add(conversationMember);
+            await _dbContext.SaveChangesAsync();
+
+            return user;
+        }
     }
 }

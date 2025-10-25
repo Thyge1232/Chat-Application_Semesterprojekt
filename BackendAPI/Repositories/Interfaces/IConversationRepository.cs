@@ -8,4 +8,5 @@ public interface IConversationRepository
     Task SaveChangesAsync();
     Task<Conversation?> GetByIdWithMembersAsync(int conversationId);
     Task<IEnumerable<Conversation>> GetByUserIdAsync(int userId);
+    Task<User?> AddUsertoConversationAsync(Conversation conversation, int userId);
 }

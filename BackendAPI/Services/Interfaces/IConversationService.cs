@@ -6,5 +6,9 @@ public interface IConversationService
 {
     Task<ConversationDto> CreateConversationAsync(CreateConversationDto createDto, int creatorId);
     Task<ConversationWithMembersDto?> GetConversationByIdAsync(int conversationId);
+    Task<ConversationWithMembersDto?> AddUserByIdToConversationByIdAsync(
+        int conversationId,
+        int userId
+    );
     Task<IEnumerable<ConversationSummaryDto>> GetConversationByUserIdAsync(int userId);
 }
