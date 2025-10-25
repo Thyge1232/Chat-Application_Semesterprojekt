@@ -60,14 +60,17 @@ export const Conversations = () => {
       onSubmit: () => console.log("Tilføj bruger Conversation clicked"),
     },
     {
-      itemlabel: "Fjern bruger",
-      onSubmit: () => console.log("Fjernbruger clicked"),
+      itemlabel: "Forlad samtalen",
+      onSubmit: () => console.log("Forlad samtalen clicked"),
     },
     {
-      itemlabel: "Vælgfarvetema",
+      itemlabel: "Vælg farvetema",
       children: themeOptions.map((t) => ({
         itemlabel: t.label,
-        onSubmit: () => updateThemeForConversation(t.id),
+        onSubmit: () => (
+          updateThemeForConversation(t.id),
+          console.log("vælg farvetema clicked")
+        ),
       })),
     },
   ];
@@ -161,12 +164,6 @@ export const Conversations = () => {
         >
           Opret en samtale
         </Button>
-
-        <Dropdown
-          label="Indstillinger"
-          items={dropdownItems}
-          className="absolute top-2 right-2"
-        />
       </div>
 
       {/* Right column: messages + input */}
@@ -177,6 +174,12 @@ export const Conversations = () => {
       ) : (
         <div className={`grid grid-rows-[1fr_auto] ${theme.conversationsBg}`}>
           <div className="overflow-y-auto p-4" style={{ height: "75vh" }}>
+            <Dropdown
+              label="Indstillinger"
+              items={dropdownItems}
+              className="z-2"
+            />
+            <div className="mb-4 mt-14" />
             {messages?.map((msg) => (
               <ChatBubble
                 key={msg.id}
