@@ -57,18 +57,18 @@ export const Conversations = () => {
   const dropdownItems: DropdownItem[] = [
     {
       itemlabel: "Tilføj bruger",
-      onClick: () => console.log("Tilføj bruger Conversation clicked"),
+      onClick: () => console.log("Tilføj bruger Conversation clicked"), //ToDO: pop up --> vælg bruger fra liste, giv backend besked
     },
     {
       itemlabel: "Forlad samtalen",
-      onClick: () => console.log("Forlad samtalen clicked"),
+      onClick: () => console.log("Forlad samtalen clicked"), //TODO: pop up, ja/nej --> giv backend besked
     },
     {
       itemlabel: "Vælg farvetema",
       subItems: themeOptions.map((t) => ({
         itemlabel: t.label,
         onClick: () => {
-          updateThemeForConversation(t.id);
+          updateThemeForConversation(t.id); //ToTO: giv backend besked
         },
       })),
     },
