@@ -80,13 +80,17 @@ public class MessageController : ControllerBase
 
     // DELETE /messages/{messageId}?userId=5
     [HttpDelete("{messageId:int}")]
-    public async Task<IActionResult> DeleteMessage(int messageId, [FromQuery] int userId, CancellationToken ct)
+    public async Task<IActionResult> DeleteMessage(int messageId, CancellationToken ct)
     {
         var message = await _db.Messages.FindAsync(new object[] { messageId }, ct);
         if (message == null)
             return NotFound("Message not found.");
 
         //Security: Only the author can delete their message
+        var userIdClaim =
+            User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("nameid")?.Value;
+        var userId = int.Parse(userIdClaim);
+
         if (message.UserId != userId)
             return Unauthorized("You can only delete your own messages.");
 
@@ -104,6 +108,9 @@ public class MessageController : ControllerBase
             return NotFound("Message not found.");
 
         //Security: Only the author can edit their message
+        var userIdClaim =
+            User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("nameid")?.Value;
+        var userId = int.Parse(userIdClaim);
         if (message.UserId != userId)
             return Unauthorized("You can only edit your own messages.");
 
