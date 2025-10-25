@@ -19,10 +19,10 @@ export const ChatBubble = ({
   timestamp,
   sender,
   colorTheme,
-}: // messageId,
-// handleDelete,
-// handleEdit,
-ChatBubbleProps) => {
+  messageId,
+  handleDelete,
+  handleEdit,
+}: ChatBubbleProps) => {
   const bubbleClass = isSender
     ? `${colorTheme.bubbleSenderBg} ${colorTheme.bubbleSenderText} ml-auto max-w-[40%] p-2 rounded-xl shadow`
     : `${colorTheme.bubbleReceiverBg} ${colorTheme.bubbleReceiverText} mr-auto max-w-[40%] p-2 rounded-xl shadow`;
@@ -43,19 +43,19 @@ ChatBubbleProps) => {
       <div className="chat-bubble__content">{children}</div>
       <div className="chat-bubble__meta">
         {sender} {formattedTime}
-      </div>
-      <div className="chat-bubble__actions">
-        <button
-        // onClick={() => handleDelete(messageId)}
-        >
-          <img src="/Images/delete_icon.png" alt="delete" />
-        </button>
+        <div className="chat-bubble__actions">
+          <button
+          // onClick={() => handleDelete(messageId)}
+          >
+            <img src="/Images/delete_icon.png" alt="delete" />
+          </button>
 
-        <button
-        // onClick={() => handleEdit(messageId)}
-        >
-          <img src="/Images/edit_icon.png" alt="edit" />
-        </button>
+          <button
+          // onClick={() => handleEdit(messageId)}
+          >
+            <img src="/Images/edit_icon.png" alt="edit" />
+          </button>
+        </div>
       </div>
     </div>
   );

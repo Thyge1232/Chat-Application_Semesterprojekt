@@ -17,6 +17,7 @@ import { useCreateConversation } from "../hooks/useCreateConversation";
 import { AxiosError } from "axios";
 
 export const Conversations = () => {
+  //LOGIC PART OF THE COMPONENT
   const { currentUser } = useAuth();
   const {
     data: userconversations,
@@ -108,6 +109,8 @@ export const Conversations = () => {
     "Conversation IDs:",
     userconversations?.map((c) => c.id)
   );
+
+  // VISUAL PART OF THE COMPONENT
   return (
     <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
       {/* Left column: conversation list */}

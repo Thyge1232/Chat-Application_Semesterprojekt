@@ -37,7 +37,9 @@ import { ENDPOINTS } from "../config/api";
  */
 
 export const messagesApi = {
-  ...createResourceApi<Message, SendMessage, Partial<SendMessage>>("/messages"),
+  ...createResourceApi<Message, SendMessage, Partial<SendMessage>>(
+    ENDPOINTS.messages
+  ),
 
   async getByConversation(conversationId: number): Promise<Message[]> {
     const res = await axiosInstance.get(
