@@ -11,7 +11,7 @@ import { ConversationColorThemeFactory } from "../ui/ColorThemes/ConversationCol
 import { Dropdown, type DropdownItem } from "../ui/Dropdown";
 import { useCreateConversation } from "../features/conversations/hooks/useCreateConversation";
 import { AxiosError } from "axios";
-import { useUsers } from "../features/authentication/hooks/useUsers";
+import { useUsers } from "../api/userAPi";
 import { useSendMessage } from "../features/messages/hooks/useSendMessage";
 import { useDeleteMessage } from "../features/messages/hooks/useDeleteMessage";
 import { useEditMessage } from "../features/messages/hooks/useEditMessage";

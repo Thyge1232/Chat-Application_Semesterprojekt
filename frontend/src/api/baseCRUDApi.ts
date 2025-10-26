@@ -11,7 +11,7 @@ export async function getListFromBackend<T>(
 
 export async function getItemFromBackend<T>(
   endpoint: string,
-  id: number,
+  id?: number,
   config?: AxiosRequestConfig
 ): Promise<T> {
   const response = await apiClient.get<T>(`${endpoint}/${id}`, config);
@@ -29,8 +29,8 @@ export async function createItemInBackend<RequestDto, ResultDto>(
 
 export async function updateItemInBackend<RequestDto, ResultDto>(
   endpoint: string,
-  id: number,
-  dto: RequestDto,
+  id?: number,
+  dto?: RequestDto,
   config?: AxiosRequestConfig
 ): Promise<ResultDto> {
   const response = await apiClient.put<ResultDto>(

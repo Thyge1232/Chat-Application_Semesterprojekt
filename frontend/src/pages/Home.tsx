@@ -7,7 +7,7 @@ import { SpinnerWithText } from "../ui/SpinnerWithText";
 // definer typerne  ()
 // implementeret specifik hook : useUserById  (inpiration useUsers), usePostUserInformation (profilbillede + fun fact)
 // refactor
-import { useUserById } from "../features/authentication/hooks/useUserById";
+import { useUserById } from "../api/userAPi";
 
 export const Home = () => {
   const { currentUser } = useAuth();

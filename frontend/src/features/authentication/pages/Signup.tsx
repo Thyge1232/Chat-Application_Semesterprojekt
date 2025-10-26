@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../../../ui/PagesStyle.css";
-import { useSignup } from "../hooks/useSignup";
+import { useSignup } from "../../../api/userAPi";
 
 interface FormInputs extends UserSignup {
   confirmPassword: string;

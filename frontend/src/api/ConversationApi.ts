@@ -1,4 +1,8 @@
-import { getListFromBackend, createItemInBackend, updateItemInBackend} from "./baseCRUDApi";
+import {
+  getListFromBackend,
+  createItemInBackend,
+  updateItemInBackend,
+} from "./baseCRUDApi";
 import type {
   Conversation,
   ConversationSummary,
@@ -6,7 +10,9 @@ import type {
 } from "../types/conversation";
 import { ENDPOINTS } from "../config/api";
 
-export async function getListOfUserConversations(): Promise<ConversationSummary[]> {
+export async function getListOfUserConversations(): Promise<
+  ConversationSummary[]
+> {
   return await getListFromBackend<ConversationSummary>(
     ENDPOINTS.userConversations
   );
@@ -17,6 +23,15 @@ export async function createConversation(
   return await createItemInBackend<CreateConversationDto, Conversation>(
     ENDPOINTS.createConversations,
     createConversationDto
+  );
+}
+
+export async function addUserToConversation(
+  conversationId: number,
+  userId: number
+): Promise<Conversation> {
+  return await updateItemInBackend<Conversation, Conversation>(
+    `${ENDPOINTS.createConversations}/${conversationId}/users/${userId},`
   );
 }
 
