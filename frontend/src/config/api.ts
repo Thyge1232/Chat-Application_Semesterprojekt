@@ -5,6 +5,7 @@ export const ENDPOINTS = {
   users: `${API_BASE_URL}/api/users`,
   messages: `${API_BASE_URL}/api/messages`,
   login: `${API_BASE_URL}/api/auth/login`,
+  conversationById: `${API_BASE_URL}/api/conversations`,
   createConversations: `${API_BASE_URL}/api/conversations`,
   userConversations: `${API_BASE_URL}/api/users/me/conversations`,
   //socket: "wss://api.venner.nu/socket", //todo midlertidig websocket url

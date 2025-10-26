@@ -40,6 +40,7 @@ export async function updateItemInBackend<RequestDto, ResultDto>(
   );
   return response.data;
 }
+
 export async function deleteItemFromBackend(
   endpoint: string,
   id: number,

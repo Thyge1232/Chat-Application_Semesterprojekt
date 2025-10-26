@@ -1,17 +1,29 @@
-import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { getMessagesByConversationId } from "../../../api/messageApi";
-import type { Message } from "../../../types/message";
+import type {
+  Conversation,
+  ConversationRaw,
+} from "../../../types/conversation";
+import { getItemFromBackend } from "../../../api/baseCRUDApi";
 import { ENDPOINTS } from "../../../config/api";
 
 export function useGetConversation(conversationId?: number) {
-  return useQuery<Message[], AxiosError>({
-    queryKey: [ENDPOINTS.messages, conversationId],
+  return useQuery<Conversation>({
+    queryKey: [ENDPOINTS.conversationById, conversationId],
     queryFn: async () => {
-      if (conversationId == null) throw new Error("Fejl i conversationId");
-      return getMessagesByConversationId(conversationId);
+      if (conversationId == null) throw new Error("No conversationId");
+      return getItemFromBackend<ConversationRaw>(
+        ENDPOINTS.conversationById,
+        conversationId
+      ).then(
+        (raw) =>
+          ({
+            conversationId: raw.id,
+            name: raw.name,
+            createdAt: new Date(raw.createdAt),
+            participants: raw.members,
+          } as Conversation)
+      );
     },
     enabled: conversationId != null,
   });
 }
-

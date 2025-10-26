@@ -21,3 +21,10 @@ export interface ConversationSummary {
   id: number;
   name: string | null;
 }
+
+export interface ConversationRaw {
+  id: number;
+  name: string;
+  createdAt: string;
+  members: User[];
+}

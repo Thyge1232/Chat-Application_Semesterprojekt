@@ -15,8 +15,10 @@ import { useUsers } from "../features/users/hooks/useUsers";
 import { useSendMessage } from "../features/messages/hooks/useSendMessage";
 import { useDeleteMessage } from "../features/messages/hooks/useDeleteMessage";
 import { useEditMessage } from "../features/messages/hooks/useEditMessage";
-import { useGetConversation } from "../features/conversations/hooks/useGetConversation";
+import { useGetConversationMessages } from "../features/conversations/hooks/useGetConversationMessages";
 import { useGetUserConversations } from "../features/conversations/hooks/useGetUserConversations";
+import { useAddUserToConversation } from "../features/conversations/hooks/useAddUserToConversation";
+import { useGetConversation } from "../features/conversations/hooks/useGetConversation";
 
 export const Conversations = () => {
   //LOGIC PART OF THE COMPONENT
@@ -39,6 +41,7 @@ export const Conversations = () => {
   const { data: users } = useUsers();
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
 
+  const { data: conversation } = useGetConversation(conversationId);
   const conversationThemeId = conversationId ?? 1;
   const [conversationThemes, setConversationThemes] = useState<
     Record<number, number>
@@ -58,10 +61,34 @@ export const Conversations = () => {
 
   //DROPDOWN!!!
   const themeOptions = ConversationColorThemeFactory.getAvailableThemes();
+  const participants = conversation?.participants ?? [];
+
+  const otherUsers =
+    users?.filter((u) => !participants.some((p) => p.id === u.id)) ?? [];
+
+  const addUserMutation = useAddUserToConversation();
+
   const dropdownItems: DropdownItem[] = [
     {
       itemlabel: "Tilføj bruger",
       onClick: () => console.log("Tilføj bruger Conversation clicked"), //ToDO: pop up --> vælg bruger fra liste, giv backend besked
+      subItems: otherUsers?.map((u) => ({
+        id: u.id,
+        itemlabel: u.username,
+        onClick: () => {
+          addUserMutation.mutate({
+            conversationId: conversationId!,
+            userId: u.id,
+          });
+          console.log(
+            `Tilføj bruger ${
+              u.username
+            } til samtale ${conversationId}\nListe over nuværende deltagere: ${participants
+              .map((p) => p.username)
+              .join(", ")}`
+          );
+        },
+      })),
     },
     {
       itemlabel: "Forlad samtalen",
@@ -72,7 +99,7 @@ export const Conversations = () => {
       subItems: themeOptions.map((t) => ({
         itemlabel: t.label,
         onClick: () => {
-          updateThemeForConversation(t.id); //ToTO: giv backend besked
+          updateThemeForConversation(t.id); //TodO: giv backend besked
         },
       })),
     },
@@ -83,7 +110,7 @@ export const Conversations = () => {
     data: messages,
     isPending,
     error,
-  } = useGetConversation(conversationId);
+  } = useGetConversationMessages(conversationId);
   if (error?.response?.status === 401)
     console.error("Adgang til samtale nægtet");
 

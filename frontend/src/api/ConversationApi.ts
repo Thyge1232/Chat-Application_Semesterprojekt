@@ -1,7 +1,7 @@
 import {
   getListFromBackend,
   createItemInBackend,
-  updateItemInBackend,
+  // updateItemInBackend,
 } from "./baseCRUDApi";
 import type {
   Conversation,
@@ -9,6 +9,7 @@ import type {
   CreateConversationDto,
 } from "../types/conversation";
 import { ENDPOINTS } from "../config/api";
+import { apiClient } from "./apiClient";
 
 export async function getListOfUserConversations(): Promise<
   ConversationSummary[]
@@ -29,10 +30,9 @@ export async function createConversation(
 export async function addUserToConversation(
   conversationId: number,
   userId: number
-): Promise<Conversation> {
-  return await updateItemInBackend<Conversation, Conversation>(
-    `${ENDPOINTS.createConversations}/${conversationId}/users/${userId},`
-  );
+): Promise<void> {
+  const url = `${ENDPOINTS.conversationById}/${conversationId}/users/${userId}`;
+  await apiClient.post(url);
 }
 
 //vi håndterer det via en liste af messages i stedet i messageApi
