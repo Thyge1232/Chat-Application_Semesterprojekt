@@ -1,13 +1,7 @@
 import { Banner } from "../ui/Banner";
 import { useAuth } from "../features/authentication/hooks/useAuth";
 import { SpinnerWithText } from "../ui/SpinnerWithText";
-//User probs -- edit, reset,
-// definer default værdier
-// Get user, (kig på conversation page)
-// definer typerne  ()
-// implementeret specifik hook : useUserById  (inpiration useUsers), usePostUserInformation (profilbillede + fun fact)
-// refactor
-import { useUserById } from "../api/userAPi";
+import { useUserById } from "../features/users/hooks/useUserById";
 
 export const Home = () => {
   const { currentUser } = useAuth();
