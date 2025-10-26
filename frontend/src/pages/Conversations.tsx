@@ -6,7 +6,7 @@ import { Button } from "../ui/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../features/authentication/hooks/useAuth";
-import { type SocketEvent } from "../types/socketEvent";
+// import { type SocketEvent } from "../types/socketEvent";
 import { ConversationColorThemeFactory } from "../ui/ColorThemes/ConversationColorThemeFactory";
 import { Dropdown, type DropdownItem } from "../ui/Dropdown";
 import { useCreateConversation } from "../features/conversations/hooks/useCreateConversation";
@@ -32,6 +32,9 @@ export const Conversations = () => {
   const [conversationId, setConversationId] = useState<number | undefined>(
     undefined
   );
+  const [newConversationName, setNewConversationName] = useState("");
+
+  const [showCreateField, setShowCreateField] = useState(false);
   const [content, setContent] = useState<string>("");
   const { mutate: createConversation } = useCreateConversation();
   const queryClient = useQueryClient();
@@ -174,26 +177,58 @@ export const Conversations = () => {
               onClick={() => setConversationId(conversation.id)}
               className="bg-blue-300 text-white mb-2"
             >
-              {`Conversation ${conversation.id}`}
+              {conversation.name?.trim() || `Samtale nr. ${conversation.id}`}
             </Button>
           ))}
         </div>
 
-        <Button
-          className="bg-blue-300 text-white mb-2"
-          onClick={() =>
-            createConversation(
-              { name: `Conversation ${Date.now()}` },
-              {
-                onSuccess: (newConversation) => {
-                  setConversationId(newConversation.conversationId);
-                },
-              }
-            )
-          }
-        >
-          Opret en samtale
-        </Button>
+        {showCreateField ? (
+          <div className="flex flex-col gap-2 p-2">
+            <input
+              type="text"
+              value={newConversationName}
+              onChange={(e) => setNewConversationName(e.target.value)}
+              placeholder="Navn på samtale"
+              className="border rounded px-2 py-1"
+            />
+            <div className="flex gap-2">
+              <Button
+                className="bg-blue-300 text-white"
+                onClick={() => {
+                  if (!newConversationName.trim()) return;
+                  createConversation(
+                    { name: newConversationName.trim() },
+                    {
+                      onSuccess: (newConversation) => {
+                        setConversationId(newConversation.conversationId);
+                        setNewConversationName("");
+                        setShowCreateField(false);
+                      },
+                    }
+                  );
+                }}
+              >
+                Opret
+              </Button>
+              <Button
+                className="bg-gray-300 text-black"
+                onClick={() => {
+                  setNewConversationName("");
+                  setShowCreateField(false);
+                }}
+              >
+                Annuller
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <Button
+            className="bg-blue-300 text-white mb-2"
+            onClick={() => setShowCreateField(true)}
+          >
+            Opret en samtale
+          </Button>
+        )}
       </div>
 
       {/* Right column: messages + input */}
