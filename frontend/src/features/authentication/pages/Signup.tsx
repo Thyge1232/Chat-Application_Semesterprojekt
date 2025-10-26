@@ -1,9 +1,9 @@
-import type { UserSignup } from "../../../types/usersignup";
+import type { UserSignup } from "../../../types/userSignup";
 import { Link } from "react-router-dom";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../../../ui/PagesStyle.css";
-import { useSignup } from "../../../api/userAPi";
+import { useSignup } from "../../users/hooks/useSignup";
 
 interface FormInputs extends UserSignup {
   confirmPassword: string;
