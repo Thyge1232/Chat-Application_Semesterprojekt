@@ -163,7 +163,7 @@ export const Conversations = () => {
     <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
       {/* Left column: conversation list */}
       <div>
-        <div className="bg-blue-100 p-4 flex flex-col overflow-y-auto relative">
+        <div className="bg-blue-100 p-4 flex flex-col overflow-y-auto relative max-h-[80vh]">
           <Title>Mine samtaler</Title>
 
           {isLoadingConversations && <SpinnerWithText />}
@@ -179,7 +179,7 @@ export const Conversations = () => {
 
           {userconversations?.length === 0 && (
             <p className="text-gray-500">
-              You don’t have any conversations yet. Create one below!
+              Du har ikke nogen samtaler endnu - opret en her.
             </p>
           )}
 
