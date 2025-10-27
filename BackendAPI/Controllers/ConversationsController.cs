@@ -71,19 +71,32 @@ public class ConversationController : ControllerBase
         return Ok(conversation);
     }
 
-    [HttpPost("{conversationId}/users/{userId}")]
-    public async Task<IActionResult> AddUserByIdToConversationById(int conversationId, int userId)
+    [Authorize]
+    [HttpPost("{conversationId}/users/{userId}/me/{memberId}")]
+    public async Task<IActionResult> AddUserByIdToConversationById(int conversationId, int userId, int memberId)
     {
-        var result = await _conversationService.AddUserByIdToConversationByIdAsync(
-            conversationId,
-            userId
-        );
-
-        if (result == null)
+        var conversation = await _conversationService.GetConversationByIdAsync(conversationId);
+        if (conversation == null)
         {
-            return NotFound();
+            NotFound("Conversation doesn't exist");
         }
 
-        return Ok($"Added user with id {result.Members[0].Id} to conversation with id {result.Id}");
+        if (conversation.Members.FirstOrDefault(u => u.Id == memberId) != null)
+        {
+            var result = await _conversationService.AddUserByIdToConversationByIdAsync(
+                conversationId,
+                userId
+            );
+            if (result == null)
+            {
+                return BadRequest("Request failed.");
+            }
+
+            return Ok(result);
+        }
+        else
+        {
+            return BadRequest("You're not a member of this conversation.");
+        }
     }
 }
