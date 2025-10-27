@@ -72,16 +72,21 @@ public class ConversationController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost("{conversationId}/users/{userId}/me/{memberId}")]
-    public async Task<IActionResult> AddUserByIdToConversationById(int conversationId, int userId, int memberId)
+    [HttpPost("{conversationId}/users/{userId}")]
+    public async Task<IActionResult> AddUserByIdToConversationById(int conversationId, int userId)
     {
-        var conversation = await _conversationService.GetConversationByIdAsync(conversationId);
+        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!int.TryParse(userIdString, out var currentUserId))
+            return Unauthorized("Invalid user token.");
+        
+var conversation = await _conversationService.GetConversationByIdAsync(conversationId);
         if (conversation == null)
         {
             NotFound("Conversation doesn't exist");
         }
 
-        if (conversation.Members.FirstOrDefault(u => u.Id == memberId) != null)
+        if (conversation.Members.FirstOrDefault(u => u.Id == currentUserId) != null)
         {
             var result = await _conversationService.AddUserByIdToConversationByIdAsync(
                 conversationId,
