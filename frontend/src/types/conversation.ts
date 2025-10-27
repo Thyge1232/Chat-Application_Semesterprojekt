@@ -7,6 +7,7 @@ export interface Conversation {
   name: string;
   createdAt: Date;
   participants: User[];
+  colorTheme?: string;
 }
 
 export interface CreateConversationDto {
@@ -27,4 +28,5 @@ export interface ConversationRaw {
   name: string;
   createdAt: string;
   members: User[];
+  colorTheme?: string;
 }

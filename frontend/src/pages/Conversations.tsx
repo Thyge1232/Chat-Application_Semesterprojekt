@@ -19,6 +19,7 @@ import { useGetConversationMessages } from "../features/conversations/hooks/useG
 import { useGetUserConversations } from "../features/conversations/hooks/useGetUserConversations";
 import { useAddUserToConversation } from "../features/conversations/hooks/useAddUserToConversation";
 import { useGetConversation } from "../features/conversations/hooks/useGetConversation";
+import { useUpdateConversationColorTheme } from "../features/conversations/hooks/useUpdateConversationColorTheme"; //implementer
 
 export const Conversations = () => {
   //LOGIC PART OF THE COMPONENT
@@ -45,22 +46,26 @@ export const Conversations = () => {
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
 
   const { data: conversation } = useGetConversation(conversationId);
-  const conversationThemeId = conversationId ?? 1;
-  const [conversationThemes, setConversationThemes] = useState<
-    Record<number, number>
-  >({});
-  const currentThemeNumber = conversationThemes[conversationThemeId] ?? 1;
-  const theme = ConversationColorThemeFactory.createTheme(currentThemeNumber);
-  const updateThemeForConversation = (themeNumber: number) => {
-    setConversationThemes((prev) => ({
-      ...prev,
-      [conversationThemeId]: themeNumber,
-    }));
-    // TODO: send til backend via Axios senere
-    console.log(
-      `Conversation ${conversationId} theme updated to ${themeNumber}`
-    );
-  };
+  const theme = ConversationColorThemeFactory.createThemeFromString(
+    conversation?.colorTheme
+  );
+
+  // const conversationThemeId = conversationId ?? 1;
+  // const [conversationThemes, setConversationThemes] = useState<
+  //   Record<number, number>
+  // >({});
+  // const currentThemeNumber = conversationThemes[conversationThemeId] ?? 1;
+  // const theme = ConversationColorThemeFactory.createTheme(currentThemeNumber);
+  // const updateThemeForConversation = (themeNumber: number) => {
+  //   setConversationThemes((prev) => ({
+  //     ...prev,
+  //     [conversationThemeId]: themeNumber,
+  //   }));
+  //   // TODO: send til backend via Axios senere
+  //   console.log(
+  //     `Conversation ${conversationId} theme updated to ${themeNumber}`
+  //   );
+  // };
 
   //DROPDOWN!!!
   const themeOptions = ConversationColorThemeFactory.getAvailableThemes();
@@ -70,6 +75,7 @@ export const Conversations = () => {
     users?.filter((u) => !participants.some((p) => p.id === u.id)) ?? [];
 
   const addUserMutation = useAddUserToConversation();
+  const updateColorTheme = useUpdateConversationColorTheme();
 
   const dropdownItems: DropdownItem[] = [
     {
@@ -102,7 +108,13 @@ export const Conversations = () => {
       subItems: themeOptions.map((t) => ({
         itemlabel: t.label,
         onClick: () => {
-          updateThemeForConversation(t.id); //TodO: giv backend besked
+          updateColorTheme.mutate({
+            conversationId: conversationId!,
+            colorTheme: t.label,
+          });
+          console.log(
+            `Bruger valgte farvetema for samtale ${conversationId}: ${t.label}`
+          );
         },
       })),
     },

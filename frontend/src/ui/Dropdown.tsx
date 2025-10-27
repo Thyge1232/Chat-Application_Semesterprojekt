@@ -25,7 +25,7 @@ const DropdownButton = ({
   colorTheme: IColorThemeConversation;
 }) => (
   <MenuButton
-    className={`inline-flex justify-center gap-x-1.5 rounded-md ${colorTheme.dropdownBg} ${colorTheme.dropdownText} px-3 py-2 text-sm font-semibold shadow-xs ring-1 ring-gray-300 hover:opacity-90 w-auto`}
+    className={`inline-flex justify-center gap-x-1.5 rounded-md ${colorTheme.dropdownBg} ${colorTheme.dropdownText} px-3 py-2 text-sm font-semibold shadow-xs ring-1 ring-gray-300 cursor-pointer w-auto`}
   >
     {label}
     <ChevronDownIcon
@@ -53,7 +53,7 @@ const DropdownItemButton = ({
     }}
     className={`flex justify-between px-4 py-2 text-sm text-left
             ${colorTheme.dropdownText} ${colorTheme.dropdownBg}
-            hover:opacity-80 w-auto min-w-full`}
+            curser-pointer w-auto min-w-full cursor-pointer `}
   >
     {item.itemlabel}
     {hasSubItems && <ChevronRightIcon className="h-4 w-4 text-gray-400" />}
@@ -71,14 +71,16 @@ export const Dropdown = ({
   return (
     <Menu
       as="div"
-      className={`absolute right-0 inline-block ${className ?? ""}`}
+      className={`absolute right-0 inline-block cursor-pointer ${
+        className ?? ""
+      }`}
     >
       {/* Dropdown label */}
       <DropdownButton label={label} colorTheme={colorTheme} />
 
       {/* Menu items */}
       <MenuItems
-        className={`absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md ${colorTheme.dropdownBg} ${colorTheme.dropdownText} shadow-lg outline-none ring-1 ring-black ring-opacity-5`}
+        className={`absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md ${colorTheme.dropdownBg} ${colorTheme.dropdownText} shadow-lg outline-none ring-1 ring-black ring-opacity-5 cursor-pointer`}
       >
         {items.map((item) => {
           const id = item.id ?? item.itemlabel;
@@ -108,7 +110,7 @@ export const Dropdown = ({
                   className={`absolute top-0 right-full mr-1 z-30 w-48 origin-top-right rounded-md
         ${colorTheme.dropdownBg} ${colorTheme.dropdownText}
         shadow-lg ring-1 ring-black ring-opacity-5
-        max-h-60 overflow-y-auto pointer-events-auto`}
+        max-h-60 overflow-y-auto pointer-events-auto cursor-pointer`}
                 >
                   {item.subItems.map((subItem) => (
                     <MenuItem key={subItem.id ?? subItem.itemlabel}>

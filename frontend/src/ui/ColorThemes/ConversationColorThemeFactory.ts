@@ -22,6 +22,19 @@ export class ConversationColorThemeFactory {
     }
   }
 
+  //Er attributten en string i db ellers blot brug ;
+  static createThemeFromString(
+    themeName: string | null | undefined
+  ): IColorThemeConversation {
+    if (!themeName) return this.createTheme(1); //default theme
+
+    const avaiableTheme = this.getAvailableThemes();
+    const found = avaiableTheme.find(
+      (t) => t.label.toLowerCase() === themeName.toLowerCase()
+    );
+    return found ? this.createTheme(found.id) : this.createTheme(1);
+  }
+
   // Dynamisk liste af tilgængelige temaer
   static getAvailableThemes(): { id: number; label: string }[] {
     return [

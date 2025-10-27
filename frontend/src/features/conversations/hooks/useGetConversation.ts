@@ -21,6 +21,7 @@ export function useGetConversation(conversationId?: number) {
             name: raw.name,
             createdAt: new Date(raw.createdAt),
             participants: raw.members,
+            colorTheme: raw.colorTheme,
           } as Conversation)
       );
     },

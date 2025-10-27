@@ -1,7 +1,7 @@
 import {
   getListFromBackend,
   createItemInBackend,
-  // updateItemInBackend,
+  updateItemInBackend,
 } from "./baseCRUDApi";
 import type {
   Conversation,
@@ -33,6 +33,18 @@ export async function addUserToConversation(
 ): Promise<void> {
   const url = `${ENDPOINTS.conversationById}/${conversationId}/users/${userId}`;
   await apiClient.post(url);
+}
+
+//Obs, når backend understøtter dette.
+export async function updateConversationColorTheme(
+  conversationId: number,
+  colorTheme: string //number ??
+): Promise<void> {
+  return await updateItemInBackend<{ colorTheme: string }, void>(
+    ENDPOINTS.conversationById,
+    conversationId,
+    { colorTheme }
+  );
 }
 
 //vi håndterer det via en liste af messages i stedet i messageApi
