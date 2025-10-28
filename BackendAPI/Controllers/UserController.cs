@@ -72,4 +72,24 @@ public class UsersController : ControllerBase
         var conversations = await _conversationService.GetConversationByUserIdAsync(currentUserId);
         return Ok(conversations);
     }
+
+    [Authorize]
+    [HttpPut("me/colortheme")]
+    public async Task<ActionResult> UpdateColorTheme([FromBody] ColorThemeUpdateDto colorThemeUpdateDto)
+    {
+        var loggedInUserIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!int.TryParse(loggedInUserIdString, out var currentUserId)) return Unauthorized("Invalid user token.");
+
+        try
+        {
+            await _userService.UpdateColorThemeAsync(currentUserId, colorThemeUpdateDto.ColorTheme);
+            return NoContent();
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { message = "An internal server error occurred." });
+        }
+    }
+
 }

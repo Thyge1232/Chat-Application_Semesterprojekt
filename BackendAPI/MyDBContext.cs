@@ -24,13 +24,18 @@ public class MyDBContext : DbContext
 
         modelBuilder.Entity<ConversationMember>().HasKey(cm => new { cm.UserId, cm.ConversationId });
 
-        modelBuilder.Entity<User>() // Unik Username
-            .HasIndex(u => u.Username)
+        modelBuilder.Entity<User>() 
+            .HasIndex(u => u.Username) // Unik Username
             .IsUnique();
 
-        modelBuilder.Entity<User>() // Unik Email
-            .HasIndex(u => u.Email)
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email) // Unik Email
             .IsUnique();
+
+        modelBuilder.Entity<User>()
+            .Property(u => u.ColorTheme)
+            .HasMaxLength(30)
+            .HasDefaultValue("default");
 
         modelBuilder
             .Entity<ConversationMember>()
