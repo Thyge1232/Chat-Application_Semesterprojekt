@@ -9,5 +9,5 @@ public interface IConversationRepository
     Task<Conversation?> GetByIdWithMembersAsync(int conversationId);
     Task<IEnumerable<Conversation>> GetByUserIdAsync(int userId);
     Task<User?> AddUsertoConversationAsync(Conversation conversation, int userId);
-    Task<bool> RemoveUserFromConversationAsync(Conversation conversation, int userId);
+    Task<bool> RemoveThisUserFromConversationAsync(Conversation conversation, int userId);
 }

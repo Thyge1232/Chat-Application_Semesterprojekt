@@ -102,11 +102,8 @@ public class ConversationController : ControllerBase
     }
 
     [Authorize]
-    [HttpDelete("{conversationId}/users/{userId}")]
-    public async Task<IActionResult> RemoveUserByIdFromConversationById(
-        int conversationId,
-        int userId
-    )
+    [HttpDelete("{conversationId}")]
+    public async Task<IActionResult> RemoveUserByIdFromConversationById(int conversationId)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -120,9 +117,9 @@ public class ConversationController : ControllerBase
         }
         else if (conversation.Members.FirstOrDefault(u => u.Id == currentUserId) != null)
         {
-            var result = await _conversationService.RemoveUserByIdFromConversationByIdAsync(
+            var result = await _conversationService.RemoveThisUserByIdFromConversationByIdAsync(
                 conversationId,
-                userId
+                currentUserId
             );
             if (!result)
             {

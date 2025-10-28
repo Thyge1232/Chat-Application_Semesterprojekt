@@ -105,7 +105,7 @@ public class ConversationService : IConversationService
         };
     }
 
-    public async Task<bool> RemoveUserByIdFromConversationByIdAsync(int conversationId, int userId)
+    public async Task<bool> RemoveThisUserByIdFromConversationByIdAsync(int conversationId, int userId)
     {
         var conversation = await _convoRepo.GetByIdWithMembersAsync(conversationId);
         if(conversation == null)
@@ -113,6 +113,6 @@ public class ConversationService : IConversationService
             return false;
         }
 
-        return await _convoRepo.RemoveUserFromConversationAsync(conversation, userId);
+        return await _convoRepo.RemoveThisUserFromConversationAsync(conversation, userId);
     }
 }
