@@ -8,6 +8,7 @@ public class User
     public DateTime CreatedAt { get; set; }
     public string ProfilePicture { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
+    public string? ColorTheme { get; set; }
     public ICollection<ConversationMember> MemberIn { get; set;} = new List<ConversationMember>();
 
 }
