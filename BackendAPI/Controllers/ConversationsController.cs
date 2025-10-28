@@ -79,14 +79,13 @@ public class ConversationController : ControllerBase
 
         if (!int.TryParse(userIdString, out var currentUserId))
             return Unauthorized("Invalid user token.");
-        
-var conversation = await _conversationService.GetConversationByIdAsync(conversationId);
+
+        var conversation = await _conversationService.GetConversationByIdAsync(conversationId);
         if (conversation == null)
         {
             NotFound("Conversation doesn't exist");
         }
-
-        if (conversation.Members.FirstOrDefault(u => u.Id == currentUserId) != null)
+        else if (conversation.Members.FirstOrDefault(u => u.Id == currentUserId) != null)
         {
             var result = await _conversationService.AddUserByIdToConversationByIdAsync(
                 conversationId,
@@ -99,9 +98,39 @@ var conversation = await _conversationService.GetConversationByIdAsync(conversat
 
             return Ok(result);
         }
-        else
+        return BadRequest("You're not a member of this conversation.");
+    }
+
+    [Authorize]
+    [HttpDelete("{conversationId}/users/{userId}")]
+    public async Task<IActionResult> RemoveUserByIdFromConversationById(
+        int conversationId,
+        int userId
+    )
+    {
+        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!int.TryParse(userIdString, out var currentUserId))
+            return Unauthorized("Invalid user token.");
+
+        var conversation = await _conversationService.GetConversationByIdAsync(conversationId);
+        if (conversation == null)
         {
-            return BadRequest("You're not a member of this conversation.");
+            NotFound("Conversation doesn't exist");
         }
+        else if (conversation.Members.FirstOrDefault(u => u.Id == currentUserId) != null)
+        {
+            var result = await _conversationService.RemoveUserByIdFromConversationByIdAsync(
+                conversationId,
+                userId
+            );
+            if (!result)
+            {
+                return BadRequest("Request failed.");
+            }
+
+            return Ok("Succesfully removed user.");
+        }
+        return BadRequest("You're not a member of this conversation.");
     }
 }

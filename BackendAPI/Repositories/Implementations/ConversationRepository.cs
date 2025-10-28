@@ -69,5 +69,18 @@ namespace BackendAPI.Repositories.Implementations
 
             return user;
         }
+
+        public async Task<bool> RemoveUserFromConversationAsync(Conversation conversation, int userId)
+        {
+            var conversationMember = await _dbContext.ConversationMembers.FirstOrDefaultAsync(u => u.UserId == userId && u.ConversationId == conversation.ConversationId);
+            if (conversationMember == null)
+            {
+                return false;
+            }
+
+            _dbContext.ConversationMembers.Remove(conversationMember);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
     }
 }

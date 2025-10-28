@@ -104,4 +104,15 @@ public class ConversationService : IConversationService
                 .ToList(),
         };
     }
+
+    public async Task<bool> RemoveUserByIdFromConversationByIdAsync(int conversationId, int userId)
+    {
+        var conversation = await _convoRepo.GetByIdWithMembersAsync(conversationId);
+        if(conversation == null)
+        {
+            return false;
+        }
+
+        return await _convoRepo.RemoveUserFromConversationAsync(conversation, userId);
+    }
 }
