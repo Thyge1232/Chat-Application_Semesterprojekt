@@ -46,6 +46,10 @@ const App = () => (
             </RequireAuth>
           }
         />
+        <Route
+          path="*"
+          element={<div>404 siden findes ikke... sorry not sorry</div>}
+        />
       </Routes>
     </Layout>
   </Router>
