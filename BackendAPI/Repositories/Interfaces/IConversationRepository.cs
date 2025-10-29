@@ -10,4 +10,6 @@ public interface IConversationRepository
     Task<IEnumerable<Conversation>> GetByUserIdAsync(int userId);
     Task<User?> AddUsertoConversationAsync(Conversation conversation, int userId);
     Task<bool> RemoveThisUserFromConversationAsync(Conversation conversation, int userId);
+    Task DeleteAsync(Conversation conversation);
+
 }

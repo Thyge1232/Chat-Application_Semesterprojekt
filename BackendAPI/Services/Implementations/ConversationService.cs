@@ -108,11 +108,27 @@ public class ConversationService : IConversationService
     public async Task<bool> RemoveThisUserByIdFromConversationByIdAsync(int conversationId, int userId)
     {
         var conversation = await _convoRepo.GetByIdWithMembersAsync(conversationId);
-        if(conversation == null)
+        if (conversation == null)
         {
             return false;
         }
 
-        return await _convoRepo.RemoveThisUserFromConversationAsync(conversation, userId);
+        bool success = await _convoRepo.RemoveThisUserFromConversationAsync(conversation, userId);
+
+        if (success)
+        {
+            await _convoRepo.SaveChangesAsync();
+
+            conversation = await _convoRepo.GetByIdWithMembersAsync(conversationId);
+
+            if (conversation != null && conversation.UserList.Count == 0)
+            {
+                await _convoRepo.DeleteAsync(conversation);
+                await _convoRepo.SaveChangesAsync();
+            }
+        }
+
+        return success;
     }
+
 }

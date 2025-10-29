@@ -72,15 +72,22 @@ namespace BackendAPI.Repositories.Implementations
 
         public async Task<bool> RemoveThisUserFromConversationAsync(Conversation conversation, int userId)
         {
-            var conversationMember = await _dbContext.ConversationMembers.FirstOrDefaultAsync(u => u.UserId == userId && u.ConversationId == conversation.ConversationId);
+            var conversationMember = conversation.UserList.FirstOrDefault(u => u.UserId == userId);
+
             if (conversationMember == null)
             {
                 return false;
             }
 
             _dbContext.ConversationMembers.Remove(conversationMember);
-            await _dbContext.SaveChangesAsync();
             return true;
         }
+
+
+        public async Task DeleteAsync(Conversation conversation)
+        {
+            _dbContext.Conversations.Remove(conversation);
+        }
+
     }
 }
