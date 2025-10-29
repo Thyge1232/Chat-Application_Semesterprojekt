@@ -173,4 +173,42 @@ public class UserServiceTest
         Assert.Empty(result); //Returer tom liste
         Assert.Equal(0, result.Count());
     }
+
+    [Fact]
+    public async Task UpdateColorThemeAsync_WithCorrectUserId_ShouldUpdateUserColorTheme()
+    {
+        // Arrange
+        var userId = 1;
+        var newColorTheme = "dark-mode";
+
+        var user1 = UserFactory.CreateUser(
+           id: 1,
+           username: "fakeuser1",
+           email: "fake1@example.com"
+       );
+        _mockUserRepository.Setup(repo => repo.GetByIdAsync(userId)).ReturnsAsync(user1);
+
+        // Act
+        await _userService.UpdateColorThemeAsync(userId, newColorTheme);
+        // Assert
+        _mockUserRepository.Verify(repo => repo.SaveChangesAsync(), Times.Once);
+        Assert.Equal(newColorTheme, user1.ColorTheme);
+    }
+
+    [Fact]
+    public async Task UpdateColorThemeAsync_WithWrongUserId_ShouldNotUpdateUserColorTheme()
+    {
+        // Arrange
+        var userId = 99; // Non-existing user ID
+        var newColorTheme = "dark-mode";
+
+        _mockUserRepository.Setup(repo => repo.GetByIdAsync(userId)).ReturnsAsync((User?)null);
+
+        // Act
+        await _userService.UpdateColorThemeAsync(userId, newColorTheme);
+
+        // Assert
+        _mockUserRepository.Verify(repo => repo.SaveChangesAsync(), Times.Never);
+    }
+
 }

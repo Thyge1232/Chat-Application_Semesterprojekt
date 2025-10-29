@@ -71,8 +71,10 @@ public class UserService : IUserService
     public async Task UpdateColorThemeAsync(int userId, string colorTheme)
     {
         var user = await _userRepository.GetByIdAsync(userId);
-        if (user == null) 
-            throw new Exception("User not found.");
+        if (user == null)
+        {
+            return;
+        }
 
         user.ColorTheme = colorTheme;
         await _userRepository.SaveChangesAsync();
