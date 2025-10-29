@@ -11,7 +11,7 @@ interface UserCardProps {
 }
 
 //placeholder til brugerens billede for now:
-const placeholder = "../public/Images/user.png";
+const placeholder = "Images/user.png";
 
 export const UserCard = ({
   username,

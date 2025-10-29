@@ -1,8 +1,8 @@
-import { Button } from "./Button";
+import { Button } from "../ui/Button";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "./LayoutStyle.css";
-import "./ButtonStyle.css";
+import "../ui/ButtonStyle.css";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -36,11 +36,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
               <Link to="/users">
                 <Button className="custom-nav-button custom-nav-button--amber">
                   Brugere
-                </Button>
-              </Link>
-              <Link to="/settings">
-                <Button className="custom-nav-button custom-nav-button--amber-light">
-                  Indstillinger
                 </Button>
               </Link>
             </div>

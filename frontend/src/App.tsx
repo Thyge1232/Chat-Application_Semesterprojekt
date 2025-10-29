@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./features/authentication/pages/Login";
 import { Signup } from "./features/authentication/pages/Signup";
-import { Conversations } from "./pages/Conversations";
-import { Settings } from "./pages/Settings";
-import { Users } from "./pages/Users";
+import { Conversations } from "./features/conversations/pages/Conversations";
 import { Home } from "./pages/Home";
-import { Layout } from "./ui/Layout";
+import { Layout } from "./layouts/Layout";
 import { RequireAuth } from "./features/authentication/RequireAuth";
+import { Users } from "./pages/Users";
 
 const App = () => (
   <Router>
@@ -27,14 +26,6 @@ const App = () => (
           element={
             <RequireAuth>
               <Users />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <RequireAuth>
-              <Settings />
             </RequireAuth>
           }
         />

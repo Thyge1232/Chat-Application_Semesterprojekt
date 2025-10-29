@@ -1,4 +1,4 @@
-import { ENDPOINTS } from "../config/api";
+/* import { ENDPOINTS } from "../config/endpoints";
 import { getToken } from "./tokenService";
 
 type MessageHandler = (data: unknown) => void;
@@ -37,3 +37,4 @@ class SocketService {
 }
 
 export const socketService = new SocketService();
+ */

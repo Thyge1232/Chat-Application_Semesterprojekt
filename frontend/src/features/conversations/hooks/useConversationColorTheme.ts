@@ -4,7 +4,7 @@
 // import type { Message } from "../../../types/message";
 // import { conversationApi } from "../../../api/conversationApi";
 
-// export function useGetConversationColorTheme(conversationId?: number) {
+// export function useConversationColorTheme(conversationId?: number) {
 //     return useApiQuery<number, AxiosError>(
 //         ["conversationColorTheme", conversationColorThemeId ?? "none"],
 //         () => conversationApi.getColorTheme(conversationId!),

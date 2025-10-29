@@ -1,34 +1,32 @@
-import { ChatBubble } from "../ui/ChatBubble";
-import { Title } from "../ui/Title";
-import { MessageInput } from "../ui/MessageInput";
-import { SpinnerWithText } from "../ui/SpinnerWithText";
-import { Button } from "../ui/Button";
+import { ChatBubble } from "../../../ui/ChatBubble";
+import { Title } from "../../../ui/Title";
+import { MessageInput } from "../../../ui/MessageInput";
+import { SpinnerWithText } from "../../../ui/SpinnerWithText";
+import { Button } from "../../../ui/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect, useRef } from "react";
-import { useAuth } from "../features/authentication/hooks/useAuth";
-// import { type SocketEvent } from "../types/socketEvent";
-import { ConversationColorThemeFactory } from "../ui/ColorThemes/ConversationColorThemeFactory";
-import { Dropdown, type DropdownItem } from "../ui/Dropdown";
-import { useCreateConversation } from "../features/conversations/hooks/useCreateConversation";
+import { useAuth } from "../../authentication/hooks/useAuth";
+import { ConversationColorThemeFactory } from "../../../ui/color-themes/ConversationColorThemeFactory";
+import { Dropdown, type DropdownItem } from "../../../ui/Dropdown";
+import { useCreateConversation } from "../hooks/useCreateConversation";
 import { AxiosError } from "axios";
-import { useUsers } from "../features/users/hooks/useUsers";
-import { useSendMessage } from "../features/messages/hooks/useSendMessage";
-import { useDeleteMessage } from "../features/messages/hooks/useDeleteMessage";
-import { useEditMessage } from "../features/messages/hooks/useEditMessage";
-import { useGetConversationMessages } from "../features/conversations/hooks/useGetConversationMessages";
-import { useGetUserConversations } from "../features/conversations/hooks/useGetUserConversations";
-import { useAddUserToConversation } from "../features/conversations/hooks/useAddUserToConversation";
-import { useGetConversation } from "../features/conversations/hooks/useGetConversation";
-import { useUpdateConversationColorTheme } from "../features/conversations/hooks/useUpdateConversationColorTheme"; //implementer
+import { useUsers } from "../../authentication/hooks/useUsers";
+import { useSendMessage } from "../../messages/hooks/useSendMessage";
+import { useDeleteMessage } from "../../messages/hooks/useDeleteMessage";
+import { useEditMessage } from "../../messages/hooks/useEditMessage";
+import { useConversationMessages } from "../hooks/useConversationMessages";
+import { useUserConversations } from "../hooks/useUserConversations";
+import { useAddUserToConversation } from "../hooks/useAddUserToConversation";
+import { useConversation } from "../hooks/useConversation";
+import { useUpdateConversationColorTheme } from "../hooks/useUpdateConversationColorTheme"; //implementer
 
 export const Conversations = () => {
-  //LOGIC PART OF THE COMPONENT
   const { currentUser } = useAuth();
   const {
     data: userconversations,
     isLoading: isLoadingConversations,
     error: conversationsError,
-  } = useGetUserConversations();
+  } = useUserConversations();
 
   const [conversationId, setConversationId] = useState<number | undefined>(
     undefined
@@ -45,29 +43,11 @@ export const Conversations = () => {
   const { data: users } = useUsers();
   const userMap = new Map(users?.map((u) => [u.id, u.username]));
 
-  const { data: conversation } = useGetConversation(conversationId);
+  const { data: conversation } = useConversation(conversationId);
   const theme = ConversationColorThemeFactory.createThemeFromString(
     conversation?.colorTheme
   );
 
-  // const conversationThemeId = conversationId ?? 1;
-  // const [conversationThemes, setConversationThemes] = useState<
-  //   Record<number, number>
-  // >({});
-  // const currentThemeNumber = conversationThemes[conversationThemeId] ?? 1;
-  // const theme = ConversationColorThemeFactory.createTheme(currentThemeNumber);
-  // const updateThemeForConversation = (themeNumber: number) => {
-  //   setConversationThemes((prev) => ({
-  //     ...prev,
-  //     [conversationThemeId]: themeNumber,
-  //   }));
-  //   // TODO: send til backend via Axios senere
-  //   console.log(
-  //     `Conversation ${conversationId} theme updated to ${themeNumber}`
-  //   );
-  // };
-
-  //DROPDOWN!!!
   const themeOptions = ConversationColorThemeFactory.getAvailableThemes();
   const participants = conversation?.participants ?? [];
 
@@ -125,17 +105,8 @@ export const Conversations = () => {
     data: messages,
     isPending,
     error,
-  } = useGetConversationMessages(conversationId);
-  if (error?.response?.status === 401)
-    console.error("Adgang til samtale nægtet");
+  } = useConversationMessages(conversationId);
 
-  // useSocket<SocketEvent>((event) => {
-  //   if (event.type === "NEW_MESSAGE") {
-  //     queryClient.invalidateQueries({
-  //       queryKey: ["conversation", event.payload.conversationId],
-  //     });
-  //   }
-  // });
   //todo temporary polling solution
   useEffect(() => {
     if (conversationId == null) return;
@@ -143,7 +114,10 @@ export const Conversations = () => {
       queryClient.invalidateQueries({
         queryKey: ["conversation", conversationId],
       });
-    }, 1000); //poll every 1 second
+      queryClient.invalidateQueries({
+        queryKey: ["messages"],
+      });
+    }, 500); //poll every 0.5 second
     return () => clearInterval(interval);
   }, [conversationId, queryClient]);
 
@@ -158,7 +132,6 @@ export const Conversations = () => {
     userconversations?.map((c) => c.id)
   );
 
-  // VISUAL PART OF THE COMPONENT
   return (
     <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
       {/* Left column: conversation list */}

@@ -1,14 +1,13 @@
 import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { getMessagesByConversationId } from "../../../api/messageApi";
+import { getMessagesByConversationId } from "../../../api/apiMessages";
 import type { Message } from "../../../types/message";
-import { ENDPOINTS } from "../../../config/api";
 
-export function useGetConversationMessages(conversationId?: number) {
+export function useConversationMessages(conversationId?: number) {
   return useQuery<Message[], AxiosError>({
-    queryKey: [ENDPOINTS.messages, conversationId],
+    queryKey: ["messages"],
     queryFn: async () => {
-      if (conversationId == null) throw new Error("Fejl i conversationId");
+      if (conversationId == undefined) throw new Error("Fejl i conversationId");
       return getMessagesByConversationId(conversationId);
     },
     enabled: conversationId != null,

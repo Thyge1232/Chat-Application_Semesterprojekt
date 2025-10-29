@@ -1,19 +1,19 @@
 import type { ApiMessage, Message, SendMessage } from "../types/message";
 import { transformMessageFromApi } from "../services/transformMessageFromApi";
-import { ENDPOINTS } from "../config/api";
+import { ENDPOINTS } from "../config/endpoints";
 import {
   getItemFromBackend,
   createItemInBackend,
   updateItemInBackend,
   deleteItemFromBackend,
   getListFromBackend,
-} from "./baseCRUDApi";
+} from "./apiBaseCrud";
 
 export async function getMessagesByConversationId(
   conversationId: number
 ): Promise<Message[]> {
   const apiMessages = await getListFromBackend<ApiMessage>(
-    `${ENDPOINTS.messages}/${conversationId}`
+    ENDPOINTS.messages.byConversation(conversationId)
   );
   return apiMessages.map(transformMessageFromApi);
 }
@@ -22,7 +22,7 @@ export async function sendMessage(
   sendMessageDto: SendMessage
 ): Promise<Message> {
   const apiMessage = await createItemInBackend<SendMessage, ApiMessage>(
-    ENDPOINTS.messages,
+    ENDPOINTS.messages.create(),
     sendMessageDto
   );
   return transformMessageFromApi(apiMessage);
@@ -33,21 +33,19 @@ export async function updateMessage(
   content: string
 ): Promise<Message> {
   const apiMessage = await updateItemInBackend<string, ApiMessage>(
-    ENDPOINTS.messages,
-    messageId,
+    ENDPOINTS.messages.byId(messageId),
     content
   );
   return transformMessageFromApi(apiMessage);
 }
 
 export async function deleteMessage(messageId: number): Promise<void> {
-  await deleteItemFromBackend(ENDPOINTS.messages, messageId);
+  await deleteItemFromBackend(ENDPOINTS.messages.byId(messageId));
 }
 
 export async function getMessageById(messageId: number): Promise<Message> {
   const apiMessage = await getItemFromBackend<ApiMessage>(
-    `${ENDPOINTS.messages}/${messageId}`,
-    messageId
+    ENDPOINTS.messages.byId(messageId)
   );
   return transformMessageFromApi(apiMessage);
 }

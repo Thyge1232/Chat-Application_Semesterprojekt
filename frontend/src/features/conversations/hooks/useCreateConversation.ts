@@ -3,21 +3,17 @@ import type {
   Conversation,
   CreateConversationDto,
 } from "../../../types/conversation";
-import { createConversation } from "../../../api/conversationApi";
-import { ENDPOINTS } from "../../../config/api";
+import { createConversationApi } from "../../../api/apiConversations";
 
 export function useCreateConversation() {
   const queryClient = useQueryClient();
   return useMutation<Conversation, unknown, CreateConversationDto>({
-    mutationFn: (dto: CreateConversationDto) => createConversation(dto),
+    mutationFn: (dto: CreateConversationDto) => createConversationApi(dto),
 
     onSuccess: () =>
-      queryClient.invalidateQueries({
-        queryKey: [ENDPOINTS.userConversations],
-      }),
-    onError: (error: unknown) => {
+      queryClient.invalidateQueries({ queryKey: ["conversations"] }),
+    onError: (error) => {
       console.error("Error creating conversation:", error);
     },
-    retry: 1,
   });
 }

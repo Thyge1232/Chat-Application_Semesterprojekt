@@ -3,17 +3,17 @@ import type {
   Conversation,
   ConversationRaw,
 } from "../../../types/conversation";
-import { getItemFromBackend } from "../../../api/baseCRUDApi";
-import { ENDPOINTS } from "../../../config/api";
+import { getItemFromBackend } from "../../../api/apiBaseCrud";
+import { ENDPOINTS } from "../../../config/endpoints";
 
-export function useGetConversation(conversationId?: number) {
+export function useConversation(conversationId?: number) {
   return useQuery<Conversation>({
-    queryKey: [ENDPOINTS.conversationById, conversationId],
+    queryKey: ["conversation", conversationId],
     queryFn: async () => {
       if (conversationId == null) throw new Error("No conversationId");
+
       return getItemFromBackend<ConversationRaw>(
-        ENDPOINTS.conversationById,
-        conversationId
+        ENDPOINTS.conversations.byId(conversationId)
       ).then(
         (raw) =>
           ({

@@ -1,7 +1,7 @@
 import { Banner } from "../ui/Banner";
 import { useAuth } from "../features/authentication/hooks/useAuth";
 import { SpinnerWithText } from "../ui/SpinnerWithText";
-import { useUserById } from "../features/users/hooks/useUserById";
+import { useUserById } from "../features/authentication/hooks/useUserById";
 
 export const Home = () => {
   const { currentUser } = useAuth();
@@ -20,7 +20,7 @@ export const Home = () => {
         userName={current.username}
         email={current.email}
         createdAt={current.createdAt}
-        profilePhoto={"../public/Images/user.png"}
+        profilePhoto={"Images/user.png"}
         totalMessages={2}
         aboutMe={"Jeg elsker pølser, og er DannyBoy"}
       />

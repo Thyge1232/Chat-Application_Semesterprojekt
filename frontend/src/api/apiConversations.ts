@@ -2,47 +2,46 @@ import {
   getListFromBackend,
   createItemInBackend,
   updateItemInBackend,
-} from "./baseCRUDApi";
+} from "./apiBaseCrud";
 import type {
   Conversation,
   ConversationSummary,
   CreateConversationDto,
 } from "../types/conversation";
-import { ENDPOINTS } from "../config/api";
+import { ENDPOINTS } from "../config/endpoints";
 import { apiClient } from "./apiClient";
 
-export async function getListOfUserConversations(): Promise<
+export async function getAllUserConversationsApi(): Promise<
   ConversationSummary[]
 > {
   return await getListFromBackend<ConversationSummary>(
-    ENDPOINTS.userConversations
+    ENDPOINTS.users.meConversations()
   );
 }
-export async function createConversation(
+export async function createConversationApi(
   createConversationDto: CreateConversationDto
 ): Promise<Conversation> {
   return await createItemInBackend<CreateConversationDto, Conversation>(
-    ENDPOINTS.createConversations,
+    ENDPOINTS.conversations.create(),
     createConversationDto
   );
 }
 
-export async function addUserToConversation(
+export async function addUserToConversationApi(
   conversationId: number,
   userId: number
 ): Promise<void> {
-  const url = `${ENDPOINTS.conversationById}/${conversationId}/users/${userId}`;
+  const url = `${ENDPOINTS.conversations.byId(conversationId)}/users/${userId}`;
   await apiClient.post(url);
 }
 
 //Obs, når backend understøtter dette.
-export async function updateConversationColorTheme(
+export async function updateConversationColorThemeApi(
   conversationId: number,
   colorTheme: string //number ??
 ): Promise<void> {
   return await updateItemInBackend<{ colorTheme: string }, void>(
-    ENDPOINTS.conversationById,
-    conversationId,
+    ENDPOINTS.conversations.byId(conversationId),
     { colorTheme }
   );
 }

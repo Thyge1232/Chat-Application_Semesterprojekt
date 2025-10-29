@@ -1,4 +1,4 @@
-import { useUsers } from "../features/users/hooks/useUsers";
+import { useUsers } from "../features/authentication/hooks/useUsers";
 import { SpinnerWithText } from "../ui/SpinnerWithText";
 import { Title } from "../ui/Title";
 import { UserCard } from "../ui/UserCard";
