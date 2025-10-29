@@ -31,6 +31,4 @@ export const ENDPOINTS = {
   auth: {
     login: () => `${API_BASE_URL}/auth/login`,
   },
-
-  // socket: () => `wss://api.venner.nu/socket`,
 };

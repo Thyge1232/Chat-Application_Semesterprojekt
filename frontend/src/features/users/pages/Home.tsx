@@ -1,4 +1,4 @@
-import { PersonalBanner } from "../components/Banner";
+import { Banner } from "../components/Banner/Banner";
 import { useAuth } from "../../authentication/hooks/useAuth";
 import { SpinnerWithText } from "../../../sharedComponents/SpinnerWithText";
 import { useUserById } from "../../authentication/hooks/useUserById";
@@ -15,7 +15,7 @@ export const Home = () => {
 
   return (
     <>
-      <PersonalBanner
+      <Banner
         userId={current.id}
         userName={current.username}
         email={current.email}
