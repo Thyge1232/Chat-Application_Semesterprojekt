@@ -1,6 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import "../../../ui/PagesStyle.css";
 import { useLogin } from "../hooks/useLogin";
 
 type Inputs = {
@@ -99,7 +98,7 @@ export const Login = () => {
             </div>
           </form>
 
-          <p className="custom-link-button">
+          <p className="mt-2.5 text-center text-[#5170aa] bg-white border border-black rounded-md inline-block px-2 py-1">
             <Link to="/signup">Er du ny her?</Link>
           </p>
         </div>

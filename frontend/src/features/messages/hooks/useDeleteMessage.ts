@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ENDPOINTS } from "../../../config/endpoints";
 import { deleteMessage } from "../../../api/apiMessages";
-import { getToken } from "../../../services/tokenService";
+import { getToken } from "../../authentication/services/tokenService";
 
 export const useDeleteMessage = () => {
   const queryClient = useQueryClient();

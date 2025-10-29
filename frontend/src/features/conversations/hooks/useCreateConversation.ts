@@ -2,7 +2,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import type {
   Conversation,
   CreateConversationDto,
-} from "../../../types/conversation";
+} from "../types/conversation";
 import { createConversationApi } from "../../../api/apiConversations";
 
 export function useCreateConversation() {

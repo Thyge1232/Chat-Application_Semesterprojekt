@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { Message } from "../../../types/message";
+import type { Message } from "../types/message";
 import { updateMessage } from "../../../api/apiMessages";
 import { ENDPOINTS } from "../../../config/endpoints";
 

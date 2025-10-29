@@ -1,6 +1,7 @@
-import "./ChatBubbleStyle.css";
 import type { IColorThemeConversation } from "../types/iColorThemes";
 import { useState, useEffect } from "react";
+import delete_icon from "../../../assets/Images/delete_icon.png";
+import edit_icon from "../../../assets/Images/edit_icon.png";
 
 export type ChatBubbleProps = {
   isSender?: boolean;
@@ -34,8 +35,8 @@ export const ChatBubble = ({
   }, [children]);
 
   const bubbleClass = isSender
-    ? `${colorTheme.bubbleSenderBg} ${colorTheme.bubbleSenderText} ml-auto max-w-[40%] p-2 rounded-xl shadow`
-    : `${colorTheme.bubbleReceiverBg} ${colorTheme.bubbleReceiverText} mr-auto max-w-[40%] p-2 rounded-xl shadow`;
+    ? `${colorTheme.bubbleSenderBg} ${colorTheme.bubbleSenderText} ml-auto max-w-[40%] p-2 rounded-xl shadow my-2 font-semibold text-[1.5rem]`
+    : `${colorTheme.bubbleReceiverBg} ${colorTheme.bubbleReceiverText} mr-auto max-w-[40%] p-2 rounded-xl shadow my-2 font-semibold text-[1.5rem]`;
 
   const formattedTime = timestamp
     ? timestamp.toLocaleString("en-GB", {
@@ -49,21 +50,18 @@ export const ChatBubble = ({
     : "";
 
   const onDelete = () => {
-    if (handleDelete && messageId !== undefined) {
-      handleDelete(messageId);
-    }
+    if (handleDelete && messageId !== undefined) handleDelete(messageId);
   };
 
   const onEdit = () => {
-    if (handleEdit && messageId !== undefined) {
+    if (handleEdit && messageId !== undefined)
       handleEdit(messageId, editedContent);
-    }
     setIsEditing(false);
   };
 
   return (
     <div className={bubbleClass}>
-      <div className="chat-bubble__content">
+      <div className="flex flex-col">
         {isEditing ? (
           <div className="flex gap-2">
             <input
@@ -76,10 +74,19 @@ export const ChatBubble = ({
               }}
               autoFocus
             />
-            <button type="button" onClick={onEdit}>
+
+            <button
+              type="button"
+              onClick={onEdit}
+              className="px-2 py-1 bg-green-500 text-white rounded-md shadow hover:bg-green-600 transition"
+            >
               ✔
             </button>
-            <button type="button" onClick={() => setIsEditing(false)}>
+            <button
+              type="button"
+              onClick={() => setIsEditing(false)}
+              className="px-2 py-1 bg-red-500 text-white rounded-md shadow hover:bg-red-600 transition"
+            >
               ✖
             </button>
           </div>
@@ -87,15 +94,27 @@ export const ChatBubble = ({
           children
         )}
       </div>
-      <div className="chat-bubble__meta">
-        {sender} {formattedTime}
+
+      <div className="text-[1rem] text-gray-600 mb-1 flex justify-between items-center">
+        <span>
+          {sender} {formattedTime}
+        </span>
+
         {isSender && (
-          <div className="chat-bubble__actions">
+          <div className="flex gap-1 h-8 w-20">
             <button type="button" onClick={onDelete}>
-              <img src="/Images/delete_icon.png" alt="delete" />
+              <img
+                src={delete_icon}
+                alt="delete"
+                className="w-8 h-8 object-contain cursor-pointer"
+              />
             </button>
             <button type="button" onClick={() => setIsEditing(true)}>
-              <img src="/Images/edit_icon.png" alt="edit" />
+              <img
+                src={edit_icon}
+                alt="edit"
+                className="w-8 h-8 object-contain cursor-pointer"
+              />
             </button>
           </div>
         )}

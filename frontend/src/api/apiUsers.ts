@@ -1,6 +1,6 @@
-import type { User } from "../types/user";
+import type { User } from "../features/users/types/user";
 import { ENDPOINTS } from "../config/endpoints";
-import type { CreateUserRequest } from "../types/createUserRequest";
+import type { CreateUserRequest } from "../features/authentication/types/createUserRequest";
 import {
   createItemInBackend,
   getItemFromBackend,

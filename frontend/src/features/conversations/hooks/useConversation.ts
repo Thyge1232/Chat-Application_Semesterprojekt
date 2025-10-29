@@ -1,8 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type {
-  Conversation,
-  ConversationRaw,
-} from "../../../types/conversation";
+import type { Conversation, ConversationRaw } from "../types/conversation";
 import { getItemFromBackend } from "../../../api/apiBaseCrud";
 import { ENDPOINTS } from "../../../config/endpoints";
 

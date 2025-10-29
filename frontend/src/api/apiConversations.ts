@@ -7,7 +7,7 @@ import type {
   Conversation,
   ConversationSummary,
   CreateConversationDto,
-} from "../types/conversation";
+} from "../features/conversations/types/conversation";
 import { ENDPOINTS } from "../config/endpoints";
 import { apiClient } from "./apiClient";
 

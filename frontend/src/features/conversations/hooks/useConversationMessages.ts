@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { getMessagesByConversationId } from "../../../api/apiMessages";
-import type { Message } from "../../../types/message";
+import type { Message } from "../../messages/types/message";
 
 export function useConversationMessages(conversationId?: number) {
   return useQuery<Message[], AxiosError>({

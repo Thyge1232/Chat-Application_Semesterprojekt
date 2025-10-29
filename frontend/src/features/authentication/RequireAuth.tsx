@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
-import { SpinnerWithText } from "../../ui/SpinnerWithText";
+import { SpinnerWithText } from "../../sharedComponents/SpinnerWithText";
 
 type RequireAuthProps = {
   children: React.ReactNode;

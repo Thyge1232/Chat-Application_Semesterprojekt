@@ -1,13 +1,13 @@
-import { ChatBubble } from "../../../ui/ChatBubble";
-import { Title } from "../../../ui/Title";
-import { MessageInput } from "../../../ui/MessageInput";
-import { SpinnerWithText } from "../../../ui/SpinnerWithText";
-import { Button } from "../../../ui/Button";
+import { ChatBubble } from "../components/ChatBubble";
+import { Title } from "../../../sharedComponents/Title";
+import { MessageInput } from "../components/MessageInput";
+import { SpinnerWithText } from "../../../sharedComponents/SpinnerWithText";
+import { Button } from "../../../sharedComponents/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../authentication/hooks/useAuth";
-import { ConversationColorThemeFactory } from "../../../ui/color-themes/ConversationColorThemeFactory";
-import { Dropdown, type DropdownItem } from "../../../ui/Dropdown";
+import { ConversationColorThemeFactory } from "../types/ConversationColorThemeFactory";
+import { Dropdown, type DropdownItem } from "../components/Dropdown";
 import { useCreateConversation } from "../hooks/useCreateConversation";
 import { AxiosError } from "axios";
 import { useUsers } from "../../authentication/hooks/useUsers";
@@ -18,7 +18,7 @@ import { useConversationMessages } from "../hooks/useConversationMessages";
 import { useUserConversations } from "../hooks/useUserConversations";
 import { useAddUserToConversation } from "../hooks/useAddUserToConversation";
 import { useConversation } from "../hooks/useConversation";
-import { useUpdateConversationColorTheme } from "../hooks/useUpdateConversationColorTheme"; //implementer
+import { useUpdateConversationColorTheme } from "../hooks/useUpdateConversationColorTheme";
 
 export const Conversations = () => {
   const { currentUser } = useAuth();
@@ -126,7 +126,7 @@ export const Conversations = () => {
   }, [messages]);
 
   if (conversationId != null && isPending) return <SpinnerWithText />;
-  if (error) return <p>Something went wrong loading messages.</p>;
+  if (error) return <p>Noget fejlede ved indhentnign af beskederne!!</p>;
   console.log(
     "Conversation IDs:",
     userconversations?.map((c) => c.id)

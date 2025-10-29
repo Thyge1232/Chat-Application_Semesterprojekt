@@ -1,4 +1,4 @@
-import type { IColorThemeConversation } from "../../types/iColorThemes";
+import type { IColorThemeConversation } from "./iColorThemes";
 
 //Blue
 export class ThemeBlue implements IColorThemeConversation {

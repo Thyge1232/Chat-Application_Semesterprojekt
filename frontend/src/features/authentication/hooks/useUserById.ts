@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { User } from "../../../types/user";
+import type { User } from "../../users/types/user";
 import { getUserInfoById } from "../../../api/apiUsers";
 
 export const useUserById = (userId: number | undefined) => {

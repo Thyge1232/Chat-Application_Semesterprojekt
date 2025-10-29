@@ -1,6 +1,6 @@
 import { signupUser } from "../../../api/apiUsers";
 import { useMutation } from "@tanstack/react-query";
-import { CreateUserRequest } from "../../../types/createUserRequest";
+import { CreateUserRequest } from "../types/createUserRequest";
 import { useNavigate } from "react-router-dom";
 
 export function useSignup() {

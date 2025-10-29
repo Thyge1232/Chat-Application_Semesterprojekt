@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./MessageInputStyle.css";
 import type { IColorThemeConversation } from "../types/iColorThemes";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 
@@ -21,7 +20,7 @@ export const MessageInput = ({
 
   return (
     <form
-      className="input"
+      className="flex w-[90%] relative items-center z-[1]"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();
@@ -30,7 +29,7 @@ export const MessageInput = ({
       <input
         type="text"
         placeholder="skriv en besked her..."
-        className={`${colorTheme.messageInputBg} ${colorTheme.messageInputText} w-full rounded-full p-5 text-lg focus:outline-none`}
+        className={`${colorTheme.messageInputBg} ${colorTheme.messageInputText} w-full rounded-full p-5 text-lg focus:outline-none focus:shadow-[0_0_10px_1000px_rgba(0,0,0,0.3)]`}
         value={content}
         onChange={(e) => setContent(e.target.value)}
         required

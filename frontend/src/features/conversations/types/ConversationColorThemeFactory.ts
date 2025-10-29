@@ -1,5 +1,5 @@
-import type { IColorThemeConversation } from "../../types/iColorThemes";
-import { ThemeBlue, ThemeDarkMode, ThemeEdgeLord } from "./Theme1";
+import type { IColorThemeConversation } from "./iColorThemes";
+import { ThemeBlue, ThemeDarkMode, ThemeEdgeLord } from "./ConversationThemes";
 
 //Factoryclass: return a colortheme for conversationpage based on a number from User.ThemeNumber (db)
 //Husk: se ui komponenter igennem for hardcoded styling /

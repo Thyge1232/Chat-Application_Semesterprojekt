@@ -1,5 +1,9 @@
-import type { ApiMessage, Message, SendMessage } from "../types/message";
-import { transformMessageFromApi } from "../services/transformMessageFromApi";
+import type {
+  ApiMessage,
+  Message,
+  SendMessage,
+} from "../features/messages/types/message";
+import { transformMessageFromApi } from "../features/messages/services/transformMessageFromApi";
 import { ENDPOINTS } from "../config/endpoints";
 import {
   getItemFromBackend,

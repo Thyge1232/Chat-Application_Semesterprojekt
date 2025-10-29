@@ -1,6 +1,5 @@
 import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
-import "../assets/styles/ButtonStyle.css";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
@@ -12,7 +11,7 @@ export const Button = ({
   ...props
 }: PropsWithChildren<ButtonProps>) => {
   return (
-    <button {...props} className={twMerge("button", className)}>
+    <button {...props} className={twMerge("cursor-pointer", className)}>
       {children}
     </button>
   );
