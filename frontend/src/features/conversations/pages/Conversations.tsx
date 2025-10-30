@@ -19,6 +19,7 @@ import { useUserConversations } from "../hooks/useUserConversations";
 import { useAddUserToConversation } from "../hooks/useAddUserToConversation";
 import { useConversation } from "../hooks/useConversation";
 import { useUpdateConversationColorTheme } from "../hooks/useUpdateConversationColorTheme";
+import { Popup } from "../components/PopUp";
 
 export const Conversations = () => {
   const { currentUser } = useAuth();
@@ -57,6 +58,9 @@ export const Conversations = () => {
   const addUserMutation = useAddUserToConversation();
   const updateColorTheme = useUpdateConversationColorTheme();
 
+  //Til popup i dropdown menu
+  const [showLeavePopup, setShowLeavePopup] = useState(false);
+
   const dropdownItems: DropdownItem[] = [
     {
       itemlabel: "Tilføj bruger",
@@ -81,7 +85,7 @@ export const Conversations = () => {
     },
     {
       itemlabel: "Forlad samtalen",
-      onClick: () => console.log("Forlad samtalen clicked"), //TODO: pop up, ja/nej --> giv backend besked
+      onClick: () => setShowLeavePopup(true),
     },
     {
       itemlabel: "Vælg farvetema",
@@ -222,20 +226,26 @@ export const Conversations = () => {
           Vælg en samtale i venstre side eller opret ny samtale.
         </div>
       ) : (
-        <div
-          className={`grid grid-rows-[1fr_auto] relative ${theme.conversationsBg}`}
-        >
-          <Dropdown
-            label="Indstillinger"
-            items={dropdownItems}
-            className={`absolute top-2 right-2 ${theme.dropdownBg} ${theme.dropdownText}`}
-            colorTheme={theme}
-          />
-          <div className="overflow-y-auto p-4" style={{ height: "65vh" }}>
+        <div className={`grid grid-rows-[1fr_auto] ${theme.conversationsBg}`}>
+          <div className="overflow-y-auto p-4" style={{ height: "75vh" }}>
+            {showLeavePopup && (
+              <Popup
+                dialogTitle="Du er ved at forlade samtalen, er du sikker?"
+                confirmLabel="Forlad samtale"
+                cancelLabel="Annuller"
+                isOpen={showLeavePopup}
+                onSubmit={() => {
+                  // Kald backend for at forlade samtalen
+                  console.log("Forlader samtale", conversationId);
+                  setConversationId(undefined); // evt. opdater state efter forlad
+                }}
+                onClose={() => setShowLeavePopup(false)}
+              />
+            )}
             <Dropdown
               label="Indstillinger"
               items={dropdownItems}
-              className={`absolute top-2 right-2 ${theme.dropdownBg} ${theme.dropdownText}`}
+              className="z-2"
               colorTheme={theme}
             />
             <div className="mb-4 mt-14" />
