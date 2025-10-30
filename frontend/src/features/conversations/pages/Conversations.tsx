@@ -133,10 +133,10 @@ export const Conversations = () => {
   );
 
   return (
-    <div className="grid grid-cols-[20%_80%]" style={{ height: "80vh" }}>
+    <div className="grid grid-cols-[20%_80%]" style={{ height: "60vh" }}>
       {/* Left column: conversation list */}
       <div>
-        <div className="bg-blue-100 p-4 flex flex-col overflow-y-auto relative max-h-[80vh]">
+        <div className="bg-blue-100 p-4 flex flex-col overflow-y-auto relative max-h-[70vh]">
           <Title>Mine samtaler</Title>
 
           {isLoadingConversations && <SpinnerWithText />}
@@ -231,7 +231,7 @@ export const Conversations = () => {
             className={`absolute top-2 right-2 ${theme.dropdownBg} ${theme.dropdownText}`}
             colorTheme={theme}
           />
-          <div className="overflow-y-auto p-4" style={{ height: "75vh" }}>
+          <div className="overflow-y-auto p-4" style={{ height: "65vh" }}>
             <Dropdown
               label="Indstillinger"
               items={dropdownItems}

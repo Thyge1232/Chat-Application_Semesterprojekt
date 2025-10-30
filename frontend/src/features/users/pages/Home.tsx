@@ -14,13 +14,11 @@ export const Home = () => {
   if (!current) return <p>Ingen bruger fundet</p>;
 
   return (
-    <>
-      <Banner
-        userId={current.id}
-        userName={current.username}
-        email={current.email}
-        createdAt={current.createdAt}
-      />
-    </>
+    <Banner
+      userId={current.id}
+      userName={current.username}
+      email={current.email}
+      createdAt={current.createdAt}
+    />
   );
 };
