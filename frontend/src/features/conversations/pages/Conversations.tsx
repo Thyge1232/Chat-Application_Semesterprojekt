@@ -107,7 +107,7 @@ export const Conversations = () => {
     error,
   } = useConversationMessages(conversationId);
 
-  //todo temporary polling solution
+  //polling solution (we arent using sockets yet)
   useEffect(() => {
     if (conversationId == null) return;
     const interval = setInterval(() => {
@@ -117,7 +117,7 @@ export const Conversations = () => {
       queryClient.invalidateQueries({
         queryKey: ["messages"],
       });
-    }, 500); //poll every 0.5 second
+    }, 500); //ms
     return () => clearInterval(interval);
   }, [conversationId, queryClient]);
 
