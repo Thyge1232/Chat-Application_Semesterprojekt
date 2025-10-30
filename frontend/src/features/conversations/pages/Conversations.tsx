@@ -19,7 +19,8 @@ import { useUserConversations } from "../hooks/useUserConversations";
 import { useAddUserToConversation } from "../hooks/useAddUserToConversation";
 import { useConversation } from "../hooks/useConversation";
 import { useUpdateConversationColorTheme } from "../hooks/useUpdateConversationColorTheme";
-import { Popup } from "../components/PopUp";
+import { Popup } from "../components/Popup";
+import { useDeleteUserFromConversation } from "../hooks/useDeleteUserFromConversation";
 
 export const Conversations = () => {
   const { currentUser } = useAuth();
@@ -60,6 +61,7 @@ export const Conversations = () => {
 
   //Til popup i dropdown menu
   const [showLeavePopup, setShowLeavePopup] = useState(false);
+  const deleteUserMutation = useDeleteUserFromConversation();
 
   const dropdownItems: DropdownItem[] = [
     {
@@ -237,7 +239,20 @@ export const Conversations = () => {
                 onSubmit={() => {
                   // Kald backend for at forlade samtalen
                   console.log("Forlader samtale", conversationId);
-                  setConversationId(undefined); // evt. opdater state efter forlad
+                  deleteUserMutation.mutate(
+                    {
+                      conversationId: conversationId!,
+                    },
+                    {
+                      onSuccess: () => {
+                        queryClient.invalidateQueries({
+                          queryKey: ["conversations"],
+                        });
+                        setConversationId(undefined);
+                        setShowLeavePopup(false);
+                      },
+                    }
+                  );
                 }}
                 onClose={() => setShowLeavePopup(false)}
               />

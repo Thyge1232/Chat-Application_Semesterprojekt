@@ -35,6 +35,13 @@ export async function addUserToConversationApi(
   await apiClient.post(url);
 }
 
+export async function deleteUserFromConversationApi(
+  conversationId: number
+): Promise<void> {
+  const url = `${ENDPOINTS.conversations.byId(conversationId)}/leave`;
+  await apiClient.delete(url);
+}
+
 //Obs, når backend understøtter dette.
 export async function updateConversationColorThemeApi(
   conversationId: number,
