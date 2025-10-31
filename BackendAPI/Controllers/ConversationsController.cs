@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using BackendAPI.Dtos;
 using BackendAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -130,4 +131,30 @@ public class ConversationController : ControllerBase
         }
         return BadRequest("You're not a member of this conversation.");
     }
+
+    [Authorize]
+    [HttpPut("conversations/colortheme")]
+    public async Task<IActionResult> UpdateColorTheme([FromBody] ColorThemeUpdateDto colorThemeUpdateDto)
+    {
+        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!int.TryParse(userIdString, out var currentUserId))
+            return Unauthorized("Invalid user token.");
+
+        try
+        {
+            await _conversationService.UpdateColorThemeAsync(
+                colorThemeUpdateDto.ConversationId,
+                currentUserId,
+                colorThemeUpdateDto.ColorTheme
+            );
+            return Ok("Color theme updated successfully.");
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new { message = "An internal server error occurred." });
+        }
+     
+    }
+
 }

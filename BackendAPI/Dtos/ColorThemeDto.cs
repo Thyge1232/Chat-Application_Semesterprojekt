@@ -4,7 +4,12 @@ namespace BackendAPI.Dtos;
 
 public class ColorThemeUpdateDto
 {
+
+
     [Required]
-    public string ColorTheme { get; set; } = "default";
+    public string ColorTheme { get; set; } = string.Empty;
+
+    [Required]
+    public int ConversationId { get; set; }
 
 }

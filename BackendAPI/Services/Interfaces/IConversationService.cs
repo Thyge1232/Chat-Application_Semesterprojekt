@@ -13,4 +13,5 @@ public interface IConversationService
     Task<IEnumerable<ConversationSummaryDto>> GetConversationByUserIdAsync(int userId);
 
     Task<bool> RemoveThisUserByIdFromConversationByIdAsync(int conversationId, int userid);
+    Task UpdateColorThemeAsync(int conversationId, int userId, string colorTheme);
 }
