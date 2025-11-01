@@ -120,7 +120,7 @@ public class ConversationService : IConversationService
             await _convoRepo.SaveChangesAsync();
 
             conversation = await _convoRepo.GetByIdWithMembersAsync(conversationId);
-
+            // Evt automatisk slettning af convosation
             if (conversation != null && conversation.UserList.Count == 0)
             {
                 await _convoRepo.DeleteAsync(conversation);

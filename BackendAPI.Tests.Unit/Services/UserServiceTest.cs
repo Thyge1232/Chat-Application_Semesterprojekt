@@ -171,7 +171,7 @@ public class UserServiceTest
         // Assert
         Assert.NotNull(result); //Er ikke null
         Assert.Empty(result); //Returer tom liste
-        Assert.Equal(0, result.Count());
+        Assert.Empty(result);
     }
 
     [Fact]
