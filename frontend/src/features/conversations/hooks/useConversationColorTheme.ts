@@ -1,15 +1,22 @@
 // import { AxiosError } from "axios";
-// import { useApiQuery } from "../../../hooks/useApiQuery";
-// import { messagesApi } from "../../../api/messageApi";
-// import type { Message } from "../../../types/message";
-// import { conversationApi } from "../../../api/conversationApi";
+// import { useQuery } from "@tanstack/react-query";
+// import { getConversationColorThemeApi } from "../../../api/apiConversations";
+// import { ConversationColorThemeFactory } from "../types/ConversationColorThemeFactory";
+// import type { IColorThemeConversation } from "../types/iColorThemes";
 
 // export function useConversationColorTheme(conversationId?: number) {
-//     return useApiQuery<number, AxiosError>(
-//         ["conversationColorTheme", conversationColorThemeId ?? "none"],
-//         () => conversationApi.getColorTheme(conversationId!),
-//         { enabled: conversationId != null }
-//     );
+//   return useQuery<IColorThemeConversation, AxiosError>({
+//     queryKey: ["colorTheme", conversationId],
+//     queryFn: async () => {
+//       if (conversationId == null) throw new Error("Fejl i conversationId");
+
+//       const themeName = await getConversationColorThemeApi(conversationId);
+
+//       return ConversationColorThemeFactory.createThemeFromString(themeName);
+//     },
+
+//     enabled: conversationId != null,
+//   });
 // }
 
-// endpoint i conversationApi, response = await apiClient.get<>
+// // endpoint i conversationApi, response = await apiClient.get<>

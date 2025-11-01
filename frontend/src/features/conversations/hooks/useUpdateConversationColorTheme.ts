@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateConversationColorThemeApi } from "../../../api/apiConversations";
-import { ENDPOINTS } from "../../../config/endpoints";
 
 export function useUpdateConversationColorTheme() {
   const queryClient = useQueryClient();

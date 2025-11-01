@@ -133,8 +133,8 @@ public class ConversationController : ControllerBase
     }
 
     [Authorize]
-    [HttpPut("conversations/colortheme")]
-    public async Task<IActionResult> UpdateColorTheme([FromBody] ColorThemeUpdateDto colorThemeUpdateDto)
+    [HttpPut("{conversationId}/colortheme")]
+    public async Task<IActionResult> UpdateColorTheme(int conversationId, [FromBody] ColorThemeUpdateDto colorThemeUpdateDto)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -144,7 +144,7 @@ public class ConversationController : ControllerBase
         try
         {
             await _conversationService.UpdateColorThemeAsync(
-                colorThemeUpdateDto.ConversationId,
+                conversationId,
                 currentUserId,
                 colorThemeUpdateDto.ColorTheme
             );

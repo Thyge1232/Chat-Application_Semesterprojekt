@@ -8,6 +8,7 @@ import type {
   ConversationSummary,
   CreateConversationDto,
 } from "../features/conversations/types/conversation";
+import type { IColorThemeConversation } from "../features/conversations/types/iColorThemes";
 import { ENDPOINTS } from "../config/endpoints";
 import { apiClient } from "./apiClient";
 
@@ -42,13 +43,23 @@ export async function deleteUserFromConversationApi(
   await apiClient.delete(url);
 }
 
+//Get colortheme
+// export async function getConversationColorThemeApi(
+//   conversationId: number
+// ): Promise<string | null> {
+//   const response = await getItemFromBackend<colorTheme>(
+//     ENDPOINTS.conversations.byId(conversationId)
+//   );
+//   return response.colorTheme;
+// }
+
 //Obs, når backend understøtter dette.
 export async function updateConversationColorThemeApi(
   conversationId: number,
-  colorTheme: string //number ??
+  colorTheme: string
 ): Promise<void> {
-  return await updateItemInBackend<{ colorTheme: string }, void>(
-    ENDPOINTS.conversations.byId(conversationId),
+  await updateItemInBackend<{ colorTheme: string }, void>(
+    ENDPOINTS.conversations.updateColorTheme(conversationId),
     { colorTheme }
   );
 }
