@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateConversationColorTheme } from "../../../api/conversationApi";
-import { ENDPOINTS } from "../../../config/api";
+import { updateConversationColorThemeApi } from "../../../api/apiConversations";
 
 export function useUpdateConversationColorTheme() {
   const queryClient = useQueryClient();
@@ -10,10 +9,10 @@ export function useUpdateConversationColorTheme() {
     { conversationId: number; colorTheme: string }
   >({
     mutationFn: ({ conversationId, colorTheme }) =>
-      updateConversationColorTheme(conversationId, colorTheme),
+      updateConversationColorThemeApi(conversationId, colorTheme),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: [ENDPOINTS.conversationById, variables.conversationId],
+        queryKey: ["conversation", variables.conversationId],
       });
     },
 

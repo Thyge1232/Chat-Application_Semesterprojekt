@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addUserToConversation } from "../../../api/conversationApi";
-import { ENDPOINTS } from "../../../config/api";
+import { addUserToConversationApi } from "../../../api/apiConversations";
+import { ENDPOINTS } from "../../../config/endpoints";
 
 export function useAddUserToConversation() {
   const queryClient = useQueryClient();
   return useMutation<void, unknown, { conversationId: number; userId: number }>(
     {
       mutationFn: ({ conversationId, userId }) =>
-        addUserToConversation(conversationId, userId),
-      onSuccess: (data, variables) => {
+        addUserToConversationApi(conversationId, userId),
+      onSuccess: (_, variables) => {
         queryClient.invalidateQueries({
-          queryKey: [ENDPOINTS.conversationById, variables.conversationId],
+          queryKey: ["conversation", variables.conversationId],
         });
       },
 
-      onError: (error: unknown) => {
+      onError: (error) => {
         console.error("Fejl ved tilføjelse af bruger til konversation:", error);
       },
     }

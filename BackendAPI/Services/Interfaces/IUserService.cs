@@ -11,7 +11,5 @@ namespace BackendAPI.Services.Interfaces
 
         Task<UserDto> RegisterUserAsync(CreateUserDto createUserDto);
 
-        Task UpdateColorThemeAsync(int userId, string colorTheme);
-
     }
 }

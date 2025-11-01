@@ -67,16 +67,4 @@ public class UserService : IUserService
             CreatedAt = user.CreatedAt
         };
     }
-
-    public async Task UpdateColorThemeAsync(int userId, string colorTheme)
-    {
-        var user = await _userRepository.GetByIdAsync(userId);
-        if (user == null)
-        {
-            return;
-        }
-
-        user.ColorTheme = colorTheme;
-        await _userRepository.SaveChangesAsync();
-    }
 }

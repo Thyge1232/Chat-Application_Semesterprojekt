@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ENDPOINTS } from "../../../config/api";
-import { deleteMessage } from "../../../api/messageApi";
-import { getToken } from "../../../services/tokenService";
+import { ENDPOINTS } from "../../../config/endpoints";
+import { deleteMessage } from "../../../api/apiMessages";
+import { getToken } from "../../authentication/services/tokenService";
 
 export const useDeleteMessage = () => {
   const queryClient = useQueryClient();
@@ -15,9 +15,9 @@ export const useDeleteMessage = () => {
       console.log(getToken());
       await deleteMessage(messageId);
     },
-    onSuccess: (_data, variables) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [ENDPOINTS.messages, variables.conversationId],
+        queryKey: ["messages"],
       });
     },
   });

@@ -32,11 +32,6 @@ public class MyDBContext : DbContext
             .HasIndex(u => u.Email) // Unik Email
             .IsUnique();
 
-        modelBuilder.Entity<User>()
-            .Property(u => u.ColorTheme)
-            .HasMaxLength(30)
-            .HasDefaultValue("default");
-
         modelBuilder
             .Entity<ConversationMember>()
             .HasOne(cm => cm.User)

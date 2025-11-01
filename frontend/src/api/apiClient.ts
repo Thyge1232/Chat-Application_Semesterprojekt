@@ -1,6 +1,9 @@
 import axios, { AxiosError, AxiosHeaders } from "axios";
-import { getToken, clearToken } from "../services/tokenService";
-import { API_BASE_URL } from "../config/api";
+import {
+  getToken,
+  clearToken,
+} from "../features/authentication/services/tokenService";
+import { API_BASE_URL } from "../config/apiUrl";
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,

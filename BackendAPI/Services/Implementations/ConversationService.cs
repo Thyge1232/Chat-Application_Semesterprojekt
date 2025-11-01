@@ -48,6 +48,7 @@ public class ConversationService : IConversationService
             Id = conversation.ConversationId,
             Name = conversation.Name,
             CreatedAt = conversation.CreatedAt,
+            ColorTheme = conversation.ColorTheme,
             Members = conversation
                 .UserList.Select(cm => new UserDto
                 {
@@ -131,4 +132,21 @@ public class ConversationService : IConversationService
         return success;
     }
 
+    public async Task UpdateColorThemeAsync(int conversationId, int userId, string colorTheme)
+    {
+        var conversation = await _convoRepo.GetByIdWithMembersAsync(conversationId);
+            if (conversation == null)
+        {
+            throw new Exception("Conversation not found.");
+        }
+
+        var member = conversation.UserList.FirstOrDefault(cm => cm.UserId == userId);
+        if (member == null)
+        {
+            throw new Exception("User is not a member of this conversation.");
+        }
+
+        conversation.ColorTheme = colorTheme;
+        await _convoRepo.SaveChangesAsync();
+    }
 }

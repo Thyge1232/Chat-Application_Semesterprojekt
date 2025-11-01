@@ -1,11 +1,10 @@
-import type { UserSignup } from "../../../types/userSignup";
 import { Link } from "react-router-dom";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import "../../../ui/PagesStyle.css";
-import { useSignup } from "../../users/hooks/useSignup";
+import { useSignup } from "../hooks/useSignup";
+import { CreateUserRequest } from "../types/createUserRequest";
 
-interface FormInputs extends UserSignup {
+interface FormInputs extends CreateUserRequest {
   confirmPassword: string;
 }
 
@@ -21,7 +20,7 @@ export const Signup = () => {
   const createUserMutation = useSignup();
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    const { confirmPassword, ...userData } = data;
+    const { ...userData } = data; // removed confirmPassword
     try {
       await createUserMutation.mutateAsync(userData);
       navigate("/home");
@@ -151,7 +150,7 @@ export const Signup = () => {
           </div>
         </form>
 
-        <p className="custom-link-button">
+        <p className="mt-2.5 text-center text-[#5170aa] bg-white border border-black rounded-md inline-block px-2 py-1">
           <Link to="/">Tilbage til log ind</Link>
         </p>
       </div>

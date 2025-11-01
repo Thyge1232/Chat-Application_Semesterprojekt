@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { Message } from "../../../types/message";
-import { updateMessage } from "../../../api/messageApi";
-import { ENDPOINTS } from "../../../config/api";
+import type { Message } from "../types/message";
+import { updateMessage } from "../../../api/apiMessages";
+import { ENDPOINTS } from "../../../config/endpoints";
 
 export const useEditMessage = () => {
   const queryClient = useQueryClient();
@@ -14,9 +14,9 @@ export const useEditMessage = () => {
       const response = await updateMessage(messageId, newContent);
       return response;
     },
-    onSuccess: (_data, variables) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [ENDPOINTS.messages, variables.conversationId],
+        queryKey: ["messages"],
       });
     },
   });

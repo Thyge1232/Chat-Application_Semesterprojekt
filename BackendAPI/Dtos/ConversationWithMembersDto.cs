@@ -7,4 +7,5 @@ public class ConversationWithMembersDto
 
     public DateTime CreatedAt { get; set; }
     public List<UserDto> Members { get; set; } = new();
+    public string ColorTheme { get; set; } = string.Empty;
 }
