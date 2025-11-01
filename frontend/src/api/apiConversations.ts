@@ -43,17 +43,6 @@ export async function deleteUserFromConversationApi(
   await apiClient.delete(url);
 }
 
-//Get colortheme
-// export async function getConversationColorThemeApi(
-//   conversationId: number
-// ): Promise<string | null> {
-//   const response = await getItemFromBackend<colorTheme>(
-//     ENDPOINTS.conversations.byId(conversationId)
-//   );
-//   return response.colorTheme;
-// }
-
-//Obs, når backend understøtter dette.
 export async function updateConversationColorThemeApi(
   conversationId: number,
   colorTheme: string

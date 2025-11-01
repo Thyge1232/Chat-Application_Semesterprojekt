@@ -21,7 +21,7 @@ import { useConversation } from "../hooks/useConversation";
 import { useUpdateConversationColorTheme } from "../hooks/useUpdateConversationColorTheme";
 import { Popup } from "../components/Popup";
 import { useDeleteUserFromConversation } from "../hooks/useDeleteUserFromConversation";
-import type { Conversation } from "../types/conversation"; // ret stien til hvor interfacet er
+import type { Conversation } from "../types/conversation";
 
 export const Conversations = () => {
   const { currentUser } = useAuth();
@@ -58,7 +58,7 @@ export const Conversations = () => {
     users?.filter((u) => !participants.some((p) => p.id === u.id)) ?? [];
 
   const addUserMutation = useAddUserToConversation();
-  const updateColorTheme = useUpdateConversationColorTheme();
+  const updateColorThemeMutation = useUpdateConversationColorTheme();
 
   //Til popup i dropdown menu
   const [showLeavePopup, setShowLeavePopup] = useState(false);
@@ -67,7 +67,6 @@ export const Conversations = () => {
   const dropdownItems: DropdownItem[] = [
     {
       itemlabel: "Tilføj bruger",
-      onClick: () => console.log("Tilføj bruger Conversation clicked"), //ToDO: pop up --> vælg bruger fra liste, giv backend besked
       subItems: otherUsers?.map((u) => ({
         id: u.id,
         itemlabel: u.username,
@@ -95,15 +94,7 @@ export const Conversations = () => {
       subItems: themeOptions.map((t) => ({
         itemlabel: t.label,
         onClick: () => {
-          // Optimistisk opdatering: ændrer cached conversation direkte
-          queryClient.setQueryData<Conversation>(
-            ["conversation", conversationId],
-            (old) => {
-              if (!old) return old;
-              return { ...old, colorTheme: t.label };
-            }
-          );
-          updateColorTheme.mutate({
+          updateColorThemeMutation.mutate({
             conversationId: conversationId!,
             colorTheme: t.label,
           });

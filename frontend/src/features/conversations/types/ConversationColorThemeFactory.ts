@@ -1,10 +1,6 @@
 import type { IColorThemeConversation } from "./iColorThemes";
 import { ThemeBlue, ThemeDarkMode, ThemeEdgeLord } from "./ConversationThemes";
 
-//Factoryclass: return a colortheme for conversationpage based on a number from User.ThemeNumber (db)
-//Husk: se ui komponenter igennem for hardcoded styling /
-//Husk: Tilføj + ændre i Conversationpage /
-
 export class ConversationColorThemeFactory {
   static createTheme(themeNumber: number): IColorThemeConversation {
     switch (themeNumber) {
