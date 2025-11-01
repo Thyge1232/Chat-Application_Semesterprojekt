@@ -21,6 +21,7 @@ import { useConversation } from "../hooks/useConversation";
 import { useUpdateConversationColorTheme } from "../hooks/useUpdateConversationColorTheme";
 import { Popup } from "../components/Popup";
 import { useDeleteUserFromConversation } from "../hooks/useDeleteUserFromConversation";
+import type { Conversation } from "../types/conversation"; // ret stien til hvor interfacet er
 
 export const Conversations = () => {
   const { currentUser } = useAuth();
@@ -94,6 +95,14 @@ export const Conversations = () => {
       subItems: themeOptions.map((t) => ({
         itemlabel: t.label,
         onClick: () => {
+          // Optimistisk opdatering: ændrer cached conversation direkte
+          queryClient.setQueryData<Conversation>(
+            ["conversation", conversationId],
+            (old) => {
+              if (!old) return old;
+              return { ...old, colorTheme: t.label };
+            }
+          );
           updateColorTheme.mutate({
             conversationId: conversationId!,
             colorTheme: t.label,

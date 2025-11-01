@@ -16,6 +16,8 @@ export const ENDPOINTS = {
       `${API_BASE_URL}/conversations/${conversationId}/users/${userId}`,
     leave: (conversationId: number | string) =>
       `${API_BASE_URL}/conversations/${conversationId}/leave`,
+    updateColorTheme: (conversationId: number | string) =>
+      `${API_BASE_URL}/conversations/${conversationId}/colortheme`,
   },
 
   messages: {
