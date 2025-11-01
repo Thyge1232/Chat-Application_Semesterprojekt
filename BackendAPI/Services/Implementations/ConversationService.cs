@@ -48,6 +48,7 @@ public class ConversationService : IConversationService
             Id = conversation.ConversationId,
             Name = conversation.Name,
             CreatedAt = conversation.CreatedAt,
+            ColorTheme = conversation.ColorTheme,
             Members = conversation
                 .UserList.Select(cm => new UserDto
                 {
