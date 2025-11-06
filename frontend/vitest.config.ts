@@ -8,8 +8,8 @@ export default defineConfig({
     globals: true,
     setupFiles: "./tests/setupTests.ts",
     coverage: {
-      provider: "v8", // or "istanbul"
-      reporter: ["text", "lcov", "html"],
+      provider: "v8",
+      reporter: ["text", "lcov", "html", "cobertura"],
       reportsDirectory: "./coverage",
     },
   },
