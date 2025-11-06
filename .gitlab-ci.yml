@@ -20,7 +20,7 @@ test-frontend:
         path: frontend/coverage/cobertura-coverage.xml
     paths:
       - frontend/coverage/
-  coverage: '/All files.*\s+(\d+\.\d+%)/'
+  coverage: '/All files.*\s+(\d+\.\d+)/'
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       allow_failure: true
