@@ -1,0 +1,49 @@
+// Importér nødvendige helpers
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event"; // til interaktioner
+import { describe, it, expect, beforeEach, vi } from "vitest";
+
+// Importér komponenten (UUT = Unit Under Test)
+import { Button as UUT } from "../../src/sharedComponents/Button";
+
+describe("UUT komponenten", () => {
+  let props: any;
+
+  // beforeEach kører før hver test – her kan du nulstille mocks eller props
+  beforeEach(() => {
+    // Eksempel: nulstil props
+    props = { message: "Hej verden" };
+
+    // Eksempel: mock global funktion
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(window, "alert").mockImplementation(() => {});
+  });
+
+  it("renderer uden fejl", () => {
+    render(<UUT {...props} />);
+    // find element via tekst, alt‑tekst, testid osv.
+    expect(screen.getByText(/Hej verden/i)).toBeInTheDocument();
+  });
+
+  it("kalder en funktion når der klikkes", async () => {
+    const handleClick = vi.fn();
+    render(<UUT {...props} onClick={handleClick} />);
+    await userEvent.click(screen.getByRole("button"));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("viser korrekt CSS-klasse", () => {
+    render(<UUT {...props} />);
+    const element = screen.getByTestId("uut");
+    expect(element).toHaveClass("bg-green-500");
+  });
+
+  it("logger fejl til konsollen", () => {
+    const error = new Error("Noget gik galt");
+    UUT(error); // hvis komponenten er en funktion
+    expect(console.log).toHaveBeenCalledWith(error);
+    expect(window.alert).toHaveBeenCalledWith(
+      "Noget gik galt: " + error.message
+    );
+  });
+});
