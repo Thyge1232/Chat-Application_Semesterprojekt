@@ -11,13 +11,20 @@ test-frontend:
     - cd frontend
     - npm ci
     - npm run lint
-    - npm test
+    - npm run test:ci   # kør CI-script med coverage
+  artifacts:
+    when: always
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: frontend/coverage/cobertura-coverage.xml
+    paths:
+      - frontend/coverage/
+  coverage: '/All files.*\s+(\d+\.\d+%)/'
   rules:
-    # On main: run but don't block the pipeline if it fails
     - if: '$CI_COMMIT_BRANCH == "main"'
       allow_failure: true
       when: on_success
-    # On MRs / other branches: run and must pass
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       when: on_success
     - if: '$CI_COMMIT_BRANCH != "main"'

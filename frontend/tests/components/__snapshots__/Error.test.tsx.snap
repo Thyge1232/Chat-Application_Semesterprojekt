@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`displayError > returns an image element with correct attributes 1`] = `
+<div>
+  <img
+    alt="error"
+    class="h-160 w-160"
+    src="Images/Error.png"
+  />
+</div>
+`;
