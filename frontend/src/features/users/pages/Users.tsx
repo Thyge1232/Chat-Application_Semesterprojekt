@@ -6,11 +6,12 @@ import { UserCard } from "../components/UserCard";
 export const Users = () => {
   const { data: allUsers, isPending, error } = useUsers();
   const users = allUsers ?? [];
-  console.log("allUsers length:", allUsers?.length);
 
   if (isPending) return <SpinnerWithText />;
   if (error)
-    return <p className="text-center text-red-500">Error loading users</p>;
+    return (
+      <p className="text-center text-red-500">Fejl med at loade brugere</p>
+    );
 
   return (
     <div className="p-4 max-w-[1200px] mx-auto">
