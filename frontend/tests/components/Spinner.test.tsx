@@ -3,15 +3,10 @@ import { describe, it, expect } from "vitest";
 import { Spinner } from "../../src/sharedComponents/Spinner";
 
 describe("Spinneren", () => {
-  it("viser en spinner", () => {
+  it("viser en spinner med tailwind indstillingerne, vi har valgt", () => {
     render(<Spinner />);
-    const spinner = screen.getByRole("presentation", { hidden: true });
+    const spinner = screen.getByTestId("spinner");
     expect(spinner).toBeInTheDocument();
-  });
-
-  it("anvender tailwind indstillingerne, vi har valgt", () => {
-    render(<Spinner />);
-    const spinner = screen.getByRole("presentation", { hidden: true });
     expect(spinner).toHaveClass(
       "border-green-700",
       "mx-auto",
