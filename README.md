@@ -21,4 +21,5 @@ VSCode extensions:
 - Tailwind CSS IntelliSense
 - Vitest Snippets
 
+[![coverage report](https://gitlab.com/<namespace>/<project>/badges/main/coverage.svg)](https://gitlab.com/<namespace>/<project>/-/commits/main)
 
