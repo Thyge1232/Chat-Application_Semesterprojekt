@@ -33,6 +33,8 @@ describe("authService", () => {
   const invalidPayloads: [Record<string, unknown>, string][] = [
     [{ nameid: 1 }, "userName missing"],
     [{ unique_name: "Alice" }, "userId missing"],
+    [{ unique_name: "Alice", nameid: null }, "userId null"],
+    [{ unique_name: "", nameid: 5 }, "userName empty"],
   ];
 
   test.each(invalidPayloads)(
