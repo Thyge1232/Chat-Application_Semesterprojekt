@@ -18,7 +18,6 @@ export class ConversationColorThemeFactory {
     }
   }
 
-  //Er attributten en string i db ellers blot brug ;
   static createThemeFromString(
     themeName: string | null | undefined
   ): IColorThemeConversation {
