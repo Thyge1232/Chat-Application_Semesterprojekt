@@ -15,6 +15,7 @@ public class AuthService : IAuthService
     private readonly MyDBContext _dbContext;
     private readonly IPasswordHasher _passwordHasher;
 
+
     public AuthService(MyDBContext dbContext, IConfiguration config, IPasswordHasher passwordHasher)
     {
         _dbContext = dbContext;
@@ -28,10 +29,10 @@ public class AuthService : IAuthService
             .FirstOrDefaultAsync(u => u.Username == loginDto.Username);
 
         if (user == null)
-            throw new InvalidOperationException("User not found");
+            throw new InvalidOperationException("Cannot find user");
 
         if (!_passwordHasher.VerifyPassword(loginDto.Password, user.Password))
-            throw new UnauthorizedAccessException("Invalid password");
+            throw new UnauthorizedAccessException("That is an invalid password");
 
         var key = Encoding.ASCII.GetBytes(_config["Jwt:Secret"]);
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -43,7 +44,7 @@ public class AuthService : IAuthService
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new Claim(ClaimTypes.Name, user.Username)
             }),
-            Expires = DateTime.UtcNow.AddHours(1),
+            Expires = DateTime.UtcNow.AddMinutes(15),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature)

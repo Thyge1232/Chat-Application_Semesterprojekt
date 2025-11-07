@@ -2,8 +2,6 @@ using BackendAPI.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-
-
 namespace BackendAPI.Tests.Unit.Services;
 
 public class AuthServiceTest
@@ -23,8 +21,7 @@ public class AuthServiceTest
 
         _mockConfig = new Mock<IConfiguration>();
         _mockConfig.Setup(c => c["Jwt:Secret"]).Returns("this_is_a_super_secret_key_1234567890");
-
-         _mockPasswordHasher = new Mock<IPasswordHasher>();
+        _mockPasswordHasher = new Mock<IPasswordHasher>();
 
         _authService = new AuthService(_myDbContext, _mockConfig.Object, _mockPasswordHasher.Object);
     }
@@ -35,7 +32,7 @@ public class AuthServiceTest
         // Arrange
         var user = new User
         {
-            UserId = 1111,
+            UserId = 1234,
             Username = "alice",
             Password = "$2a$11$DHb2SBahkIIXSIv1hf.GX.fP1BjCtOwTJJ9Boyqi3PrjEqCZRQs66",
             Email = "alice@example.com"
@@ -60,19 +57,19 @@ public class AuthServiceTest
     {
         // Arrange
         var user = new User
-        {
-            UserId = 1111,
-            Username = "alice",
-            Password = "$2a$11$DHb2SBahkIIXSIv1hf.GX.fP1BjCtOwTJJ9Boyqi3PrjEqCZRQs66",
-            Email = "alice@example.com"
-        };
+    {
+        UserId = 1234,
+        Username = "alice",
+        Password = "$2a$11$DHb2SBahkIIXSIv1hf.GX.fP1BjCtOwTJJ9Boyqi3PrjEqCZRQs66",
+        Email = "alice@example.com"
+    };
 
         _myDbContext.Users.Add(user);
         await _myDbContext.SaveChangesAsync();
 
-        var loginDto = new LoginDto { Username = "alice", Password = "forkert" };
+        var loginDto = new LoginDto { Username = "alice", Password = "wrongCode" };
 
-        _mockPasswordHasher.Setup(p => p.VerifyPassword("forkert", user.Password)).Returns(false);
+        _mockPasswordHasher.Setup(p => p.VerifyPassword("wrongCode", user.Password)).Returns(false);
 
         await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
         _authService.LoginAsync(loginDto));
