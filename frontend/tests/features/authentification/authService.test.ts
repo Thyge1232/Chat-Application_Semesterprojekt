@@ -1,8 +1,5 @@
 import { describe, expect, test, beforeEach, vi, afterEach } from "vitest";
-import {
-  getCurrentUser,
-  type CurrentUser,
-} from "../../../src/features/authentication/services/authService";
+import { getCurrentUser } from "../../../src/features/authentication/services/authService";
 import * as tokenService from "../../../src/features/authentication/services/tokenService";
 
 describe("authService", () => {
