@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "D7uo1a5VPKk=",
+  "dgSpecHash": "LwknoBX7xLo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
+  "projectFilePath": "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cecil\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Cecil\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

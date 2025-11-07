@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj": {}
+    "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj": {
+    "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
+        "projectUniqueName": "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
         "projectName": "BackendAPI.Tests.Unit",
-        "projectPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
+        "projectPath": "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
         "packagesPath": "C:\\Users\\Cecil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\obj\\",
+        "outputPath": "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj": {
-                "projectPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj"
+              "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj": {
+                "projectPath": "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj"
               }
             }
           }
@@ -96,14 +96,14 @@
         }
       }
     },
-    "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj": {
+    "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj",
+        "projectUniqueName": "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj",
         "projectName": "BackendAPI",
-        "projectPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj",
+        "projectPath": "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj",
         "packagesPath": "C:\\Users\\Cecil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\obj\\",
+        "outputPath": "c:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
