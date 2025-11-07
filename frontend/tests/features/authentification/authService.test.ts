@@ -1,66 +1,66 @@
-//Strategi: starter ved at teste services, så hooks og til sidst
-//Først tokenService, da authServices er afhængig af denne
-
-//Her testes authServices + tokenService
-//mock backend svar
-
-import { describe, expect, test, beforeEach, vi } from "vitest";
+import { describe, expect, test, beforeEach, vi, afterEach } from "vitest";
 import {
-  getToken,
-  setToken,
-  clearToken,
-} from "../../../src/features/authentication/services/tokenService";
+  getCurrentUser,
+  type CurrentUser,
+} from "../../../src/features/authentication/services/authService";
+import * as tokenService from "../../../src/features/authentication/services/tokenService";
 
-describe("tokenService", () => {
+describe("authService", () => {
+  let getTokenSpy: ReturnType<typeof vi.spyOn>;
   beforeEach(() => {
-    localStorage.clear();
+    getTokenSpy = vi.spyOn(tokenService, "getToken");
+  });
+
+  afterEach(() => {
     vi.restoreAllMocks();
   });
 
-  describe("setToken", () => {
-    beforeEach(() => {
-      vi.spyOn(Storage.prototype, "setItem");
-    });
+  describe("getCurrentUser", () => {
+    const invalidTokens = [
+      "header..signature",
+      "header.hh.signature",
+      "header.null.signature",
+      "",
+      "header",
+    ];
 
-    test("Spy on localStorage.setItem", () => {
-      setToken("abc123");
-      expect(localStorage.setItem).toHaveBeenCalledWith("auth_token", "abc123");
-    });
-
-    test("Saves token to localStorage", () => {
-      setToken("abc123");
-      expect(localStorage.getItem("auth_token")).toBe("abc123");
-    });
-
-    test("Clears token form localStorage when token is null", () => {
-      setToken(null);
-      expect(localStorage.getItem("auth_token")).toBe(null);
+    test.each(invalidTokens)("returns null for invalidTokens '%s'", (token) => {
+      getTokenSpy.mockReturnValue(token);
+      expect(getCurrentUser()).toBeNull();
     });
   });
 
-  describe("getToken", () => {
-    test("Returns token from inMemoryToken if it exists", () => {
-      setToken("aaa123");
-      expect(getToken()).toBe("aaa123");
-    });
+  const invalidPayloads: [Record<string, unknown>, string][] = [
+    [{ nameid: 1 }, "userName missing"],
+    [{ unique_name: "Alice" }, "userId missing"],
+    [{ unique_name: "Alice", nameid: null }, "userId null"],
+    [{ unique_name: "", nameid: 5 }, "userName empty"],
+  ];
 
-    test("Returns null if inMemoryToken is null and localStorage is empty", () => {
-      setToken(null);
-      expect(getToken()).toBeNull();
-    });
+  test.each(invalidPayloads)(
+    "returns null if payload is incomplete: %s (%s)",
+    (payload, _) => {
+      const token = `header.${btoa(JSON.stringify(payload))}.signature`;
+      getTokenSpy.mockReturnValue(token);
+      expect(getCurrentUser()).toBeNull();
+    }
+  );
 
-    test("Falls back to localStorage if inMemoryToken is null", () => {
-      localStorage.setItem("auth_token", "storedToken");
-      expect(getToken()).toBe("storedToken");
-    });
-  });
+  const validPayloads: Record<string, unknown>[] = [
+    { nameid: 1, unique_name: "Alice" },
+    { unique_name: "Jens", nameid: 5 },
+  ];
 
-  describe("clearToken", () => {
-    test("Clears both inMemoryToken and localStorage", () => {
-      setToken("abc145");
-      clearToken();
-      expect(getToken()).toBe(null);
-      expect(localStorage.getItem("auth_token")).toBeNull();
-    });
-  });
+  test.each(validPayloads)(
+    "returns CurrentUser for valid payload: %o",
+    (payload) => {
+      const token = `header.${btoa(JSON.stringify(payload))}.signature`;
+      getTokenSpy.mockReturnValue(token);
+      const user = getCurrentUser();
+      expect(user).toEqual({
+        userId: Number(payload.nameid),
+        userName: String(payload.unique_name),
+      });
+    }
+  );
 });

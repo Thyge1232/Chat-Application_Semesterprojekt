@@ -1,11 +1,12 @@
 export const SpinnerWithText = () => {
   return (
-    <div>
+    <div data-testid="SpinnerWithText">
       <p className="mb-2 text-sm font-medium text-gray-500">
         Loader... vi krydser fingre for at serveren er med os!
       </p>
       <button className="flex items-center gap-x-4 rounded-xl bg-blue-600 px-8 py-3 font-medium text-white">
         <svg
+          data-testid="SpinnerIcon"
           className="h-5 w-5 animate-spin"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
