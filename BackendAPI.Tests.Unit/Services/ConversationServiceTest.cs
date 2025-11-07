@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 
 namespace BackendAPI.Tests.Unit.Services;
 
 public class ConversationServiceTest
+=======
+using System.Net.Cache;
+
+namespace BackendAPI.Tests.Unit.Services;
+
+public class ConversationTest
+>>>>>>> c64375e3a3ab6f99922ec314f6c7a14edada142e
 {
     private readonly Mock<IConversationRepository> _mockConvoRepo;
 
     private readonly IConversationService _uut;
 
+<<<<<<< HEAD
     public ConversationServiceTest()
+=======
+    public ConversationTest()
+>>>>>>> c64375e3a3ab6f99922ec314f6c7a14edada142e
     {
         _mockConvoRepo = new Mock<IConversationRepository>();
         _uut = new ConversationService(_mockConvoRepo.Object);
@@ -100,7 +112,11 @@ public class ConversationServiceTest
     public async Task RemoveThisUserByIdFromConversationByIdAsync_WhenUserIsRemovedAndConversationIsNotEmpty_ShouldReturnTrue()
     {
         var conversationId = 1;
+<<<<<<< HEAD
         var userIdToRemove = 1;
+=======
+        var userIdToRemove  = 1;
+>>>>>>> c64375e3a3ab6f99922ec314f6c7a14edada142e
         var user1 = UserFactory.CreateUser(userIdToRemove, "alice");
         var user2 = UserFactory.CreateUser(2, "bob");
         var conversationWithTwoMembers = ConversationFactory.CreateConversation(
@@ -117,7 +133,11 @@ public class ConversationServiceTest
             .ReturnsAsync(true);
 
         //Act
+<<<<<<< HEAD
         var result = await _uut.RemoveThisUserByIdFromConversationByIdAsync(conversationId, userIdToRemove);
+=======
+        var result = await _uut.RemoveThisUserByIdFromConversationByIdAsync(conversationId, userIdToRemove );
+>>>>>>> c64375e3a3ab6f99922ec314f6c7a14edada142e
 
         // Assert
         Assert.True(result);
@@ -169,6 +189,7 @@ public class ConversationServiceTest
                 Times.Once); // Samtalen ER blevet slettet
 
     }
+<<<<<<< HEAD
     [Fact]
     public async Task RemoveThisUserByIdFromConversationByIdAsync_WhenConversationNotFound_ShouldReturnFalse()
     {
@@ -360,3 +381,22 @@ public class ConversationServiceTest
     }
 
 }
+=======
+        [Fact]
+        public async Task RemoveThisUserByIdFromConversationByIdAsync_WhenConversationNotFound_ShouldReturnFalse()
+        {
+            // Arrange
+            var nonExistentId = 99;
+            _mockConvoRepo.Setup(repo => repo.GetByIdWithMembersAsync(nonExistentId)).ReturnsAsync((Conversation?)null);
+            
+            // Act
+            var result = await _uut.RemoveThisUserByIdFromConversationByIdAsync(nonExistentId, 1);
+            
+            // Assert
+            Assert.False(result);
+            _mockConvoRepo.Verify(repo => repo.SaveChangesAsync(), Times.Never);
+            _mockConvoRepo.Verify(repo => repo.DeleteAsync(It.IsAny<Conversation>()), Times.Never);
+        }
+    } 
+
+>>>>>>> c64375e3a3ab6f99922ec314f6c7a14edada142e

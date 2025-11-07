@@ -56,9 +56,11 @@ test:
   artifacts:
     when: always
     reports:
-      junit: test-results.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: frontend/coverage/cobertura-coverage.xml
     paths:
-      - test-results.xml
-      - coverage/
+      - frontend/coverage/
+  coverage: '/All files.*\s+(\d+\.\d+%)/'
   rules:
     - if: $CI_PIPELINE_SOURCE
