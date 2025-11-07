@@ -4492,23 +4492,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\thyge\\.nuget\\packages\\": {},
+    "C:\\Users\\Cecil\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
+      "projectUniqueName": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
       "projectName": "BackendAPI.Tests.Unit",
-      "projectPath": "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
-      "packagesPath": "C:\\Users\\thyge\\.nuget\\packages\\",
-      "outputPath": "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI.Tests.Unit\\obj\\",
+      "projectPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
+      "packagesPath": "C:\\Users\\Cecil\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\thyge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Cecil\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4524,8 +4524,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI\\BackendAPI.csproj": {
-              "projectPath": "C:\\GitLab\\PRJ_4\\chat-app\\BackendAPI\\BackendAPI.csproj"
+            "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj": {
+              "projectPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj"
             }
           }
         }
