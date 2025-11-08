@@ -1,110 +1,11 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="1404" lines-covered="223" line-rate="0.1588" branches-valid="72" branches-covered="46" branch-rate="0.6388" timestamp="1762601996932" complexity="0" version="0.1">
+<coverage lines-valid="1342" lines-covered="223" line-rate="0.1661" branches-valid="69" branches-covered="46" branch-rate="0.6666" timestamp="1762603948433" complexity="0" version="0.1">
   <sources>
     <source>C:/programmering/4sw/projekt/chat-app/frontend</source>
   </sources>
   <packages>
-    <package name="frontend" line-rate="0" branch-rate="0">
-      <classes>
-        <class name="eslint.config.js" filename="eslint.config.js" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="0" signature="()V">
-              <lines>
-                <line number="1" hits="0"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="1" hits="0" branch="true" condition-coverage="0% (0/1)"/>
-            <line number="2" hits="0" branch="false"/>
-            <line number="3" hits="0" branch="false"/>
-            <line number="4" hits="0" branch="false"/>
-            <line number="5" hits="0" branch="false"/>
-            <line number="6" hits="0" branch="false"/>
-            <line number="7" hits="0" branch="false"/>
-            <line number="8" hits="0" branch="false"/>
-            <line number="9" hits="0" branch="false"/>
-            <line number="10" hits="0" branch="false"/>
-            <line number="11" hits="0" branch="false"/>
-            <line number="12" hits="0" branch="false"/>
-            <line number="13" hits="0" branch="false"/>
-            <line number="14" hits="0" branch="false"/>
-            <line number="15" hits="0" branch="false"/>
-            <line number="16" hits="0" branch="false"/>
-            <line number="17" hits="0" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="19" hits="0" branch="false"/>
-            <line number="20" hits="0" branch="false"/>
-            <line number="21" hits="0" branch="false"/>
-            <line number="22" hits="0" branch="false"/>
-            <line number="23" hits="0" branch="false"/>
-            <line number="24" hits="0" branch="false"/>
-            <line number="25" hits="0" branch="false"/>
-            <line number="26" hits="0" branch="false"/>
-            <line number="27" hits="0" branch="false"/>
-            <line number="28" hits="0" branch="false"/>
-            <line number="29" hits="0" branch="false"/>
-          </lines>
-        </class>
-        <class name="vite.config.ts" filename="vite.config.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="0" signature="()V">
-              <lines>
-                <line number="1" hits="0"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="1" hits="0" branch="true" condition-coverage="0% (0/1)"/>
-            <line number="2" hits="0" branch="false"/>
-            <line number="3" hits="0" branch="false"/>
-            <line number="5" hits="0" branch="false"/>
-            <line number="6" hits="0" branch="false"/>
-            <line number="7" hits="0" branch="false"/>
-            <line number="8" hits="0" branch="false"/>
-            <line number="9" hits="0" branch="false"/>
-            <line number="10" hits="0" branch="false"/>
-            <line number="11" hits="0" branch="false"/>
-            <line number="12" hits="0" branch="false"/>
-          </lines>
-        </class>
-        <class name="vitest.config.ts" filename="vitest.config.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="0" signature="()V">
-              <lines>
-                <line number="1" hits="0"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="1" hits="0" branch="true" condition-coverage="0% (0/1)"/>
-            <line number="2" hits="0" branch="false"/>
-            <line number="4" hits="0" branch="false"/>
-            <line number="5" hits="0" branch="false"/>
-            <line number="6" hits="0" branch="false"/>
-            <line number="7" hits="0" branch="false"/>
-            <line number="8" hits="0" branch="false"/>
-            <line number="9" hits="0" branch="false"/>
-            <line number="10" hits="0" branch="false"/>
-            <line number="11" hits="0" branch="false"/>
-            <line number="12" hits="0" branch="false"/>
-            <line number="13" hits="0" branch="false"/>
-            <line number="14" hits="0" branch="false"/>
-            <line number="15" hits="0" branch="false"/>
-            <line number="16" hits="0" branch="false"/>
-            <line number="17" hits="0" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="19" hits="0" branch="false"/>
-            <line number="20" hits="0" branch="false"/>
-            <line number="21" hits="0" branch="false"/>
-            <line number="22" hits="0" branch="false"/>
-            <line number="23" hits="0" branch="false"/>
-          </lines>
-        </class>
-      </classes>
-    </package>
-    <package name="frontend.src" line-rate="1" branch-rate="1">
+    <package name="src" line-rate="1" branch-rate="1">
       <classes>
         <class name="vite-env.d.ts" filename="src\vite-env.d.ts" line-rate="0" branch-rate="0">
           <methods>
@@ -119,7 +20,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.authentication" line-rate="0" branch-rate="0">
+    <package name="src.features.authentication" line-rate="0" branch-rate="0">
       <classes>
         <class name="RequireAuth.tsx" filename="src\features\authentication\RequireAuth.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -145,7 +46,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.authentication.hooks" line-rate="0.5714" branch-rate="0.6666">
+    <package name="src.features.authentication.hooks" line-rate="0.5714" branch-rate="0.6666">
       <classes>
         <class name="useAuth.ts" filename="src\features\authentication\hooks\useAuth.ts" line-rate="1" branch-rate="1">
           <methods>
@@ -286,7 +187,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.authentication.pages" line-rate="0" branch-rate="0">
+    <package name="src.features.authentication.pages" line-rate="0" branch-rate="0">
       <classes>
         <class name="Login.tsx" filename="src\features\authentication\pages\Login.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -531,7 +432,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.authentication.services" line-rate="1" branch-rate="1">
+    <package name="src.features.authentication.services" line-rate="1" branch-rate="1">
       <classes>
         <class name="authService.ts" filename="src\features\authentication\services\authService.ts" line-rate="1" branch-rate="1">
           <methods>
@@ -609,7 +510,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.conversations.components" line-rate="0" branch-rate="0.25">
+    <package name="src.features.conversations.components" line-rate="0" branch-rate="0.25">
       <classes>
         <class name="ChatBubble.tsx" filename="src\features\conversations\components\ChatBubble.tsx" line-rate="0" branch-rate="1">
           <methods>
@@ -950,7 +851,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.conversations.hooks" line-rate="0.07200000000000001" branch-rate="0.375">
+    <package name="src.features.conversations.hooks" line-rate="0.07200000000000001" branch-rate="0.375">
       <classes>
         <class name="useAddUserToConversation.ts" filename="src\features\conversations\hooks\useAddUserToConversation.ts" line-rate="0" branch-rate="0">
           <methods>
@@ -1147,7 +1048,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.conversations.pages" line-rate="0" branch-rate="0">
+    <package name="src.features.conversations.pages" line-rate="0" branch-rate="0">
       <classes>
         <class name="Conversations.tsx" filename="src\features\conversations\pages\Conversations.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -1430,7 +1331,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.messages.hooks" line-rate="0" branch-rate="0">
+    <package name="src.features.messages.hooks" line-rate="0" branch-rate="0">
       <classes>
         <class name="useDeleteMessage.ts" filename="src\features\messages\hooks\useDeleteMessage.ts" line-rate="0" branch-rate="0">
           <methods>
@@ -1519,7 +1420,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.messages.services" line-rate="0" branch-rate="1">
+    <package name="src.features.messages.services" line-rate="0" branch-rate="1">
       <classes>
         <class name="transformMessageFromApi.ts" filename="src\features\messages\services\transformMessageFromApi.ts" line-rate="0" branch-rate="1">
           <methods>
@@ -1543,7 +1444,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.users.components" line-rate="0" branch-rate="0">
+    <package name="src.features.users.components" line-rate="0" branch-rate="0">
       <classes>
         <class name="UserCard.tsx" filename="src\features\users\components\UserCard.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -1603,7 +1504,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.users.components.Banner" line-rate="0" branch-rate="0.3333">
+    <package name="src.features.users.components.Banner" line-rate="0" branch-rate="0.3333">
       <classes>
         <class name="Banner.tsx" filename="src\features\users\components\Banner\Banner.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -1684,7 +1585,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.features.users.pages" line-rate="0" branch-rate="0">
+    <package name="src.features.users.pages" line-rate="0" branch-rate="0">
       <classes>
         <class name="Home.tsx" filename="src\features\users\pages\Home.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -1752,7 +1653,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.sharedComponents" line-rate="1" branch-rate="1">
+    <package name="src.sharedComponents" line-rate="1" branch-rate="1">
       <classes>
         <class name="Button.tsx" filename="src\sharedComponents\Button.tsx" line-rate="1" branch-rate="1">
           <methods>
@@ -1886,7 +1787,7 @@
         </class>
       </classes>
     </package>
-    <package name="frontend.src.sharedComponents.Layout" line-rate="1" branch-rate="1">
+    <package name="src.sharedComponents.Layout" line-rate="1" branch-rate="1">
       <classes>
         <class name="Footer.tsx" filename="src\sharedComponents\Layout\Footer.tsx" line-rate="1" branch-rate="1">
           <methods>

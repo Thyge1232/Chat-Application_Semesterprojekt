@@ -15,6 +15,9 @@ export default defineConfig({
         "src/config/**", //configuration
         "src/features/**/types/**", //type definitions
         "src/api/**",
+        "eslint.config.js",
+        "vitest.config.ts",
+        "vite.config.ts",
       ],
       reporter: ["text", "text-summary", "lcov", "html", "cobertura"],
       reportsDirectory: "./coverage",
