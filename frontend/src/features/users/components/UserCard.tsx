@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import AvatarPlaceholder from "../../../assets/Images/avatarPlaceHolder.png";
+import AvatarPlaceholder from "../../../assets/images/avatarPlaceHolder.png";
 
 interface UserCardProps {
   username: string;

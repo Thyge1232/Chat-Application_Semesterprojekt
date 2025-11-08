@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="1404" lines-covered="223" line-rate="0.1588" branches-valid="72" branches-covered="46" branch-rate="0.6388" timestamp="1762601413867" complexity="0" version="0.1">
+<coverage lines-valid="1404" lines-covered="223" line-rate="0.1588" branches-valid="72" branches-covered="46" branch-rate="0.6388" timestamp="1762601996932" complexity="0" version="0.1">
   <sources>
     <source>C:/programmering/4sw/projekt/chat-app/frontend</source>
   </sources>

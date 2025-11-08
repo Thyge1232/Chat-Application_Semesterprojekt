@@ -1,7 +1,7 @@
 import type { IColorThemeConversation } from "../types/iColorThemes";
 import { useState, useEffect } from "react";
-import delete_icon from "../../../assets/Images/delete_icon.png";
-import edit_icon from "../../../assets/Images/edit_icon.png";
+import delete_icon from "../../../assets/images/delete_icon.png";
+import edit_icon from "../../../assets/images/edit_icon.png";
 
 export type ChatBubbleProps = {
   isSender?: boolean;

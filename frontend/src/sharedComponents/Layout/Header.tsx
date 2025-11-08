@@ -1,5 +1,5 @@
-import logo from "../../assets/Images/logo.png";
-import frog from "../../assets/Images/frog.gif";
+import logo from "../../assets/images/logo.png";
+import frog from "../../assets/images/frog.gif";
 import { NavButtons } from "./NavButtons";
 
 export const Header = ({ hideButtons }: { hideButtons: boolean }) => (
