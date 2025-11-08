@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="1671" lines-covered="263" line-rate="0.1573" branches-valid="84" branches-covered="58" branch-rate="0.6904" timestamp="1762600854572" complexity="0" version="0.1">
+<coverage lines-valid="1404" lines-covered="223" line-rate="0.1588" branches-valid="72" branches-covered="46" branch-rate="0.6388" timestamp="1762601413867" complexity="0" version="0.1">
   <sources>
     <source>C:/programmering/4sw/projekt/chat-app/frontend</source>
   </sources>
   <packages>
-    <package name="src" line-rate="0" branch-rate="0">
+    <package name="frontend" line-rate="0" branch-rate="0">
       <classes>
-        <class name="main.tsx" filename="src\main.tsx" line-rate="0" branch-rate="0">
+        <class name="eslint.config.js" filename="eslint.config.js" line-rate="0" branch-rate="0">
           <methods>
             <method name="(empty-report)" hits="0" signature="()V">
               <lines>
@@ -22,7 +22,9 @@
             <line number="4" hits="0" branch="false"/>
             <line number="5" hits="0" branch="false"/>
             <line number="6" hits="0" branch="false"/>
+            <line number="7" hits="0" branch="false"/>
             <line number="8" hits="0" branch="false"/>
+            <line number="9" hits="0" branch="false"/>
             <line number="10" hits="0" branch="false"/>
             <line number="11" hits="0" branch="false"/>
             <line number="12" hits="0" branch="false"/>
@@ -31,21 +33,52 @@
             <line number="15" hits="0" branch="false"/>
             <line number="16" hits="0" branch="false"/>
             <line number="17" hits="0" branch="false"/>
+            <line number="18" hits="0" branch="false"/>
+            <line number="19" hits="0" branch="false"/>
+            <line number="20" hits="0" branch="false"/>
+            <line number="21" hits="0" branch="false"/>
+            <line number="22" hits="0" branch="false"/>
+            <line number="23" hits="0" branch="false"/>
+            <line number="24" hits="0" branch="false"/>
+            <line number="25" hits="0" branch="false"/>
+            <line number="26" hits="0" branch="false"/>
+            <line number="27" hits="0" branch="false"/>
+            <line number="28" hits="0" branch="false"/>
+            <line number="29" hits="0" branch="false"/>
           </lines>
         </class>
-      </classes>
-    </package>
-    <package name="src.api" line-rate="0.0718" branch-rate="0.75">
-      <classes>
-        <class name="apiBaseCrud.ts" filename="src\api\apiBaseCrud.ts" line-rate="0" branch-rate="1">
+        <class name="vite.config.ts" filename="vite.config.ts" line-rate="0" branch-rate="0">
           <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
+            <method name="(empty-report)" hits="0" signature="()V">
               <lines>
-                <line number="1" hits="1"/>
+                <line number="1" hits="0"/>
               </lines>
             </method>
           </methods>
           <lines>
+            <line number="1" hits="0" branch="true" condition-coverage="0% (0/1)"/>
+            <line number="2" hits="0" branch="false"/>
+            <line number="3" hits="0" branch="false"/>
+            <line number="5" hits="0" branch="false"/>
+            <line number="6" hits="0" branch="false"/>
+            <line number="7" hits="0" branch="false"/>
+            <line number="8" hits="0" branch="false"/>
+            <line number="9" hits="0" branch="false"/>
+            <line number="10" hits="0" branch="false"/>
+            <line number="11" hits="0" branch="false"/>
+            <line number="12" hits="0" branch="false"/>
+          </lines>
+        </class>
+        <class name="vitest.config.ts" filename="vitest.config.ts" line-rate="0" branch-rate="0">
+          <methods>
+            <method name="(empty-report)" hits="0" signature="()V">
+              <lines>
+                <line number="1" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="1" hits="0" branch="true" condition-coverage="0% (0/1)"/>
             <line number="2" hits="0" branch="false"/>
             <line number="4" hits="0" branch="false"/>
             <line number="5" hits="0" branch="false"/>
@@ -54,228 +87,6 @@
             <line number="8" hits="0" branch="false"/>
             <line number="9" hits="0" branch="false"/>
             <line number="10" hits="0" branch="false"/>
-            <line number="12" hits="0" branch="false"/>
-            <line number="13" hits="0" branch="false"/>
-            <line number="14" hits="0" branch="false"/>
-            <line number="15" hits="0" branch="false"/>
-            <line number="16" hits="0" branch="false"/>
-            <line number="17" hits="0" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="20" hits="0" branch="false"/>
-            <line number="21" hits="0" branch="false"/>
-            <line number="22" hits="0" branch="false"/>
-            <line number="23" hits="0" branch="false"/>
-            <line number="24" hits="0" branch="false"/>
-            <line number="25" hits="0" branch="false"/>
-            <line number="26" hits="0" branch="false"/>
-            <line number="27" hits="0" branch="false"/>
-            <line number="29" hits="0" branch="false"/>
-            <line number="30" hits="0" branch="false"/>
-            <line number="31" hits="0" branch="false"/>
-            <line number="32" hits="0" branch="false"/>
-            <line number="33" hits="0" branch="false"/>
-            <line number="34" hits="0" branch="false"/>
-            <line number="35" hits="0" branch="false"/>
-            <line number="36" hits="0" branch="false"/>
-            <line number="37" hits="0" branch="false"/>
-            <line number="38" hits="0" branch="false"/>
-            <line number="39" hits="0" branch="false"/>
-            <line number="40" hits="0" branch="false"/>
-            <line number="42" hits="0" branch="false"/>
-            <line number="43" hits="0" branch="false"/>
-            <line number="44" hits="0" branch="false"/>
-            <line number="45" hits="0" branch="false"/>
-            <line number="46" hits="0" branch="false"/>
-            <line number="47" hits="0" branch="false"/>
-          </lines>
-        </class>
-        <class name="apiClient.ts" filename="src\api\apiClient.ts" line-rate="0.41369999999999996" branch-rate="1">
-          <methods>
-          </methods>
-          <lines>
-            <line number="1" hits="1" branch="false"/>
-            <line number="2" hits="1" branch="false"/>
-            <line number="6" hits="1" branch="false"/>
-            <line number="8" hits="1" branch="false"/>
-            <line number="9" hits="1" branch="false"/>
-            <line number="10" hits="1" branch="false"/>
-            <line number="11" hits="1" branch="false"/>
-            <line number="13" hits="1" branch="false"/>
-            <line number="14" hits="0" branch="false"/>
-            <line number="15" hits="0" branch="false"/>
-            <line number="16" hits="0" branch="false"/>
-            <line number="17" hits="0" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="19" hits="0" branch="false"/>
-            <line number="20" hits="0" branch="false"/>
-            <line number="21" hits="0" branch="false"/>
-            <line number="22" hits="0" branch="false"/>
-            <line number="23" hits="0" branch="false"/>
-            <line number="24" hits="0" branch="false"/>
-            <line number="25" hits="0" branch="false"/>
-            <line number="27" hits="1" branch="false"/>
-            <line number="28" hits="1" branch="false"/>
-            <line number="29" hits="1" branch="false"/>
-            <line number="30" hits="0" branch="false"/>
-            <line number="31" hits="0" branch="false"/>
-            <line number="32" hits="0" branch="false"/>
-            <line number="33" hits="0" branch="false"/>
-            <line number="34" hits="0" branch="false"/>
-            <line number="35" hits="1" branch="false"/>
-          </lines>
-        </class>
-        <class name="apiConversations.ts" filename="src\api\apiConversations.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="0" signature="()V">
-              <lines>
-                <line number="1" hits="0"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="1" hits="0" branch="true" condition-coverage="0% (0/1)"/>
-            <line number="12" hits="0" branch="false"/>
-            <line number="13" hits="0" branch="false"/>
-            <line number="15" hits="0" branch="false"/>
-            <line number="17" hits="0" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="19" hits="0" branch="false"/>
-            <line number="20" hits="0" branch="false"/>
-            <line number="21" hits="0" branch="false"/>
-            <line number="22" hits="0" branch="false"/>
-            <line number="23" hits="0" branch="false"/>
-            <line number="24" hits="0" branch="false"/>
-            <line number="25" hits="0" branch="false"/>
-            <line number="26" hits="0" branch="false"/>
-            <line number="27" hits="0" branch="false"/>
-            <line number="28" hits="0" branch="false"/>
-            <line number="29" hits="0" branch="false"/>
-            <line number="31" hits="0" branch="false"/>
-            <line number="32" hits="0" branch="false"/>
-            <line number="33" hits="0" branch="false"/>
-            <line number="34" hits="0" branch="false"/>
-            <line number="35" hits="0" branch="false"/>
-            <line number="36" hits="0" branch="false"/>
-            <line number="37" hits="0" branch="false"/>
-            <line number="39" hits="0" branch="false"/>
-            <line number="40" hits="0" branch="false"/>
-            <line number="41" hits="0" branch="false"/>
-            <line number="42" hits="0" branch="false"/>
-            <line number="43" hits="0" branch="false"/>
-            <line number="44" hits="0" branch="false"/>
-            <line number="46" hits="0" branch="false"/>
-            <line number="47" hits="0" branch="false"/>
-            <line number="48" hits="0" branch="false"/>
-            <line number="49" hits="0" branch="false"/>
-            <line number="50" hits="0" branch="false"/>
-            <line number="51" hits="0" branch="false"/>
-            <line number="52" hits="0" branch="false"/>
-            <line number="53" hits="0" branch="false"/>
-            <line number="54" hits="0" branch="false"/>
-          </lines>
-        </class>
-        <class name="apiMessages.ts" filename="src\api\apiMessages.ts" line-rate="0" branch-rate="1">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="6" hits="0" branch="false"/>
-            <line number="7" hits="0" branch="false"/>
-            <line number="8" hits="0" branch="false"/>
-            <line number="16" hits="0" branch="false"/>
-            <line number="17" hits="0" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="19" hits="0" branch="false"/>
-            <line number="20" hits="0" branch="false"/>
-            <line number="21" hits="0" branch="false"/>
-            <line number="22" hits="0" branch="false"/>
-            <line number="23" hits="0" branch="false"/>
-            <line number="25" hits="0" branch="false"/>
-            <line number="26" hits="0" branch="false"/>
-            <line number="27" hits="0" branch="false"/>
-            <line number="28" hits="0" branch="false"/>
-            <line number="29" hits="0" branch="false"/>
-            <line number="30" hits="0" branch="false"/>
-            <line number="31" hits="0" branch="false"/>
-            <line number="32" hits="0" branch="false"/>
-            <line number="33" hits="0" branch="false"/>
-            <line number="35" hits="0" branch="false"/>
-            <line number="36" hits="0" branch="false"/>
-            <line number="37" hits="0" branch="false"/>
-            <line number="38" hits="0" branch="false"/>
-            <line number="39" hits="0" branch="false"/>
-            <line number="40" hits="0" branch="false"/>
-            <line number="41" hits="0" branch="false"/>
-            <line number="42" hits="0" branch="false"/>
-            <line number="43" hits="0" branch="false"/>
-            <line number="44" hits="0" branch="false"/>
-            <line number="46" hits="0" branch="false"/>
-            <line number="47" hits="0" branch="false"/>
-            <line number="48" hits="0" branch="false"/>
-            <line number="50" hits="0" branch="false"/>
-            <line number="51" hits="0" branch="false"/>
-            <line number="52" hits="0" branch="false"/>
-            <line number="53" hits="0" branch="false"/>
-            <line number="54" hits="0" branch="false"/>
-            <line number="55" hits="0" branch="false"/>
-          </lines>
-        </class>
-        <class name="apiUsers.ts" filename="src\api\apiUsers.ts" line-rate="0" branch-rate="1">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="2" hits="0" branch="false"/>
-            <line number="4" hits="0" branch="false"/>
-            <line number="10" hits="0" branch="false"/>
-            <line number="11" hits="0" branch="false"/>
-            <line number="12" hits="0" branch="false"/>
-            <line number="13" hits="0" branch="false"/>
-            <line number="15" hits="0" branch="false"/>
-            <line number="16" hits="0" branch="false"/>
-            <line number="17" hits="0" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="20" hits="0" branch="false"/>
-            <line number="21" hits="0" branch="false"/>
-            <line number="22" hits="0" branch="false"/>
-            <line number="23" hits="0" branch="false"/>
-            <line number="24" hits="0" branch="false"/>
-            <line number="25" hits="0" branch="false"/>
-            <line number="26" hits="0" branch="false"/>
-            <line number="27" hits="0" branch="false"/>
-            <line number="28" hits="0" branch="false"/>
-          </lines>
-        </class>
-      </classes>
-    </package>
-    <package name="src.app" line-rate="0" branch-rate="0">
-      <classes>
-        <class name="App.tsx" filename="src\app\App.tsx" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="0" signature="()V">
-              <lines>
-                <line number="1" hits="0"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="1" hits="0" branch="true" condition-coverage="0% (0/1)"/>
-            <line number="2" hits="0" branch="false"/>
-            <line number="3" hits="0" branch="false"/>
-            <line number="4" hits="0" branch="false"/>
-            <line number="5" hits="0" branch="false"/>
-            <line number="6" hits="0" branch="false"/>
-            <line number="7" hits="0" branch="false"/>
-            <line number="8" hits="0" branch="false"/>
-            <line number="10" hits="0" branch="false"/>
             <line number="11" hits="0" branch="false"/>
             <line number="12" hits="0" branch="false"/>
             <line number="13" hits="0" branch="false"/>
@@ -287,163 +98,28 @@
             <line number="19" hits="0" branch="false"/>
             <line number="20" hits="0" branch="false"/>
             <line number="21" hits="0" branch="false"/>
+            <line number="22" hits="0" branch="false"/>
             <line number="23" hits="0" branch="false"/>
-            <line number="24" hits="0" branch="false"/>
-            <line number="25" hits="0" branch="false"/>
-            <line number="26" hits="0" branch="false"/>
-            <line number="27" hits="0" branch="false"/>
-            <line number="28" hits="0" branch="false"/>
-            <line number="29" hits="0" branch="false"/>
-            <line number="31" hits="0" branch="false"/>
-            <line number="32" hits="0" branch="false"/>
-            <line number="33" hits="0" branch="false"/>
-            <line number="34" hits="0" branch="false"/>
-            <line number="35" hits="0" branch="false"/>
-            <line number="36" hits="0" branch="false"/>
-            <line number="37" hits="0" branch="false"/>
-            <line number="39" hits="0" branch="false"/>
-            <line number="40" hits="0" branch="false"/>
-            <line number="41" hits="0" branch="false"/>
-            <line number="42" hits="0" branch="false"/>
-            <line number="43" hits="0" branch="false"/>
-            <line number="44" hits="0" branch="false"/>
-            <line number="45" hits="0" branch="false"/>
-            <line number="46" hits="0" branch="false"/>
-            <line number="49" hits="0" branch="false"/>
           </lines>
         </class>
       </classes>
     </package>
-    <package name="src.config" line-rate="0.8484" branch-rate="1">
+    <package name="frontend.src" line-rate="1" branch-rate="1">
       <classes>
-        <class name="apiUrl.ts" filename="src\config\apiUrl.ts" line-rate="1" branch-rate="1">
+        <class name="vite-env.d.ts" filename="src\vite-env.d.ts" line-rate="0" branch-rate="0">
           <methods>
-          </methods>
-          <lines>
-            <line number="1" hits="1" branch="false"/>
-          </lines>
-        </class>
-        <class name="endpoints.ts" filename="src\config\endpoints.ts" line-rate="0.8437" branch-rate="1">
-          <methods>
-            <method name="all" hits="0" signature="()V">
+            <method name="(empty-report)" hits="1" signature="()V">
               <lines>
-                <line number="5" hits="0"/>
-              </lines>
-            </method>
-            <method name="byId" hits="0" signature="()V">
-              <lines>
-                <line number="6" hits="0"/>
-              </lines>
-            </method>
-            <method name="create" hits="0" signature="()V">
-              <lines>
-                <line number="7" hits="0"/>
-              </lines>
-            </method>
-            <method name="meConversations" hits="0" signature="()V">
-              <lines>
-                <line number="8" hits="0"/>
-              </lines>
-            </method>
-            <method name="updateColorTheme" hits="0" signature="()V">
-              <lines>
-                <line number="9" hits="0"/>
-              </lines>
-            </method>
-            <method name="byId" hits="0" signature="()V">
-              <lines>
-                <line number="13" hits="0"/>
-              </lines>
-            </method>
-            <method name="create" hits="0" signature="()V">
-              <lines>
-                <line number="14" hits="0"/>
-              </lines>
-            </method>
-            <method name="addUser" hits="0" signature="()V">
-              <lines>
-                <line number="15" hits="0"/>
-              </lines>
-            </method>
-            <method name="leave" hits="0" signature="()V">
-              <lines>
-                <line number="17" hits="0"/>
-              </lines>
-            </method>
-            <method name="updateColorTheme" hits="0" signature="()V">
-              <lines>
-                <line number="19" hits="0"/>
-              </lines>
-            </method>
-            <method name="all" hits="0" signature="()V">
-              <lines>
-                <line number="24" hits="0"/>
-              </lines>
-            </method>
-            <method name="byConversation" hits="0" signature="()V">
-              <lines>
-                <line number="25" hits="0"/>
-              </lines>
-            </method>
-            <method name="byId" hits="0" signature="()V">
-              <lines>
-                <line number="27" hits="0"/>
-              </lines>
-            </method>
-            <method name="create" hits="0" signature="()V">
-              <lines>
-                <line number="28" hits="0"/>
-              </lines>
-            </method>
-            <method name="update" hits="0" signature="()V">
-              <lines>
-                <line number="29" hits="0"/>
-              </lines>
-            </method>
-            <method name="login" hits="2" signature="()V">
-              <lines>
-                <line number="34" hits="2"/>
+                <line number="1" hits="1"/>
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="1" hits="1" branch="false"/>
-            <line number="3" hits="1" branch="false"/>
-            <line number="4" hits="1" branch="false"/>
-            <line number="5" hits="1" branch="false"/>
-            <line number="6" hits="1" branch="false"/>
-            <line number="7" hits="1" branch="false"/>
-            <line number="8" hits="1" branch="false"/>
-            <line number="9" hits="1" branch="false"/>
-            <line number="10" hits="1" branch="false"/>
-            <line number="12" hits="1" branch="false"/>
-            <line number="13" hits="1" branch="false"/>
-            <line number="14" hits="1" branch="false"/>
-            <line number="15" hits="1" branch="false"/>
-            <line number="16" hits="0" branch="false"/>
-            <line number="17" hits="1" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="19" hits="1" branch="false"/>
-            <line number="20" hits="0" branch="false"/>
-            <line number="21" hits="1" branch="false"/>
-            <line number="23" hits="1" branch="false"/>
-            <line number="24" hits="1" branch="false"/>
-            <line number="25" hits="1" branch="false"/>
-            <line number="26" hits="0" branch="false"/>
-            <line number="27" hits="1" branch="false"/>
-            <line number="28" hits="1" branch="false"/>
-            <line number="29" hits="1" branch="false"/>
-            <line number="30" hits="0" branch="false"/>
-            <line number="31" hits="1" branch="false"/>
-            <line number="33" hits="1" branch="false"/>
-            <line number="34" hits="1" branch="true" condition-coverage="100% (1/1)"/>
-            <line number="35" hits="1" branch="false"/>
-            <line number="36" hits="1" branch="false"/>
           </lines>
         </class>
       </classes>
     </package>
-    <package name="src.features.authentication" line-rate="0" branch-rate="0">
+    <package name="frontend.src.features.authentication" line-rate="0" branch-rate="0">
       <classes>
         <class name="RequireAuth.tsx" filename="src\features\authentication\RequireAuth.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -469,7 +145,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.authentication.hooks" line-rate="0.5714" branch-rate="0.6666">
+    <package name="frontend.src.features.authentication.hooks" line-rate="0.5714" branch-rate="0.6666">
       <classes>
         <class name="useAuth.ts" filename="src\features\authentication\hooks\useAuth.ts" line-rate="1" branch-rate="1">
           <methods>
@@ -610,7 +286,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.authentication.pages" line-rate="0" branch-rate="0">
+    <package name="frontend.src.features.authentication.pages" line-rate="0" branch-rate="0">
       <classes>
         <class name="Login.tsx" filename="src\features\authentication\pages\Login.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -855,7 +531,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.authentication.services" line-rate="1" branch-rate="1">
+    <package name="frontend.src.features.authentication.services" line-rate="1" branch-rate="1">
       <classes>
         <class name="authService.ts" filename="src\features\authentication\services\authService.ts" line-rate="1" branch-rate="1">
           <methods>
@@ -933,44 +609,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.authentication.types" line-rate="1" branch-rate="1">
-      <classes>
-        <class name="authentication.ts" filename="src\features\authentication\types\authentication.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-          </lines>
-        </class>
-        <class name="createUserRequest.ts" filename="src\features\authentication\types\createUserRequest.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-          </lines>
-        </class>
-        <class name="loginCredentials.ts" filename="src\features\authentication\types\loginCredentials.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-          </lines>
-        </class>
-      </classes>
-    </package>
-    <package name="src.features.conversations.components" line-rate="0" branch-rate="0.25">
+    <package name="frontend.src.features.conversations.components" line-rate="0" branch-rate="0.25">
       <classes>
         <class name="ChatBubble.tsx" filename="src\features\conversations\components\ChatBubble.tsx" line-rate="0" branch-rate="1">
           <methods>
@@ -1311,7 +950,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.conversations.hooks" line-rate="0.07200000000000001" branch-rate="0.375">
+    <package name="frontend.src.features.conversations.hooks" line-rate="0.07200000000000001" branch-rate="0.375">
       <classes>
         <class name="useAddUserToConversation.ts" filename="src\features\conversations\hooks\useAddUserToConversation.ts" line-rate="0" branch-rate="0">
           <methods>
@@ -1508,7 +1147,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.conversations.pages" line-rate="0" branch-rate="0">
+    <package name="frontend.src.features.conversations.pages" line-rate="0" branch-rate="0">
       <classes>
         <class name="Conversations.tsx" filename="src\features\conversations\pages\Conversations.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -1791,126 +1430,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.conversations.types" line-rate="0" branch-rate="1">
-      <classes>
-        <class name="ConversationColorThemeFactory.ts" filename="src\features\conversations\types\ConversationColorThemeFactory.ts" line-rate="0" branch-rate="1">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="2" hits="0" branch="false"/>
-            <line number="4" hits="0" branch="false"/>
-            <line number="5" hits="0" branch="false"/>
-            <line number="6" hits="0" branch="false"/>
-            <line number="7" hits="0" branch="false"/>
-            <line number="8" hits="0" branch="false"/>
-            <line number="10" hits="0" branch="false"/>
-            <line number="11" hits="0" branch="false"/>
-            <line number="13" hits="0" branch="false"/>
-            <line number="14" hits="0" branch="false"/>
-            <line number="16" hits="0" branch="false"/>
-            <line number="17" hits="0" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="19" hits="0" branch="false"/>
-            <line number="21" hits="0" branch="false"/>
-            <line number="22" hits="0" branch="false"/>
-            <line number="23" hits="0" branch="false"/>
-            <line number="24" hits="0" branch="false"/>
-            <line number="26" hits="0" branch="false"/>
-            <line number="27" hits="0" branch="false"/>
-            <line number="28" hits="0" branch="false"/>
-            <line number="29" hits="0" branch="false"/>
-            <line number="30" hits="0" branch="false"/>
-            <line number="31" hits="0" branch="false"/>
-            <line number="34" hits="0" branch="false"/>
-            <line number="35" hits="0" branch="false"/>
-            <line number="36" hits="0" branch="false"/>
-            <line number="37" hits="0" branch="false"/>
-            <line number="38" hits="0" branch="false"/>
-            <line number="39" hits="0" branch="false"/>
-            <line number="40" hits="0" branch="false"/>
-            <line number="41" hits="0" branch="false"/>
-          </lines>
-        </class>
-        <class name="ConversationThemes.ts" filename="src\features\conversations\types\ConversationThemes.ts" line-rate="0" branch-rate="1">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-            <line number="4" hits="0" branch="false"/>
-            <line number="5" hits="0" branch="false"/>
-            <line number="6" hits="0" branch="false"/>
-            <line number="7" hits="0" branch="false"/>
-            <line number="8" hits="0" branch="false"/>
-            <line number="10" hits="0" branch="false"/>
-            <line number="11" hits="0" branch="false"/>
-            <line number="12" hits="0" branch="false"/>
-            <line number="13" hits="0" branch="false"/>
-            <line number="15" hits="0" branch="false"/>
-            <line number="16" hits="0" branch="false"/>
-            <line number="17" hits="0" branch="false"/>
-            <line number="18" hits="0" branch="false"/>
-            <line number="21" hits="0" branch="false"/>
-            <line number="22" hits="0" branch="false"/>
-            <line number="23" hits="0" branch="false"/>
-            <line number="24" hits="0" branch="false"/>
-            <line number="25" hits="0" branch="false"/>
-            <line number="27" hits="0" branch="false"/>
-            <line number="28" hits="0" branch="false"/>
-            <line number="29" hits="0" branch="false"/>
-            <line number="30" hits="0" branch="false"/>
-            <line number="32" hits="0" branch="false"/>
-            <line number="33" hits="0" branch="false"/>
-            <line number="34" hits="0" branch="false"/>
-            <line number="35" hits="0" branch="false"/>
-            <line number="38" hits="0" branch="false"/>
-            <line number="39" hits="0" branch="false"/>
-            <line number="40" hits="0" branch="false"/>
-            <line number="41" hits="0" branch="false"/>
-            <line number="42" hits="0" branch="false"/>
-            <line number="44" hits="0" branch="false"/>
-            <line number="45" hits="0" branch="false"/>
-            <line number="46" hits="0" branch="false"/>
-            <line number="47" hits="0" branch="false"/>
-            <line number="49" hits="0" branch="false"/>
-            <line number="50" hits="0" branch="false"/>
-            <line number="51" hits="0" branch="false"/>
-            <line number="52" hits="0" branch="false"/>
-          </lines>
-        </class>
-        <class name="conversation.ts" filename="src\features\conversations\types\conversation.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-          </lines>
-        </class>
-        <class name="iColorThemes.ts" filename="src\features\conversations\types\iColorThemes.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-          </lines>
-        </class>
-      </classes>
-    </package>
-    <package name="src.features.messages.hooks" line-rate="0" branch-rate="0">
+    <package name="frontend.src.features.messages.hooks" line-rate="0" branch-rate="0">
       <classes>
         <class name="useDeleteMessage.ts" filename="src\features\messages\hooks\useDeleteMessage.ts" line-rate="0" branch-rate="0">
           <methods>
@@ -1999,7 +1519,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.messages.services" line-rate="0" branch-rate="1">
+    <package name="frontend.src.features.messages.services" line-rate="0" branch-rate="1">
       <classes>
         <class name="transformMessageFromApi.ts" filename="src\features\messages\services\transformMessageFromApi.ts" line-rate="0" branch-rate="1">
           <methods>
@@ -2023,22 +1543,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.messages.types" line-rate="1" branch-rate="1">
-      <classes>
-        <class name="message.ts" filename="src\features\messages\types\message.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-          </lines>
-        </class>
-      </classes>
-    </package>
-    <package name="src.features.users.components" line-rate="0" branch-rate="0">
+    <package name="frontend.src.features.users.components" line-rate="0" branch-rate="0">
       <classes>
         <class name="UserCard.tsx" filename="src\features\users\components\UserCard.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -2098,7 +1603,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.users.components.Banner" line-rate="0" branch-rate="0.3333">
+    <package name="frontend.src.features.users.components.Banner" line-rate="0" branch-rate="0.3333">
       <classes>
         <class name="Banner.tsx" filename="src\features\users\components\Banner\Banner.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -2179,7 +1684,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.users.pages" line-rate="0" branch-rate="0">
+    <package name="frontend.src.features.users.pages" line-rate="0" branch-rate="0">
       <classes>
         <class name="Home.tsx" filename="src\features\users\pages\Home.tsx" line-rate="0" branch-rate="0">
           <methods>
@@ -2247,22 +1752,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.features.users.types" line-rate="1" branch-rate="1">
-      <classes>
-        <class name="user.ts" filename="src\features\users\types\user.ts" line-rate="0" branch-rate="0">
-          <methods>
-            <method name="(empty-report)" hits="1" signature="()V">
-              <lines>
-                <line number="1" hits="1"/>
-              </lines>
-            </method>
-          </methods>
-          <lines>
-          </lines>
-        </class>
-      </classes>
-    </package>
-    <package name="src.sharedComponents" line-rate="1" branch-rate="1">
+    <package name="frontend.src.sharedComponents" line-rate="1" branch-rate="1">
       <classes>
         <class name="Button.tsx" filename="src\sharedComponents\Button.tsx" line-rate="1" branch-rate="1">
           <methods>
@@ -2396,7 +1886,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.sharedComponents.Layout" line-rate="1" branch-rate="1">
+    <package name="frontend.src.sharedComponents.Layout" line-rate="1" branch-rate="1">
       <classes>
         <class name="Footer.tsx" filename="src\sharedComponents\Layout\Footer.tsx" line-rate="1" branch-rate="1">
           <methods>
