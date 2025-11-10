@@ -60,7 +60,7 @@ export const ChatBubble = ({
   };
 
   return (
-    <div className={bubbleClass}>
+    <div className={bubbleClass} data-testid="chat-bubble">
       <div className="flex flex-col">
         {isEditing ? (
           <div className="flex gap-2">

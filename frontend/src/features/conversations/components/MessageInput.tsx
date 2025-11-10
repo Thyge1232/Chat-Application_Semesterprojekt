@@ -20,6 +20,7 @@ export const MessageInput = ({
 
   return (
     <form
+      data-testid="messageinputform"
       className="flex w-[90%] relative items-center z-[1]"
       onSubmit={(e) => {
         e.preventDefault();

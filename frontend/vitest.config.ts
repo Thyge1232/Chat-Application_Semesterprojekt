@@ -1,5 +1,6 @@
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
+import { env } from "process";
 
 export default defineConfig({
   plugins: [react()],
@@ -18,6 +19,7 @@ export default defineConfig({
         "eslint.config.js",
         "vitest.config.ts",
         "vite.config.ts",
+        "src/vite-env.d.ts",
       ],
       reporter: ["text", "text-summary", "lcov", "html", "cobertura"],
       reportsDirectory: "./coverage",
