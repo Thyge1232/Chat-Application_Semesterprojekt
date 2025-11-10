@@ -10,6 +10,8 @@ export default defineConfig({
     setupFiles: "./tests/setupTests.ts",
     coverage: {
       provider: "v8",
+      all: true,
+      include: ["src/**/*.{ts,tsx}"],
       exclude: [
         "src/main.tsx", //entry point
         "src/app/App.tsx", //just the app wrapper
