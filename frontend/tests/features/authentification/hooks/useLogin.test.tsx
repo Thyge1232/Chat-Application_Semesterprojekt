@@ -6,10 +6,6 @@ import { describe, it, vi, expect, afterEach } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, act, waitFor } from "@testing-library/react";
 
-//laver et api-kald,  mock dette request: username, password,  -> rigtig + forkert -> response
-// rigtig , mocker token, kaldes setToken()
-//return getCurrentUser
-
 const wrapper = ({ children }: { children: React.ReactNode }) => {
   const queryClient = new QueryClient();
   return (
