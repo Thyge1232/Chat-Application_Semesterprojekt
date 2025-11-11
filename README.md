@@ -28,8 +28,7 @@ VSCode extensions:
 
 ### Frontend Test Coverage
 
-| Type           | Badge                                                                                                          |
-| :------------- | :------------------------------------------------------------------------------------------------------------- |
-| **Lines**      | ![Line Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:line)            |
-| **Branches**   | ![Branch Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:branch)        |
-| **Statements** | ![Statement Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:statements) |
+| Type         | Badge                                                                                                   |
+| :----------- | :------------------------------------------------------------------------------------------------------ |
+| **Lines**    | ![Line Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:line)     |
+| **Branches** | ![Branch Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:branch) |
