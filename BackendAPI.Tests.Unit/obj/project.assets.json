@@ -4492,40 +4492,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Cecil\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/home/nikoh/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
+      "projectUniqueName": "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI.Tests.Unit/BackendAPI.Tests.Unit.csproj",
       "projectName": "BackendAPI.Tests.Unit",
-      "projectPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
-      "packagesPath": "C:\\Users\\Cecil\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI.Tests.Unit\\obj\\",
+      "projectPath": "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI.Tests.Unit/BackendAPI.Tests.Unit.csproj",
+      "packagesPath": "/home/nikoh/.nuget/packages/",
+      "outputPath": "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI.Tests.Unit/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Cecil\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/nikoh/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj": {
-              "projectPath": "C:\\Users\\Cecil\\Dokumenter\\SW4\\chat-app\\BackendAPI\\BackendAPI.csproj"
+            "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI/BackendAPI.csproj": {
+              "projectPath": "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI/BackendAPI.csproj"
             }
           }
         }
@@ -4534,13 +4526,7 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -4583,7 +4569,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -396,4 +396,26 @@ public class ConversationTest
         Assert.False(result);
         _mockConvoRepo.Verify(repo => repo.SaveChangesAsync(), Times.Never);
     }
+
+
+    [Fact]
+    public async Task RemoveThisUserByIdFromConversationByIdAsync_WhenUserIsMember_ShouldReturnTrue()
+    {
+        // Arrange
+        var conversationId = 1;
+        var nonMemberUserId = 99;
+        var member = UserFactory.CreateUser(1, "alice");
+        var conversation = ConversationFactory.CreateConversation(conversationId, "Test", new List<User> { member });
+
+        _mockConvoRepo.Setup(repo => repo.GetByIdWithMembersAsync(conversationId)).ReturnsAsync(conversation);
+
+        _mockConvoRepo.Setup(repo => repo.RemoveThisUserFromConversationAsync(conversation, nonMemberUserId)).ReturnsAsync(true);
+
+        // Act
+        var result = await _uut.RemoveThisUserByIdFromConversationByIdAsync(conversationId, nonMemberUserId);
+
+        // Assert
+        Assert.True(result);
+        _mockConvoRepo.Verify(repo => repo.SaveChangesAsync(), Times.Once);
+    }
 }
