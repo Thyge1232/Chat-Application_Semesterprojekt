@@ -41,7 +41,6 @@ const mockError = (
   server.use(http[method](url, () => new HttpResponse(null, { status })));
 };
 
-// --- Handlers ---
 const handlers = [
   // GET users list
   http.get("http://api/users", () => HttpResponse.json(users)),

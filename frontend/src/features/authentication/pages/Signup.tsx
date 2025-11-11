@@ -24,12 +24,9 @@ export const Signup = () => {
     try {
       await createUserMutation.mutateAsync(userData);
       navigate("/home");
-      console.log("Form data:", data);
-      console.log("Json-String:", userData);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       alert("Noget gik galt: " + message);
-      console.error("Fejlmeldning: ", message);
     }
   };
 
