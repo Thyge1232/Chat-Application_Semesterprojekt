@@ -7,7 +7,6 @@ if [ ! -f "$XML_PATH" ]; then
   # If not found, print zeros so badges show 0.0%
   echo "Line coverage: 0.0%"
   echo "Branch coverage: 0.0%"
-  echo "Function coverage: 0.0%"
   echo "Statements coverage: 0.0%"
   # generic output for backward compatibility
   echo "Coverage: 0.0%"
@@ -17,13 +16,6 @@ fi
 # extract attributes from root <coverage ...>
 LINE_RATE=$(grep -oP 'line-rate="\K[0-9.]+' "$XML_PATH" || echo "0")
 BRANCH_RATE=$(grep -oP 'branch-rate="\K[0-9.]+' "$XML_PATH" || echo "0")
-
-# Cobertura may not include function-rate; try method-rate or function-rate
-FUNC_RATE=$(grep -oP 'function-rate="\K[0-9.]+' "$XML_PATH" || true)
-if [ -z "$FUNC_RATE" ]; then
-  FUNC_RATE=$(grep -oP 'method-rate="\K[0-9.]+' "$XML_PATH" || true)
-fi
-FUNC_RATE=${FUNC_RATE:-0}
 
 # Statements coverage is not always a top-level attribute in Cobertura.
 # We'll estimate statements by using line-rate as fallback if no explicit attribute exists.
@@ -46,7 +38,6 @@ STMT_PCT=$(to_pct "${STMT_RATE:-0}")
 # Print labeled lines. CI jobs will pick the relevant line and output a single "Coverage: X.Y%" for GitLab parsing
 echo "Line coverage: ${LINE_PCT}%"
 echo "Branch coverage: ${BRANCH_PCT}%"
-echo "Function coverage: ${FUNC_PCT}%"
 echo "Statements coverage: ${STMT_PCT}%"
 # Generic fallback line for existing badge
 echo "Coverage: ${LINE_PCT}%"
