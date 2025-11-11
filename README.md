@@ -23,3 +23,11 @@ VSCode extensions:
 
 [![coverage report](https://gitlab.com/<namespace>/<project>/badges/main/coverage.svg)](https://gitlab.com/<namespace>/<project>/-/commits/main)
 
+### Frontend Test Coverage
+
+| Type | Badge |
+|:----|:----|
+| **Lines** | ![Line Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:line) |
+| **Branches** | ![Branch Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:branch) |
+| **Functions** | ![Function Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:function) |
+| **Statements** | ![Statement Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:statements) |
