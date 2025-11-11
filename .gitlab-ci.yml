@@ -13,6 +13,7 @@ test-frontend:
     - npm run lint
     - npm run test:ci
     - cd ..
+    - bash -c "chmod +x scripts/print_coverage.sh"
     - ./scripts/print_coverage.sh
   artifacts:
     when: always
@@ -36,6 +37,7 @@ coverage:line:
   image: node:22
   needs: ["test-frontend"]
   script:
+    - bash -c "chmod +x scripts/print_coverage.sh"
     - ./scripts/print_coverage.sh frontend/coverage/cobertura-coverage.xml
   coverage: '/Line coverage:\s+(\d+\.\d+)%/'
   rules:
@@ -46,6 +48,7 @@ coverage:branch:
   image: node:22
   needs: ["test-frontend"]
   script:
+    - bash -c "chmod +x scripts/print_coverage.sh"
     - ./scripts/print_coverage.sh frontend/coverage/cobertura-coverage.xml
   coverage: '/Branch coverage:\s+(\d+\.\d+)%/'
   rules:
@@ -56,6 +59,7 @@ coverage:function:
   image: node:22
   needs: ["test-frontend"]
   script:
+    - bash -c "chmod +x scripts/print_coverage.sh"
     - ./scripts/print_coverage.sh frontend/coverage/cobertura-coverage.xml
   coverage: '/Function coverage:\s+(\d+\.\d+)%/'
   rules:
@@ -66,6 +70,7 @@ coverage:statements:
   image: node:22
   needs: ["test-frontend"]
   script:
+    - bash -c "chmod +x scripts/print_coverage.sh"
     - ./scripts/print_coverage.sh frontend/coverage/cobertura-coverage.xml
   coverage: '/Statements coverage:\s+(\d+\.\d+)%/'
   rules:
