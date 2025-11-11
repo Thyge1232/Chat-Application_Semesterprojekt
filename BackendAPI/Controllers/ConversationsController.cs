@@ -104,7 +104,7 @@ public class ConversationController : ControllerBase
 
     [Authorize]
     [HttpDelete("{conversationId}/leave")]
-    public async Task<IActionResult> RemoveUserByIdFromConversationById(int conversationId)
+    public async Task<IActionResult> RemoveUserFromConversationById(int conversationId)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
