@@ -94,7 +94,10 @@ describe("Signup page", () => {
     const createUserMutation = vi.fn();
     vi.spyOn(useSignup, "useSignup").mockReturnValue({
       mutateAsync: createUserMutation,
-    } as any);
+      isLoading: false,
+      isError: false,
+      error: null,
+    } as unknown as ReturnType<typeof useSignup.useSignup>);
 
     render(<Signup />, { wrapper });
 
