@@ -35,7 +35,7 @@ fi
 
 # convert fraction -> percent with one decimal
 to_pct() {
-  awk "BEGIN{ printf \"%.1f\", ($1 * 100) }"
+  awk -v val="$1" 'BEGIN { printf "%.1f", (val * 100) }'
 }
 
 LINE_PCT=$(to_pct "${LINE_RATE:-0}")
