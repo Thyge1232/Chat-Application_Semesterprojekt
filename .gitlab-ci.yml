@@ -7,36 +7,13 @@ stages:
 test-frontend:
   stage: test
   image: node:22
-  variables:
-    COVERAGE_THRESHOLD: "50" # percent; adjust to your required minimum
   script:
     - cd frontend
     - npm ci
     - npm run lint
     - npm run test:ci
-    - |
-      # Extract line-rate from cobertura XML and convert to percent with 2 decimals
-      xml_path="frontend/coverage/cobertura-coverage.xml"
-      if [ ! -f "$xml_path" ]; then
-        percent="0.00"
-      else
-        percent=$(node -e "
-        const fs = require('fs');
-        const p = process.argv[1];
-        const xml = fs.readFileSync(p,'utf8');
-        const m = xml.match(/line-rate=\"([0-9.]+)\"/);
-        const v = m ? parseFloat(m[1]) * 100 : 0;
-        console.log(v.toFixed(2));
-      " "$xml_path")
-      fi
-    - echo "All files ${percent}"
-    - |
-      # Enforce coverage threshold on non-main branches and merge requests
-      # On main branch tests are run but allowed to fail (keeps previous behavior)
-      if [ "$CI_COMMIT_BRANCH" != "main" ] || [ "$CI_PIPELINE_SOURCE" = "merge_request_event" ]; then
-        # compare as floats
-        awk -v p="$percent" -v t="$COVERAGE_THRESHOLD" 'BEGIN{ if (p+0 < t+0) exit 1; else exit 0 }'
-      fi
+    - cd ..
+    - ./scripts/print_coverage.sh
   artifacts:
     when: always
     reports:
@@ -45,15 +22,54 @@ test-frontend:
         path: frontend/coverage/cobertura-coverage.xml
     paths:
       - frontend/coverage/
-  coverage: '/All files.*\s+(\d+\.\d+)/'
+  coverage: '/Coverage:\s+(\d+\.\d+)%/'
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
-      allow_failure: true
       when: on_success
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       when: on_success
     - if: '$CI_COMMIT_BRANCH != "main"'
       when: on_success
+
+coverage:line:
+  stage: test
+  image: node:22
+  needs: ["test-frontend"]
+  script:
+    - ./scripts/print_coverage.sh frontend/coverage/cobertura-coverage.xml
+  coverage: '/Line coverage:\s+(\d+\.\d+)%/'
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+coverage:branch:
+  stage: test
+  image: node:22
+  needs: ["test-frontend"]
+  script:
+    - ./scripts/print_coverage.sh frontend/coverage/cobertura-coverage.xml
+  coverage: '/Branch coverage:\s+(\d+\.\d+)%/'
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+coverage:function:
+  stage: test
+  image: node:22
+  needs: ["test-frontend"]
+  script:
+    - ./scripts/print_coverage.sh frontend/coverage/cobertura-coverage.xml
+  coverage: '/Function coverage:\s+(\d+\.\d+)%/'
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+coverage:statements:
+  stage: test
+  image: node:22
+  needs: ["test-frontend"]
+  script:
+    - ./scripts/print_coverage.sh frontend/coverage/cobertura-coverage.xml
+  coverage: '/Statements coverage:\s+(\d+\.\d+)%/'
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
 
 # --- Backend tests ---
 test-backend:
