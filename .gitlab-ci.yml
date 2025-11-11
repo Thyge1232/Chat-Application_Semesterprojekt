@@ -61,7 +61,7 @@ coverage:function:
   script:
     - bash -c "chmod +x scripts/print_coverage.sh"
     - ./scripts/print_coverage.sh frontend/coverage/cobertura-coverage.xml
-  coverage: '/Function coverage:\s+(\d+\.\d+)%/'
+  coverage: '/Function coverage:\s*([0-9]+(?:\.[0-9]+)?)%/'
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
 
