@@ -18,7 +18,6 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe("useAuth hook", () => {
-  //   let getCurrentUserSpy: ReturnType<typeof vi.spyOn>;
   afterEach(() => {
     vi.restoreAllMocks();
   });
