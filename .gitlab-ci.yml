@@ -32,7 +32,7 @@ test-frontend:
     - if: '$CI_COMMIT_BRANCH != "main"'
       when: on_success
 
-coverage:line:
+FEDcoverage:line:
   stage: test
   image: node:22
   needs: ["test-frontend"]
@@ -43,7 +43,7 @@ coverage:line:
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
 
-coverage:branch:
+FEDcoverage:branch:
   stage: test
   image: node:22
   needs: ["test-frontend"]
