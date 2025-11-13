@@ -10,22 +10,18 @@
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
           "FluentAssertions": "8.7.0",
-          "JunitXml.TestLogger": "6.1.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.9",
           "Microsoft.EntityFrameworkCore.Design": "9.0.9",
           "Microsoft.EntityFrameworkCore.InMemory": "9.0.9",
           "Microsoft.EntityFrameworkCore.Sqlite": "9.0.9",
-          "Microsoft.EntityFrameworkCore.Tools": "9.0.9",
-          "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.22.1",
           "Moq": "4.20.72",
           "NSubstitute": "5.3.0",
           "NUnit": "4.4.0",
           "NUnit3TestAdapter": "5.1.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
           "Swashbuckle.AspNetCore": "6.6.2",
-          "System.IdentityModel.Tokens.Jwt": "8.14.0",
-          "coverlet.collector": "6.0.4"
+          "System.IdentityModel.Tokens.Jwt": "8.14.0"
         },
         "runtime": {
           "BackendAPI.dll": {}
@@ -40,9 +36,6 @@
         }
       },
       "Castle.Core/5.1.1": {
-        "dependencies": {
-          "System.Diagnostics.EventLog": "6.0.0"
-        },
         "runtime": {
           "lib/net6.0/Castle.Core.dll": {
             "assemblyVersion": "5.0.0.0",
@@ -50,7 +43,6 @@
           }
         }
       },
-      "coverlet.collector/6.0.4": {},
       "FluentAssertions/8.7.0": {
         "runtime": {
           "lib/net6.0/FluentAssertions.dll": {
@@ -67,7 +59,6 @@
           }
         }
       },
-      "JunitXml.TestLogger/6.1.0": {},
       "Microsoft.ApplicationInsights/2.23.0": {
         "dependencies": {
           "System.Diagnostics.DiagnosticSource": "9.0.9"
@@ -98,7 +89,6 @@
           }
         }
       },
-      "Microsoft.Build.Framework/17.8.3": {},
       "Microsoft.Build.Locator/1.7.8": {
         "runtime": {
           "lib/net6.0/Microsoft.Build.Locator.dll": {
@@ -107,14 +97,7 @@
           }
         }
       },
-      "Microsoft.CodeAnalysis.Analyzers/3.3.4": {},
       "Microsoft.CodeAnalysis.Common/4.8.0": {
-        "dependencies": {
-          "Microsoft.CodeAnalysis.Analyzers": "3.3.4",
-          "System.Collections.Immutable": "7.0.0",
-          "System.Reflection.Metadata": "7.0.0",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        },
         "runtime": {
           "lib/net7.0/Microsoft.CodeAnalysis.dll": {
             "assemblyVersion": "4.8.0.0",
@@ -276,8 +259,7 @@
           "Microsoft.Bcl.AsyncInterfaces": "7.0.0",
           "Microsoft.CodeAnalysis.Common": "4.8.0",
           "System.Composition": "7.0.0",
-          "System.IO.Pipelines": "9.0.9",
-          "System.Threading.Channels": "7.0.0"
+          "System.IO.Pipelines": "9.0.9"
         },
         "runtime": {
           "lib/net7.0/Microsoft.CodeAnalysis.Workspaces.dll": {
@@ -329,7 +311,6 @@
       },
       "Microsoft.CodeAnalysis.Workspaces.MSBuild/4.8.0": {
         "dependencies": {
-          "Microsoft.Build.Framework": "17.8.3",
           "Microsoft.CodeAnalysis.Common": "4.8.0",
           "Microsoft.CodeAnalysis.Workspaces.Common": "4.8.0",
           "System.Text.Json": "9.0.9"
@@ -400,7 +381,6 @@
       "Microsoft.EntityFrameworkCore/9.0.9": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Abstractions": "9.0.9",
-          "Microsoft.EntityFrameworkCore.Analyzers": "9.0.9",
           "Microsoft.Extensions.Caching.Memory": "9.0.9",
           "Microsoft.Extensions.Logging": "9.0.9"
         },
@@ -419,11 +399,9 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/9.0.9": {},
       "Microsoft.EntityFrameworkCore.Design/9.0.9": {
         "dependencies": {
           "Humanizer.Core": "2.14.1",
-          "Microsoft.Build.Framework": "17.8.3",
           "Microsoft.Build.Locator": "1.7.8",
           "Microsoft.CodeAnalysis.CSharp": "4.8.0",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.8.0",
@@ -500,12 +478,6 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/9.0.9": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "9.0.9"
-        }
-      },
-      "Microsoft.Extensions.ApiDescription.Server/6.0.5": {},
       "Microsoft.Extensions.Caching.Abstractions/9.0.9": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "9.0.9"
@@ -964,9 +936,6 @@
         }
       },
       "Microsoft.TestPlatform.ObjectModel/17.13.0": {
-        "dependencies": {
-          "System.Reflection.Metadata": "7.0.0"
-        },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CoreUtilities.dll": {
             "assemblyVersion": "15.0.0.0",
@@ -1062,7 +1031,6 @@
           }
         }
       },
-      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.22.1": {},
       "Mono.TextTemplating/3.0.0": {
         "dependencies": {
           "System.CodeDom": "6.0.0"
@@ -1151,9 +1119,6 @@
         }
       },
       "SQLitePCLRaw.core/2.1.10": {
-        "dependencies": {
-          "System.Memory": "4.5.3"
-        },
         "runtime": {
           "lib/netstandard2.0/SQLitePCLRaw.core.dll": {
             "assemblyVersion": "2.1.10.2445",
@@ -1283,7 +1248,6 @@
       },
       "Swashbuckle.AspNetCore/6.6.2": {
         "dependencies": {
-          "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
           "Swashbuckle.AspNetCore.Swagger": "6.6.2",
           "Swashbuckle.AspNetCore.SwaggerGen": "6.6.2",
           "Swashbuckle.AspNetCore.SwaggerUI": "6.6.2"
@@ -1327,7 +1291,6 @@
           }
         }
       },
-      "System.Collections.Immutable/7.0.0": {},
       "System.Composition/7.0.0": {
         "dependencies": {
           "System.Composition.AttributedModel": "7.0.0",
@@ -1396,7 +1359,6 @@
           }
         }
       },
-      "System.Diagnostics.EventLog/6.0.0": {},
       "System.IdentityModel.Tokens.Jwt/8.14.0": {
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "8.14.0",
@@ -1417,13 +1379,6 @@
           }
         }
       },
-      "System.Memory/4.5.3": {},
-      "System.Reflection.Metadata/7.0.0": {
-        "dependencies": {
-          "System.Collections.Immutable": "7.0.0"
-        }
-      },
-      "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
       "System.Text.Encodings.Web/9.0.9": {
         "runtime": {
           "lib/net8.0/System.Text.Encodings.Web.dll": {
@@ -1451,8 +1406,7 @@
             "fileVersion": "9.0.925.41916"
           }
         }
-      },
-      "System.Threading.Channels/7.0.0": {}
+      }
     }
   },
   "libraries": {
@@ -1475,13 +1429,6 @@
       "path": "castle.core/5.1.1",
       "hashPath": "castle.core.5.1.1.nupkg.sha512"
     },
-    "coverlet.collector/6.0.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-lkhqpF8Pu2Y7IiN7OntbsTtdbpR1syMsm2F3IgX6ootA4ffRqWL5jF7XipHuZQTdVuWG/gVAAcf8mjk8Tz0xPg==",
-      "path": "coverlet.collector/6.0.4",
-      "hashPath": "coverlet.collector.6.0.4.nupkg.sha512"
-    },
     "FluentAssertions/8.7.0": {
       "type": "package",
       "serviceable": true,
@@ -1495,13 +1442,6 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
-    },
-    "JunitXml.TestLogger/6.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-a3ciawoHOzqcry7yS5z9DerNyF9QZi6fEZZJPILSy6Noj6+r8Ydma+cENA6wvivXDCblpXxw72wWT9QApNy/0w==",
-      "path": "junitxml.testlogger/6.1.0",
-      "hashPath": "junitxml.testlogger.6.1.0.nupkg.sha512"
     },
     "Microsoft.ApplicationInsights/2.23.0": {
       "type": "package",
@@ -1524,26 +1464,12 @@
       "path": "microsoft.bcl.asyncinterfaces/7.0.0",
       "hashPath": "microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512"
     },
-    "Microsoft.Build.Framework/17.8.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-NrQZJW8TlKVPx72yltGb8SVz3P5mNRk9fNiD/ao8jRSk48WqIIdCn99q4IjlVmPcruuQ+yLdjNQLL8Rb4c916g==",
-      "path": "microsoft.build.framework/17.8.3",
-      "hashPath": "microsoft.build.framework.17.8.3.nupkg.sha512"
-    },
     "Microsoft.Build.Locator/1.7.8": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-sPy10x527Ph16S2u0yGME4S6ohBKJ69WfjeGG/bvELYeZVmJdKjxgnlL8cJJJLGV/cZIRqSfB12UDB8ICakOog==",
       "path": "microsoft.build.locator/1.7.8",
       "hashPath": "microsoft.build.locator.1.7.8.nupkg.sha512"
-    },
-    "Microsoft.CodeAnalysis.Analyzers/3.3.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-AxkxcPR+rheX0SmvpLVIGLhOUXAKG56a64kV9VQZ4y9gR9ZmPXnqZvHJnmwLSwzrEP6junUF11vuc+aqo5r68g==",
-      "path": "microsoft.codeanalysis.analyzers/3.3.4",
-      "hashPath": "microsoft.codeanalysis.analyzers.3.3.4.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.Common/4.8.0": {
       "type": "package",
@@ -1601,13 +1527,6 @@
       "path": "microsoft.entityframeworkcore.abstractions/9.0.9",
       "hashPath": "microsoft.entityframeworkcore.abstractions.9.0.9.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/9.0.9": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-uiKeU/qR0YpaDUa4+g0rAjKCuwfq8YWZGcpPptnFWIr1K7dXQTm/15D2HDwwU4ln3Uf66krYybymuY58ua4hhw==",
-      "path": "microsoft.entityframeworkcore.analyzers/9.0.9",
-      "hashPath": "microsoft.entityframeworkcore.analyzers.9.0.9.nupkg.sha512"
-    },
     "Microsoft.EntityFrameworkCore.Design/9.0.9": {
       "type": "package",
       "serviceable": true,
@@ -1642,20 +1561,6 @@
       "sha512": "sha512-eQVF8fBgDxjnjan3EB1ysdfDO7lKKfWKTT4VR0BInU4Mi6ADdgiOdm6qvZ/ufh04f3hhPL5lyknx5XotGzBh8A==",
       "path": "microsoft.entityframeworkcore.sqlite.core/9.0.9",
       "hashPath": "microsoft.entityframeworkcore.sqlite.core.9.0.9.nupkg.sha512"
-    },
-    "Microsoft.EntityFrameworkCore.Tools/9.0.9": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Q8n1PXXJApa1qX8HI3r/YuHoJ1HuLwjI2hLqaCV9K9pqQhGpi6Z38laOYwL2ElUOTWCxTKMDEMMYWfPlw6rwgg==",
-      "path": "microsoft.entityframeworkcore.tools/9.0.9",
-      "hashPath": "microsoft.entityframeworkcore.tools.9.0.9.nupkg.sha512"
-    },
-    "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Ckb5EDBUNJdFWyajfXzUIMRkhf52fHZOQuuZg/oiu8y7zDCVwD0iHhew6MnThjHmevanpxL3f5ci2TtHQEN6bw==",
-      "path": "microsoft.extensions.apidescription.server/6.0.5",
-      "hashPath": "microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/9.0.9": {
       "type": "package",
@@ -1825,13 +1730,6 @@
       "path": "microsoft.testplatform.objectmodel/17.13.0",
       "hashPath": "microsoft.testplatform.objectmodel.17.13.0.nupkg.sha512"
     },
-    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.22.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-EfYANhAWqmWKoLwN6bxoiPZSOfJSO9lzX+UrU6GVhLhPub1Hd+5f0zL0/tggIA6mRz6Ebw2xCNcIsM4k+7NPng==",
-      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.22.1",
-      "hashPath": "microsoft.visualstudio.azure.containers.tools.targets.1.22.1.nupkg.sha512"
-    },
     "Mono.TextTemplating/3.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1944,13 +1842,6 @@
       "path": "system.codedom/6.0.0",
       "hashPath": "system.codedom.6.0.0.nupkg.sha512"
     },
-    "System.Collections.Immutable/7.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-dQPcs0U1IKnBdRDBkrCTi1FoajSTBzLcVTpjO4MBCMC7f4pDOIPzgBoX8JjG7X6uZRJ8EBxsi8+DR1JuwjnzOQ==",
-      "path": "system.collections.immutable/7.0.0",
-      "hashPath": "system.collections.immutable.7.0.0.nupkg.sha512"
-    },
     "System.Composition/7.0.0": {
       "type": "package",
       "serviceable": true,
@@ -2000,13 +1891,6 @@
       "path": "system.diagnostics.diagnosticsource/9.0.9",
       "hashPath": "system.diagnostics.diagnosticsource.9.0.9.nupkg.sha512"
     },
-    "System.Diagnostics.EventLog/6.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-lcyUiXTsETK2ALsZrX+nWuHSIQeazhqPphLfaRxzdGaG93+0kELqpgEHtwWOlQe7+jSFnKwaCAgL4kjeZCQJnw==",
-      "path": "system.diagnostics.eventlog/6.0.0",
-      "hashPath": "system.diagnostics.eventlog.6.0.0.nupkg.sha512"
-    },
     "System.IdentityModel.Tokens.Jwt/8.14.0": {
       "type": "package",
       "serviceable": true,
@@ -2021,27 +1905,6 @@
       "path": "system.io.pipelines/9.0.9",
       "hashPath": "system.io.pipelines.9.0.9.nupkg.sha512"
     },
-    "System.Memory/4.5.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
-      "path": "system.memory/4.5.3",
-      "hashPath": "system.memory.4.5.3.nupkg.sha512"
-    },
-    "System.Reflection.Metadata/7.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-MclTG61lsD9sYdpNz9xsKBzjsmsfCtcMZYXz/IUr2zlhaTaABonlr1ESeompTgM+Xk+IwtGYU7/voh3YWB/fWw==",
-      "path": "system.reflection.metadata/7.0.0",
-      "hashPath": "system.reflection.metadata.7.0.0.nupkg.sha512"
-    },
-    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
-      "path": "system.runtime.compilerservices.unsafe/6.0.0",
-      "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
-    },
     "System.Text.Encodings.Web/9.0.9": {
       "type": "package",
       "serviceable": true,
@@ -2055,13 +1918,6 @@
       "sha512": "sha512-NEnpppwq67fRz/OvQRxsEMgetDJsxlxpEsAFO/4PZYbAyAMd4Ol6KS7phc8uDoKPsnbdzRLKobpX303uQwCqdg==",
       "path": "system.text.json/9.0.9",
       "hashPath": "system.text.json.9.0.9.nupkg.sha512"
-    },
-    "System.Threading.Channels/7.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-qmeeYNROMsONF6ndEZcIQ+VxR4Q/TX/7uIVLJqtwIWL7dDWeh0l1UIqgo4wYyjG//5lUNhwkLDSFl+pAWO6oiA==",
-      "path": "system.threading.channels/7.0.0",
-      "hashPath": "system.threading.channels.7.0.0.nupkg.sha512"
     }
   }
 }
