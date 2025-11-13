@@ -1,0 +1,25 @@
+
+
+@startuml
+
+FrontEnd -> AuthController: HTTP POST request
+AuthController -> AuthController : Login (loginDto)
+AuthController -> AuthService: LoginAsync(loginDto)
+AuthService -> AuthService: LoginAsync(loginDto)
+AuthService -> AuthRepository: PostLoginAsync(loginDto)
+activate AuthRepository
+AuthRepository --> AuthService: User
+deactivate AuthRepository
+AuthService -> PasswordHasher: VerifyPassword(loginDto.Password, user.Password)
+activate PasswordHasher
+PasswordHasher --> AuthService: true
+deactivate PasswordHasher
+AuthService -> IConfiguration: Get("Jwt: Secret")
+activate IConfiguration
+IConfiguration --> AuthService: secretKey
+deactivate IConfiguration
+AuthService -> AuthService: Perform Auth
+AuthService --> AuthController: securityToken
+AuthController --> FrontEnd: Ok(token)
+
+@enduml
