@@ -9,5 +9,4 @@ public class User
     public string ProfilePicture { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public ICollection<ConversationMember> MemberIn { get; set;} = new List<ConversationMember>();
-
 }

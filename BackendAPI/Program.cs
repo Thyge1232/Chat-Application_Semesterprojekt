@@ -1,17 +1,18 @@
-using Microsoft.EntityFrameworkCore;
-using BackendAPI.Context;
-using BackendAPI.Repositories.Interfaces;
-using BackendAPI.Repositories.Implementations;
-using BackendAPI.Services.Interfaces;
-using BackendAPI.Services.Implementations;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using BackendAPI.Context;
+using BackendAPI.Repositories.Implementations;
+using BackendAPI.Repositories.Interfaces;
+using BackendAPI.Services.Implementations;
+using BackendAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connString = Environment.GetEnvironmentVariable("ConnectionStrings__Default") ??
-builder.Configuration.GetConnectionString("Default");
+var connString =
+    Environment.GetEnvironmentVariable("ConnectionStrings__Default")
+    ?? builder.Configuration.GetConnectionString("Default");
 Console.WriteLine($"Using DB: {connString}");
 
 builder.Services.AddDbContext<MyDBContext>(opt => opt.UseNpgsql(connString));
@@ -27,62 +28,70 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 // JWT Authentication
-var jwtKey = builder.Configuration["Jwt:Secret"]
-             ?? throw new InvalidOperationException("JWT secret mangler i konfigurationen");
+var jwtKey =
+    builder.Configuration["Jwt:Secret"]
+    ?? throw new InvalidOperationException("JWT secret mangler i konfigurationen");
 var keyBytes = Encoding.ASCII.GetBytes(jwtKey);
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false; // kun til udvikling
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
+builder
+    .Services.AddAuthentication(options =>
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        ClockSkew = TimeSpan.Zero
-    };
-});
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false; // kun til udvikling
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ClockSkew = TimeSpan.Zero,
+        };
+    });
 
 // Swagger configuration med JWT support
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     // Definer sikkerhedsskemaet (Bearer token)
-    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
-    });
+    options.AddSecurityDefinition(
+        "Bearer",
+        new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+            Scheme = "Bearer",
+            BearerFormat = "JWT",
+            In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+            Description =
+                "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+        }
+    );
 
     // Gør det muligt at tilføje token til alle requests
-    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-    {
+    options.AddSecurityRequirement(
+        new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
         {
-            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
             {
-                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                new Microsoft.OpenApi.Models.OpenApiSecurityScheme
                 {
-                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
+                    Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                    {
+                        Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                        Id = "Bearer",
+                    },
+                },
+                new string[] { }
             },
-            new string[] {}
         }
-    });
+    );
 });
 
-// Generate password 
+// Generate password
 var hasher = new PasswordHasher();
 var hash = hasher.HashPassword("alice123");
 Console.WriteLine("Hash for alice123: " + hash);
@@ -94,19 +103,20 @@ builder.Services.AddControllers();
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.AllowAnyOrigin()
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
-                      });
+    options.AddPolicy(
+        name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        }
+    );
 });
 
 var app = builder.Build();
 
-await using (var scope = app.Services.CreateAsyncScope())
+if (!builder.Environment.IsEnvironment("Testing"))
 {
+    await using var scope = app.Services.CreateAsyncScope();
     var db = scope.ServiceProvider.GetRequiredService<MyDBContext>();
     await db.Database.MigrateAsync();
 }

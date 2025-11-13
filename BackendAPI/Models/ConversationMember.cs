@@ -1,5 +1,6 @@
 namespace BackendAPI.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+
 public class ConversationMember
 {
     public int UserId { get; set; }
@@ -9,5 +10,4 @@ public class ConversationMember
     [ForeignKey("ConversationId")]
     public Conversation Conversation { get; set; }
     public DateTime JoinedAt { get; set; }
-
 }
