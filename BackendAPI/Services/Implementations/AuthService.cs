@@ -3,30 +3,31 @@ using System.Security.Claims;
 using System.Text;
 using BackendAPI.Context;
 using BackendAPI.Dtos;
+using BackendAPI.Repositories.Implementations;
 using BackendAPI.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using BackendAPI.Repositories.Interfaces;
 
 namespace BackendAPI.Services.Implementations;
 
 public class AuthService : IAuthService
 {
     private readonly IConfiguration _config;
-    private readonly MyDBContext _dbContext;
+    private readonly IAuthRepository _authRepository;
     private readonly IPasswordHasher _passwordHasher;
 
 
-    public AuthService(MyDBContext dbContext, IConfiguration config, IPasswordHasher passwordHasher)
+    public AuthService(IAuthRepository repo, IConfiguration config, IPasswordHasher passwordHasher)
     {
-        _dbContext = dbContext;
+        _authRepository = repo;
         _config = config;
         _passwordHasher = passwordHasher;
     }
 
     public async Task<string> LoginAsync(LoginDto loginDto)
     {
-        var user = await _dbContext.Users
-            .FirstOrDefaultAsync(u => u.Username == loginDto.Username);
+        var user = await _authRepository.PostLoginAsync(loginDto);
 
         if (user == null)
             throw new InvalidOperationException("Cannot find user");
