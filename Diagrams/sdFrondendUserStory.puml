@@ -1,0 +1,96 @@
+@startuml
+actor User
+participant Loginpage
+participant useLoginHook
+participant apiClient
+participant Backend
+participant tokenService
+participant authService
+participant apiBaseCrud
+participant apiUsers
+participant useUserById
+participant Homepage
+participant useAuth
+
+
+
+
+User -> Loginpage : Types username \nand password, \n presses submit
+activate useLoginHook
+Loginpage-> useLoginHook : login({ username, password })
+activate apiClient
+useLoginHook -> apiClient : await apiClient.post("/auth/login") \n with { username, password }
+activate tokenService
+apiClient -> tokenService : getToken() (interceptor)
+tokenService --> apiClient : null (no token yet)
+deactivate tokenService
+activate Backend
+apiClient -> Backend : HTTP POST request without \n authorization header
+deactivate apiClient
+Backend --> useLoginHook :  Ok(token)
+deactivate Backend
+
+activate tokenService
+useLoginHook -> tokenService : setToken(token)
+tokenService -> tokenService : inMemoryToken = token
+tokenService -> tokenService : setItem("auth_token", token) \nin localStorage
+deactivate tokenService
+
+activate authService
+useLoginHook -> authService : getCurrentUser()
+
+activate tokenService
+authService -> tokenService : getToken()
+tokenService --> authService : inMemoryToken
+deactivate tokenService
+authService -> authService : decode JWT payload
+authService --> useLoginHook : CurrentUser { userId, userName }
+deactivate authService
+useLoginHook --> Loginpage : CurrentUser {userId, userName}
+deactivate useLoginHook
+Loginpage -> Homepage : navigate(/home)
+
+
+activate useAuth
+Homepage -> useAuth : useAuth()
+activate authService
+useAuth -> authService : getCurrentUser()
+activate tokenService
+authService -> tokenService : getToken()
+tokenService --> authService : inMemoryToken || localStorage
+deactivate tokenService
+authService -> authService : decode JWT payload
+authService --> useAuth : CurrentUser { userId, userName }
+useAuth -> useAuth : setCurrentUser(currentUser) \nsetAuthChecked(true)
+useAuth --> Homepage : returns currentUser
+deactivate authService
+deactivate useAuth
+
+
+activate useUserById
+Homepage -> useUserById : useUserById(currentUser.userId)
+activate apiUsers
+useUserById -> apiUsers : await \ngetUserInfoById(userId)
+activate apiBaseCrud
+apiUsers -> apiBaseCrud : await \ngetItemFromBackend("userId/{userId}")
+activate apiClient
+apiBaseCrud -> apiClient : await apiClient.get(endpoint)
+activate tokenService
+apiClient -> tokenService : getToken() (interceptor)
+tokenService --> apiClient : returns inMemoryToken or localStorage
+deactivate tokenService
+activate Backend
+apiClient -> Backend : HTTP GET /users/{userId} \nwith Authorization header
+Backend --> apiClient : Ok(json.userdata)
+deactivate Backend
+apiClient --> apiBaseCrud : user data \n {userId, userName, email, createdAt}
+deactivate apiClient
+apiBaseCrud --> apiUsers : user data 
+deactivate apiBaseCrud
+apiUsers --> useUserById : user data 
+deactivate apiUsers
+useUserById --> Homepage : user data 
+deactivate useUserById
+Homepage -> Homepage : shows homepage with \nuser data
+Homepage -> User : display Homepage
+@enduml
