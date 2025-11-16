@@ -37,6 +37,16 @@ BackendAPI.Tests.Unit/.vs/
 BackendAPI.Tests.Unit/wwwroot/dist/
 BackendAPI.Tests.Unit/appsettings.*.json
 
+BackendAPI.Tests.Integration/bin/
+BackendAPI.Tests.Integration/obj/
+BackendAPI.Tests.Integration/*.user
+BackendAPI.Tests.Integration/*.suo
+BackendAPI.Tests.Integration/*.userosscache
+BackendAPI.Tests.Integration/*.sln.docstates
+BackendAPI.Tests.Integration/.vs/
+BackendAPI.Tests.Integration/wwwroot/dist/
+BackendAPI.Tests.Integration/appsettings.*.json
+
 
 
 # --- IDEs ---
