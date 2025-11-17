@@ -3,11 +3,12 @@
 @startuml
 
 FrontEnd -> AuthController: HTTP POST request
-AuthController -> AuthController : Login (loginDto)
+AuthController -> AuthController : Login(loginDto)
 AuthController -> AuthService: LoginAsync(loginDto)
 AuthService -> AuthService: LoginAsync(loginDto)
 AuthService -> AuthRepository: PostLoginAsync(loginDto)
 activate AuthRepository
+AuthRepository -> AuthRepository: PostLoginAsync(loginDto)
 AuthRepository --> AuthService: User
 deactivate AuthRepository
 AuthService -> PasswordHasher: VerifyPassword(loginDto.Password, user.Password)
@@ -21,5 +22,21 @@ deactivate IConfiguration
 AuthService -> AuthService: Perform Auth
 AuthService --> AuthController: securityToken
 AuthController --> FrontEnd: Ok(token)
+FrontEnd -> UserController: HTTP GET request
+activate UserController
+UserController -> UserController: GetUserById(id)
+UserController -> UserService: GetUserByIdAsync(id)
+deactivate UserController
+activate UserService
+UserService -> UserService: GetUserByIdAsync(userId)
+UserService -> UserRepository: GetByIdAsync(userId)
+deactivate UserService
+activate UserRepository
+UserRepository -> UserRepository: GetByIdAsync(userId)
+UserRepository --> UserService: User
+deactivate UserRepository
+UserService --> UserController: UserDto
+UserController --> FrontEnd: OK(UserDto)
+
 
 @enduml
