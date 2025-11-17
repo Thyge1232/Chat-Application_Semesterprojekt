@@ -2,7 +2,7 @@
 
 @startuml
 
-FrontEnd -> AuthController: HTTP POST request
+Frontend -> AuthController: HTTP POST request
 AuthController -> AuthController : Login(loginDto)
 AuthController -> AuthService: LoginAsync(loginDto)
 AuthService -> AuthService: LoginAsync(loginDto)
@@ -21,8 +21,8 @@ IConfiguration --> AuthService: secretKey
 deactivate IConfiguration
 AuthService -> AuthService: Perform Auth
 AuthService --> AuthController: securityToken
-AuthController --> FrontEnd: Ok(token)
-FrontEnd -> UserController: HTTP GET request
+AuthController --> Frontend: Ok(token)
+Frontend -> UserController: HTTP GET request
 activate UserController
 UserController -> UserController: GetUserById(id)
 UserController -> UserService: GetUserByIdAsync(id)
@@ -36,7 +36,7 @@ UserRepository -> UserRepository: GetByIdAsync(userId)
 UserRepository --> UserService: User
 deactivate UserRepository
 UserService --> UserController: UserDto
-UserController --> FrontEnd: OK(UserDto)
+UserController --> Frontend: OK(UserDto)
 
 
 @enduml
