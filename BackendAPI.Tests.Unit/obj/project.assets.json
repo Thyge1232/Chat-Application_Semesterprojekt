@@ -4492,32 +4492,33 @@
     ]
   },
   "packageFolders": {
-    "/home/nikoh/.nuget/packages/": {}
+    "C:\\Users\\Nikoh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI.Tests.Unit/BackendAPI.Tests.Unit.csproj",
+      "projectUniqueName": "C:\\Softwareteknologi\\4. Semester\\PRJ4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
       "projectName": "BackendAPI.Tests.Unit",
-      "projectPath": "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI.Tests.Unit/BackendAPI.Tests.Unit.csproj",
-      "packagesPath": "/home/nikoh/.nuget/packages/",
-      "outputPath": "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI.Tests.Unit/obj/",
+      "projectPath": "C:\\Softwareteknologi\\4. Semester\\PRJ4\\chat-app\\BackendAPI.Tests.Unit\\BackendAPI.Tests.Unit.csproj",
+      "packagesPath": "C:\\Users\\Nikoh\\.nuget\\packages\\",
+      "outputPath": "C:\\Softwareteknologi\\4. Semester\\PRJ4\\chat-app\\BackendAPI.Tests.Unit\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/nikoh/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Nikoh\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI/BackendAPI.csproj": {
-              "projectPath": "/mnt/c/Softwareteknologi/4. Semester/PRJ4/chat-app/BackendAPI/BackendAPI.csproj"
+            "C:\\Softwareteknologi\\4. Semester\\PRJ4\\chat-app\\BackendAPI\\BackendAPI.csproj": {
+              "projectPath": "C:\\Softwareteknologi\\4. Semester\\PRJ4\\chat-app\\BackendAPI\\BackendAPI.csproj"
             }
           }
         }
@@ -4526,7 +4527,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -4564,12 +4571,26 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.22, 8.0.22]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.22, 8.0.22]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.22, 8.0.22]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

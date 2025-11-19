@@ -136,6 +136,7 @@ public class TestDatabase : WebApplicationFactory<Program>
             db.Messages.AddRange(
                 new Message
                 {
+                    MessageId = 1,
                     MessageContent = "Hey Bob, did you finish the report?",
                     ConversationId = conv1.ConversationId,
                     UserId = user1.UserId,
@@ -143,6 +144,7 @@ public class TestDatabase : WebApplicationFactory<Program>
                 },
                 new Message
                 {
+                    MessageId = 2,
                     MessageContent = "Yes Alice, I sent it yesterday.",
                     ConversationId = conv1.ConversationId,
                     UserId = user2.UserId,
@@ -150,6 +152,7 @@ public class TestDatabase : WebApplicationFactory<Program>
                 },
                 new Message
                 {
+                    MessageId = 3,
                     MessageContent = "Anyone up for coffee later?",
                     ConversationId = conv2.ConversationId,
                     UserId = user1.UserId,
@@ -157,6 +160,7 @@ public class TestDatabase : WebApplicationFactory<Program>
                 },
                 new Message
                 {
+                    MessageId = 4,
                     MessageContent = "Sure, let’s meet at 3pm.",
                     ConversationId = conv2.ConversationId,
                     UserId = user2.UserId,
