@@ -6,7 +6,6 @@ namespace BackendAPI.Tests.Unit.Services;
 
 public class AuthServiceTest
 {
-    private readonly MyDBContext _myDbContext;
     private readonly Mock<IAuthRepository> _mockAuthRepo;
     private readonly Mock<IConfiguration> _mockConfig;
     private readonly Mock<IPasswordHasher> _mockPasswordHasher;
@@ -17,8 +16,6 @@ public class AuthServiceTest
         var options = new DbContextOptionsBuilder<MyDBContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
-
-        _myDbContext = new MyDBContext(options);
 
         _mockConfig = new Mock<IConfiguration>();
         _mockAuthRepo = new Mock<IAuthRepository>();
@@ -44,12 +41,9 @@ public class AuthServiceTest
             Email = "alice@example.com",
         };
 
-        _myDbContext.Users.Add(user);
-        await _myDbContext.SaveChangesAsync();
-
-        _mockPasswordHasher.Setup(p => p.VerifyPassword("alice123", user.Password)).Returns(true);
-
         var loginDto = new LoginDto { Username = "alice", Password = "alice123" };
+        _mockAuthRepo.Setup(r => r.PostLoginAsync(loginDto)).ReturnsAsync(user);
+        _mockPasswordHasher.Setup(h => h.VerifyPassword("alice123", user.Password)).Returns(true);
 
         // Act
         var token = await _authService.LoginAsync(loginDto);
@@ -70,12 +64,12 @@ public class AuthServiceTest
             Email = "alice@example.com",
         };
 
-        _myDbContext.Users.Add(user);
-        await _myDbContext.SaveChangesAsync();
+        
 
         var loginDto = new LoginDto { Username = "alice", Password = "wrongCode" };
+        _mockAuthRepo.Setup(r => r.PostLoginAsync(loginDto)).ReturnsAsync(user);
+         _mockPasswordHasher.Setup(h => h.VerifyPassword("alice123", user.Password)).Returns(false);
 
-        _mockPasswordHasher.Setup(p => p.VerifyPassword("wrongCode", user.Password)).Returns(false);
 
         await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
             _authService.LoginAsync(loginDto)
