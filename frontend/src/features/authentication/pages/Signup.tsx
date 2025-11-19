@@ -57,6 +57,8 @@ export const Signup = () => {
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
                 {...register("username", {
                   required: "Oprettelse kræver et brugernavn",
+                  validate: (value) =>
+                    value.length >= 3 || "Brugernavnet skal være mindst 3 tegn",
                 })}
               />
               {errors.username && (
@@ -106,7 +108,7 @@ export const Signup = () => {
                 {...register("password", {
                   required: "Kodeord er påkrævet for oprettelse",
                   validate: (value) =>
-                    value.length >= 6 || "Kodeordet skal være mindst 6 tegn",
+                    value.length >= 8 || "Kodeordet skal være mindst 8 tegn",
                 })}
               />
               {errors.password && (
