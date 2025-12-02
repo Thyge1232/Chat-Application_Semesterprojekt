@@ -111,6 +111,12 @@ builder.Services.AddCors(options =>
         }
     );
 });
+builder.Services.AddHttpLogging(options =>
+{
+    options.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestPropertiesAndHeaders
+                            | Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponseStatusCode;
+});
+
 
 var app = builder.Build();
 
@@ -120,7 +126,7 @@ if (!builder.Environment.IsEnvironment("Testing"))
     var db = scope.ServiceProvider.GetRequiredService<MyDBContext>();
     await db.Database.MigrateAsync();
 }
-
+app.UseHttpLogging();
 app.UseSwagger();
 app.UseSwaggerUI();
 
