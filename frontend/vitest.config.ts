@@ -25,6 +25,13 @@ export default defineConfig({
       ],
       reporter: ["text", "text-summary", "lcov", "html", "cobertura"],
       reportsDirectory: "./coverage",
+      reporterOptions: {
+        cobertura: {
+          metrics: ["line", "branch"],
+        },
+        text: {
+          metrics: ["line", "branch"],
+        },
     },
   },
 });
