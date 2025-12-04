@@ -1,0 +1,129 @@
+
+> chat-app@0.0.0 test:ci
+> vitest run --coverage --coverage.provider=v8 --coverage.reporter=text --coverage.reporter=cobertura --coverage.reporter=lcov --coverage.reporter=html --coverage.reporter-options.cobertura.metrics=line,branch --coverage.reporter-options.text.metrics=line,branch --coverage.reportsDirectory=coverage
+
+
+[1m[46m RUN [49m[22m [36mv3.2.4 [39m[90mC:/programmering/4sw/projekt/chat-app/frontend[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m tests/components/Button.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 130[2mms[22m[39m
+ [32m✓[39m tests/features/conversations/hooks/useUserConversations.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 86[2mms[22m[39m
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mgetListFromBackEndtests[2m > [22m[2mgetListFromBackEnd returns userlist succesfully
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mgetListFromBackEndtests[2m > [22m[2mgetListFromBacked throws on 500 error
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+ [32m✓[39m tests/features/conversations/components/MessageInput.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 31[2mms[22m[39m
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mgetItemFromBackend[2m > [22m[2mgetItemFromBackend returns a single user
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mgetItemFromBackend[2m > [22m[2mgetItemFromBackend throws on 404
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+ [32m✓[39m tests/components/Footer.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 39[2mms[22m[39m
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mcreateItemInBackend[2m > [22m[2mcreateItemInBackend creates user successfully
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mcreateItemInBackend[2m > [22m[2mcreateItemInBackend throws on invalid input
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+ [32m✓[39m tests/components/SpinnerMini.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 23[2mms[22m[39m
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mupdateItemInBackend[2m > [22m[2mupdateItemInBackend updates message succesfully
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mupdateItemInBackend[2m > [22m[2mupdateItemInBackend throws on empty content
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mdeleteItemFromBackend[2m > [22m[2mdeleteMessage deletes message successfully
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+[90mstdout[2m | tests/api/apiBaseCrud.test.ts[2m > [22m[2mdeleteItemFromBackend[2m > [22m[2mdeleteMessage throws on 404
+[22m[39mInterceptor attaching token: [1mnull[22m
+
+ [32m✓[39m tests/features/authentification/hooks/useUserById.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 104[2mms[22m[39m
+ [32m✓[39m tests/components/Error.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+ [32m✓[39m tests/features/conversations/components/ChatBubble.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 55[2mms[22m[39m
+ [32m✓[39m tests/components/Header.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 36[2mms[22m[39m
+ [32m✓[39m tests/components/Layout.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 38[2mms[22m[39m
+ [32m✓[39m tests/components/SpinnerWithText.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 125[2mms[22m[39m
+ [32m✓[39m tests/api/apiBaseCrud.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 69[2mms[22m[39m
+ [32m✓[39m tests/features/authentification/hooks/useSignup.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 149[2mms[22m[39m
+ [32m✓[39m tests/features/authentification/hooks/useLogin.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+ [32m✓[39m tests/features/authentification/signuppage.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 289[2mms[22m[39m
+ [32m✓[39m tests/features/authentification/authService.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m tests/features/authentification/tokenService.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/services/placeholder.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m tests/services/registerpage.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 1[2mms[22m[39m
+ [32m✓[39m tests/components/Spinner.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m tests/components/Title.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m tests/features/authentification/hooks/useAuth.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m tests/api/apiUsers.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m23 passed[39m[22m[90m (23)[39m
+[2m      Tests [22m [1m[32m65 passed[39m[22m[90m (65)[39m
+[2m   Start at [22m 16:52:47
+[2m   Duration [22m 2.95s[2m (transform 629ms, setup 2.50s, collect 4.38s, tests 1.31s, environment 17.10s, prepare 3.35s)[22m
+
+[34m % [39m[2mCoverage report from [22m[33mv8[39m
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   35.54 |    70.52 |   55.38 |   35.54 |                   
+ ...authentication |       0 |        0 |       0 |       0 |                   
+  RequireAuth.tsx  |       0 |        0 |       0 |       0 | 1-18              
+ ...tication/hooks |   85.71 |    91.66 |   88.88 |   85.71 |                   
+  useAuth.ts       |     100 |      100 |     100 |     100 |                   
+  useLogin.ts      |     100 |      100 |     100 |     100 |                   
+  useSignup.ts     |     100 |      100 |     100 |     100 |                   
+  useUserById.ts   |     100 |      100 |     100 |     100 |                   
+  useUsers.ts      |       0 |        0 |       0 |       0 | 1-13              
+ ...tication/pages |   59.17 |     62.5 |   85.71 |   59.17 |                   
+  Login.tsx        |       0 |        0 |       0 |       0 | 1-108             
+  Signup.tsx       |   96.99 |    66.66 |     100 |   96.99 | 28-30,137         
+ ...ation/services |     100 |      100 |     100 |     100 |                   
+  authService.ts   |     100 |      100 |     100 |     100 |                   
+  tokenService.ts  |     100 |      100 |     100 |     100 |                   
+ ...ons/components |   35.03 |    57.14 |   14.28 |   35.03 |                   
+  ChatBubble.tsx   |   68.42 |       70 |   14.28 |   68.42 | 53-54,57-60,66-92 
+  Dropdown.tsx     |       0 |        0 |       0 |       0 | 1-134             
+  MessageInput.tsx |    74.5 |       50 |      20 |    74.5 | 26-28,47-56       
+  Popup.tsx        |       0 |        0 |       0 |       0 | 1-84              
+ ...rsations/hooks |     7.2 |     37.5 |    37.5 |     7.2 |                   
+  ...nversation.ts |       0 |        0 |       0 |       0 | 1-22              
+  ...nversation.ts |       0 |        0 |       0 |       0 | 1-27              
+  ...onMessages.ts |       0 |      100 |     100 |       0 | 2-15              
+  ...nversation.ts |       0 |        0 |       0 |       0 | 1-19              
+  ...nversation.ts |       0 |        0 |       0 |       0 | 1-19              
+  ...ColorTheme.ts |       0 |        0 |       0 |       0 | 1-23              
+  ...versations.ts |     100 |      100 |     100 |     100 |                   
+ ...rsations/pages |       0 |        0 |       0 |       0 |                   
+  ...ersations.tsx |       0 |        0 |       0 |       0 | 1-311             
+ ...messages/hooks |       0 |        0 |       0 |       0 |                   
+  ...eteMessage.ts |       0 |        0 |       0 |       0 | 1-24              
+  ...ditMessage.ts |       0 |        0 |       0 |       0 | 1-23              
+  ...endMessage.ts |       0 |        0 |       0 |       0 | 1-20              
+ ...sages/services |       0 |      100 |     100 |       0 |                   
+  ...ageFromApi.ts |       0 |      100 |     100 |       0 | 3-11              
+ ...ers/components |       0 |        0 |       0 |       0 |                   
+  UserCard.tsx     |       0 |        0 |       0 |       0 | 1-59              
+ ...ponents/Banner |       0 |    33.33 |   33.33 |       0 |                   
+  Banner.tsx       |       0 |        0 |       0 |       0 | 1-17              
+  ProfileImage.tsx |       0 |        0 |       0 |       0 | 1-8               
+  UserInfo.tsx     |       0 |      100 |     100 |       0 | 9-29              
+ ...es/users/pages |       0 |        0 |       0 |       0 |                   
+  Home.tsx         |       0 |        0 |       0 |       0 | 1-24              
+  Users.tsx        |       0 |        0 |       0 |       0 | 1-29              
+ sharedComponents  |     100 |      100 |     100 |     100 |                   
+  Button.tsx       |     100 |      100 |     100 |     100 |                   
+  Error.tsx        |     100 |      100 |     100 |     100 |                   
+  Spinner.tsx      |     100 |      100 |     100 |     100 |                   
+  SpinnerMini.tsx  |     100 |      100 |     100 |     100 |                   
+  ...rWithText.tsx |     100 |      100 |     100 |     100 |                   
+  Title.tsx        |     100 |      100 |     100 |     100 |                   
+ ...ponents/Layout |     100 |      100 |     100 |     100 |                   
+  Footer.tsx       |     100 |      100 |     100 |     100 |                   
+  Header.tsx       |     100 |      100 |     100 |     100 |                   
+  Layout.tsx       |     100 |      100 |     100 |     100 |                   
+  NavButtons.tsx   |     100 |      100 |     100 |     100 |                   
+-------------------|---------|----------|---------|---------|-------------------

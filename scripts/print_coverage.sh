@@ -3,11 +3,7 @@ set -euo pipefail
 
 XML_PATH="${1:-frontend/coverage/cobertura-coverage.xml}"
 
-# Try both possible locations for the captured text report
 TEXT_REPORT="frontend/coverage/text-report.txt"
-if [ ! -f "$TEXT_REPORT" ] && [ -f "coverage/text-report.txt" ]; then
-  TEXT_REPORT="coverage/text-report.txt"
-fi
 
 if [ ! -f "$XML_PATH" ]; then
   # If not found, print zeros so badges show 0.0%

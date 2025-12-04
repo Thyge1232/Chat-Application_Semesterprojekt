@@ -2,7 +2,7 @@
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
 Person(user, "User", "A user of the chat application")
-System(chatSystem, "Chat Application", "Web-based chat application allowing users to sign up, login, manage conversation and messages.")
+System(chatSystem, "Chat Application", "Web-based chat application allowing users to sign up, login, manage conversations and messages.")
 Rel(user, chatSystem, "Uses", "HTTPS / Web Browser")
 @enduml
 
@@ -25,65 +25,43 @@ Rel(api_server, db, "Reads/Writes", "SQL")
 
 
 @startuml Component FrontEnd – Web Application
+' Include C4 definitions
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
 Person(user, "User", "Interacts with the chat app")
 
-Container(web_app, "Web Application", "React SPA", 
-  "Single-page app with login, signup, users, conversations, personal page")
+Container(web_app, "Web Application", "React SPA", "Single-page app with login, signup, users, conversations, personal page")
 
 System_Boundary(web_app_boundary, "Front-End Components") {
-  Component(loginComponent,              "LoginComponent",              "TS/React", "Login form UI")
-  Component(signupComponent,             "SignupComponent",             "TS/React", "Signup form UI")
-  Component(usersComponent,              "UsersComponent",              "TS/React", "View registered users")
-  Component(conversationListComponent,   "ConversationsComponent",      "TS/React", "List/create/select conversations")
-  Component(currentConversationComponent,"CurrentConversationComponent","TS/React", 
-            "Nested in Conversations page: read, write, edit, delete messages; change theme")
-  Component(personalPageComponent,       "PersonalPageComponent",       "TS/React", "Default landing page after login")
+  Component(loginComponent,            "LoginComponent",            "TS/React",    "Login form UI")
+  Component(signupComponent,     "SignupComponent",     "TS/React",    "Signup form UI")
+  Component(usersComponent,      "UsersComponent",      "TS/React",    "View registered users")
+  Component(conversationListComponent, "ConversationsComponent", "TS/React",    "List, create, select conversations")
+  Component(currentConversationComponent,"CurrentConversationComponent","TS/React", "Nested in Conversations page: read, write, edit, delete messages; change theme")
+   Component(personalPageComponent,       "PersonalPageComponent",       "TS/React", "Default landing page after login")
 
-  Component(apiService,                  "ApiService (Axios)",          "TS Service", 
-            "HTTP wrapper for REST: CRUD messages, conversations, users, manage tokens")
-  Component(contactService,              "ContactService",              "TS Service", "CRUD contacts")
+Component(apiService, "ApiService (Axios)", "TS Service", "HTTP wrapper for REST: CRUD messages, conversations, users, manage tokens")
+  Component(contactService,  "ContactService", "TS Service", "CRUD contacts")
 }
 
-Rel(user, web_app, "Uses", "Browser")
-Rel(web_app, apiService, "Calls", "HTTPS / JSON (Axios)")
+' User ↔ UI interactions
+Rel(user, loginComponent,              "Login")
+Rel(user, signupComponent,             "Sign up")
+Rel(user, usersComponent,              "Manage contacts")
+Rel(user, conversationListComponent,   "Select conversation")
+Rel(user, currentConversationComponent,"Chat & send messages")
+Rel(user, personalPageComponent,       "View/edit personal page")
+
+' Component → Service calls
+Rel(loginComponent,            apiService,     "POST /login")
+Rel(signupComponent,           apiService,     "POST /register")
+Rel(usersComponent,            contactService, "GET/POST contacts")
+Rel(conversationListComponent, apiService,     "GET /conversations")
+Rel(currentConversationComponent, apiService,  "CRUD messages (GET/POST/PUT/DELETE)")
+Rel(personalPageComponent,     apiService,     "GET/PUT profile, manage tokens")
+
 @enduml
 
-
-' @startuml Code – Front-End Code
-
-' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
-
-' Container_Boundary(web_app, "Web Application (React SPA)", "React / TypeScript") {
-'   Component(loginForm_tsx,                "LoginForm.tsx",                "React Component", "Formik-based form for email/password")
-'   Component(loginComponent_tsx,           "LoginComponent.tsx",           "React Component", "Wraps LoginForm; calls ApiService.login()")
-'   Component(signupForm_tsx,         "SignupForm.tsx",         "React Component", "Formik-based signup form")
-'   Component(signupComponent_tsx,    "SignupComponent.tsx",    "React Component", "Wraps SignupForm; calls ApiService.register()")
-'   Component(usersComponent_tsx,     "ContactListComponent.tsx",     "React Component", "Displays & manages contacts")
-'   Component(conversationListComponent_tsx,"ConversationListComponent.tsx","React Component", "Lists conversations; shows unread")
-'   Component(currentConversationComponent_tsx,      "ChatWindowComponent.tsx",      "React Component", "MessageList + MessageInput")
-'   Component(settingsComponent_tsx,        "SettingsComponent.tsx",        "React Component", "Profile & prefs UI")
-
-'   Component(apiService_ts,                "ApiService.ts",                "TS Service",        "login(), register(), getConversations(), patchProfile()")
-'   Component(contactService_ts,            "ContactService.ts",            "TS Service",        "CRUD contacts")
-'   Component(messageService_ts,            "MessageService.ts",            "TS Service",        "getMessages(), sendMessage()")
-'   Component(webSocketService_ts,          "WebSocketService.ts",          "TS Service",        "connect(), onMessage(), send()")
-' }
-
-' Rel(loginComponent_tsx,        loginForm_tsx,       "renders & controls")
-' Rel(loginComponent_tsx,        apiService_ts,       "calls login()")
-' Rel(signupComponent_tsx, signupForm_tsx,"renders & controls")
-' Rel(signupComponent_tsx, apiService_ts,       "calls register()")
-' Rel(usersComponent_tsx,       contactService_ts,    "calls getContacts(), createContact()")
-' Rel(conversationListComponent_tsx,  apiService_ts,        "calls getConversations()")
-' Rel(conversationListComponent_tsx,  webSocketService_ts,  "subscribes to new-message events")
-' Rel(currentConversationComponent_tsx,        messageService_ts,    "uses getMessages(), sendMessage()")
-' Rel(currentConversationComponent_tsx,        webSocketService_ts,  "sends/receives messages")
-' Rel(settingsComponent_tsx,          apiService_ts,        "calls patchProfile()")
-
-
-' @enduml
 
 @startuml
 
