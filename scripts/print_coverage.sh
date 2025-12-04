@@ -32,6 +32,7 @@ echo "Branch coverage: ${BRANCH_PCT}%"
 echo "Coverage: ${LINE_PCT}%"
 
 # --- NEW: print filtered ASCII coverage table (only Branch + Lines) ---
+TEXT_REPORT="frontend/coverage/text-report.txt"
 if [ -f "$TEXT_REPORT" ]; then
   echo
   echo "Filtered coverage table (Branch + Lines only):"

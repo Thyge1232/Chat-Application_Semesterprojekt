@@ -11,7 +11,7 @@ test-frontend:
     - cd frontend
     - npm ci
     - npm run lint
-    - npm run test:ci
+    - npm run test:ci > coverage/text-report.txt
     - cd ..
     - bash -c "chmod +x scripts/print_coverage.sh"
     - ./scripts/print_coverage.sh
