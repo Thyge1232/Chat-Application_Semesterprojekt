@@ -9,7 +9,7 @@ export default defineConfig({
     globals: true,
     setupFiles: "./tests/setupTests.ts",
     coverage: {
-      provider: "istanbul",
+      provider: "v8",
       all: true,
       include: ["src/**/*.{ts,tsx}"],
       exclude: [
@@ -23,7 +23,7 @@ export default defineConfig({
         "vite.config.ts",
         "src/vite-env.d.ts",
       ],
-      reporter: ["lcov", "html", "cobertura"],
+      reporter: ["text", "text-summary", "lcov", "html", "cobertura"],
       reportsDirectory: "./coverage",
     },
   },
