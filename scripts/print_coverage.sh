@@ -24,8 +24,32 @@ to_pct() {
 LINE_PCT=$(to_pct "${LINE_RATE:-0}")
 BRANCH_PCT=$(to_pct "${BRANCH_RATE:-0}")
 
-# Print labeled lines. CI jobs will pick the relevant line and output a single "Coverage: X.Y%" for GitLab parsing
+# Print labeled lines. 
 echo "Line coverage: ${LINE_PCT}%"
 echo "Branch coverage: ${BRANCH_PCT}%"
 # Generic fallback line for existing badge
 echo "Coverage: ${LINE_PCT}%"
+
+# get filtered ASCII coverage table
+if command -v npx >/dev/null 2>&1; then
+  echo
+  echo "Filtered coverage table (Branch + Lines only):"
+  npx vitest run --coverage --coverage.provider=v8 --coverage.reporter=text \
+    | awk -F'|' '{
+        # Keep header and separator lines as-is
+        if (NR == 1 || $0 ~ /^-+$/) {
+          print $0
+        }
+        # For table rows, print only File, Branch, Lines columns
+        else if ($0 ~ /\|/) {
+          # Trim whitespace around columns
+          gsub(/^ +| +$/, "", $1)
+          gsub(/^ +| +$/, "", $3)
+          gsub(/^ +| +$/, "", $5)
+          printf "%-20s | %-8s | %-8s\n", $1, $3, $5
+        }
+        else {
+          print $0
+        }
+    }'
+fi
