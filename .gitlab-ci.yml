@@ -11,10 +11,7 @@ test-frontend:
     - cd frontend
     - npm ci
     - npm run lint
-    - npm run test:ci \
-      | sed -E '/^(Statements|Functions)\s+/d;/^Coverage:\s+/d' \
-      | tee coverage/coverage-table.txt
-
+    - npm run test:ci
     - cd ..
     - bash -c "chmod +x scripts/print_coverage.sh"
     - ./scripts/print_coverage.sh
