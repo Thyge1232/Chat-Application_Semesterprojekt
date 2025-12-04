@@ -23,7 +23,7 @@ export default defineConfig({
         "vite.config.ts",
         "src/vite-env.d.ts",
       ],
-      reporter: ["text", "text-summary", "lcov", "html", "cobertura"],
+      reporter: ["lcov", "html", "cobertura"],
       reportsDirectory: "./coverage",
     },
   },
