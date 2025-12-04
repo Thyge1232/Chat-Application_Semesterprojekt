@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ci": "vitest run --coverage --outputFile=coverage/cobertura-coverage.xml"
+    "test:ci": "vitest run --coverage --coverage.provider=v8 --coverage.reporter=text --coverage.reporter=cobertura --coverage.reportsDirectory=coverage"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
