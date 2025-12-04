@@ -11,6 +11,7 @@ test-frontend:
     - cd frontend
     - npm ci
     - npm run lint
+    - mkdir -p frontend/coverage
     - npm run test:ci | tee frontend/coverage/text-report.txt > /dev/null
     - cd ..
     - bash -c "chmod +x scripts/print_coverage.sh"
