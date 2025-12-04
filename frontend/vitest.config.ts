@@ -13,25 +13,26 @@ export default defineConfig({
       all: true,
       include: ["src/**/*.{ts,tsx}"],
       exclude: [
-        "src/main.tsx", //entry point
-        "src/app/App.tsx", //just the app wrapper
-        "src/config/**", //configuration
-        "src/features/**/types/**", //type definitions
+        "src/main.tsx", // entry point
+        "src/app/App.tsx", // just the app wrapper
+        "src/config/**", // configuration
+        "src/features/**/types/**", // type definitions
         "src/api/**",
         "eslint.config.js",
         "vitest.config.ts",
         "vite.config.ts",
-        "src/vite-env.d.ts",
+        "src/vite-env.d.ts"
       ],
       reporter: ["text", "text-summary", "lcov", "html", "cobertura"],
       reportsDirectory: "./coverage",
       reporterOptions: {
         cobertura: {
-          metrics: ["line", "branch"],
+          metrics: ["line", "branch"]
         },
         text: {
-          metrics: ["line", "branch"],
-        },
-    },
-  },
+          metrics: ["line", "branch"]
+        }
+      }
+    }
+  }
 });
