@@ -2,7 +2,12 @@
 set -euo pipefail
 
 XML_PATH="${1:-frontend/coverage/cobertura-coverage.xml}"
+
+# Try both possible locations for the captured text report
 TEXT_REPORT="frontend/coverage/text-report.txt"
+if [ ! -f "$TEXT_REPORT" ] && [ -f "coverage/text-report.txt" ]; then
+  TEXT_REPORT="coverage/text-report.txt"
+fi
 
 if [ ! -f "$XML_PATH" ]; then
   # If not found, print zeros so badges show 0.0%
@@ -31,22 +36,46 @@ echo "Branch coverage: ${BRANCH_PCT}%"
 # Generic fallback line for existing badge
 echo "Coverage: ${LINE_PCT}%"
 
-# --- NEW: print filtered ASCII coverage table (only Branch + Lines) ---
-TEXT_REPORT="frontend/coverage/text-report.txt"
+# --- Print filtered ASCII coverage table (only Branch + Lines) ---
 if [ -f "$TEXT_REPORT" ]; then
   echo
   echo "Filtered coverage table (Branch + Lines only):"
-  awk -F'|' '{
-    if (NR == 1 || $0 ~ /^-+$/) {
-      print $0
-    } else if ($0 ~ /\|/) {
-      # Trim whitespace around columns
-      gsub(/^ +| +$/, "", $1)
-      gsub(/^ +| +$/, "", $3)
-      gsub(/^ +| +$/, "", $5)
-      printf "%-20s | %-8s | %-8s\n", $1, $3, $5
-    } else {
-      print $0
-    }
-  }' "$TEXT_REPORT"
+
+  # Strip ANSI color codes and normalize spacing before parsing
+  sed -r 's/\x1B
+
+\[[0-9;]*[mK]//g' "$TEXT_REPORT" \
+    | awk -F'|' '{
+        # Print separator/header lines as-is
+        if ($0 ~ /^-+$/ || $0 ~ /^ *% Coverage report from v8/ || $0 ~ /^ *File *\|/) {
+          # Rebuild header to reflect only Branch and Lines columns if it is the header row
+          if ($0 ~ /^ *File *\|/) {
+            printf "-------------------|----------|---------\n"
+            printf "File               | % Branch | % Lines\n"
+            printf "-------------------|----------|---------\n"
+          } else {
+            print $0
+          }
+          next
+        }
+
+        # Process table rows that have pipes
+        if ($0 ~ /\|/) {
+          # Split by '|' into fields
+          n = split($0, a, "|")
+
+          # Trim whitespace on the needed columns:
+          # a[1] = File, a[3] = % Branch, a[5] = % Lines
+          gsub(/^ +| +$/, "", a[1])
+          gsub(/^ +| +$/, "", a[3])
+          gsub(/^ +| +$/, "", a[5])
+
+          # Print only File, Branch, Lines with fixed widths
+          printf "%-19s | %-8s | %-7s\n", a[1], a[3], a[5]
+          next
+        }
+
+        # Otherwise print the line as-is
+        print $0
+      }'
 fi
