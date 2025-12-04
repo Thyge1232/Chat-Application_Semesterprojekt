@@ -38,6 +38,7 @@ echo "Coverage: ${LINE_PCT}%"
 
 # --- Print filtered ASCII coverage table (only Branch + Lines) ---
 if [ -f "$TEXT_REPORT" ]; then
+  echo "DEBUG: Found text report at $TEXT_REPORT"
   echo
   echo "Filtered coverage table (Branch + Lines only):"
 
