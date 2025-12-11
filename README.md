@@ -1,34 +1,66 @@
-# todo
+# 💬 Chatapplikation - Semesterprojekt 4 (SW4PRJ4)
 
-### Tech setup for React development
+Dette repository indeholder kildekoden til en webbaseret chatapplikation udviklet som semesterprojekt på 4. semester (Softwareteknologi, Aarhus Universitet).
 
-node npm version 22.x - https://nodejs.org/en/download
+Applikationen gør det muligt for brugere at oprette profiler, starte samtaler og sende beskeder i et sikkert miljø.
 
-Først: Clone repoet
-herefter kør:
+## 🛠 Teknologier
 
-- `cd frontend`
+Projektet er bygget ud fra en lagdelt arkitektur med følgende tech-stack:
 
-- `npm install`
+*   **Frontend:** React (Vite), TypeScript, Tailwind CSS
+*   **Backend:** ASP.NET Core 8 Web API
+*   **Database:** PostgreSQL (Entity Framework Core)
+*   **Test:** xUnit, Moq, Vitest, React Testing Library
+*   **DevOps:** Docker, Docker Compose, GitLab CI/CD
 
-- `npm run dev` for at køre en lokal development server (hostet på localhost:5173)
-- `npm test` for at køre tests
+## 🚀 Kom godt i gang
 
-VSCode extensions:
+For at køre projektet lokalt skal du have **Docker** og **Docker Compose** installeret.
 
-- Color Highlight
-- ES7+ React/Redux/React-Native snippets
-- Prettier - Code formatter
-- npm Intellisense
-- ESLint
-- Tailwind CSS IntelliSense
-- Vitest Snippets
+### Kør med Docker (Anbefalet)
 
-[![coverage report](https://gitlab.com/<namespace>/<project>/badges/main/coverage.svg)](https://gitlab.com/<namespace>/<project>/-/commits/main)
+1.  Klon repositoriet:
+    ```bash
+    git clone https://github.com/Thyge1232/Chat-Application_Semesterprojekt.git
+    cd REPO-NAVN
+    ```
 
-### Frontend Test Coverage
+2.  Start applikationen:
+    ```bash
+    docker-compose up --build
+    ```
 
-| Type         | Badge                                                                                                   |
-| :----------- | :------------------------------------------------------------------------------------------------------ |
-| **Lines**    | ![Line Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:line)     |
-| **Branches** | ![Branch Coverage](https://gitlab.au.dk/au749882/chat-app/badges/main/coverage.svg?job=coverage:branch) |
+3.  Tilgå applikationen:
+    *   **Frontend:** http://localhost:5173
+    *   **Backend API (Swagger):** http://localhost:8080/swagger
+
+### Manuel opsætning (Uden Docker)
+
+**Backend:**
+1.  Naviger til `BackendAPI` mappen.
+2.  Opdater `appsettings.json` med din PostgreSQL connection string.
+3.  Kør `dotnet run`.
+
+**Frontend:**
+1.  Naviger til `frontend` mappen.
+2.  Kør `npm install`.
+3.  Kør `npm run dev`.
+
+## ✨ Features
+
+*   **Brugerstyring:** Oprettelse og login med JWT-autentificering.
+*   **Samtaler:** Opret private samtaler eller grupper.
+*   **Beskeder:** Send og modtag beskeder (Polling-baseret).
+*   **Historik:** Persistering af al data i PostgreSQL.
+*   **Sikkerhed:** Password hashing med BCrypt og beskyttede endpoints.
+
+## 👥 Forfattere - Gruppe 5
+
+*   Nis Jonas Gerup Adamsen
+*   Thyge Bertelsen
+*   Cecilie Øgendahl Janstrøm
+*   Nikolaj Lundø Hansen
+*   Line Højberg
+*   Daniel Machado
+*   Kalja Blirup Grønning
